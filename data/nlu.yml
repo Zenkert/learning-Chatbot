@@ -8,12 +8,12 @@ nlu:
     - i want to learn about [Machine Learning](subject)
     - i want to learn about [Business](subject)
     - i want to learn about [Chemistry](subject)
-    - i would like to learn a [Language](subject)
     - i would like to learn about [Pyschology](subject)
     - i would like to learn about [History](subject)
     - i would like to learn about [Humanities](subject)
     - i would like to learn about [Social Studies](subject)
     - i want to learn about [Art and Design](subject)
+
 - intent: ask_for_suggestion
   examples: |
     - i want to learn
@@ -26,22 +26,26 @@ nlu:
     - suggest me something to learn
     - give me something to learn
     - please provide me some suggestions
+
 - intent: german_greet
   examples: |
     - Ich möchte lernen
     - ich mochte lernen
     - Geben Sie mir ein Thema
     - Ich möchte eine Prüfung ablegen
+
 - intent: greek_greet
   examples: |
     - Θέλω να μάθω
     - δώστε μου ένα θέμα
     - Θέλω να δώσω εξετάσεις
+
 - intent: goodbye
   examples: |
     - see you later
     - goodbye
     - byebye
+
 - intent: user_stress
   examples: |
     - i am stressed
@@ -50,6 +54,7 @@ nlu:
     - i am kind of feeling stressed
     - i am not feeling good
     - i am feeling sad
+
 - intent: user_happy
   examples: |
     - good
@@ -59,6 +64,7 @@ nlu:
     - doing fine
     - it is going great
     - it is a fine day
+
 - intent: user_unhappy
   examples: |
     - bad
@@ -68,6 +74,7 @@ nlu:
     - could have been better
     - not okay
     - it is very worst
+
 - intent: user_affirm
   examples: |
     - yes
@@ -76,6 +83,7 @@ nlu:
     - sure
     - ofcourse
     - of course
+
 - intent: user_deny
   examples: |
     - no
@@ -84,12 +92,14 @@ nlu:
     - nah
     - i am not in mood
     - i dont feel like it
+
 - intent: user_data
   examples: |
     - {'name': 'sathish', 'id': '1234', 'language': 'english'}
     - {'name': 'kumar', 'id': '9865', 'language': 'german'}
     - {'name': 'john', 'id': '7822', 'language': 'spanish'}
     - {'name': 'milton', 'id': '4593', 'language': 'greek'}
+
 - intent: out_of_scope
   examples: |
     - i want to contact my teacher
@@ -102,6 +112,7 @@ nlu:
     - i would like to learn more about you
     - i want to know how to learn to drive
     - i want to know how to do calculations
+
 - intent: bot_challenge
   examples: |
     - who are you?

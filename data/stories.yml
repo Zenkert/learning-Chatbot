@@ -1,7 +1,6 @@
 version: "2.0"
 
 stories:
-
 - story: story display jokes
   steps:
   - intent: user_stress
@@ -44,7 +43,7 @@ stories:
   - intent: user_data
   - action: action_save_data
   - intent: user_unhappy
-  - action: utter_sorry  
+  - action: utter_sorry
 
 - story: interactive_story_1
   steps:
@@ -54,7 +53,6 @@ stories:
   - slot_was_set:
     - subject: Physics
   - action: action_tell_subjects
-
 
 - story: interactive_story_2
   steps:
@@ -83,3 +81,4 @@ stories:
   - slot_was_set:
     - subject: Art and Design
   - action: action_tell_subjects
+
