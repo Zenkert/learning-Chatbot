@@ -1,0 +1,9 @@
+tests/
+results/
+misc/
+events.db
+events.db-shm
+events.db-wal
+rasa.db
+story_graph.odt
+.env
