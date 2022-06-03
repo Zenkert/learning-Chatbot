@@ -1,0 +1,103 @@
+version: "2.0"
+nlu:
+  - lookup: subject
+    examples: |
+      - Accounting
+      - Agriculture
+      - Algebra
+      - Animation
+      - Anthropology
+      - Arabic
+      - Art
+      - Astronomy
+      - Bike Ed
+      - Biology
+      - Botany
+      - Business Studies
+      - Calculus
+      - Cantonese
+      - Chemistry
+      - Citizenship
+      - Commerce
+      - Computers
+      - Computer Programming
+      - Creative Writing
+      - Cultures
+      - Dance
+      - Debate
+      - Design
+      - Drama
+      - Drawing
+      - Driver Ed
+      - Economics
+      - Ethics
+      - Fashion
+      - Film Making
+      - First Aid
+      - Forensics
+      - French
+      - Gardening
+      - Geography
+      - Geometry
+      - German
+      - Greek
+      - Health
+      - Hebrew
+      - History
+      - Home Economics
+      - Hospitality
+      - Humanities
+      - ICT
+      - Indigenous Studies
+      - Indonesian
+      - Italian
+      - Japanese
+      - Journalism
+      - Korean
+      - Latin
+      - Law
+      - Leadership
+      - Literature
+      - Mandarin
+      - Math
+      - Mechanics
+      - Media Studies
+      - Meteorology
+      - Music
+      - Nutrition
+      - Outdoor Education
+      - Painting
+      - Performing Arts
+      - Philosophy
+      - Photography
+      - Physical Education
+      - Physics
+      - Poetry
+      - Polish
+      - Portuguese
+      - Pottery
+      - Probability
+      - Programming
+      - Psychology
+      - Public Speaking
+      - Religion
+      - Russian
+      - Science
+      - Sculpture
+      - Sex Education
+      - Sign Language
+      - Social Studies
+      - Sociology
+      - Spanish
+      - Sport Coaching
+      - Sports
+      - Statistics
+      - Swimming
+      - Technology
+      - Textiles
+      - Tourism
+      - Trigonometry
+      - Typing
+      - Vietnamese
+      - Web Designing
+      - Woodworking

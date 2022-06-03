@@ -1,0 +1,30 @@
+language: en
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+    case_sensitive: false
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 2
+    max_ngram: 4
+  - name: RegexEntityExtractor
+    case_sensitive: false
+    use_lookup_tables: true
+  - name: DIETClassifier
+    epochs: 100
+    model_confidence: softmax
+    constrain_similarities: true
+  - name: CRFEntityExtractor
+    max_iterations: 75
+  - name: FallbackClassifier
+    threshold: 0.6
+
+policies:
+  - name: MemoizationPolicy
+  - name: RulePolicy
+  - name: TEDPolicy
+    max_history: 3
+    epochs: 50
+    constrain_similarities: true
