@@ -1,6 +1,7 @@
 tests/
 results/
 misc/
+.vscode/
 events.db
 events.db-shm
 events.db-wal

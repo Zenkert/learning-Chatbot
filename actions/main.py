@@ -8,6 +8,7 @@ import os
 database_name = "test"
 collection_name = "subjects"
 
+
 def connection(database_name):
     load_dotenv()
     user_name = os.getenv('MONGODBUSERNAME')
@@ -18,12 +19,13 @@ def connection(database_name):
     database = client[database_name]
     return database
 
+
 def get_subjects(collection_name):
-    
+
     collection = database[collection_name]
 
     tops = collection.find({})
-        
+
     l = []
     i = 1
     for z in tops:
@@ -31,11 +33,9 @@ def get_subjects(collection_name):
             l.append(z['subject'])
         i += 1
 
-    return l 
+    return l
+
 
 database = connection(database_name=database_name)
 resss = get_subjects(collection_name=collection_name)
 print(resss)
-
-
-
