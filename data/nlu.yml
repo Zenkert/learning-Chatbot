@@ -1,6 +1,6 @@
-version: "2.0"
+version: "3.1"
 nlu:
-- intent: take_test
+- intent: learn_subject
   examples: |
     - i want to learn [Maths](subject)
     - i want to learn [Physics](subject)
@@ -13,11 +13,12 @@ nlu:
     - i would like to learn about [Humanities](subject)
     - i would like to learn about [Social Studies](subject)
     - i want to learn about [Art and Design](subject)
-
+    - i want to study [mathematics](subject)
+    - i want to learn [maths](subject)
 - intent: ask_for_suggestion
   examples: |
     - i want to learn
-    - i would like to learn 
+    - i would like to learn
     - what are the subjects available
     - what can i learn
     - give me a subject
@@ -26,26 +27,22 @@ nlu:
     - suggest me something to learn
     - give me something to learn
     - please provide me some suggestions
-
 - intent: german_greet
   examples: |
     - Ich möchte lernen
     - ich mochte lernen
     - Geben Sie mir ein Thema
     - Ich möchte eine Prüfung ablegen
-
 - intent: greek_greet
   examples: |
     - Θέλω να μάθω
     - δώστε μου ένα θέμα
     - Θέλω να δώσω εξετάσεις
-
 - intent: goodbye
   examples: |
     - see you later
     - goodbye
     - byebye
-
 - intent: user_stress
   examples: |
     - i am stressed
@@ -54,7 +51,6 @@ nlu:
     - i am kind of feeling stressed
     - i am not feeling good
     - i am feeling sad
-
 - intent: user_happy
   examples: |
     - good
@@ -64,7 +60,6 @@ nlu:
     - doing fine
     - it is going great
     - it is a fine day
-
 - intent: user_unhappy
   examples: |
     - bad
@@ -74,7 +69,6 @@ nlu:
     - could have been better
     - not okay
     - it is very worst
-
 - intent: user_affirm
   examples: |
     - yes
@@ -83,7 +77,6 @@ nlu:
     - sure
     - ofcourse
     - of course
-
 - intent: user_deny
   examples: |
     - no
@@ -92,14 +85,12 @@ nlu:
     - nah
     - i am not in mood
     - i dont feel like it
-
 - intent: user_data
   examples: |
-    - {'name': 'sathish', 'id': '1234', 'language': 'english'}
-    - {'name': 'kumar', 'id': '9865', 'language': 'german'}
-    - {'name': 'john', 'id': '7822', 'language': 'spanish'}
-    - {'name': 'milton', 'id': '4593', 'language': 'greek'}
-
+    - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
+    - {'name': 'kumar', 'id': '9865', 'lang': 'DE'}
+    - {'name': 'john', 'id': '7822', 'lang': 'ES'}
+    - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
 - intent: out_of_scope
   examples: |
     - i want to contact my teacher
@@ -112,7 +103,6 @@ nlu:
     - i would like to learn more about you
     - i want to know how to learn to drive
     - i want to know how to do calculations
-
 - intent: bot_challenge
   examples: |
     - who are you?
@@ -122,6 +112,3 @@ nlu:
     - are you real?
     - who build you?
     - who developed you?
-
-# /user_data{{"name": "Sathish", "id": "1234", "language": "english"}}
-# /user_data{{'name': 'Sathish', 'id': '1234', 'language': 'english'}}

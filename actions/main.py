@@ -26,14 +26,10 @@ def get_subjects(collection_name):
 
     tops = collection.find({})
 
-    l = []
-    i = 1
-    for z in tops:
-        if i <= 5:
-            l.append(z['subject'])
-        i += 1
+    # getting subjects from "subjects" collection
+    list_of_subjects = [sub["subject"] for sub in tops]
 
-    return l
+    return list_of_subjects
 
 
 database = connection(database_name=database_name)

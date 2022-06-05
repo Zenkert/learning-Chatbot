@@ -1,10 +1,8 @@
 from random import choices
-from urllib import response
 from matplotlib.pyplot import text
 import pandas as pd
 from typing import Any, Text, Dict, List
 import json
-import actions
 
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
@@ -100,6 +98,7 @@ class ActionTellSubjects(Action):
             dispatcher.utter_message(
                 text=f"I will query my database about {subject}")
             print("Subject: ", subject)
+            print(f"I will query my database about {subject}")
 
         else:
             dispatcher.utter_message(

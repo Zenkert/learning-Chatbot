@@ -1,68 +1,60 @@
-version: '2.0'
+version: '3.1'
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
-- take_test
 - ask_for_suggestion
-- user_happy
-- user_data
-- greet
-- german_greet
-- greek_greet
-- show_video
-- goodbye
-- user_unhappy
-- user_stress
-- user_affirm
-- user_deny
 - bot_challenge
+- german_greet
+- goodbye
+- greek_greet
+- learn_subject
+- user_affirm
+- user_data
+- user_deny
+- user_happy
+- user_stress
+- user_unhappy
+
 entities:
-- scrape_query
 - subject
 - name
 - id
 - language
+
 slots:
   subject:
     type: text
-    influence_conversation: false
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: subject
   name:
     type: text
     influence_conversation: false
-    auto_fill: true
+    mappings:
+    - type: from_entity
+      entity: name
   id:
     type: text
     influence_conversation: false
-    auto_fill: true
+    mappings:
+    - type: from_entity
+      entity: id
   language:
     type: text
     influence_conversation: false
-    auto_fill: true
-  selected_subject:
-    type: text
-    influence_conversation: true
-  selected_xquestions:
-    type: text
-    influence_conversation: true
-  selected_subject_german:
-    type: text
-    influence_conversation: true
-  selected_xquestions_german:
-    type: text
-    influence_conversation: true
-  selected_subject_greek:
-    type: text
-    influence_conversation: true
-  selected_xquestions_greek:
-    type: text
-    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: language
+
 responses:
+  utter_sugg:
+  - text: These are the suggestions...
   utter_greet:
   - text: Hey! How are you?
-  utter_cheer_up:
-  - image: https://i.imgur.com/nGF1K8f.jpg
-    text: 'Here is something to cheer you up:'
   utter_did_that_help:
   - text: Did that help you?
   utter_happy:
@@ -75,8 +67,6 @@ responses:
   - text: Beenden..
   utter_done_greek:
   - text: φινίρισμα
-  utter_iamabot:
-  - text: I am a bot, powered by Rasa.
   utter_joke:
   - text: Do you like to hear a joke?
   utter_great:
@@ -100,39 +90,11 @@ responses:
   - text: I am an assistant and I'll happily help you :)
   utter_name:
   - text: Hey {name}, how are you doing?
+  utter_sub:
+  - text: This is your selection - {subject}
+
 actions:
-- action_ask_selected_subject
-- action_ask_selected_subject_german
-- action_ask_selected_subject_greek
-- action_ask_selected_xquestions
-- action_ask_selected_xquestions_german
-- action_ask_selected_xquestions_greek
-- action_give_show_video
 - action_give_suggestion
 - action_save_data
 - action_submit
-- action_tell_joke
 - action_tell_subjects
-- utter_done
-- validate_select_subject_form
-- validate_select_subject_form_german
-- validate_select_subject_form_greek
-forms:
-  select_subject_form:
-    required_slots:
-      selected_subject:
-      - type: from_text
-      selected_xquestions:
-      - type: from_text
-  select_subject_form_german:
-    required_slots:
-      selected_subject_german:
-      - type: from_text
-      selected_xquestions_german:
-      - type: from_text
-  select_subject_form_greek:
-    required_slots:
-      selected_subject_greek:
-      - type: from_text
-      selected_xquestions_greek:
-      - type: from_text

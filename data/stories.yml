@@ -1,84 +1,13 @@
-version: "2.0"
+version: "3.1"
 
 stories:
-- story: story display jokes
-  steps:
-  - intent: user_stress
-  - action: utter_joke
-  - intent: user_affirm
-  - action: action_tell_joke
 
-- story: story don't display jokes
+- story: User asking for a subject
   steps:
-  - intent: user_stress
-  - action: utter_joke
-  - intent: user_deny
-  - action: utter_goodbye
-
-- story: story german
-  steps:
-  - intent: german_greet
-  - action: select_subject_form_german
-  - active_loop: select_subject_form_german
-  - active_loop: null
-  - action: utter_done_german
-
-- story: story greek
-  steps:
-  - intent: greek_greet
-  - action: select_subject_form_greek
-  - active_loop: select_subject_form_greek
-  - active_loop: null
-  - action: utter_done_greek
-
-- story: user happy
-  steps:
-  - intent: user_data
-  - action: action_save_data
-  - intent: user_happy
-  - action: utter_great
-
-- story: user unhappy
-  steps:
-  - intent: user_data
-  - action: action_save_data
-  - intent: user_unhappy
-  - action: utter_sorry
-
-- story: interactive_story_1
-  steps:
-  - intent: take_test
-    entities:
-    - subject: Physics
-  - slot_was_set:
-    - subject: Physics
+  - intent: learn_subject
   - action: action_tell_subjects
 
-- story: interactive_story_2
-  steps:
-  - intent: take_test
-  - action: action_tell_subjects
-
-- story: giving suggestion to user
+- story: Provide subject suggestions
   steps:
   - intent: ask_for_suggestion
-  - action: action_give_suggestion
-
-- story: story sample
-  steps:
-  - intent: take_test
-    entities:
-    - subject: Computer Science
-  - slot_was_set:
-    - subject: Computer Science
   - action: action_tell_subjects
-
-- story: story sample 2
-  steps:
-  - intent: take_test
-    entities:
-    - subject: Art and Design
-  - slot_was_set:
-    - subject: Art and Design
-  - action: action_tell_subjects
-
