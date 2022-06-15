@@ -2,6 +2,11 @@ version: "3.1"
 
 rules:
 
+- rule: save user data
+  steps:
+  - intent: user_data
+  - action: action_save_data
+
 - rule: out of scope
   steps:
   - intent: out_of_scope

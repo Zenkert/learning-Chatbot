@@ -8,6 +8,8 @@ nlu:
     - i want to learn about [Machine Learning](subject)
     - i want to learn about [Business](subject)
     - i want to learn about [Chemistry](subject)
+    - i would like to learn [Maths](subject)
+    - i would like to learn [Physics](subject)
     - i would like to learn about [Pyschology](subject)
     - i would like to learn about [History](subject)
     - i would like to learn about [Humanities](subject)
@@ -18,6 +20,7 @@ nlu:
 - intent: ask_for_suggestion
   examples: |
     - i want to learn
+    - i want to study
     - i would like to learn
     - what are the subjects available
     - what can i learn
@@ -27,6 +30,7 @@ nlu:
     - suggest me something to learn
     - give me something to learn
     - please provide me some suggestions
+    - suggest me something
 - intent: german_greet
   examples: |
     - Ich möchte lernen
@@ -112,3 +116,29 @@ nlu:
     - are you real?
     - who build you?
     - who developed you?
+- intent: inform
+  examples: |
+    - maths
+    - business
+    - technology
+    - biology
+    - science
+- intent: user_greet
+  examples: |
+    - hey
+    - hi
+    - hiya
+    - howdy
+    - hallo
+    - hii
+    - heyy
+    - hey, good morning
+    - good evening
+    - gud morning
+    - gud evening
+- intent: inform_new
+  examples: |
+    - This is a random[](subj) example
+    - This is another random[](subj) example
+    - This is last random example[](topic)
+    - This is final random example[](topic)

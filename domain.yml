@@ -1,29 +1,32 @@
 version: '3.1'
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
+config:
+  store_entities_as_slots: true
 intents:
 - ask_for_suggestion
 - bot_challenge
 - german_greet
 - goodbye
 - greek_greet
+- inform
+- inform_new
 - learn_subject
 - user_affirm
 - user_data
 - user_deny
+- user_greet
 - user_happy
 - user_stress
 - user_unhappy
-
 entities:
 - subject
+- subj
+- topic
 - name
 - id
 - language
-
 slots:
   subject:
     type: text
@@ -31,6 +34,18 @@ slots:
     mappings:
     - type: from_entity
       entity: subject
+  subj:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: subj
+  topic:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: topic
   name:
     type: text
     influence_conversation: false
@@ -49,7 +64,6 @@ slots:
     mappings:
     - type: from_entity
       entity: language
-
 responses:
   utter_sugg:
   - text: These are the suggestions...
@@ -92,9 +106,21 @@ responses:
   - text: Hey {name}, how are you doing?
   utter_sub:
   - text: This is your selection - {subject}
-
+  utter_ask_subject:
+  - text: That's great. What would you like to learn today?
+  utter_okay:
+  - text: Okay, I'll do it!
+  utter_okay_subj:
+  - text: I'll provide you activites for {topic}
+  utter_rest:
+  - text: I'm sorry to hear that. Would you like to take rest?
+  utter_rest_is_okay:
+  - text: Sometimes it's okay take rest. I'll see you later re-energized :)
 actions:
 - action_give_suggestion
 - action_save_data
 - action_submit
 - action_tell_subjects
+- action_tell_topics
+- utter_rest
+- utter_rest_is_okay

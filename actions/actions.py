@@ -1,5 +1,4 @@
-from random import choices
-from matplotlib.pyplot import text
+from re import sub
 import pandas as pd
 from typing import Any, Text, Dict, List
 import json
@@ -8,7 +7,9 @@ from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
+
 from actions import main
+from fuzzywuzzy import process
 
 
 class ActionSubmit(Action):
@@ -59,16 +60,16 @@ class ActionUserData(Action):
 
         # replacing {'key': 'value'} to {"key": "value"} to get valid json
         msg = tracker.latest_message['text'].replace("'", "\"")
-        print(msg)
+        print('msg: ', msg)
         # converting string to json using loads
         try:
             message = json.loads(msg)
-            print(message)
+            print('message: ', message)
             name: str = message['name']
             id: int = message['id']
-            language: str = message['language']
-
-            dispatcher.utter_message(response="utter_name")
+            language: str = message['lang']
+            print('name: ', name, id, language)
+            dispatcher.utter_message(text=f'Hey {name}, how are you doing?')
             return [SlotSet("name", name), SlotSet("id", id), SlotSet("language", language)]
         except:
             print("This is an error!")
@@ -85,8 +86,30 @@ class ActionTellSubjects(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        name = tracker.get_slot('name')
+        print('name: ', name)
 
         subs = main.get_subjects(collection_name='subjects')
+
+        user_input = tracker.latest_message.get('text')
+
+        fnd, common_value = process.extractOne(user_input, subs)
+        print("fnd: ", fnd, 'common value: ', common_value)
+
+        buttons = [{'title': 'Yes', 'payload': '/user_affirm{"subj":"'+fnd+'"}'},  # add subject as entity
+                   {'title': 'No', 'payload': '/user_deny'}]
+
+        if fnd is not None:
+
+            if common_value >= 70:
+                dispatcher.utter_message(
+                    text=f"I found {fnd!r} in my database. Is that what you mean?", buttons=buttons)
+                return []
+
+            elif 50 <= common_value < 70:
+                dispatcher.utter_message(
+                    text=f"I think this is the one: {fnd}. Is this what you mean?", buttons=buttons)
+                return []
 
         try:
             subject = next(tracker.get_latest_entity_values(
@@ -101,11 +124,12 @@ class ActionTellSubjects(Action):
             print(f"I will query my database about {subject}")
 
         else:
-            dispatcher.utter_message(
-                text=f"These are the some of the subjects available: {subs}")
-            print("No entity: ", subject)
+            buttons = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
+                       for sub in subs]
 
-        # return [SlotSet("id", id), SlotSet("name", name), SlotSet("language", language)]
+            dispatcher.utter_message(
+                text=f"I couldn't find anything related to that subject. These are some of the subjects available.", buttons=buttons)
+
         return []
 
 
@@ -119,7 +143,34 @@ class ActionGiveSuggestion(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         subs = main.get_subjects(collection_name='subjects')
+
+        buttons = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
+                   for sub in subs]
+
         dispatcher.utter_message(
-            text=f"These are some of the subjects I'd suggest: {subs}")
+            text="These are some of the subjects I'd suggest: ", buttons=buttons)
+
+        return []
+
+
+class ActionTellTopics(Action):
+
+    def name(self) -> Text:
+        return "action_tell_topics"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        subject = tracker.get_slot('subj')
+        print('subj -> action_tell_topics: ', subject)
+
+        topics_available = main.get_topics(subject)
+
+        buttons = [{"title": topic, "payload": '/inform_new{"topic":"'+topic+'"}'}
+                   for topic in topics_available]
+
+        dispatcher.utter_message(
+            text=f'Please select a topic: {topics_available}', buttons=buttons)
 
         return []

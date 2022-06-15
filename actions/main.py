@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson import ObjectId
 from dotenv import load_dotenv
 import os
 
@@ -11,9 +12,9 @@ collection_name = "subjects"
 
 def connection(database_name):
     load_dotenv()
-    user_name = os.getenv('MONGODBUSERNAME')
-    password = os.getenv('MONGODBPASSWORD')
-    cluster = f'mongodb+srv://{user_name}:{password}@cluster0.vw63h.mongodb.net/?retryWrites=true&w=majority'
+    # user_name = os.getenv('MONGODBUSERNAME')
+    # password = os.getenv('MONGODBPASSWORD')
+    cluster = f'mongodb+srv://sathish:alpha1234@cluster0.vw63h.mongodb.net/?retryWrites=true&w=majority'
 
     client = MongoClient(cluster)
     database = client[database_name]
@@ -32,6 +33,26 @@ def get_subjects(collection_name):
     return list_of_subjects
 
 
+def get_topics(subject):
+
+    collection = database[collection_name]
+
+    tops = collection.find_one({'subject': f'{subject}'}, '_id')
+
+    subject_id = tops['_id']
+
+    topic_collection = database['topics']
+
+    topics = topic_collection.find({'subId': ObjectId(subject_id)})
+
+    topics_available = [top['topic'] for top in topics]
+
+    return topics_available
+
+
 database = connection(database_name=database_name)
 resss = get_subjects(collection_name=collection_name)
-print(resss)
+
+# buttons.append(
+#     {"payload": '/inform_new{"subj":"'+sub+'"}', "title": sub})
+# print(buttons)
