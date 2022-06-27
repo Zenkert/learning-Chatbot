@@ -7,16 +7,18 @@ nlu:
     - i want to learn [Computer Science](subject)
     - i want to learn about [Machine Learning](subject)
     - i want to learn about [Business](subject)
-    - i want to learn about [Chemistry](subject)
+    - i want to learn [Chemistry](subject)
     - i would like to learn [Maths](subject)
     - i would like to learn [Physics](subject)
-    - i would like to learn about [Pyschology](subject)
-    - i would like to learn about [History](subject)
+    - i would like to learn [Pyschology](subject)
+    - i would like to learn [History](subject)
     - i would like to learn about [Humanities](subject)
     - i would like to learn about [Social Studies](subject)
     - i want to learn about [Art and Design](subject)
     - i want to study [mathematics](subject)
     - i want to learn [maths](subject)
+    - i wanr to learn about [astronomy](subject)
+    - i want to learn about [astronomy](subject)
 - intent: ask_for_suggestion
   examples: |
     - i want to learn

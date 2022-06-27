@@ -2,16 +2,6 @@ version: "3.1"
 
 stories: 
 
-# - story: basic
-#   steps:
-#   - intent: user_greet
-#   - action: utter_okay
-
-# - story: basic plus
-#   steps:
-#   - intent: ask_for_suggestion
-#   - action: utter_happy
-
 - story: User data at start of conversation - happy
   steps:
   - or:
