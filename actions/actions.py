@@ -1,4 +1,3 @@
-from re import sub
 import pandas as pd
 from typing import Any, Text, Dict, List
 import json
@@ -82,6 +81,10 @@ class ActionTellSubjects(Action):
 
     def name(self) -> Text:
         return "action_tell_subjects"
+
+    @staticmethod
+    def user_language():
+        pass
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -174,3 +177,19 @@ class ActionTellTopics(Action):
             text=f'Please select a topic: {topics_available}', buttons=buttons)
 
         return []
+
+
+# class ValidateSubmitWithTopicForm(FormValidationAction):
+
+#     def name(self) -> Text:
+#         return "validate_subject_with_topic_form"
+
+#     def validate_subj(
+#         self,
+#         slot_value: Any,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: DomainDict
+#         ) -> Dict[Text, Any]:
+
+#         pass

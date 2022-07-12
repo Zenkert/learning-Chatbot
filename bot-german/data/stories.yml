@@ -1,0 +1,29 @@
+version: "3.1"
+
+stories: 
+
+- story: ask in german
+  steps:
+  - intent: german_greet
+  - action: action_tell_subjects_german
+  - intent: inform_new_german
+  - action: action_tell_topics_german
+  - intent: inform_new_german
+  - action: utter_okay_german
+
+- story: interactive_story_1
+  steps:
+  - intent: german_greet
+  - action: action_tell_subjects_german
+  - intent: inform_new_german
+    entities:
+    - subj: Biology
+  - slot_was_set:
+    - subj: Biology
+  - action: action_tell_topics_german
+  - intent: inform_new_german
+    entities:
+    - topic: Human anatomy
+  - slot_was_set:
+    - topic: Human anatomy
+  - action: utter_okay_german

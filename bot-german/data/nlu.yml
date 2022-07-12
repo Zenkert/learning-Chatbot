@@ -1,0 +1,76 @@
+version: "3.1"
+nlu:
+- intent: german_greet
+  examples: |
+    - Ich möchte lernen
+    - ich mochte lernen
+    - Geben Sie mir ein Thema
+    - Ich möchte eine Prüfung ablegen
+
+- intent: goodbye
+  examples: |
+    - tschuss
+    - bis bald
+    - chao
+- intent: user_stress
+  examples: |
+    - i am stressed
+    - i am feeling stressed
+    - i have stress
+    - i am kind of feeling stressed
+    - i am not feeling good
+    - i am feeling sad
+- intent: user_happy
+  examples: |
+    - good
+    - i am doing good
+    - i am great
+    - i am happy
+    - doing fine
+    - it is going great
+    - it is a fine day
+- intent: user_unhappy
+  examples: |
+    - bad
+    - not good
+    - not a good day
+    - it is bad
+    - could have been better
+    - not okay
+    - it is very worst
+- intent: user_affirm
+  examples: |
+    - ja
+    - jaa
+    - naturlich
+    - sicher
+- intent: user_deny
+  examples: |
+    - nie
+    - nein
+    - i dont want to
+    - nah
+    - i am not in mood
+    - i dont feel like it
+- intent: user_data
+  examples: |
+    - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
+    - {'name': 'kumar', 'id': '9865', 'lang': 'DE'}
+    - {'name': 'john', 'id': '7822', 'lang': 'ES'}
+    - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
+
+- intent: bot_challenge
+  examples: |
+    - wie bist du?
+    - sind sie ein bot?
+    - sind sie ein human?
+    - are you my teacher?
+    - are you real?
+    - who build you?
+    - who developed you?
+
+- intent: inform_new_german
+  examples: |
+    - Dies ist ein zufälliges Beispiel
+    - Dies ist ein weiteres zufälliges Beispiel
+    - Letztes zufälliges Beispiel

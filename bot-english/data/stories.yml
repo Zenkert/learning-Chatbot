@@ -1,0 +1,180 @@
+version: "3.1"
+
+stories: 
+
+# - story: subject with topic form
+#   steps:
+#   - intent: learn_subject
+#   - action: subject_with_topic_form
+#   - active_loop: subject_with_topic_form
+
+- story: User data at start of conversation - happy
+  steps:
+  - or:
+    - intent: user_greet
+    - intent: user_data
+  - action: action_save_data  
+  - intent: user_happy
+  - action: utter_ask_subject
+  - or:
+    - intent: learn_subject
+    - intent: inform
+  - action: action_tell_subjects
+  - intent: user_affirm
+  - action: action_tell_topics
+  - intent: inform_new
+  - action: utter_okay
+
+- story: User data at start of conversation - unhappy
+  steps:
+  - or:
+    - intent: user_greet
+    - intent: user_data
+  - action: action_save_data  
+  - intent: user_happy
+  - action: utter_ask_subject
+  - or:
+    - intent: learn_subject
+    - intent: inform
+  - action: action_tell_subjects
+  - intent: user_deny
+  - action: action_give_suggestion
+
+- story: User asking for a subject
+  steps:
+  - intent: learn_subject
+  - action: action_tell_subjects
+  - intent: user_affirm
+  - action: utter_okay
+
+- story: User asking for a subject + extra
+  steps:
+  - intent: learn_subject
+  - action: action_tell_subjects
+  - intent: user_deny
+  - action: action_give_suggestion
+
+- story: Provide subject suggestions
+  steps:
+  - intent: ask_for_suggestion
+  - action: action_give_suggestion
+  - intent: inform_new
+    entities:
+    - subj: Biology
+  - slot_was_set:
+    - subj: Biology
+  - action: action_tell_topics
+  - intent: inform_new
+    entities:
+    - topic: Neurology
+  - slot_was_set:
+    - topic: Neurology
+  - action: utter_okay
+
+- story: User unhappy
+  steps:
+  - or:
+    - intent: user_greet
+    - intent: user_data
+  - action: action_save_data  
+  - intent: user_unhappy
+  - action: utter_rest
+  - intent: user_affirm
+  - action: utter_rest_is_okay
+
+- story: User unhappy -> then happy + working
+  steps:
+  - or:
+    - intent: user_greet
+    - intent: user_data
+  - action: action_save_data  
+  - intent: user_unhappy
+  - action: utter_rest
+  - intent: user_deny
+  - action: utter_ask_subject
+  - or:
+    - intent: learn_subject
+    - intent: inform
+  - action: action_tell_subjects
+  - intent: user_affirm
+  - action: utter_okay
+
+- story: User unhappy -> then happy
+  steps:
+  - or:
+    - intent: user_greet
+    - intent: user_data
+  - action: action_save_data  
+  - intent: user_unhappy
+  - action: utter_rest
+  - intent: user_deny
+  - action: utter_ask_subject
+  - or:
+    - intent: learn_subject
+    - intent: inform
+  - action: action_tell_subjects
+  - intent: user_deny
+  - action: action_give_suggestion
+
+- story: interactive_story_1
+  steps:
+  - intent: user_data
+  - action: action_save_data
+  - slot_was_set:
+    - name: sathish
+  - slot_was_set:
+    - id: '1234'
+  - slot_was_set:
+    - language: EN
+  - intent: user_happy
+  - action: utter_ask_subject
+  - intent: learn_subject
+    entities:
+    - subject: maths
+  - slot_was_set:
+    - subject: maths
+  - action: action_tell_subjects
+  - intent: user_affirm
+  - action: utter_okay
+
+- story: interactive_story_2
+  steps:
+  - intent: ask_for_suggestion
+  - action: action_give_suggestion
+  - intent: inform_new
+  - action: utter_okay_subj
+
+- story: interactive_story_unhappy
+  steps:
+  - intent: user_greet
+  - action: action_save_data
+  - intent: user_unhappy
+  - action: utter_rest
+  - intent: user_affirm
+  - action: utter_rest_is_okay
+
+- story: ask in german
+  steps:
+  - intent: german_greet
+  - action: action_tell_subjects_german
+  - intent: inform_new_german
+  - action: action_tell_topics_german
+  - intent: inform_new_german
+  - action: utter_okay_german
+
+- story: interactive_story_1
+  steps:
+  - intent: german_greet
+  - action: action_tell_subjects_german
+  - intent: inform_new_german
+    entities:
+    - subj: Biology
+  - slot_was_set:
+    - subj: Biology
+  - action: action_tell_topics_german
+  - intent: inform_new_german
+    entities:
+    - topic: Human anatomy
+  - slot_was_set:
+    - topic: Human anatomy
+  - action: utter_okay_german

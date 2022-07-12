@@ -1,0 +1,151 @@
+version: "3.1"
+nlu:
+- intent: learn_subject
+  examples: |
+    - i want to learn [Maths](subject)
+    - i want to learn [Physics](subject)
+    - i want to learn [Computer Science](subject)
+    - i want to learn about [Machine Learning](subject)
+    - i want to learn about [Business](subject)
+    - i want to learn [Chemistry](subject)
+    - i would like to learn [Maths](subject)
+    - i would like to learn [Physics](subject)
+    - i would like to learn [Pyschology](subject)
+    - i would like to learn [History](subject)
+    - i would like to learn about [Humanities](subject)
+    - i would like to learn about [Social Studies](subject)
+    - i want to learn about [Art and Design](subject)
+    - i want to study [mathematics](subject)
+    - i want to learn [maths](subject)
+    - i wanr to learn about [astronomy](subject)
+    - i want to learn about [astronomy](subject)
+- intent: ask_for_suggestion
+  examples: |
+    - i want to learn
+    - i want to study
+    - i would like to learn
+    - what are the subjects available
+    - what can i learn
+    - give me a subject
+    - give me a suggestion
+    - suggest me a subject
+    - suggest me something to learn
+    - give me something to learn
+    - please provide me some suggestions
+    - suggest me something
+- intent: german_greet
+  examples: |
+    - Ich möchte lernen
+    - ich mochte lernen
+    - Geben Sie mir ein Thema
+    - Ich möchte eine Prüfung ablegen
+- intent: greek_greet
+  examples: |
+    - Θέλω να μάθω
+    - δώστε μου ένα θέμα
+    - Θέλω να δώσω εξετάσεις
+- intent: goodbye
+  examples: |
+    - see you later
+    - goodbye
+    - byebye
+- intent: user_stress
+  examples: |
+    - i am stressed
+    - i am feeling stressed
+    - i have stress
+    - i am kind of feeling stressed
+    - i am not feeling good
+    - i am feeling sad
+- intent: user_happy
+  examples: |
+    - good
+    - i am doing good
+    - i am great
+    - i am happy
+    - doing fine
+    - it is going great
+    - it is a fine day
+- intent: user_unhappy
+  examples: |
+    - bad
+    - not good
+    - not a good day
+    - it is bad
+    - could have been better
+    - not okay
+    - it is very worst
+- intent: user_affirm
+  examples: |
+    - yes
+    - yeah
+    - yup
+    - sure
+    - ofcourse
+    - of course
+- intent: user_deny
+  examples: |
+    - no
+    - nope
+    - i dont want to
+    - nah
+    - i am not in mood
+    - i dont feel like it
+- intent: user_data
+  examples: |
+    - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
+    - {'name': 'kumar', 'id': '9865', 'lang': 'DE'}
+    - {'name': 'john', 'id': '7822', 'lang': 'ES'}
+    - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
+- intent: out_of_scope
+  examples: |
+    - i want to contact my teacher
+    - i want to send a message to my friend
+    - i would like to message my supervisor
+    - i would like to play now
+    - i want to learn about flying to mars
+    - i want to learn more about the world
+    - i would like to learn how to ride a horse
+    - i would like to learn more about you
+    - i want to know how to learn to drive
+    - i want to know how to do calculations
+- intent: bot_challenge
+  examples: |
+    - who are you?
+    - are you a bot?
+    - are you a human?
+    - are you my teacher?
+    - are you real?
+    - who build you?
+    - who developed you?
+- intent: inform
+  examples: |
+    - maths
+    - business
+    - technology
+    - biology
+    - science
+- intent: user_greet
+  examples: |
+    - hey
+    - hi
+    - hiya
+    - howdy
+    - hallo
+    - hii
+    - heyy
+    - hey, good morning
+    - good evening
+    - gud morning
+    - gud evening
+- intent: inform_new
+  examples: |
+    - This is a random[](subj) example
+    - This is another random[](subj) example
+    - This is last random example[](topic)
+    - This is final random example[](topic)
+- intent: inform_new_german
+  examples: |
+    - Dies ist ein zufälliges Beispiel
+    - Dies ist ein weiteres zufälliges Beispiel
+    - Letztes zufälliges Beispiel

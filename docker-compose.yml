@@ -1,13 +1,21 @@
 version: '3.0'
 services:
-  rasa:
-    container_name: "rasa_server"
+  rasa_english:
+    container_name: "rasa_server_english"
     build:
-      context: .
+      context: ./bot-english
     volumes:
-      - "./:/app"
+      - "./bot-english:/app"
     ports:
       - "5005:5005"
+  rasa_german:
+    container_name: "rasa_server_german"
+    build:
+      context: ./bot-german
+    volumes:
+      - "./bot-german:/app"
+    ports:
+      - "8000:8000"
   action_server:
     container_name: "action_server"
     build:
