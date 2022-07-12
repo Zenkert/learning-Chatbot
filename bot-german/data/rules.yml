@@ -16,3 +16,8 @@ rules:
   steps:
   - intent: nlu_fallback
   - action: utter_rephrase
+
+- rule: say goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye

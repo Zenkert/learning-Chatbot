@@ -90,15 +90,15 @@ responses:
   utter_available_subjects:
   - text: The entity/slot is {subject}
   utter_rephrase:
-  - text: Sorry, I couldn't understand. Can you please rephrase that?
-  - text: Can you please rephrase your text so that I can understand it correctly?
+  - text: Tut mir leid, ich habe nicht verstanden. Können Sie das bitte anders formulieren?
+  - text: Können Sie Ihren Text bitte so umformulieren, dass ich ihn richtig verstehen kann?
   utter_default:
-  - text: Oh, I am not capable of doing that!
-  - text: I am afraid that's beyond my capabilities!
+  - text: Oh, dazu bin ich nicht fähig!
+  - text: Ich fürchte, das übersteigt meine Fähigkeiten!
   utter_i_am_a_bot:
-  - text: I am a bot and I'm here to assist you!
-  - text: I am a bot and my purpose is to assist you!
-  - text: I am an assistant and I'll happily help you :)
+  - text: Ich bin ein Bot und ich bin hier, um dir zu helfen!
+  - text: Ich bin ein Bot und meine Aufgabe ist es, dir zu helfen!
+  - text: Ich bin eine Assistentin und helfe Ihnen gerne :)
   utter_name:
   - text: Hey {name}, how are you doing?
   utter_sub:
