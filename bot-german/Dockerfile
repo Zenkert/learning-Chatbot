@@ -1,8 +1,8 @@
 FROM rasa/rasa:3.1.1
 
-WORKDIR /app
+WORKDIR /app/bot-german
 
-COPY . /app
+COPY . /app/bot-german
 
 USER root
 
@@ -10,11 +10,11 @@ RUN rasa train
 
 USER 1001
 
-VOLUME /app
+VOLUME /app/bot-german
 
-VOLUME /app/data
+VOLUME /app/bot-german/data
 
-VOLUME /app/models
+VOLUME /app/bot-german/models
 
-CMD [ "run", "-m", "/app/models", "--enable-api", "--cors", "*", "--debug", "-p", "8000" ]
+CMD [ "run", "-m", "/app/bot-german/models", "--enable-api", "--cors", "*", "--debug", "-p", "8000" ]
 

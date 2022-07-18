@@ -5,7 +5,7 @@ services:
     build:
       context: ./bot-english
     volumes:
-      - "./bot-english:/app"
+      - "./bot-english:/app/bot-english"
     ports:
       - "5005:5005"
   rasa_german:
@@ -13,7 +13,7 @@ services:
     build:
       context: ./bot-german
     volumes:
-      - "./bot-german:/app"
+      - "./bot-german:/app/bot-german"
     ports:
       - "8000:8000"
   action_server:
