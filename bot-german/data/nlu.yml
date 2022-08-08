@@ -1,13 +1,12 @@
 version: "3.1"
 nlu:
-- intent: german_greet
+- intent: ask_for_suggestion
   examples: |
     - Ich möchte lernen
     - ich mochte lernen
     - Geben Sie mir ein Thema
     - Ich möchte eine Prüfung ablegen
-
-- intent: goodbye
+- intent: goodbye_german
   examples: |
     - tschuss
     - bis bald
@@ -23,6 +22,8 @@ nlu:
 - intent: user_happy
   examples: |
     - good
+    - gut
+    - sehr gut
     - i am doing good
     - i am great
     - i am happy
@@ -32,10 +33,13 @@ nlu:
 - intent: user_unhappy
   examples: |
     - bad
+    - schlecht
+    - nicht gut
     - not good
     - not a good day
     - it is bad
     - could have been better
+    - nicht okay
     - not okay
     - it is very worst
 - intent: user_affirm
@@ -58,19 +62,38 @@ nlu:
     - {'name': 'kumar', 'id': '9865', 'lang': 'DE'}
     - {'name': 'john', 'id': '7822', 'lang': 'ES'}
     - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
-
-- intent: bot_challenge
+- intent: bot_challenge_german
   examples: |
     - wie bist du?
     - sind sie ein bot?
     - sind sie ein human?
-    - are you my teacher?
-    - are you real?
-    - who build you?
-    - who developed you?
-
-- intent: inform_new_german
+    - bist du gut?
+    - sind sie gut?
+- intent: inform_new
   examples: |
     - Dies ist ein zufälliges Beispiel
     - Dies ist ein weiteres zufälliges Beispiel
     - Letztes zufälliges Beispiel
+- intent: inform
+  examples: |
+    - maths
+    - business
+    - technology
+    - biology
+    - science
+- intent: next_option
+  examples: |
+    - next
+    - next option
+- intent: out_of_scope
+  examples: |
+    - Ich möchte meinen Lehrer kontaktieren
+    - ich möchte meinem Freund eine Nachricht senden
+    - möchte meinem Vorgesetzten eine Nachricht schicken
+    - Ich möchte jetzt spielen
+    - Ich möchte über den Flug zum Mars lernen
+    - Ich möchte mehr über die Welt erfahren
+    - Ich möchte lernen, wie man ein Pferd reitet
+    - Ich würde gerne mehr über dich erfahren
+    - Ich möchte wissen, wie man Autofahren lernt
+    - ich möchte wissen, wie man rechnet

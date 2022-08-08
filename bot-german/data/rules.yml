@@ -2,22 +2,34 @@ version: "3.1"
 
 rules:
 
-- rule: save user data
+- rule: activate subj form
   steps:
-  - intent: user_data
-  - action: action_save_data
+  - intent: ask_for_suggestion
+  - action: action_clean_entity_german
+  - action: subject_with_topic_form_german
+  - active_loop: subject_with_topic_form_german
+  - active_loop: null
+  - action: questions_form_german
+  - active_loop: questions_form_german
+  - active_loop: null
+  - action: utter_okay_german
 
 - rule: user bot challenge
   steps:
-  - intent: bot_challenge
-  - action: utter_i_am_a_bot
+  - intent: bot_challenge_german
+  - action: utter_i_am_a_bot_german
 
 - rule: ask user to rephrase
   steps:
   - intent: nlu_fallback
-  - action: utter_rephrase
+  - action: utter_rephrase_german
 
 - rule: say goodbye
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+  - intent: goodbye_german
+  - action: utter_goodbye_german
+
+- rule: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_default_german

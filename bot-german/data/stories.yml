@@ -2,28 +2,36 @@ version: "3.1"
 
 stories: 
 
-- story: ask in german
+- story: FORM - User data at start of conversation - happy
   steps:
-  - intent: german_greet
-  - action: action_tell_subjects_german
-  - intent: inform_new_german
-  - action: action_tell_topics_german
-  - intent: inform_new_german
+  - intent: ask_for_suggestion
+  - action: action_clean_entity_german
+  - action: subject_with_topic_form_german
+  - active_loop: subject_with_topic_form_german
+  - active_loop: null
+  - action: questions_form_german
+  - active_loop: questions_form_german
+  - active_loop: null
   - action: utter_okay_german
 
 - story: interactive_story_1
   steps:
-  - intent: german_greet
-  - action: action_tell_subjects_german
-  - intent: inform_new_german
-    entities:
-    - subj: Biology
+  - intent: ask_for_suggestion
+  - action: action_clean_entity_german
+  - action: subject_with_topic_form_german
+  - active_loop: subject_with_topic_form_german
+  - slot_was_set:
+    - requested_slot: subj_german
   - slot_was_set:
     - subj: Biology
-  - action: action_tell_topics_german
-  - intent: inform_new_german
-    entities:
-    - topic: Human anatomy
+  - slot_was_set:
+    - requested_slot: topic_german
   - slot_was_set:
     - topic: Human anatomy
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: questions_form_german
+  - active_loop: questions_form_german
+  - active_loop: null
   - action: utter_okay_german

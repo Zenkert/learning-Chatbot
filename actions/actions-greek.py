@@ -12,10 +12,47 @@ from actions import main
 from fuzzywuzzy import process
 
 
-class ActionUserDataGerman(Action):
+class ActionSubmit(Action):
 
     def name(self) -> Text:
-        return "action_save_data_german"
+        return "action_submit"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        tracker_events = tracker.events
+
+        transcript = []
+
+        for data in tracker_events:
+            m = 1
+            if data['event'] == 'user':
+                try:
+                    user_uttered = data['text']
+                    user_uttered_formatted = f'User: {user_uttered}'
+                    transcript.append(user_uttered_formatted)
+                except KeyError:
+                    pass
+
+            elif data['event'] == 'bot':
+                try:
+                    bot_uttered = data['text']
+                    user_uttered_formatted = f'Bot: {bot_uttered}'
+                    transcript.append(user_uttered_formatted)
+                except KeyError:
+                    pass
+
+        dj = pd.DataFrame(transcript, columns=['Transcript'])
+        dj.to_excel('user_transcript.xlsx')
+
+        return []
+
+
+class ActionUserData(Action):
+
+    def name(self) -> Text:
+        return "action_save_data"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -48,10 +85,10 @@ subject_idx = 0
 topic_idx = 0
 
 
-class ActionTellSubjectsGerman(Action):
+class ActionTellSubjects(Action):
 
     def name(self) -> Text:
-        return "action_ask_subj_german"
+        return "action_ask_subj"
 
     @staticmethod
     def user_language():
@@ -69,22 +106,22 @@ class ActionTellSubjectsGerman(Action):
         if subject_idx == 0:
             total_subs = main.get_subjects(collection_name='subjects')
             subs = [total_subs.pop() for _ in range(5)]
-            buttons_subj = [{"title": sub, "payload": '/inform_new{"subj_german":"'+sub+'"}'}
+            buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                             for sub in subs]
             buttons_subj.append(
-                {"title": 'Next', "payload": '/next_option{"subj_german":"None"}'})
+                {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
 
         elif subject_idx != 0:
             if len(total_subs) >= 5:
                 subs = [total_subs.pop() for _ in range(5)]
-                buttons_subj = [{"title": sub, "payload": '/inform_new{"subj_german":"'+sub+'"}'}
+                buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                                 for sub in subs]
                 buttons_subj.append(
                     {"title": 'Next', "payload": 'next'})
 
             else:
                 subs = [total_subs.pop() for _ in range(len(total_subs))]
-                buttons_subj = [{"title": sub, "payload": '/inform_new{"subj_german":"'+sub+'"}'}
+                buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                                 for sub in subs]
 
         user_input = tracker.latest_message.get('text')
@@ -92,19 +129,19 @@ class ActionTellSubjectsGerman(Action):
         fnd, common_value = process.extractOne(user_input, subs)
         print("fnd: ", fnd, 'common value: ', common_value)
 
-        buttons = [{'title': 'Yes', 'payload': '/user_affirm{"subj_german":"'+fnd+'"}'},  # add subject as entity
+        buttons = [{'title': 'Yes', 'payload': '/user_affirm{"subj":"'+fnd+'"}'},  # add subject as entity
                    {'title': 'No', 'payload': '/user_deny'}]
 
         if fnd is not None:
 
             if common_value >= 70:
                 dispatcher.utter_message(
-                    text=f"Ich habe in meiner Datenbank {fnd!r} gefunden. Ist es das, was Sie meinen?", buttons=buttons)
+                    text=f"I found {fnd!r} in my database. Is that what you mean?", buttons=buttons)
                 return []
 
             elif 50 <= common_value < 70:
                 dispatcher.utter_message(
-                    text=f"Ich glaube, das ist es: {fnd!r}. Ist es das, was Sie meinen?", buttons=buttons)
+                    text=f"I think this is the one: {fnd}. Is this what you mean?", buttons=buttons)
                 return []
 
         try:
@@ -115,21 +152,21 @@ class ActionTellSubjectsGerman(Action):
 
         if subject is not None:
             dispatcher.utter_message(
-                text=f"Ich werde meine Datenbank abfragen über {subject}")
+                text=f"I will query my database about {subject}")
             print("Subject: ", subject)
-            print(f"Ich werde meine Datenbank abfragen über {subject}")
+            print(f"I will query my database about {subject}")
 
         else:
             dispatcher.utter_message(
-                text=f"Dies sind einige der verfügbaren Themen.", buttons=buttons_subj, button_type="vertical")
+                text=f"I couldn't find anything related to that subject. These are some of the subjects available.", buttons=buttons_subj, button_type="vertical")
 
         return []
 
 
-class ActionGiveSuggestionGerman(Action):
+class ActionGiveSuggestion(Action):
 
     def name(self) -> Text:
-        return "action_give_suggestion_german"
+        return "action_give_suggestion"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -137,19 +174,19 @@ class ActionGiveSuggestionGerman(Action):
 
         subs = main.get_subjects(collection_name='subjects')
 
-        buttons = [{"title": sub, "payload": '/inform_new{"subj_german":"'+sub+'"}'}
+        buttons = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                    for sub in subs]
 
         dispatcher.utter_message(
-            text="Dies sind einige der Themen, die ich vorschlagen würde: ", buttons=buttons)
+            text="These are some of the subjects I'd suggest: ", buttons=buttons)
 
         return []
 
 
-class ActionTellTopicsGerman(Action):
+class ActionTellTopics(Action):
 
     def name(self) -> Text:
-        return "action_ask_topic_german"
+        return "action_ask_topic"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -157,26 +194,26 @@ class ActionTellTopicsGerman(Action):
 
         global topic_idx
 
-        subject = tracker.get_slot('subj_german')
+        subject = tracker.get_slot('subj')
         print('subj -> action_tell_topics: ', subject)
 
         # if topic_idx == 0:
         topics_available = main.get_topics(subject)
-        buttons = [{"title": topic, "payload": '/inform_new{"topic_german":"'+topic_id+'"}'}
+        buttons = [{"title": topic, "payload": '/inform_new{"topic":"'+topic_id+'"}'}
                    for topic, topic_id in topics_available.items()]
 
         dispatcher.utter_message(
-            text=f'Bitte wählen Sie ein Thema: ', buttons=buttons, button_type="vertical")
+            text=f'Please select a topic: ', buttons=buttons, button_type="vertical")
 
         return []
 
 
-class ValidateSubmitWithTopicFormGerman(FormValidationAction):
+class ValidateSubmitWithTopicForm(FormValidationAction):
 
     def name(self) -> Text:
-        return "validate_subject_with_topic_form_german"
+        return "validate_subject_with_topic_form"
 
-    def validate_subj_german(
+    def validate_subj(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -194,12 +231,12 @@ class ValidateSubmitWithTopicFormGerman(FormValidationAction):
 
         if intent_value == "next_option":
             subject_idx += 1
-            return {'subj_german': None}
+            return {'subj': None}
         print('subject_idx:', subject_idx)
         subject_idx = 0
-        return {'subj_german': slot_value}
+        return {'subj': slot_value}
 
-    def validate_topic_german(
+    def validate_topic(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -207,13 +244,13 @@ class ValidateSubmitWithTopicFormGerman(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
-        return {'topic_german': slot_value}
+        return {'topic': slot_value}
 
 
 class ActionCleanEntity(Action):
 
     def name(self) -> Text:
-        return "action_clean_entity_german"
+        return "action_clean_entity"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -222,17 +259,17 @@ class ActionCleanEntity(Action):
         global i
         i = 0  # reset i before activation of form
 
-        return [SlotSet("subj_german", None), SlotSet("topic_german", None)]
+        return [SlotSet("subj", None), SlotSet("topic", None)]
 
 
 global i
 i = 0
 
 
-class ActionAskQuestionGerman(Action):
+class ActionAskQuestion(Action):
 
     def name(self) -> Text:
-        return "action_ask_question_german"
+        return "action_ask_question"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -240,7 +277,7 @@ class ActionAskQuestionGerman(Action):
 
         global i
 
-        topic_id = tracker.get_slot('topic_german')
+        topic_id = tracker.get_slot('topic')
         print('topic_id: ', topic_id)
 
         _, questions_available = main.get_questions(topic_id)
@@ -257,12 +294,12 @@ class ActionAskQuestionGerman(Action):
         return []
 
 
-class ValidateQuestionsFormGerman(FormValidationAction):
+class ValidateQuestionsForm(FormValidationAction):
 
     def name(self) -> Text:
-        return "validate_questions_form_german"
+        return "validate_questions_form"
 
-    def validate_question_german(
+    def validate_question(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -271,7 +308,7 @@ class ValidateQuestionsFormGerman(FormValidationAction):
     ) -> Dict[Text, Any]:
 
         global i
-        topic_id = tracker.get_slot('topic_german')
+        topic_id = tracker.get_slot('topic')
         question_count, questions_available = main.get_questions(topic_id)
 
         right_answer = questions_available['right_answer'][i]
@@ -280,7 +317,7 @@ class ValidateQuestionsFormGerman(FormValidationAction):
         # mcq_choices = questions_available['mcq_choices'][i]
 
         if slot_value.startswith('/inform_new'):
-            return {'question_german': None}
+            return {'question': None}
         elif slot_value == right_answer:
             dispatcher.utter_message(text=pos_feedback)
         else:
@@ -289,10 +326,10 @@ class ValidateQuestionsFormGerman(FormValidationAction):
         if i < question_count-1:
             i += 1
             print('i ==> ', i, 'question_count ==> ', question_count)
-            return {'question_german': None}
+            return {'question': None}
         i = 0  # reset value of i to loop again
 
-        return {'question_german': slot_value}
+        return {'question': slot_value}
 
 # class ActionTellSubjects(Action):
 
