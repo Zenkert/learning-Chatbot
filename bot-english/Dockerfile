@@ -4,12 +4,6 @@ WORKDIR /app/bot-english
 
 COPY . /app/bot-english
 
-COPY ./data /app/bot-english/data
-
-# COPY config.yml /app/bot-english/
-
-# COPY credentials.yml /app/bot-english/
-
 USER root
 
 RUN rasa train

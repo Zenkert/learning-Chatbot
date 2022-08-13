@@ -2,7 +2,7 @@ version: "3.1"
 
 stories: 
 
-- story: SUBJECT_WITH_TOPIC_FORM - Happy path 1
+- story: FORM - User data at start of conversation - happy
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
@@ -12,9 +12,9 @@ stories:
   - action: questions_form
   - active_loop: questions_form
   - active_loop: null
-  - action: utter_done
+  - action: utter_okay
 
-- story: SUBJECT_WITH_TOPIC_FORM - Happy path 2
+- story: interactive_story_1
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
@@ -34,31 +34,7 @@ stories:
   - action: questions_form
   - active_loop: questions_form
   - active_loop: null
-  - action: utter_done
-
-- story: GIVE USER PROGRESS
-  steps:
-  - intent: ask_progress
-  - action: action_give_progress
-
-- story: GIVE USER IMPROVEMENT
-  steps:
-  - intent: ask_improvement
-  - action: action_give_improvement
-
-- story: GIVE USER APPROACH
-  steps:
-  - intent: ask_approach
-  - action: action_give_approach
-
-- story: GET USER FEEDBACK
-  steps:
-  - intent: user_feedback
-  - action: action_clean_feedbackform_slots
-  - action: feedback_form
-  - active_loop: feedback_form
-  - active_loop: null
-  - action: utter_thanks_feedback
+  - action: utter_okay
 
 # - story: User data at start of conversation - happy
 #   steps:
@@ -205,21 +181,42 @@ stories:
 #   - intent: user_affirm
 #   - action: utter_rest_is_okay
 
-- story: interactive_story_4
-  steps:
-  - intent: user_feedback
-  - action: action_clean_feedbackform_slots
-  - action: feedback_form
-  - active_loop: feedback_form
-  - slot_was_set:
-    - requested_slot: feedback
-  - slot_was_set:
-    - feedback: it is going great
-  - slot_was_set:
-    - requested_slot: confirm_feedback
-  - slot_was_set:
-    - confirm_feedback: Yes
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: utter_thanks_feedback
+# - story: interactive_story_1
+#   steps:
+#   - intent: ask_for_suggestion
+#   - slot_was_set:
+#     - question: i wanr to learn
+#   - action: action_clean_entity
+#   - slot_was_set:
+#     - subj: null
+#   - slot_was_set:
+#     - topic: null
+#   - action: subject_with_topic_form
+#   - active_loop: subject_with_topic_form
+#   - slot_was_set:
+#     - requested_slot: subj
+#   - slot_was_set:
+#     - subj: Biology
+#   - slot_was_set:
+#     - question: /inform_new{"subj":"Biology"}
+#   - slot_was_set:
+#     - subj: Biology
+#   - slot_was_set:
+#     - requested_slot: topic
+#   - slot_was_set:
+#     - topic: 628292ddc942dd68d1fcc42d
+#   - slot_was_set:
+#     - question: /inform_new{"topic":"628292ddc942dd68d1fcc42d"}
+#   - slot_was_set:
+#     - topic: 628292ddc942dd68d1fcc42d
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: questions_form
+#   - active_loop: questions_form
+#   - slot_was_set:
+#     - question: /inform_new{"topic":"628292ddc942dd68d1fcc42d"}
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: utter_okay

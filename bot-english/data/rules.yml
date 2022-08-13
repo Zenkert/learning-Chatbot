@@ -2,7 +2,7 @@ version: "3.1"
 
 rules:
 
-- rule: activate SUBJECT_WITH_TOPIC_FORM
+- rule: activate subj form
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
@@ -12,16 +12,7 @@ rules:
   - action: questions_form
   - active_loop: questions_form
   - active_loop: null
-  - action: utter_done
-
-- rule: GET USER FEEDBACK RULE
-  steps:
-  - intent: user_feedback
-  - action: action_clean_feedbackform_slots
-  - action: feedback_form
-  - active_loop: feedback_form
-  - active_loop: null
-  - action: utter_thanks_feedback
+  - action: utter_okay
 
 - rule: save user data
   steps:
@@ -42,47 +33,3 @@ rules:
   steps:
   - intent: nlu_fallback
   - action: utter_rephrase
-
-- rule: remind call
-  steps:
-  - intent: ask_remind_call
-  - action: action_set_reminder
-
-- rule: forget reminder
-  steps:
-  - intent: ask_forget_reminders
-  - action: action_forget_reminders
-
-- rule: say goodbye to user
-  steps:
-  - intent: user_goodbye
-  - action: utter_goodbye
-
-- rule: convo action_tell_id
-  steps:
-  - intent: ask_id
-  - action: action_tell_id
-
-- rule: warn dry plant
-  steps:
-  - intent: EXTERNAL_dry_plant
-  - action: action_warn_dry
-
-- rule: react to reminder
-  steps:
-  - intent: EXTERNAL_reminder
-  - action: action_react_to_reminder
-
-- rule: say thanks to user
-  steps:
-  - intent: user_thanks
-  - action: utter_welcome
-
-# - rule: Respond to ask_what_can_do
-#   steps:
-#   - intent: ask_what_can_do
-#   - action: utter_abilities
-#   - intent: tell_me_more     # for this to work, set `restrict_rules: false` for the RulePolicy
-#   - action: utter_abilities
-#   - intent: tell_me_more
-#   - action: utter_abilities

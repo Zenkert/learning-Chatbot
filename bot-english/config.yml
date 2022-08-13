@@ -14,10 +14,6 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
-  - name: DucklingEntityExtractor
-    url: http://localhost:8000
-    dimensions: ["time"]
-    timezone: "Europe/Berlin"
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
@@ -30,4 +26,3 @@ policies:
     max_history: 5
     epochs: 100
   - name: RulePolicy
-    # restrict_rules: false

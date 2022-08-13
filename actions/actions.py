@@ -1,13 +1,7 @@
-from datetime import datetime as dt
-from email import message
-from rasa_sdk.events import ReminderScheduled, ReminderCancelled, UserUtteranceReverted, ActionReverted
-from rasa_sdk import Action, Tracker
 import pandas as pd
 from typing import Any, Text, Dict, List
 import json
-import random
 from bson import ObjectId
-import copy
 
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
@@ -16,9 +10,6 @@ from rasa_sdk.types import DomainDict
 
 from actions import main
 from fuzzywuzzy import process
-from dateutil.parser import *
-
-dict_vars = {'total_subs': None, 'subject_idx': 0, 'topic_idx': 0, 'i': 0}
 
 
 class ActionSubmit(Action):
@@ -87,6 +78,13 @@ class ActionUserData(Action):
         return []
 
 
+global total_subs
+global subject_idx
+global topic_idx
+subject_idx = 0
+topic_idx = 0
+
+
 class ActionTellSubjects(Action):
 
     def name(self) -> Text:
@@ -101,29 +99,28 @@ class ActionTellSubjects(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # name = tracker.get_slot('name')
         # print('name: ', name)
+        global subject_idx
+        global total_subs
+        print('subject_idx:', subject_idx)
 
-        print('subject_idx:', dict_vars['subject_idx'])
-
-        if dict_vars['subject_idx'] == 0:
-            dict_vars['total_subs'] = main.get_subjects(
-                collection_name='subjects')
-            subs = [dict_vars['total_subs'].pop() for _ in range(5)]
+        if subject_idx == 0:
+            total_subs = main.get_subjects(collection_name='subjects')
+            subs = [total_subs.pop() for _ in range(5)]
             buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                             for sub in subs]
             buttons_subj.append(
                 {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
 
-        elif dict_vars['subject_idx'] != 0:
-            if len(dict_vars['total_subs']) >= 5:
-                subs = [dict_vars['total_subs'].pop() for _ in range(5)]
+        elif subject_idx != 0:
+            if len(total_subs) >= 5:
+                subs = [total_subs.pop() for _ in range(5)]
                 buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                                 for sub in subs]
                 buttons_subj.append(
-                    {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
+                    {"title": 'Next', "payload": 'next'})
 
             else:
-                subs = [dict_vars['total_subs'].pop()
-                        for _ in range(len(dict_vars['total_subs']))]
+                subs = [total_subs.pop() for _ in range(len(total_subs))]
                 buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                                 for sub in subs]
 
@@ -195,6 +192,8 @@ class ActionTellTopics(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        global topic_idx
+
         subject = tracker.get_slot('subj')
         print('subj -> action_tell_topics: ', subject)
 
@@ -222,6 +221,8 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
+        global subject_idx
+
         intent_value = tracker.get_intent_of_latest_message()
 
         print('intent_value: ', intent_value)
@@ -229,10 +230,10 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         print('slot_valuexx->>', slot_value)
 
         if intent_value == "next_option":
-            dict_vars['subject_idx'] += 1
+            subject_idx += 1
             return {'subj': None}
-        print(f"{dict_vars['subject_idx'] = }")
-        dict_vars['subject_idx'] = 0
+        print('subject_idx:', subject_idx)
+        subject_idx = 0
         return {'subj': slot_value}
 
     def validate_topic(
@@ -255,24 +256,14 @@ class ActionCleanEntity(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        # reset dict before activation of form
-
-        dict_vars['i'] = 0
-        dict_vars['subject_idx'] = 0
+        global i
+        i = 0  # reset i before activation of form
 
         return [SlotSet("subj", None), SlotSet("topic", None)]
 
 
-class ActionCleanFeedbackformSlots(Action):
-
-    def name(self) -> Text:
-        return "action_clean_feedbackform_slots"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        return [SlotSet("feedback", None), SlotSet("confirm_feedback", None)]
+global i
+i = 0
 
 
 class ActionAskQuestion(Action):
@@ -284,14 +275,16 @@ class ActionAskQuestion(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        global i
+
         topic_id = tracker.get_slot('topic')
         print('topic_id: ', topic_id)
 
         _, questions_available = main.get_questions(topic_id)
 
-        mcq_question = questions_available['mcq_question'][dict_vars['i']]
-        mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
-        print('i: ', dict_vars['i'], 'mcq_qq: ', mcq_question)
+        mcq_question = questions_available['mcq_question'][i]
+        mcq_choices = questions_available['mcq_choices'][i]
+        print('i: ', i, 'mcq_qq: ', mcq_question)
         buttons = [{"title": choice, "payload": f"option{idx+1}"}
                    for idx, choice in enumerate(mcq_choices)]
 
@@ -314,13 +307,14 @@ class ValidateQuestionsForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
+        global i
         topic_id = tracker.get_slot('topic')
         question_count, questions_available = main.get_questions(topic_id)
 
-        right_answer = questions_available['right_answer'][dict_vars['i']]
-        pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars['i']]
-        neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars['i']]
-        # mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
+        right_answer = questions_available['right_answer'][i]
+        pos_feedback = questions_available['feedback']['pos_feedback'][i]
+        neg_feedback = questions_available['feedback']['neg_feedback'][i]
+        # mcq_choices = questions_available['mcq_choices'][i]
 
         if slot_value.startswith('/inform_new'):
             return {'question': None}
@@ -329,12 +323,11 @@ class ValidateQuestionsForm(FormValidationAction):
         else:
             dispatcher.utter_message(text=neg_feedback)
 
-        if dict_vars['i'] < question_count-1:
-            dict_vars['i'] += 1
-            print('i ==> ', dict_vars['i'],
-                  'question_count ==> ', question_count)
+        if i < question_count-1:
+            i += 1
+            print('i ==> ', i, 'question_count ==> ', question_count)
             return {'question': None}
-        dict_vars['i'] = 0  # reset value of i to loop again
+        i = 0  # reset value of i to loop again
 
         return {'question': slot_value}
 
@@ -395,274 +388,3 @@ class ValidateQuestionsForm(FormValidationAction):
 #                 text=f"I couldn't find anything related to that subject. These are some of the subjects available.", buttons=buttons)
 
 #         return []
-
-
-class ActionSetReminder(Action):
-
-    def name(self) -> Text:
-        return "action_set_reminder"
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-
-        reminder_time = tracker.get_slot("time")
-
-        time_object = dt.strptime(reminder_time, "%Y-%m-%dT%H:%M:%S.%f%z")
-        print(f'{time_object=}')
-        dispatcher.utter_message(
-            f"Okay, I will remind you at {time_object.time()} on {time_object.date()}.")
-        # if rem_time != None:
-        #     datez = rem_time.split('.000+02:00')
-        #     datetime_obj = parse(datez[0])
-
-        # else:
-        #     datetime_obj = datetime.datetime.now() + datetime.timedelta(seconds=5)
-        #     dispatcher.utter_message(
-        #         f"DEFAULT: {rem_time}")
-        entities = tracker.latest_message.get("entities")
-
-        reminder = ReminderScheduled(
-            "EXTERNAL_reminder",
-            trigger_date_time=time_object,
-            entities=entities,
-            name="my_reminder",
-            kill_on_user_message=False,
-        )
-
-        return [reminder]
-
-
-class ActionReactToReminder(Action):
-
-    def name(self) -> Text:
-        return "action_react_to_reminder"
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(f"Hey, here is your reminder!")
-
-        return []
-
-
-class ActionTellID(Action):
-
-    def name(self) -> Text:
-        return "action_tell_id"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-
-        conversation_id = tracker.sender_id
-
-        dispatcher.utter_message(
-            f"The ID of this conversation is '{conversation_id}'.")
-        dispatcher.utter_message(
-            f"Trigger an intent with: \n"
-            f'curl -H "Content-Type: application/json" '
-            f'-X POST -d \'{{"name": "EXTERNAL_dry_plant", '
-            f'"entities": {{"plant": "Orchid"}}}}\' '
-            f'"http://localhost:5005/conversations/{conversation_id}'
-            f'/trigger_intent?output_channel=latest"'
-        )
-
-        return []
-
-
-class ActionWarnDry(Action):
-
-    def name(self) -> Text:
-        return "action_warn_dry"
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-
-        plant = next(tracker.get_latest_entity_values("plant"), "someone")
-        dispatcher.utter_message(f"Your {plant} needs some water!")
-
-        return []
-
-
-class ForgetReminders(Action):
-
-    def name(self) -> Text:
-        return "action_forget_reminders"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message("Okay, I'll cancel your reminders.")
-
-        # Cancel all reminders
-        return [ReminderCancelled()]
-
-
-class ActionGiveProgress(Action):
-
-    def name(self) -> Text:
-        return "action_give_progress"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(text='Hey, This is your progress')
-
-        return []
-
-
-class ActionGiveImprovement(Action):
-
-    def name(self) -> Text:
-        return "action_give_improvement"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(
-            text='These are the topics you should improve on!')
-
-        return []
-
-
-class ActionGiveApproach(Action):
-
-    def name(self) -> Text:
-        return "action_give_approach"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(
-            text='Please watch the video to get a better understanding :)')
-
-        return []
-
-
-class ActionGetFeedback(Action):
-
-    def name(self) -> Text:
-        return "action_get_feedback"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message('Thank you for your input!')
-
-        return []
-
-
-class ActionAskFeedback(Action):
-
-    def name(self) -> Text:
-        return "action_ask_feedback"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        message = ["I would like to hear it. Please provide your input in one complete message!",
-                   "Oh, please provide your input in one complete message!"]
-
-        dispatcher.utter_message(text=random.choice(message))
-
-        return []
-
-
-class ActionAskConfirmFeedback(Action):
-
-    def name(self) -> Text:
-        return "action_ask_confirm_feedback"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        if tracker.latest_message['text'] == 'No':
-            return [ActionReverted(), SlotSet('feedback', None)]
-
-        buttons = [{'title': 'Yes, proceed!👍', 'payload': 'Yes'},
-                   {'title': 'No, I want to make changes👎', 'payload': 'No'}]
-
-        dispatcher.utter_message(
-            text='Are you sure you want to submit?', buttons=buttons, button_type="vertical")
-
-        return []
-
-
-class ValidateQuestionsForm(FormValidationAction):
-
-    def name(self) -> Text:
-        return "validate_feedback_form"
-
-    def validate_feedback(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict
-    ) -> Dict[Text, Any]:
-
-        dispatcher.utter_message(
-            text=f'Your input is: {slot_value}')
-
-        return {'feedback': slot_value}
-
-    def validate_confirm_feedback(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict
-    ) -> Dict[Text, Any]:
-
-        if slot_value == 'Yes':
-            return {'confirm_feedback': 'Yes'}
-
-        return {'confirm_feedback': None}
-
-
-# class GlobalSlotMapping(Action):
-
-#     def name(self) -> Text:
-#         return "global_slot_mapping"
-
-#     def run(
-#         self,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: Dict[Text, Any]
-#     ) -> List[Dict[Text, Any]]:
-#         new_slot_values: Dict[Text, Any] = dict()
-
-#         # ...
-
-#         # Count how often the bot executed `utter_abilities`
-#         num_utter_abilities = 0
-#         # for event in tracker.applied_events():
-#         if random.choice([True, False]):
-#             num_utter_abilities += 1
-#         new_slot_values["num_utter_abilities"] = num_utter_abilities
-
-#         print(f'{new_slot_values=}')
-#         return [
-#             SlotSet(name, value)
-#             for name, value in new_slot_values.items()
-#         ]

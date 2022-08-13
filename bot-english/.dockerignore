@@ -1,0 +1,8 @@
+**/results
+**/tests
+**/events.db*
+**/rasa.db
+**/story_graph.dot
+**/app.py
+**/.vscode
+**/.env
