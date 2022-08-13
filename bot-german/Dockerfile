@@ -18,5 +18,5 @@ VOLUME /app/bot-german/models
 
 EXPOSE 8000
 
-CMD [ "run", "-m", "/app/bot-german/models", "--enable-api", "--cors", "*", "--debug", "-p", "8000" ]
+CMD [ "run", "-m", "/app/bot-german/models", "--enable-api", "--cors", "*", "--debug", "-p", "5006" ]
 
