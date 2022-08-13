@@ -1,0 +1,2 @@
+[{"recipient_id":"sathish","text":"Okay, I will remind you at 20:05:00 on 2022-08-12."}][{"recipient_id":"sathish","text":"Okay, I will remind you at 20:06:00 on 2022-08-12."}]
+curl --header "Content-Type: application/json" --request POST --data '{"sender":"sathish", "message":"remind me to learn in one hour"}' http://localhost:5005/webhooks/rest/webhook
