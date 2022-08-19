@@ -7,14 +7,13 @@ from typing import Any, Text, Dict, List
 import json
 import random
 from bson import ObjectId
-import copy
 
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
-from actions import main
+from actions import main, plot
 from fuzzywuzzy import process
 from dateutil.parser import *
 
@@ -132,8 +131,8 @@ class ActionTellSubjects(Action):
         fnd, common_value = process.extractOne(user_input, subs)
         print("fnd: ", fnd, 'common value: ', common_value)
 
-        buttons = [{'title': 'Yes', 'payload': '/user_affirm{"subj":"'+fnd+'"}'},  # add subject as entity
-                   {'title': 'No', 'payload': '/user_deny'}]
+        buttons = [{'title': 'Yes', 'payload': '/inform_new{"subj":"'+fnd+'"}'},  # add subject as entity
+                   {'title': 'No', 'payload': '/user_deny{"subj":"None"}'}]
 
         if fnd is not None:
 
@@ -231,6 +230,9 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         if intent_value == "next_option":
             dict_vars['subject_idx'] += 1
             return {'subj': None}
+        elif intent_value == "user_deny":
+            return {'subj': None}
+
         print(f"{dict_vars['subject_idx'] = }")
         dict_vars['subject_idx'] = 0
         return {'subj': slot_value}
@@ -411,18 +413,15 @@ class ActionSetReminder(Action):
 
         reminder_time = tracker.get_slot("time")
 
+        if reminder_time == 'None' or reminder_time == None:
+            dispatcher.utter_message('Please provide a time!')
+            return []
+
         time_object = dt.strptime(reminder_time, "%Y-%m-%dT%H:%M:%S.%f%z")
         print(f'{time_object=}')
         dispatcher.utter_message(
             f"Okay, I will remind you at {time_object.time()} on {time_object.date()}.")
-        # if rem_time != None:
-        #     datez = rem_time.split('.000+02:00')
-        #     datetime_obj = parse(datez[0])
 
-        # else:
-        #     datetime_obj = datetime.datetime.now() + datetime.timedelta(seconds=5)
-        #     dispatcher.utter_message(
-        #         f"DEFAULT: {rem_time}")
         entities = tracker.latest_message.get("entities")
 
         reminder = ReminderScheduled(
@@ -453,6 +452,21 @@ class ActionReactToReminder(Action):
         return []
 
 
+class ActionCleanTimeSlot(Action):
+
+    def name(self) -> Text:
+        return "action_clean_time_slot"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        return [SlotSet('time', None)]
+
+
 class ActionTellID(Action):
 
     def name(self) -> Text:
@@ -474,24 +488,6 @@ class ActionTellID(Action):
             f'"http://localhost:5005/conversations/{conversation_id}'
             f'/trigger_intent?output_channel=latest"'
         )
-
-        return []
-
-
-class ActionWarnDry(Action):
-
-    def name(self) -> Text:
-        return "action_warn_dry"
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-
-        plant = next(tracker.get_latest_entity_values("plant"), "someone")
-        dispatcher.utter_message(f"Your {plant} needs some water!")
 
         return []
 
@@ -520,7 +516,13 @@ class ActionGiveProgress(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text='Hey, This is your progress')
+        dispatcher.utter_message(
+            text='Please wait a moment!')
+
+        image_url = plot.image_url()
+        print(f'{image_url = }')
+        dispatcher.utter_message(
+            text='Hey, here is your progress', image=image_url)
 
         return []
 
@@ -639,30 +641,80 @@ class ValidateQuestionsForm(FormValidationAction):
         return {'confirm_feedback': None}
 
 
-# class GlobalSlotMapping(Action):
+class ActionShowFeatures(Action):
 
-#     def name(self) -> Text:
-#         return "global_slot_mapping"
+    def name(self) -> Text:
+        return "action_show_features"
 
-#     def run(
-#         self,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: Dict[Text, Any]
-#     ) -> List[Dict[Text, Any]]:
-#         new_slot_values: Dict[Text, Any] = dict()
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-#         # ...
+        message = 'Here are some of the options you can choose from:'
 
-#         # Count how often the bot executed `utter_abilities`
-#         num_utter_abilities = 0
-#         # for event in tracker.applied_events():
-#         if random.choice([True, False]):
-#             num_utter_abilities += 1
-#         new_slot_values["num_utter_abilities"] = num_utter_abilities
+        buttons = [{'title': 'Do an activity', 'payload': '/ask_for_suggestion'},
+                   {'title': 'Ask for a subject', 'payload': '/find_subject'},
+                   {'title': 'Question types available',
+                       'payload': '/ask_question_types'},
+                   {'title': 'What is my progress?', 'payload': '/ask_progress'},
+                   {'title': 'What should I improve?',
+                       'payload': '/ask_improvement'},
+                   {'title': 'Show me how to solve activities',
+                       'payload': '/ask_approach'},
+                   {'title': 'Create a reminder',
+                       'payload': '/ask_remind_call{"time":None}'},
+                   {'title': 'Cancel my reminders',
+                       'payload': '/ask_forget_reminders'},
+                   {'title': 'I want to give feedback',
+                       'payload': '/user_feedback'},
+                   {'title': 'Who are you?', 'payload': '/bot_challenge'},
+                   {'title': '', 'payload': '/'}
+                   ]
+        dispatcher.utter_message(
+            text=message, buttons=buttons, button_type="vertical")
 
-#         print(f'{new_slot_values=}')
-#         return [
-#             SlotSet(name, value)
-#             for name, value in new_slot_values.items()
-#         ]
+        return []
+
+
+class ActionExplainQuestionTypes(Action):
+
+    def name(self) -> Text:
+        return "action_explain_question_types"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        message = 'These are the question types available. Please select an option to learn more'
+
+        buttons = [
+            {'title': 'MCQ', 'payload': '/inform{"type":"MCQ"}'},
+            {'title': 'True/False', 'payload': '/inform{"type":"True/False"}'},
+            {'title': 'Matching Pairs', 'payload': '/inform{"type":"Matching Pairs"}'}
+        ]
+
+        dispatcher.utter_message(
+            text=message, buttons=buttons, button_type="vertical")
+
+        return []
+
+
+class ActionExplainQuestionTypesDefinition(Action):
+
+    def name(self) -> Text:
+        return "action_explain_question_types_definition"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        entity = next(tracker.get_latest_entity_values('type'))
+
+        explanation = {'MCQ': 'A multiple-choice question(MCQ) is composed of two parts: a stem that identifies the question or problem, and a set of alternatives or possible answers that contain a key that is the best answer to the question, and a number of distractors that are plausible but incorrect answers to the question.',
+                       'True/False': 'True/false determines whether a statement is correct. You have a 50-50 chance of guessing the correct answer',
+                       'Matching Pairs': 'Matching pairs consist of two lists of items. For each item in List A, there is an item in List B that\'s related. Find the related pairs'}
+
+        message = explanation[entity]
+        dispatcher.utter_message(text=message)
+
+        return []

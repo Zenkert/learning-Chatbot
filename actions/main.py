@@ -83,12 +83,5 @@ def get_questions(topic_id):
 database = connection(database_name=database_name)
 resss = get_subjects(collection_name=collection_name)
 
-srk, mmm = get_questions('628292ddc942dd68d1fcc42d')
-# print(mmm[0])
-# for k, v in srk.items():
-#     if k == "mcq_choices":
-#         print('k: ', k, '-->', v, '\n-------------------------------')
-
-# buttons.append(
-#     {"payload": '/inform_new{"subj":"'+sub+'"}', "title": sub})
-# print(buttons)
+if __name__ == '__main__':
+    question_count, queried_data = get_questions('628292ddc942dd68d1fcc42d')

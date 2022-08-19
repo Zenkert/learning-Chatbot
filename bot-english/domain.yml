@@ -30,6 +30,9 @@ intents:
 - user_stress
 - user_thanks
 - user_unhappy
+- ask_features
+- ask_question_types
+- find_subject
 entities:
 - topic
 - subj
@@ -38,6 +41,7 @@ entities:
 - id
 - language
 - time
+- type
 slots:
   subject:
     type: text
@@ -116,27 +120,11 @@ forms:
     - feedback
     - confirm_feedback
 responses:
-  utter_abilities:
-  - text: I am Lost & Found Bot and can help you find things.
-    condition:
-    - type: slot
-      name: num_utter_abilities
-      value: 0
-  - text: I can help you find things that you've lost either on a train or some other place in town.
-    condition:
-    - type: slot
-      name: num_utter_abilities
-      value: 1
-  - text: Actually, I'm just a demo, so don't expect me to really find something.
-    condition:
-    - type: slot
-      name: num_utter_abilities
-      value: 2
-  - text: I can't do anything beyond what I already mentioned, sorry.
   utter_sugg:
   - text: These are the suggestions...
   utter_greet:
-  - text: Hey! How are you?
+  - text: Hey, welcome. What would you like to do today!
+  - text: Greetings. What would you like to do!
   utter_did_that_help:
   - text: Did that help you?
   utter_happy:
@@ -192,6 +180,8 @@ responses:
   utter_thanks_feedback:
   - text: Thanks for your input
   - text: Thank you for the input
+  utter_find_subject:
+  - text: Please ask 'I want to learn <subject name>' or 'I want to study <subject name>', to find a subject directly!
 actions:
 - action_ask_confirm_feedback
 - action_ask_feedback
@@ -212,8 +202,10 @@ actions:
 - action_show_questions
 - action_submit
 - action_tell_id
-- action_warn_dry
-- utter_done
+- action_show_features
+- action_explain_question_types
+- action_explain_question_types_definition
+- action_clean_time_slot
 - validate_feedback_form
 - validate_questions_form
 - validate_subject_with_topic_form

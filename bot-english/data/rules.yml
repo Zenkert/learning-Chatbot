@@ -2,6 +2,11 @@ version: "3.1"
 
 rules:
 
+- rule: GREET USER
+  steps:
+  - intent: user_greet
+  - action: utter_greet
+
 - rule: activate SUBJECT_WITH_TOPIC_FORM
   steps:
   - intent: ask_for_suggestion
@@ -47,6 +52,7 @@ rules:
   steps:
   - intent: ask_remind_call
   - action: action_set_reminder
+  - action: action_clean_time_slot
 
 - rule: forget reminder
   steps:
@@ -63,11 +69,6 @@ rules:
   - intent: ask_id
   - action: action_tell_id
 
-- rule: warn dry plant
-  steps:
-  - intent: EXTERNAL_dry_plant
-  - action: action_warn_dry
-
 - rule: react to reminder
   steps:
   - intent: EXTERNAL_reminder
@@ -78,6 +79,21 @@ rules:
   - intent: user_thanks
   - action: utter_welcome
 
+# - rule: explain question types available
+#   steps:
+#   - intent: ask_question_types
+#   - action: action_explain_question_types
+#   - action: action_explain_question_types_definition
+
+- rule: SHOW BOT FEATURES
+  steps:
+  - intent: ask_features
+  - action: action_show_features
+
+- rule: UTTER FIND SUBJECT
+  steps:
+  - intent: find_subject
+  - action: utter_find_subject
 # - rule: Respond to ask_what_can_do
 #   steps:
 #   - intent: ask_what_can_do

@@ -25,7 +25,7 @@ nlu:
     - thank you for the help
     - i appreciate the help
     - thankss
-- intent: learn_subject
+- intent: ask_for_suggestion
   examples: |
     - i want to learn [Maths](subject)
     - i want to learn [Physics](subject)
@@ -44,10 +44,7 @@ nlu:
     - i want to learn [maths](subject)
     - i wanr to learn about [astronomy](subject)
     - i want to learn about [astronomy](subject)
-- intent: ask_for_suggestion
-  examples: |
     - i want to learn
-    - i want to study
     - i would like to learn
     - what are the subjects available
     - what can i learn
@@ -58,7 +55,20 @@ nlu:
     - give me something to learn
     - please provide me some suggestions
     - suggest me something
-    - i wanr to learn
+# - intent: ask_for_suggestion
+#   examples: |
+#     - i want to learn
+#     - i would like to learn
+#     - what are the subjects available
+#     - what can i learn
+#     - give me a subject
+#     - give me a suggestion
+#     - suggest me a subject
+#     - suggest me something to learn
+#     - give me something to learn
+#     - please provide me some suggestions
+#     - suggest me something
+#     - i wanr to learn
 - intent: user_goodbye
   examples: |
     - see you later
@@ -238,3 +248,25 @@ nlu:
     - there is an issue with a task
     - i would like to provide feedback
     - i want to give some feedback
+- intent: ask_features
+  examples: |
+    - what are all your features?
+    - what are the things you can do?
+    - what can you do?
+    - list me the things you can do
+    - list me your features
+    - list me all your features
+    - show me all the things you can do
+    - show me all of your features
+- intent: ask_question_types
+  examples: |
+    - what are the question types available?
+    - what are the tyypes of questions available?
+    - what are the kinds of questions available?
+    - what kind of questions are available?
+    - what questions does an activity have?
+    - how many question types are available?
+- intent: find_subject
+  examples: |
+    - subject name
+    - subject name
