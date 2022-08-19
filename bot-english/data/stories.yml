@@ -93,7 +93,9 @@ stories:
 
 - story: SHOW BOT FEATURES
   steps:
-  - intent: ask_features
+  - or:
+    - intent: start
+    - intent: ask_features
   - action: action_show_features
 
 - story: SHOW QUESTION TYPES

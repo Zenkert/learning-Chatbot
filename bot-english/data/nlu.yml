@@ -50,25 +50,13 @@ nlu:
     - what can i learn
     - give me a subject
     - give me a suggestion
+    - i want to do an activity
+    - i would to do an activity
     - suggest me a subject
     - suggest me something to learn
     - give me something to learn
     - please provide me some suggestions
     - suggest me something
-# - intent: ask_for_suggestion
-#   examples: |
-#     - i want to learn
-#     - i would like to learn
-#     - what are the subjects available
-#     - what can i learn
-#     - give me a subject
-#     - give me a suggestion
-#     - suggest me a subject
-#     - suggest me something to learn
-#     - give me something to learn
-#     - please provide me some suggestions
-#     - suggest me something
-#     - i wanr to learn
 - intent: user_goodbye
   examples: |
     - see you later
@@ -270,3 +258,13 @@ nlu:
   examples: |
     - subject name
     - subject name
+- intent: start
+  examples: |
+    - start
+    - start 
+    - i want to start
+
+- synonym: subject
+  examples: |
+    - credit card account
+    - credit account

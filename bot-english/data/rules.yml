@@ -87,13 +87,16 @@ rules:
 
 - rule: SHOW BOT FEATURES
   steps:
-  - intent: ask_features
+  - or:
+    - intent: start
+    - intent: ask_features
   - action: action_show_features
 
 - rule: UTTER FIND SUBJECT
   steps:
   - intent: find_subject
   - action: utter_find_subject
+
 # - rule: Respond to ask_what_can_do
 #   steps:
 #   - intent: ask_what_can_do

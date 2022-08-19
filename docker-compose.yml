@@ -8,17 +8,17 @@ services:
       - "./bot-english:/app/bot-english"
     ports:
       - "5005:5005"
-    # depends_on:
-    #   - action_server
-    #   - duckling_server
-    # rasa_german:
-    #   container_name: "rasa_server_german"
-    #   build:
-    #     context: ./bot-german
-    #   volumes:
-    #     - "./bot-german:/app/bot-german"
-    #   ports:
-    #     - "5006:5006"
+  # depends_on:
+  #   - action_server
+  #   - duckling_server
+  # rasa_german:
+  #   container_name: "rasa_server_german"
+  #   build:
+  #     context: ./bot-german
+  #   volumes:
+  #     - "./bot-german:/app/bot-german"
+  #   ports:
+  #     - "5006:5006"
   action_server:
     container_name: "action_server"
     build:

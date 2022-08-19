@@ -33,6 +33,7 @@ intents:
 - ask_features
 - ask_question_types
 - find_subject
+- start
 entities:
 - topic
 - subj

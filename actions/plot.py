@@ -9,17 +9,23 @@ import requests
 from dotenv import load_dotenv
 import os
 import random
+import pathlib
+
 
 # values = [66, 19, 6, 5, 4]
-list_of_values = [[66, 19, 6, 5, 4], [46, 29, 6, 15, 4], [26, 39, 21, 5, 9]]
-values = random.choice(list_of_values)
-y = np.array(values)
-mylabels = ["Subject 1", "Subject 2",
-            "Subject 3", "Subject 4", "Subject 5"]
-mycolors = ["#f08663", "#89bcd6", "#ebce90", "#d6ed8b", "#c6b7eb"]
 
-images_folder = '/images/'
-my_path = os.path.dirname(os.path.abspath(__file__)) + images_folder
+
+def random_value():
+    list_of_values = [[66, 19, 6, 5, 4], [46, 29, 6, 15, 4], [26, 39, 21, 5, 9],
+                      [96, 1, 1, 1, 1], [6, 49, 26, 10, 9], [16, 49, 11, 5, 19]]
+
+    values = random.choice(list_of_values)
+    y = np.array(values)
+    mylabels = ["Subject 1", "Subject 2",
+                "Subject 3", "Subject 4", "Subject 5"]
+    mycolors = ["#f08663", "#89bcd6", "#ebce90", "#d6ed8b", "#c6b7eb"]
+
+    return values, y, mylabels, mycolors
 
 
 def make_autopct(values):
@@ -30,27 +36,52 @@ def make_autopct(values):
     return my_autopct
 
 
-def plot_graph(current_time=dt.now(), path=my_path):
+def plot_graph(current_time):
 
     file_name = f'{current_time}_plot.png'
-    final_path = path+file_name
     title = 'DATE: ' + str(current_time.date())
-    plt.pie(y, labels=mylabels, colors=mycolors,
-            startangle=180, autopct=make_autopct(values))
+
+    # values, y, mylabels, mycolors = random_value()
+
+    # plt.pie(y, labels=mylabels, colors=mycolors,
+    #         startangle=180, autopct=make_autopct(values))
+    # plt.title(title)
+    # plt.savefig(file_name)
+    # return file_name
+
+    subjects = ['Biology', 'Math', 'Art and Design',
+                'Humanities', 'Business']
+
+    list_of_values = [[66, 19, 6, 5, 4], [46, 29, 6, 15, 4], [26, 39, 21, 5, 9],
+                      [96, 1, 1, 1, 1], [6, 49, 26, 10, 9], [16, 49, 11, 5, 19]]
+
+    values = random.choice(list_of_values)
+
+    colors = ["#f08663", "#89bcd6", "#ebce90", "#d6ed8b", "#c6b7eb"]
+    fig = plt.figure(figsize=(10, 5))
+
+    plt.bar(subjects, values, color=colors,
+            width=0.4)
+
+    plt.xlabel("Subjects")
+    plt.ylabel("Activity completed related to Subject(no of times)")
     plt.title(title)
-    plt.savefig(path+file_name)
+    plt.savefig(file_name)
+    # plt.show()
+    return file_name
 
-    return final_path
 
-
-def image_url(final_path=plot_graph()):
+def image_url(current_time):
 
     load_dotenv()
 
-    f = open(final_path, "rb")
-    image_data = f.read()
+    final_path = plot_graph(current_time)
+    with open(final_path, "rb") as f:
+        image_data = f.read()
 
     b64_image = base64.standard_b64encode(image_data)
+
+    os.remove(final_path)
 
     client_id = os.getenv('CLIENT_ID')
     headers = {'Authorization': 'Client-ID ' + client_id}
@@ -67,8 +98,8 @@ def image_url(final_path=plot_graph()):
 
     parse = json.loads(request.text)
 
-    return parse['data']['link']
+    return final_path, parse['data']['link']
 
 
 if __name__ == '__main__':
-    image_url()
+    image_url(current_time=dt.now())

@@ -147,8 +147,7 @@ class ActionTellSubjects(Action):
                 return []
 
         try:
-            subject = next(tracker.get_latest_entity_values(
-                entity_type="subject"))
+            subject = next(tracker.get_latest_entity_values('subject'))
         except:
             subject = None
 
@@ -467,31 +466,6 @@ class ActionCleanTimeSlot(Action):
         return [SlotSet('time', None)]
 
 
-class ActionTellID(Action):
-
-    def name(self) -> Text:
-        return "action_tell_id"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-
-        conversation_id = tracker.sender_id
-
-        dispatcher.utter_message(
-            f"The ID of this conversation is '{conversation_id}'.")
-        dispatcher.utter_message(
-            f"Trigger an intent with: \n"
-            f'curl -H "Content-Type: application/json" '
-            f'-X POST -d \'{{"name": "EXTERNAL_dry_plant", '
-            f'"entities": {{"plant": "Orchid"}}}}\' '
-            f'"http://localhost:5005/conversations/{conversation_id}'
-            f'/trigger_intent?output_channel=latest"'
-        )
-
-        return []
-
-
 class ForgetReminders(Action):
 
     def name(self) -> Text:
@@ -503,7 +477,6 @@ class ForgetReminders(Action):
 
         dispatcher.utter_message("Okay, I'll cancel your reminders.")
 
-        # Cancel all reminders
         return [ReminderCancelled()]
 
 
@@ -519,10 +492,10 @@ class ActionGiveProgress(Action):
         dispatcher.utter_message(
             text='Please wait a moment!')
 
-        image_url = plot.image_url()
+        final_path, image_url = plot.image_url(current_time=dt.now())
         print(f'{image_url = }')
         dispatcher.utter_message(
-            text='Hey, here is your progress', image=image_url)
+            text=f'Hey, here is your progress!: {final_path}', image=image_url)
 
         return []
 
@@ -651,6 +624,9 @@ class ActionShowFeatures(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         message = 'Here are some of the options you can choose from:'
+
+        if tracker.get_intent_of_latest_message() == "start":
+            message = 'Welcome. I am a bot and I\'m here to assist you in your studies. You can choose an option from below to start!'
 
         buttons = [{'title': 'Do an activity', 'payload': '/ask_for_suggestion'},
                    {'title': 'Ask for a subject', 'payload': '/find_subject'},
