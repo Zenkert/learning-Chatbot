@@ -52,7 +52,7 @@ rules:
   steps:
   - intent: ask_remind_call
   - action: action_set_reminder
-  - action: action_clean_time_slot
+  # - action: action_clean_time_slot
 
 - rule: forget reminder
   steps:
@@ -63,11 +63,6 @@ rules:
   steps:
   - intent: user_goodbye
   - action: utter_goodbye
-
-- rule: convo action_tell_id
-  steps:
-  - intent: ask_id
-  - action: action_tell_id
 
 - rule: react to reminder
   steps:
@@ -97,6 +92,7 @@ rules:
   - intent: find_subject
   - action: utter_find_subject
 
+# misc
 # - rule: Respond to ask_what_can_do
 #   steps:
 #   - intent: ask_what_can_do

@@ -182,7 +182,6 @@ nlu:
     - forget about it
     - don't remind me!
     - Forget about the reminder
-    - do not remind me
     - cancel the reminder
     - cancel all reminders please
     - Forget reminding me
@@ -258,6 +257,7 @@ nlu:
   examples: |
     - subject name
     - subject name
+    - give subject name
 - intent: start
   examples: |
     - start

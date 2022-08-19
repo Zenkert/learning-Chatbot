@@ -86,12 +86,12 @@ slots:
     mappings:
     - type: from_text
       action: action_ask_question
-  time:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: time
+  # time:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #   - type: from_entity
+  #     entity: time
   feedback:
     type: text
     influence_conversation: false

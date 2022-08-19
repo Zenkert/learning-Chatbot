@@ -15,7 +15,7 @@ pipeline:
     epochs: 100
     constrain_similarities: true
   - name: DucklingEntityExtractor
-    url: http://docker_server:8000
+    url: http://localhost:8000
     dimensions: ["time"]
     timezone: "Europe/Berlin"
   - name: EntitySynonymMapper

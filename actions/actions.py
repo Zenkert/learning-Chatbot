@@ -410,7 +410,12 @@ class ActionSetReminder(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        reminder_time = tracker.get_slot("time")
+        reminder_time = None
+
+        try:
+            reminder_time = next(tracker.get_latest_entity_values('time'))
+        except:
+            pass
 
         if reminder_time == 'None' or reminder_time == None:
             dispatcher.utter_message('Please provide a time!')
@@ -638,7 +643,7 @@ class ActionShowFeatures(Action):
                    {'title': 'Show me how to solve activities',
                        'payload': '/ask_approach'},
                    {'title': 'Create a reminder',
-                       'payload': '/ask_remind_call{"time":None}'},
+                       'payload': '/ask_remind_call{"time":"None"}'},
                    {'title': 'Cancel my reminders',
                        'payload': '/ask_forget_reminders'},
                    {'title': 'I want to give feedback',
