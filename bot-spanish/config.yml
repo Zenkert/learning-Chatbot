@@ -1,6 +1,6 @@
 recipe: default.v1
 
-language: en
+language: es
 
 pipeline:
   - name: WhitespaceTokenizer
@@ -14,11 +14,16 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
-  - name: EntitySynonymMapper
+  - name: DucklingEntityExtractor
+    url: http://duckling_server:8000
+    # url: http://localhost:8000
+    dimensions: ["time"]
+    timezone: "Europe/Berlin"
+  - name: RegexEntityExtractor
   - name: ResponseSelector
     epochs: 100
   - name: FallbackClassifier
-    threshold: 0.6
+    threshold: 0.4
 
 policies:
   - name: MemoizationPolicy
@@ -26,3 +31,4 @@ policies:
     max_history: 5
     epochs: 100
   - name: RulePolicy
+    # restrict_rules: false

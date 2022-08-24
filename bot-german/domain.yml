@@ -5,136 +5,224 @@ session_config:
 config:
   store_entities_as_slots: true
 intents:
+- EXTERNAL_dry_plant
+- EXTERNAL_reminder
+- EXT_reminder
+- ask_approach
 - ask_for_suggestion
-- bot_challenge_german
-- goodbye_german
+- ask_forget_reminders
+- ask_id
+- ask_improvement
+- ask_progress
+- ask_remind_call
+- bot_challenge
 - inform
 - inform_new
+- learn_subject
 - next_option
 - user_affirm
 - user_data
 - user_deny
+- user_feedback
+- user_goodbye
 - user_greet
 - user_happy
 - user_stress
+- user_thanks
 - user_unhappy
-- out_of_scope
+- ask_features
+- ask_question_types
+- ask_types
+- find_subject
+- start
+- user_done
+- activity_done
+- user_language
 entities:
-- topic_german
-- subj_german
-- subject_german
-- name_german
-- id_german
-- language_german
+- topic
+- subj
+- subject
+- name
+- id
+- language
+- time
+- type
+- num_times
 slots:
-  subject_german:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: subject_german
-  subj_german:
+  subject:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: subj_german
-  topic_german:
+      entity: subject
+  subj:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: topic_german
-  name_german:
+      entity: subj
+  topic:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: name_german
-  id_german:
+      entity: topic
+  name:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: id_german
-  language_german:
+      entity: name
+  id:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: language_german
-  question_german:
+      entity: id
+  language:
+    type: text
+    influence_conversation: false
+    initial_value: 'DE'
+    mappings:
+    - type: from_entity
+      entity: language
+  type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: type
+  question:
     type: text
     influence_conversation: false
     mappings:
     - type: from_text
-responses:
-  utter_sugg:
-  - text: These are the suggestions...
-  utter_greet:
-  - text: Hey! How are you?
-  utter_did_that_help:
-  - text: Did that help you?
-  utter_happy:
-  - text: Great, carry on!
-  utter_goodbye_german:
-  - text: tschuss, bis spater!
-  utter_done:
-  - text: That's it, done!
-  utter_done_german:
-  - text: Beenden..
-  utter_done_greek:
-  - text: φινίρισμα
-  utter_joke:
-  - text: Do you like to hear a joke?
-  utter_great:
-  - text: That's good
-  - text: Good to hear that!
-  - text: I am glad :)
-  utter_sorry:
-  - text: That's okay, it will get better :)
-  - text: I am sorry to hear that, I hope you'll be fine :)
-  utter_available_subjects:
-  - text: The entity/slot is {subject_german}
-  utter_rephrase_german:
-  - text: Tut mir leid, ich habe nicht verstanden. Können Sie das bitte anders formulieren?
-  - text: Können Sie Ihren Text bitte so umformulieren, dass ich ihn richtig verstehen kann?
-  utter_default_german:
-  - text: Oh, dazu bin ich nicht fähig!
-  - text: Ich fürchte, das übersteigt meine Fähigkeiten!
-  utter_i_am_a_bot_german:
-  - text: Ich bin ein Bot und ich bin hier, um dir zu helfen!
-  - text: Ich bin ein Bot und meine Aufgabe ist es, dir zu helfen!
-  - text: Ich bin eine Assistentin und helfe Ihnen gerne :)
-  utter_name:
-  - text: Hey {name_german}, how are you doing?
-  utter_sub:
-  - text: This is your selection - {subject_german}
-  utter_ask_subject:
-  - text: That's great. What would you like to learn today?
-  utter_okay_german:
-  - text: Okay.. Ich mache das!
-  utter_okay_subj:
-  - text: I'll provide you activites for {topic_german}
-  utter_rest:
-  - text: I'm sorry to hear that. Would you like to take rest?
-  utter_rest_is_okay:
-  - text: Sometimes it's okay take rest. I'll see you later re-energized :)
-actions:
-- action_ask_question_german
-- action_ask_subj_german
-- action_ask_topic_german
-- action_clean_entity_german
-- action_give_suggestion_german
-- action_save_data_german
-- action_show_questions_german
-- validate_questions_form_german
-- validate_subject_with_topic_form_german
+      action: action_ask_question
+  # time:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #   - type: from_entity
+  #     entity: time
+  feedback:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: feedback_form
+        requested_slot: feedback
+  confirm_feedback:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: feedback_form
+        requested_slot: confirm_feedback
 forms:
-  subject_with_topic_form_german:
+  subject_with_topic_form:
     required_slots:
-    - subj_german
-    - topic_german
-  questions_form_german:
+    - subj
+    - topic
+  questions_form:
     required_slots:
-    - question_german
+    - question
+  feedback_form:
+    required_slots:
+    - feedback
+    - confirm_feedback
+responses:
+  utter_continue:
+  - text: Die Aktivität ist beendet. Willst du noch eine weitere Aktivität machen?
+  utter_greet:
+  - text: Hey, willkommen. Was würdest du heute gerne tun!
+  - text: Grüße. Was würden Sie gerne tun!
+  utter_did_that_help:
+  - text: Hat Ihnen das geholfen?
+  utter_good_time:
+  - text: Viel Spaß beim Lösen der Aufgaben :)
+  utter_happy:
+  - text: Toll, weiter so!
+  utter_goodbye:
+  - text: Auf Wiedersehen
+  - text: Auf Wiedersehen, hoffentlich bis bald :)
+  - text: Tschüss Tschüss :)
+  - text: Dir auch auf Wiedersehen :)
+  utter_done:
+  - text: Okay, das war's, fertig!
+  - text: Nun, das war's, fertig!
+  utter_joke:
+  - text: Willst du einen Witz hören?
+  utter_great:
+  - text: Das ist gut
+  - text: Schön, das zu hören!
+  - text: Das freut mich :)
+  utter_sorry:
+  - text: Das ist okay, es wird besser werden :)
+  - text: Es tut mir leid, das zu hören, ich hoffe, du wirst wieder gesund :)
+  utter_available_subjects:
+  - text: Die Entität/der Slot ist {subject}
+  utter_rephrase:
+  - text: Tut mir leid, ich habe nicht verstanden. Können Sie das bitte umformulieren?
+  - text: Können Sie Ihren Text bitte so umformulieren, dass ich ihn richtig verstehen kann?
+  utter_default:
+  - text: Oh, dazu bin ich nicht in der Lage!
+  - text: Ich fürchte, das übersteigt meine Fähigkeiten!
+  utter_i_am_a_bot:
+  - text: Ich bin ein Bot und ich bin hier, um dir zu helfen!
+  - text: Ich bin ein Bot, und meine Aufgabe ist es, dir zu helfen!
+  - text: Ich bin ein Assistent und ich helfe dir gerne :)
+  utter_name:
+  - text: Hey {Name}, wie geht es dir?
+  utter_sub:
+  - text: Dies ist Ihre Auswahl - {subject}
+  utter_ask_subject:
+  - text: Das ist großartig. Was würden Sie heute gerne lernen?
+  utter_okay:
+  - text: Okay, ich werde es tun!
+  utter_okay_subj:
+  - text: Ich werde dir Aktivitäten für {topic} anbieten
+  utter_rest:
+  - text: Es tut mir leid, das zu hören. Möchten Sie sich ausruhen?
+  utter_rest_is_okay:
+  - text: Manchmal ist es okay, sich auszuruhen. Wir sehen uns später wieder gestärkt :)
+  utter_welcome:
+  - text: Du bist herzlich willkommen!
+  - text: Du bist willkommen :)
+  - text: Freut mich, dass ich helfen konnte!
+  - text: Freut mich, dass ich helfen konnte :)
+  utter_thanks_feedback:
+  - text: Danke für Ihren Beitrag
+  - text: Vielen Dank für Ihren Beitrag
+  utter_find_subject:
+  - text: Bitte fragen Sie 'Ich möchte <Fachname> lernen' oder 'Ich möchte <Fachname> studieren', um ein Fach direkt zu finden!
+actions:
+- action_ask_confirm_feedback
+- action_ask_feedback
+- action_ask_question
+- action_ask_subj
+- action_ask_topic
+- action_clean_entity
+- action_clean_feedbackform_slots
+- action_forget_reminders
+- action_get_feedback
+- action_give_approach
+- action_give_improvement
+- action_give_progress
+- action_give_suggestion
+- action_react_to_reminder
+- action_save_data
+- action_set_reminder
+- action_show_questions
+- action_submit
+- action_tell_id
+- action_show_features
+- action_explain_question_types
+- action_explain_question_types_definition
+- action_clean_time_slot
+- action_continue
+- action_set_language
+- validate_feedback_form
+- validate_questions_form
+- validate_subject_with_topic_form

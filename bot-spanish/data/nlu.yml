@@ -1,87 +1,112 @@
-version: "3.1"
+versión: "3.1"
 nlu:
-- intent: learn_subject
+- intent: user_greet
   examples: |
-    - i want to learn [Maths](subject)
-    - i want to learn [Physics](subject)
-    - i want to learn [Computer Science](subject)
-    - i want to learn about [Machine Learning](subject)
-    - i want to learn about [Business](subject)
-    - i want to learn [Chemistry](subject)
-    - i would like to learn [Maths](subject)
-    - i would like to learn [Physics](subject)
-    - i would like to learn [Pyschology](subject)
-    - i would like to learn [History](subject)
-    - i would like to learn about [Humanities](subject)
-    - i would like to learn about [Social Studies](subject)
-    - i want to learn about [Art and Design](subject)
-    - i want to study [mathematics](subject)
-    - i want to learn [maths](subject)
-    - i wanr to learn about [astronomy](subject)
-    - i want to learn about [astronomy](subject)
+    - hola
+    - hola
+    - hiii
+    - hola
+    - hii
+    - hola, buenos días
+    - buenos días
+    - buenos días
+    - buenas tardes
+- intent: user_thanks
+  examples: |
+    - gracias
+    - gracias
+    - muchas gracias
+    - gracias por la ayuda
+    - gracias por la ayuda
+    - gracias por la ayuda
+    - agradezco la ayuda
+    - gracias
 - intent: ask_for_suggestion
   examples: |
-    - i want to learn
-    - i want to study
-    - i would like to learn
-    - what are the subjects available
-    - what can i learn
-    - give me a subject
-    - give me a suggestion
-    - suggest me a subject
-    - suggest me something to learn
-    - give me something to learn
-    - please provide me some suggestions
-    - suggest me something
-    - i wanr to learn
-- intent: goodbye
+    - quiero aprender [Matemáticas](subject)
+    - quiero aprender [Física](subject)
+    - quiero aprender [Informática](subject)
+    - quiero aprender sobre [Aprendizaje automático](subject)
+    - quiero aprender sobre [Negocios](subject)
+    - quiero aprender [Química](subject)
+    - quiero aprender [Matemáticas](subject)
+    - me gustaría aprender [Física](subject)
+    - me gustaría aprender [Psicología](subject)
+    - me gustaría aprender [Historia](subject)
+    - me gustaría aprender sobre [Humanidades](subject)
+    - me gustaría aprender sobre [Estudios Sociales](subject)
+    - quiero aprender sobre [Arte y Diseño](subject)
+    - quiero estudiar [matemáticas](subject)
+    - quiero aprender [matemáticas](subject)
+    - quiero aprender sobre [astronomía](subject)
+    - quiero aprender sobre [astronomía](subject)
+    - quiero aprender
+    - me gustaría aprender
+    - cuáles son las asignaturas disponibles
+    - qué puedo aprender
+    - dame un tema
+    - dame una sugerencia
+    - quiero hacer una actividad
+    - quiero hacer una actividad
+    - sugiéreme un tema
+    - sugiéreme algo para aprender
+    - dame algo para aprender
+    - sugiéreme algo
+    - sugerirme algo
+- intent: user_goodbye
   examples: |
-    - see you later
-    - goodbye
-    - byebye
+    - hasta luego
+    - adiós
+    - adiós
+    - adiós
+    - adiós
+    - ciao
+    - hasta la vista
+    - nos vemos
 - intent: user_stress
   examples: |
-    - i am stressed
-    - i am feeling stressed
-    - i have stress
-    - i am kind of feeling stressed
-    - i am not feeling good
-    - i am feeling sad
+    - estoy estresado
+    - me siento estresado
+    - tengo estrés
+    - me siento estresado
+    - no me siento bien
+    - me siento triste
 - intent: user_happy
   examples: |
-    - good
-    - i am doing good
-    - i am great
-    - i am happy
-    - doing fine
-    - it is going great
-    - it is a fine day
+    - bien
+    - me va bien
+    - estoy bien
+    - soy feliz
+    - me va bien
+    - va muy bien
+    - es un buen día
 - intent: user_unhappy
   examples: |
-    - bad
-    - not good
-    - not a good day
-    - it is bad
-    - could have been better
-    - not okay
-    - it is very worst
+    - malo
+    - no es bueno
+    - no es un buen día
+    - es malo
+    - podría haber sido mejor
+    - no está bien
+    - es muy peor
 - intent: user_affirm
   examples: |
-    - yes
-    - yeah
-    - yup
-    - sure
-    - ofcourse
-    - of course
+    - sí
+    - sí
+    - sí
+    - claro
+    - por supuesto
+    - por supuesto
+    - Sí
 - intent: user_deny
   examples: |
     - no
-    - nope
-    - i dont want to
-    - nah
-    - i am not in mood
-    - i dont feel like it
-    - next
+    - no
+    - no quiero
+    - no
+    - no estoy de humor
+    - no me apetece
+    - No
 - intent: user_data
   examples: |
     - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
@@ -90,52 +115,147 @@ nlu:
     - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
 - intent: out_of_scope
   examples: |
-    - i want to contact my teacher
-    - i want to send a message to my friend
-    - i would like to message my supervisor
-    - i would like to play now
-    - i want to learn about flying to mars
-    - i want to learn more about the world
-    - i would like to learn how to ride a horse
-    - i would like to learn more about you
-    - i want to know how to learn to drive
-    - i want to know how to do calculations
+    - quiero contactar con mi profesor
+    - quiero enviar un mensaje a mi amigo
+    - quiero enviar un mensaje a mi supervisor
+    - quiero jugar ahora
+    - quiero aprender a volar a marte
+    - quiero aprender más sobre el mundo
+    - quiero aprender a montar a caballo
+    - me gustaría saber más sobre ti
+    - quiero saber cómo aprender a conducir
 - intent: bot_challenge
   examples: |
-    - who are you?
-    - are you a bot?
-    - are you a human?
-    - are you my teacher?
-    - are you real?
-    - who build you?
-    - who developed you?
+    - ¿quién eres?
+    - ¿eres un bot?
+    - ¿eres un humano?
+    - ¿eres mi profesor?
+    - ¿eres real?
+    - ¿quién te construyó?
+    - ¿quién te ha desarrollado?
 - intent: inform
   examples: |
-    - maths
-    - business
-    - technology
-    - biology
-    - science
-- intent: user_greet
-  examples: |
-    - hey
-    - hi
-    - hiya
-    - howdy
-    - hallo
-    - hii
-    - heyy
-    - hey, good morning
-    - good evening
-    - gud morning
-    - gud evening
+    - matemáticas
+    - negocios
+    - tecnología
+    - biología
+    - ciencia
 - intent: inform_new
   examples: |
-    - This is a random[](subj) example
-    - This is another random[](subj) example
-    - This is last random example[](topic)
-    - This is final random example[](topic)
+    - Este es un ejemplo de random[](subj)
+    - Este es otro ejemplo aleatorio[](subj)
+    - Este es el último ejemplo aleatorio[](tema)
+    - Este es el último ejemplo aleatorio[](tema)
 - intent: next_option
   examples: |
-    - next
-    - next option
+    - siguiente
+    - siguiente opción
+- intent: ask_remind_call
+  examples: |
+    - recuérdame que haga las clases en 5 minutos
+    - recuérdame que haga las clases en 1 hora
+    - Recuérdame que haga las actividades en 5 segundos
+    - Recuérdame hacer las clases en 2 horas
+    - Recuérdame hacer actividades en 120 minutos
+    - recordarme que tengo que aprender
+    - Recuérdame que aprenda más tarde
+    - más tarde tengo que tomar clases
+    - más tarde tengo que hacer clases
+    - más tarde tengo que hacer actividades
+    - Por favor, recuérdame hacer actividades
+    - por favor, recuérdame hacer lecciones más tarde
+    - No debo olvidarme de hacer actividades
+    - No debo olvidarme de hacer las clases más tarde
+    - recuérdame que tengo que aprender en 1 hora
+- intent: ask_id
+  examples: |
+    - ¿cuál es el id de la conversación?
+    - id
+    - ¿Cuál es el ID de esta conversación?
+    - ¿Cómo puedo enviar una solicitud POST a esta conversación?
+- intent: ask_forget_reminders
+  examples: |
+    - olvídalo
+    - no me lo recuerdes
+    - Olvidar el recordatorio
+    - cancelar el recordatorio
+    - cancela todos los recordatorios por favor
+    - Olvídate de recordármelo
+    - Olvídate de recordármelo
+- intent: ask_progress
+  examples: |
+    - cuál es mi progreso
+    - cuál es mi progreso en el aprendizaje
+    - cómo es mi progreso
+    - cómo es mi progreso
+    - cómo es mi progreso en el aprendizaje
+    - ¿lo estoy haciendo bien?
+    - cuál es mi último progreso
+    - cuál es mi progreso reciente
+- intent: ask_improvement
+  examples: |
+    - qué debería mejorar
+    - cómo puedo mejorar
+    - en qué debo centrarme
+    - en qué tema debo centrarme
+    - en qué tema debo centrarme
+    - ¿necesito mejorar algo?
+    - ¿necesito mejorar algo?
+    - ¿necesito centrarme en algún tema?
+    - ¿necesito mejorar en alguna asignatura?
+    - ¿necesito centrarme en algún tema?
+    - ¿necesito mejorar en algún tema?
+- intent: ask_approach
+  examples: |
+    - no sé cómo hacer esta tarea
+    - cómo puedo resolver esta tarea
+    - ayúdame a resolver esta tarea
+    - cómo utilizo esta aplicación
+    - ¿Cómo puedo utilizar esta aplicación?
+    - no sé qué hacer
+    - no sé cómo hacer
+    - cómo puedo enfocar esto
+    - no sé cómo hacer mcqs
+    - no sé cómo hacer verdadero o falso
+    - no sé cómo hacer preguntas de concordancia
+    - no sé cómo hacer actividades
+- intent: user_feedback
+  examples: |
+    - hay un problema con una actividad
+    - hay un problema con un tema
+    - hay un problema con un tema
+    - hay un problema con la aplicación
+    - hay un problema con una actividad
+    - he encontrado un problema con una actividad
+    - he encontrado un problema con la aplicación
+    - hay un problema con una tarea
+    - me gustaría dar mi opinión
+    - quiero dar una opinión
+- intent: ask_features
+  examples: |
+    - ¿cuáles son sus características?
+    - ¿cuáles son las cosas que puede hacer?
+    - ¿qué puedes hacer?
+    - Léame las cosas que puede hacer
+    - Léame sus características
+    - Líbrame de todas tus funciones
+    - muéstrame todas las cosas que puedes hacer
+    - muéstrame todas tus características
+- intent: ask_question_types
+  examples: |
+    - ¿cuáles son los tipos de preguntas disponibles?
+    - ¿cuáles son los tipos de preguntas disponibles?
+    - ¿cuáles son los tipos de preguntas disponibles?
+    - ¿qué tipo de preguntas están disponibles?
+    - ¿qué preguntas tiene una actividad?
+    - ¿cuántos tipos de preguntas hay disponibles?
+- intent: find_subject
+  examples: |
+    - nombre del sujeto
+    - nombre del sujeto
+    - dar el nombre del sujeto
+- intent: start
+  examples: |
+    - inicio
+    - empezar 
+    - quiero empezar

@@ -16,9 +16,10 @@ pipeline:
     constrain_similarities: true
   - name: DucklingEntityExtractor
     url: http://duckling_server:8000
+    # url: http://localhost:8000
     dimensions: ["time"]
     timezone: "Europe/Berlin"
-  - name: EntitySynonymMapper
+  - name: RegexEntityExtractor
   - name: ResponseSelector
     epochs: 100
   - name: FallbackClassifier

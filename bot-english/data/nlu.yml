@@ -29,8 +29,6 @@ nlu:
   examples: |
     - i want to learn [Maths](subject)
     - i want to learn [Physics](subject)
-    - i want to learn [Computer Science](subject)
-    - i want to learn about [Machine Learning](subject)
     - i want to learn about [Business](subject)
     - i want to learn [Chemistry](subject)
     - i would like to learn [Maths](subject)
@@ -42,8 +40,6 @@ nlu:
     - i want to learn about [Art and Design](subject)
     - i want to study [mathematics](subject)
     - i want to learn [maths](subject)
-    - i wanr to learn about [astronomy](subject)
-    - i want to learn about [astronomy](subject)
     - i want to learn
     - i would like to learn
     - what are the subjects available
@@ -263,8 +259,21 @@ nlu:
     - start
     - start 
     - i want to start
-
-- synonym: subject
+- intent: user_done
   examples: |
-    - credit card account
-    - credit account
+    - That's enough
+    - that's done
+
+- lookup: subject
+  examples: |
+    - Math
+    - Business
+    - Art and Design
+    - Humanities
+    - Physics
+    - Biology
+    - History
+    - Chemistry
+    - Pyschology
+    - Technology
+    - Language

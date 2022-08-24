@@ -1,87 +1,117 @@
-version: "3.1"
+Version: "3.1"
 nlu:
-- intent: learn_subject
+- intent: user_greet
   examples: |
-    - i want to learn [Maths](subject)
-    - i want to learn [Physics](subject)
-    - i want to learn [Computer Science](subject)
-    - i want to learn about [Machine Learning](subject)
-    - i want to learn about [Business](subject)
-    - i want to learn [Chemistry](subject)
-    - i would like to learn [Maths](subject)
-    - i would like to learn [Physics](subject)
-    - i would like to learn [Pyschology](subject)
-    - i would like to learn [History](subject)
-    - i would like to learn about [Humanities](subject)
-    - i would like to learn about [Social Studies](subject)
-    - i want to learn about [Art and Design](subject)
-    - i want to study [mathematics](subject)
-    - i want to learn [maths](subject)
-    - i wanr to learn about [astronomy](subject)
-    - i want to learn about [astronomy](subject)
+    - hey
+    - hi
+    - γεια
+    - hii
+    - hiya
+    - howdy
+    - hallo
+    - Γεια σου
+    - hiii
+    - heyy
+    - hey, καλημέρα
+    - Καλησπέρα
+    - Καλημέρα.
+    - Καλό απόγευμα.
+- intent: user_thanks
+  examples: |
+    - ευχαριστώ
+    - ευχαριστώ
+    - σας ευχαριστώ πολύ
+    - ευχαριστώ για τη βοήθεια
+    - ευχαριστώ για τη βοήθειά σας
+    - Σας ευχαριστώ για τη βοήθεια
+    - Εκτιμώ τη βοήθεια
+    - Ευχαριστώ
 - intent: ask_for_suggestion
   examples: |
-    - i want to learn
-    - i want to study
-    - i would like to learn
-    - what are the subjects available
-    - what can i learn
-    - give me a subject
-    - give me a suggestion
-    - suggest me a subject
-    - suggest me something to learn
-    - give me something to learn
-    - please provide me some suggestions
-    - suggest me something
-    - i wanr to learn
-- intent: goodbye
+    - Θέλω να μάθω [Μαθηματικά](subject)
+    - Θέλω να μάθω [Φυσική](subject)
+    - Θέλω να μάθω [Πληροφορική](subject)
+    - Θέλω να μάθω για [Μηχανική Μάθηση](subject)
+    - Θέλω να μάθω για [Επιχειρήσεις](subject)
+    - Θέλω να μάθω [Χημεία](subject)
+    - θα ήθελα να μάθω [Μαθηματικά](subject)
+    - θα ήθελα να μάθω [Φυσική](subject)
+    - Θα ήθελα να μάθω [Ψυχολογία](subject)
+    - θα ήθελα να μάθω [Ιστορία](subject)
+    - θα ήθελα να μάθω [Ανθρωπιστικές επιστήμες](subject)
+    - Θα ήθελα να μάθω για [Κοινωνικές Σπουδές](subject)
+    - Θέλω να μάθω για [Τέχνη και Σχεδιασμός](subject)
+    - θέλω να σπουδάσω [μαθηματικά](αντικείμενο)
+    - θέλω να μάθω [μαθηματικά](αντικείμενο)
+    - θέλω να μάθω για την [αστρονομία](subject)
+    - Θέλω να μάθω για την [αστρονομία](subject)
+    - Θέλω να μάθω
+    - θα ήθελα να μάθω
+    - ποια είναι τα διαθέσιμα μαθήματα
+    - τι μπορώ να μάθω
+    - δώστε μου ένα θέμα
+    - δώστε μου μια πρόταση
+    - Θέλω να κάνω μια δραστηριότητα
+    - Θα ήθελα να κάνω μια δραστηριότητα
+    - πρότεινέ μου ένα θέμα
+    - πρότεινέ μου κάτι να μάθω
+    - δώσε μου κάτι να μάθω
+    - παρακαλώ δώστε μου κάποιες προτάσεις
+    - να μου προτείνετε κάτι
+- intent: user_goodbye
   examples: |
-    - see you later
-    - goodbye
-    - byebye
+    - τα λέμε αργότερα
+    - αντίο
+    - αντίο
+    - αντίο
+    - αντίο
+    - ciao
+    - τα λέμε
+    - τα λέμε
 - intent: user_stress
   examples: |
-    - i am stressed
-    - i am feeling stressed
-    - i have stress
-    - i am kind of feeling stressed
-    - i am not feeling good
-    - i am feeling sad
+    - είμαι αγχωμένος
+    - αισθάνομαι αγχωμένος
+    - έχω άγχος
+    - αισθάνομαι κάπως αγχωμένος
+    - δεν αισθάνομαι καλά
+    - αισθάνομαι λυπημένος
 - intent: user_happy
   examples: |
-    - good
-    - i am doing good
-    - i am great
-    - i am happy
-    - doing fine
-    - it is going great
-    - it is a fine day
+    - Καλός
+    - κάνω καλά
+    - είμαι σπουδαίος
+    - είμαι ευτυχισμένος
+    - τα πάω καλά
+    - Όλα πάνε καλά
+    - Είναι μια ωραία μέρα
 - intent: user_unhappy
   examples: |
-    - bad
-    - not good
-    - not a good day
-    - it is bad
-    - could have been better
-    - not okay
-    - it is very worst
+    - κακό
+    - δεν είναι καλό
+    - όχι καλή μέρα
+    - είναι κακή
+    - θα μπορούσε να είναι καλύτερη
+    - όχι εντάξει
+    - είναι πολύ χειρότερα
 - intent: user_affirm
   examples: |
-    - yes
-    - yeah
+    - ναι
+    - ναι
     - yup
-    - sure
-    - ofcourse
-    - of course
+    - σίγουρα
+    - Φυσικά
+    - Φυσικά
+    - Ναι, ναι, ναι...
 - intent: user_deny
   examples: |
-    - no
+    - όχι
     - nope
-    - i dont want to
-    - nah
-    - i am not in mood
-    - i dont feel like it
-    - next
+    - δεν θέλω
+    - όχι
+    - Δεν έχω διάθεση.
+    - Δεν έχω όρεξη
+    - Δεν έχω όρεξη.
 - intent: user_data
   examples: |
     - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
@@ -90,52 +120,148 @@ nlu:
     - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
 - intent: out_of_scope
   examples: |
-    - i want to contact my teacher
-    - i want to send a message to my friend
-    - i would like to message my supervisor
-    - i would like to play now
-    - i want to learn about flying to mars
-    - i want to learn more about the world
-    - i would like to learn how to ride a horse
-    - i would like to learn more about you
-    - i want to know how to learn to drive
-    - i want to know how to do calculations
+    - Θέλω να επικοινωνήσω με τον καθηγητή μου
+    - Θέλω να στείλω ένα μήνυμα στο φίλο μου
+    - θα ήθελα να στείλω μήνυμα στον προϊστάμενό μου
+    - Θα ήθελα να παίξω τώρα
+    - Θέλω να μάθω για την πτήση στον Άρη
+    - Θέλω να μάθω περισσότερα για τον κόσμο
+    - Θα ήθελα να μάθω πώς να ιππεύω ένα άλογο
+    - Θα ήθελα να μάθω περισσότερα για σένα
+    - Θέλω να μάθω πώς να μαθαίνω να οδηγώ
 - intent: bot_challenge
   examples: |
-    - who are you?
-    - are you a bot?
-    - are you a human?
-    - are you my teacher?
-    - are you real?
-    - who build you?
-    - who developed you?
+    - ποιος είσαι;
+    - Είσαι bot;
+    - Είσαι άνθρωπος;
+    - Είσαι ο δάσκαλός μου;
+    - Είσαι αληθινός;
+    - Ποιος σε έφτιαξε;
+    - Ποιος σε ανέπτυξε;
 - intent: inform
   examples: |
-    - maths
-    - business
-    - technology
-    - biology
-    - science
-- intent: user_greet
-  examples: |
-    - hey
-    - hi
-    - hiya
-    - howdy
-    - hallo
-    - hii
-    - heyy
-    - hey, good morning
-    - good evening
-    - gud morning
-    - gud evening
+    - μαθηματικά
+    - επιχειρήσεις
+    - τεχνολογία
+    - βιολογία
+    - επιστήμη
 - intent: inform_new
   examples: |
-    - This is a random[](subj) example
-    - This is another random[](subj) example
-    - This is last random example[](topic)
-    - This is final random example[](topic)
+    - Αυτό είναι ένα παράδειγμα random[](subj)
+    - Αυτό είναι ένα άλλο παράδειγμα random[](subj)
+    - Αυτό είναι το τελευταίο τυχαίο παράδειγμα[](topic)
+    - Αυτό είναι το τελευταίο τυχαίο παράδειγμα[](topic)
 - intent: next_option
   examples: |
-    - next
-    - next option
+    - επόμενη
+    - επόμενη επιλογή
+- intent: ask_remind_call
+  examples: |
+    - Υπενθυμίστε μου να πάρω μαθήματα σε 5 λεπτά
+    - Υπενθύμισέ μου να κάνω μαθήματα σε 1 ώρα
+    - Υπενθυμίστε μου να κάνω δραστηριότητες σε 5 δευτερόλεπτα
+    - Υπενθυμίστε μου να κάνω μαθήματα σε 2 ώρες
+    - να μου θυμίζει να κάνω δραστηριότητες σε 120 λεπτά
+    - υπενθυμίστε μου να μάθω
+    - Υπενθύμισέ μου να μάθω αργότερα
+    - αργότερα πρέπει να κάνω μαθήματα
+    - αργότερα πρέπει να κάνω μαθήματα
+    - αργότερα πρέπει να κάνω δραστηριότητες
+    - Σε παρακαλώ, θύμισέ μου να κάνω δραστηριότητες
+    - παρακαλώ να μου θυμίσετε να κάνω μαθήματα αργότερα
+    - Δεν πρέπει να ξεχάσω να κάνω δραστηριότητες
+    - Δεν πρέπει να ξεχάσω να κάνω μαθήματα αργότερα
+    - υπενθύμισέ μου να μάθω σε 1 ώρα
+- intent: ask_id
+  examples: |
+    - Ποιο είναι το id της συζήτησης;
+    - id
+    - Ποιο είναι το αναγνωριστικό αυτής της συνομιλίας;
+    - Πώς μπορώ να στείλω ένα αίτημα POST σε αυτή τη συζήτηση;
+- intent: ask_forget_reminders
+  examples: |
+    - ξεχάστε το
+    - μην μου το θυμίζεις!
+    - Ξεχάστε την υπενθύμιση
+    - ακυρώστε την υπενθύμιση
+    - ακυρώστε όλες τις υπενθυμίσεις παρακαλώ
+    - Ξεχάστε την υπενθύμιση
+    - Ξεχάστε την υπενθύμιση!
+- intent: ask_progress
+  examples: |
+    - ποια είναι η πρόοδός μου
+    - Ποια είναι η πρόοδός μου στη μάθηση
+    - πώς είναι η πρόοδός μου
+    - πόσο καλά είναι η πρόοδός μου
+    - πώς είναι η πρόοδός μου στη μάθηση
+    - τα πάω καλά;
+    - ποια είναι η τελευταία μου πρόοδος
+    - ποια είναι η πρόσφατη πρόοδός μου
+- intent: ask_improvement
+  examples: |
+    - τι πρέπει να βελτιώσω
+    - πώς μπορώ να βελτιωθώ
+    - σε τι πρέπει να επικεντρωθώ
+    - σε ποιο θέμα πρέπει να επικεντρωθώ
+    - σε ποιο θέμα πρέπει να επικεντρωθώ
+    - Πρέπει να βελτιώσω κάτι;
+    - χρειάζομαι βελτίωση
+    - πρέπει να επικεντρωθώ σε κάποιο θέμα
+    - Πρέπει να βελτιωθώ σε οποιοδήποτε θέμα
+    - πρέπει να επικεντρωθώ σε οποιοδήποτε θέμα
+    - Πρέπει να βελτιωθώ σε οποιοδήποτε θέμα
+- intent: ask_approach
+  examples: |
+    - δεν ξέρω πώς να κάνω αυτή την εργασία
+    - πώς μπορώ να λύσω αυτή την εργασία
+    - βοηθήστε με να λύσω αυτή την εργασία
+    - πώς μπορώ να χρησιμοποιήσω αυτή την εφαρμογή
+    - Πώς μπορώ να χρησιμοποιήσω αυτή την εφαρμογή
+    - Δεν ξέρω τι να κάνω
+    - Δεν ξέρω πώς να το κάνω
+    - Πώς να το προσεγγίσω αυτό;
+    - Δεν ξέρω πώς να κάνω mcqs
+    - Δεν ξέρω πώς να κάνω το σωστό ή το λάθος.
+    - Δεν ξέρω πώς να κάνω ερωτήσεις αντιστοίχισης
+    - Δεν ξέρω πώς να κάνω δραστηριότητες
+- intent: user_feedback
+  examples: |
+    - Υπάρχει πρόβλημα με μια δραστηριότητα
+    - Υπάρχει πρόβλημα με ένα θέμα
+    - Υπάρχει πρόβλημα με ένα θέμα
+    - υπάρχει πρόβλημα με την εφαρμογή
+    - υπάρχει πρόβλημα με μια δραστηριότητα
+    - Βρήκα ένα πρόβλημα με μια δραστηριότητα
+    - Βρήκα ένα πρόβλημα με την εφαρμογή
+    - υπάρχει πρόβλημα με μια εργασία
+    - Θα ήθελα να δώσω ανατροφοδότηση
+    - Θέλω να δώσω ανατροφοδότηση
+- intent: ask_features
+  examples: |
+    - ποια είναι όλα τα χαρακτηριστικά σας;
+    - ποια είναι τα πράγματα που μπορείτε να κάνετε;
+    - τι μπορείτε να κάνετε;
+    - απαριθμήστε μου τα πράγματα που μπορείτε να κάνετε
+    - απαριθμήστε μου τα χαρακτηριστικά σας
+    - απαριθμήστε μου όλα τα χαρακτηριστικά σας
+    - Δείξε μου όλα τα πράγματα που μπορείς να κάνεις
+    - δείξε μου όλα τα χαρακτηριστικά σου
+- intent: ask_question_types
+  examples: |
+    - ποιοι είναι οι διαθέσιμοι τύποι ερωτήσεων;
+    - Ποιοι είναι οι διαθέσιμοι τύποι ερωτήσεων;
+    - ποια είναι τα είδη των διαθέσιμων ερωτήσεων;
+    - τι είδους ερωτήσεις είναι διαθέσιμες;
+    - τι ερωτήσεις έχει μια δραστηριότητα;
+    - πόσοι τύποι ερωτήσεων είναι διαθέσιμοι;
+- intent: find_subject
+  examples: |
+    - όνομα θέματος
+    - όνομα θέματος
+    - give subject name
+- intent: start
+  examples: |
+    - έναρξη
+    - έναρξη 
+    - θέλω να ξεκινήσω
+

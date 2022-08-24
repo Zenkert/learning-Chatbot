@@ -19,6 +19,30 @@ services:
   #     - "./bot-german:/app/bot-german"
   #   ports:
   #     - "5006:5006"
+  # rasa_greek:
+  #   container_name: "rasa_server_greek"
+  #   build:
+  #     context: ./bot-greek
+  #   volumes:
+  #     - "./bot-greek:/app/bot-greek"
+  #   ports:
+  #     - "5007:5007"
+  # rasa_spanish:
+  #   container_name: "rasa_server_spanish"
+  #   build:
+  #     context: ./bot-spanish
+  #   volumes:
+  #     - "./bot-spanish:/app/bot-spanish"
+  #   ports:
+  #     - "5008:5008"
+  # rasa_telegram:
+  #   container_name: "rasa_server_telegram"
+  #   build:
+  #     context: ./bot-telegram
+  #   volumes:
+  #     - "./bot-telegram:/app/bot-telegram"
+  #   ports:
+  #     - "5009:5009"
   action_server:
     container_name: "action_server"
     build:
@@ -33,3 +57,11 @@ services:
     image: rasa/duckling:latest
     ports:
       - "8000:8000"
+  # nginx:
+  #   image: nginx:latest
+  #   volumes:
+  #     - ./conf.d:/etc/nginx/conf.d
+  #   depends_on:
+  #     - action_server
+  #   ports:
+  #     - "5055:5055"

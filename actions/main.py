@@ -1,87 +1,130 @@
-from pymongo import MongoClient
-from bson import ObjectId
-from dotenv import load_dotenv
+from pydoc_data.topics import topics
+from urllib import response
+import requests
 
 # from dataclasses import dataclass, field
 # import collections
 
-database_name = "test"
-collection_name = "subjects"
+
+def get_subjects():
+    response = requests.get(
+        'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/subject/get').json()
+
+    subject_list = [s['subject'] for s in response]
+
+    subjects = {s['subject']: s['_id'] for s in response}
+
+    return subject_list, subjects
 
 
-def connection(database_name):
-    load_dotenv()
-    # user_name = os.getenv('MONGODBUSERNAME')
-    # password = os.getenv('MONGODBPASSWORD')
-    cluster = f'mongodb+srv://sathish:alpha1234@cluster0.vw63h.mongodb.net/?retryWrites=true&w=majority'
+def get_topics(subj):
+    subject_response = requests.get(
+        'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/subject/get').json()
 
-    client = MongoClient(cluster)
-    database = client[database_name]
-    return database
+    for s in subject_response:
+        if s['subject'] == subj:
+            subject_id = s['_id']
 
+    response = requests.get(
+        'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic').json()
 
-def get_subjects(collection_name):
+    topic_list = [s['topic']
+                  for s in response if s['subId'] == subject_id]
 
-    collection = database[collection_name]
+    topics = {s['topic']: s['_id']
+              for s in response if s['subId'] == subject_id}
 
-    tops = collection.find({})
-
-    # getting subjects from "subjects" collection
-    list_of_subjects = [sub["subject"] for sub in tops]
-
-    return list_of_subjects
-
-
-def get_topics(subject):
-
-    collection = database[collection_name]
-
-    tops = collection.find_one({'subject': f'{subject}'}, '_id')
-
-    subject_id = tops['_id']
-
-    topic_collection = database['topics']
-
-    topics = topic_collection.find({'subId': ObjectId(subject_id)})
-
-    topics_available = {top['topic']: str(top['_id']) for top in topics}
-
-    return topics_available
+    return topic_list, topics
 
 
 def get_questions(topic_id):
 
-    collection = database['mcqs']
-
-    topics = collection.find({'topicId': ObjectId(topic_id)})
+    response = requests.get(
+        f'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic/getByTopic/{topic_id}').json()
 
     queried_data = {'mcq_question': [], 'mcq_choices': [],  'right_answer': [], 'feedback': {
         'pos_feedback': [], 'neg_feedback': []}}
-    # qq = [topic for topic in topics]
-    for topic in topics:
-        try:
-            queried_data['mcq_question'].append(topic['mcqs'])
-            num_of_options = [topic['option1'], topic['option2']]
-            if topic.get('option3', None) != None:
-                num_of_options.append(topic['option3'])
-                if topic.get('option4', None) != None:
-                    num_of_options.append(topic['option4'])
-            queried_data['mcq_choices'].append(num_of_options)
-            queried_data['right_answer'].append(topic['answer'])
-            queried_data['feedback']['pos_feedback'].append(
-                topic['posFeedback'])
-            queried_data['feedback']['neg_feedback'].append(
-                topic['negFeedback'])
-        except:
-            print('----- ERROR -----')
 
-    question_count = len(queried_data['mcq_question'])
-    # return qq
+    # queried_data = {'mcq': {'mcq_question': [], 'mcq_choices': [],  'right_answer': [], 'feedback': {
+    #     'pos_feedback': [], 'neg_feedback': []}},
+    #     'truefalse': {'true_false': [], 'choices': [],  'right_answer': [], 'feedback': {
+    #         'pos_feedback': [], 'neg_feedback': []}}}
+    question_count = 0
+
+    for value in response:
+        all_questions = value['allQuestions']
+        # print(type(zz), zz)
+        for val in all_questions:
+            if val['questionType'] == 'mcqs':
+                question_count += 1
+                try:
+                    queried_data['mcq_question'].append(val['mcqs'])
+                    num_of_options = [val['option1'], val['option2']]
+                    if val.get('option3', None) != None:
+                        num_of_options.append(val['option3'])
+                        if val.get('option4', None) != None:
+                            num_of_options.append(val['option4'])
+                    queried_data['mcq_choices'].append(num_of_options)
+                    queried_data['right_answer'].append(val['answer'])
+                    queried_data['feedback']['pos_feedback'].append(
+                        val['posFeedback'])
+                    queried_data['feedback']['neg_feedback'].append(
+                        val['negFeedback'])
+                except:
+                    print('----- ERROR -----')
+            elif val['questionType'] == 'trueFalse':
+                question_count += 1
+                try:
+                    queried_data['mcq_question'].append(
+                        val['question'])
+                    num_of_options = ['True', 'False']
+                    queried_data['mcq_choices'].append(
+                        num_of_options)
+                    queried_data['right_answer'].append(
+                        val['answer'])
+                    queried_data['feedback']['pos_feedback'].append(
+                        val['posFeedback'])
+                    queried_data['feedback']['neg_feedback'].append(
+                        val['negFeedback'])
+                    # queried_data['truefalse']['true_false'].append(
+                    #     val['question'])
+                    # num_of_options = ['True', 'False']
+                    # queried_data['truefalse']['choices'].append(
+                    #     num_of_options)
+                    # queried_data['truefalse']['right_answer'].append(
+                    #     val['answer'])
+                    # queried_data['truefalse']['feedback']['pos_feedback'].append(
+                    #     val['posFeedback'])
+                    # queried_data['truefalse']['feedback']['neg_feedback'].append(
+                    #     val['negFeedback'])
+                except:
+                    print('----- ERROR -----')
+
     return question_count, queried_data
 
 
-database = connection(database_name=database_name)
-resss = get_subjects(collection_name=collection_name)
-
 if __name__ == '__main__':
-    question_count, queried_data = get_questions('628292ddc942dd68d1fcc42d')
+    # subject_list, subjects = get_subjects()
+    # print(subject_list, subjects)
+
+    # topic_list, topics_available = get_topics('Humanities')
+    # print(topic_list, topics_available)
+
+    question_count, queried_data = get_questions(
+        '62f22b06c992eabdda6fbd93')
+    print(question_count, queried_data)
+
+
+# All mcqs: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/mcqs
+
+# All topics: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic
+
+# All grades: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/grade/get
+
+# All age groups: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/age/get
+
+# All subjects: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/subject/get
+
+# All true false: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/true_false
+
+# Get quiz by topic ID: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic/getByTopic/62f22b06c992eabdda6fbd93

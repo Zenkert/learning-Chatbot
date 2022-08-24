@@ -1,5 +1,5 @@
 from datetime import datetime as dt
-from email import message
+from pydoc_data.topics import topics
 from rasa_sdk.events import ReminderScheduled, ReminderCancelled, UserUtteranceReverted, ActionReverted
 from rasa_sdk import Action, Tracker
 import pandas as pd
@@ -15,46 +15,37 @@ from rasa_sdk.types import DomainDict
 
 from actions import main, plot
 from fuzzywuzzy import process
-from dateutil.parser import *
 
-dict_vars = {'total_subs': None, 'subject_idx': 0, 'topic_idx': 0, 'i': 0}
+with open('actions/responses.json', 'r') as file:
+    data = json.load(file)
+
+dict_vars = {'total_subs': None, 'total_topicss': None,
+             'subject_idx': 0, 'topic_idx': 0, 'i': 0}
 
 
-class ActionSubmit(Action):
+class ActionSetLanguage(Action):
 
     def name(self) -> Text:
-        return "action_submit"
+        return "action_set_language"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        tracker_events = tracker.events
+        user_lang1 = tracker.get_slot('language')
 
-        transcript = []
+        user_lang2 = 'EN' if user_lang1 is None else user_lang1
 
-        for data in tracker_events:
-            m = 1
-            if data['event'] == 'user':
-                try:
-                    user_uttered = data['text']
-                    user_uttered_formatted = f'User: {user_uttered}'
-                    transcript.append(user_uttered_formatted)
-                except KeyError:
-                    pass
+        # user_ent = 'None'
+        # try:
+        #     user_ent = next(tracker.get_latest_entity_values('language'))
+        # except:
+        #     pass
 
-            elif data['event'] == 'bot':
-                try:
-                    bot_uttered = data['text']
-                    user_uttered_formatted = f'Bot: {bot_uttered}'
-                    transcript.append(user_uttered_formatted)
-                except KeyError:
-                    pass
+        dispatcher.utter_message(
+            text=f'User language is {user_lang1}, {user_lang2}')
 
-        dj = pd.DataFrame(transcript, columns=['Transcript'])
-        dj.to_excel('user_transcript.xlsx')
-
-        return []
+        return [SlotSet("language", "EN")]
 
 
 class ActionUserData(Action):
@@ -101,67 +92,146 @@ class ActionTellSubjects(Action):
         # name = tracker.get_slot('name')
         # print('name: ', name)
 
-        print('subject_idx:', dict_vars['subject_idx'])
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_ask_subj']
 
         if dict_vars['subject_idx'] == 0:
-            dict_vars['total_subs'] = main.get_subjects(
-                collection_name='subjects')
-            subs = [dict_vars['total_subs'].pop() for _ in range(5)]
+            dict_vars['total_subs'], sub_dict = main.get_subjects()
+            subs = [dict_vars['total_subs'].pop() for _ in range(6)]
             buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                             for sub in subs]
             buttons_subj.append(
-                {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
+                {"title": message["next"], "payload": '/next_option{"subj":"None"}'})
 
-        elif dict_vars['subject_idx'] != 0:
-            if len(dict_vars['total_subs']) >= 5:
-                subs = [dict_vars['total_subs'].pop() for _ in range(5)]
-                buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
-                                for sub in subs]
-                buttons_subj.append(
-                    {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
+            _ = [sub_dict.pop(s) for s in subs]
 
-            else:
-                subs = [dict_vars['total_subs'].pop()
-                        for _ in range(len(dict_vars['total_subs']))]
-                buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
-                                for sub in subs]
+        else:
+            subs = []
+            try:
+                for _ in range(len(dict_vars['total_subs'])):
+                    subs.append(dict_vars['total_subs'].pop())
+            except:
+                pass
+
+            buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
+                            for sub in subs]
 
         user_input = tracker.latest_message.get('text')
 
-        fnd, common_value = process.extractOne(user_input, subs)
-        print("fnd: ", fnd, 'common value: ', common_value)
-
-        buttons = [{'title': 'Yes', 'payload': '/inform_new{"subj":"'+fnd+'"}'},  # add subject as entity
-                   {'title': 'No', 'payload': '/user_deny{"subj":"None"}'}]
-
-        if fnd is not None:
-
-            if common_value >= 70:
-                dispatcher.utter_message(
-                    text=f"I found {fnd!r} in my database. Is that what you mean?", buttons=buttons)
-                return []
-
-            elif 50 <= common_value < 70:
-                dispatcher.utter_message(
-                    text=f"I think this is the one: {fnd}. Is this what you mean?", buttons=buttons)
-                return []
+        fnd, common_value = None, 50
 
         try:
-            subject = next(tracker.get_latest_entity_values('subject'))
+            subject_list, _ = main.get_subjects()
+            fnd, common_value = process.extractOne(
+                user_input, subject_list)
+            print('dict_vars[\'total_subs\']: ', dict_vars['total_subs'])
+            print("fnd: ", fnd, 'common value: ', common_value)
         except:
-            subject = None
+            pass
 
-        if subject is not None:
-            dispatcher.utter_message(
-                text=f"I will query my database about {subject}")
-            print("Subject: ", subject)
-            print(f"I will query my database about {subject}")
+        if fnd is not None and not user_input.startswith('/'):
 
-        else:
-            dispatcher.utter_message(
-                text=f"These are some of the subjects available.", buttons=buttons_subj, button_type="vertical")
+            if common_value >= 70:
+                dispatcher.utter_message(f'{message["found"]} {fnd!r}')
+                buttons = [{'title': message["yes"], 'payload': '/inform_new{"subj":"'+fnd+'"}'},  # add subject as entity
+                           {'title': message["no"], 'payload': '/user_deny{"subj":"None"}'}]
+                dispatcher.utter_message(
+                    text=f'{message["mean"]}', buttons=buttons)
+                return []
+
+            # elif 50 <= common_value < 70 and not user_input.startswith('/'):
+            #     dispatcher.utter_message(f'{message["found"]} {fnd!r}')
+            #     dispatcher.utter_message(
+            #         text=f'{message["mean"]}', buttons=buttons)
+            #     return []
+
+        # try:
+        #     subject = next(tracker.get_latest_entity_values('subject'))
+        # except:
+        #     subject = None
+
+        # if subject is not None:
+        #     dispatcher.utter_message(
+        #         text=f'{message["query"]}: {subject!r}')
+        #     print("Subject: ", subject)
+        #     print(f'{message["query"]}: {subject!r}')
+
+        message = message["available"]
+        try:
+            num_times = next(tracker.get_latest_entity_values('num_times'))
+            print(f'{num_times = }')
+            if num_times == 1:
+                message = message["choose"]
+        except:
+            pass
+
+        dispatcher.utter_message(
+            text=message, buttons=buttons_subj, button_type="vertical")
 
         return []
+
+# class ActionTellSubjects(Action):
+
+#     def name(self) -> Text:
+#         return "action_ask_subj"
+
+#     @staticmethod
+#     def user_language():
+#         pass
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         # name = tracker.get_slot('name')
+#         # print('name: ', name)
+
+#         print('subject_idx:', dict_vars['subject_idx'])
+
+#         if dict_vars['subject_idx'] == 0:
+#             dict_vars['total_subs'] = main.get_subjects(
+#                 collection_name='subjects')
+#             subs = [dict_vars['total_subs'].pop() for _ in range(5)]
+#             buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
+#                             for sub in subs]
+#             buttons_subj.append(
+#                 {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
+
+#         elif dict_vars['subject_idx'] != 0:
+#             if len(dict_vars['total_subs']) >= 5:
+#                 subs = [dict_vars['total_subs'].pop() for _ in range(5)]
+#                 buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
+#                                 for sub in subs]
+#                 buttons_subj.append(
+#                     {"title": 'Next', "payload": '/next_option{"subj":"None"}'})
+
+#             else:
+#                 subs = [dict_vars['total_subs'].pop()
+#                         for _ in range(len(dict_vars['total_subs']))]
+#                 buttons_subj = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
+#                                 for sub in subs]
+
+#         try:
+#             subject = next(tracker.get_latest_entity_values('subject'))
+#         except:
+#             subject = None
+
+#         if subject is not None:
+#             fnd, common_value = process.extractOne(subject, subs)
+#             print("fnd: ", fnd, 'common value: ', common_value)
+#             buttons = [{'title': 'Yes', 'payload': '/inform_new{"subj":"'+fnd+'"}'},  # add subject as entity
+#                        {'title': 'No', 'payload': '/user_deny{"subj":"None"}'}]
+#             dispatcher.utter_message(
+#                 text=f"I found {fnd!r} in my database. Is that what you mean?", buttons=buttons)
+#             print("Subject: ", subject)
+
+#         else:
+#             dispatcher.utter_message(
+#                 text=f"These are the subjects available. Please choose one:", buttons=buttons_subj, button_type="vertical")
+
+#         return []
 
 
 class ActionGiveSuggestion(Action):
@@ -173,13 +243,19 @@ class ActionGiveSuggestion(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_give_suggestion']
+
         subs = main.get_subjects(collection_name='subjects')
 
         buttons = [{"title": sub, "payload": '/inform_new{"subj":"'+sub+'"}'}
                    for sub in subs]
 
         dispatcher.utter_message(
-            text="These are some of the subjects I'd suggest: ", buttons=buttons)
+            text=message, buttons=buttons)
 
         return []
 
@@ -193,16 +269,55 @@ class ActionTellTopics(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        subject = tracker.get_slot('subj')
-        print('subj -> action_tell_topics: ', subject)
+        user_lang = tracker.get_slot('language')
 
-        # if topic_idx == 0:
-        topics_available = main.get_topics(subject)
-        buttons = [{"title": topic, "payload": '/inform_new{"topic":"'+topic_id+'"}'}
-                   for topic, topic_id in topics_available.items()]
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_ask_topic']
+
+        subject = tracker.get_slot('subj')
+
+        if dict_vars['topic_idx'] == 0:
+            dict_vars['total_topics'], topic_dict = main.get_topics(subject)
+
+            if len(dict_vars['total_topics']) == 0:
+                dispatcher.utter_message(text=message['not_available'])
+                return [SlotSet('topic', 'NOT AVAILABLE'), SlotSet('question', 'NOT AVAILABLE')]
+
+            elif len(dict_vars['total_topics']) <= 6:
+                topics = [dict_vars['total_topics'].pop()
+                          for _ in range(len(dict_vars['total_topics']))]
+
+            else:
+                topics = [dict_vars['total_topics'].pop()
+                          for _ in range(6)]
+
+            buttons = [{"title": topic, "payload": '/inform_new{"topic":"'+topic_id+'"}'}
+                       for topic, topic_id in topic_dict.items()]
+
+            if len(topics) >= 6:
+                buttons.append(
+                    {"title": message["next"], "payload": '/next_option{"topic":"None"}'})
+
+            _ = [topic_dict.pop(s) for s in topics]
+
+        else:
+            topics = [dict_vars['total_topics'].pop()
+                      for _ in range(len(dict_vars['total_topics']))]
+            buttons = [{"title": topic, "payload": '/inform_new{"topic":"'+topic_id+'"}'}
+                       for topic, topic_id in topic_dict.items()]
+
+        # ===============   WORKING   ================
+
+        # topic_list, topics_available = main.get_topics(subject)
+        # buttons = [{"title": topic, "payload": '/inform_new{"topic":"'+topic_id+'"}'}
+        #         for topic, topic_id in topics_available.items()]
+
+        # dispatcher.utter_message(
+        #     text=f'{message}', buttons=buttons, button_type="vertical")
 
         dispatcher.utter_message(
-            text=f'Please select a topic: ', buttons=buttons, button_type="vertical")
+            text=message['topic'], buttons=buttons, button_type="vertical")
 
         return []
 
@@ -222,9 +337,11 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
 
         intent_value = tracker.get_intent_of_latest_message()
 
-        print('intent_value: ', intent_value)
+        dispatcher.utter_message(text=f'Subject ID is {slot_value}')
 
-        print('slot_valuexx->>', slot_value)
+        # print('intent_value: ', intent_value)
+
+        # print('slot_valuexx->>', slot_value)
 
         if intent_value == "next_option":
             dict_vars['subject_idx'] += 1
@@ -232,7 +349,6 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         elif intent_value == "user_deny":
             return {'subj': None}
 
-        print(f"{dict_vars['subject_idx'] = }")
         dict_vars['subject_idx'] = 0
         return {'subj': slot_value}
 
@@ -243,6 +359,18 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict
     ) -> Dict[Text, Any]:
+
+        intent_value = tracker.get_intent_of_latest_message()
+
+        dispatcher.utter_message(text=f'Topic ID is {slot_value}')
+
+        if intent_value == "next_option":
+            dict_vars['topic_idx'] += 1
+            return {'topic': None}
+        elif intent_value == "user_deny":
+            return {'topic': None}
+
+        dict_vars['topic_idx'] = 0
 
         return {'topic': slot_value}
 
@@ -276,68 +404,35 @@ class ActionCleanFeedbackformSlots(Action):
         return [SlotSet("feedback", None), SlotSet("confirm_feedback", None)]
 
 
-class ActionAskQuestion(Action):
+# class ActionAskQuestion(Action):
 
-    def name(self) -> Text:
-        return "action_ask_question"
+#     def name(self) -> Text:
+#         return "action_ask_question"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        topic_id = tracker.get_slot('topic')
-        print('topic_id: ', topic_id)
+#         topic_id = tracker.get_slot('topic')
+#         print('topic_id: ', topic_id)
 
-        _, questions_available = main.get_questions(topic_id)
+#         question_count, questions_available = main.get_questions(topic_id)
 
-        mcq_question = questions_available['mcq_question'][dict_vars['i']]
-        mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
-        print('i: ', dict_vars['i'], 'mcq_qq: ', mcq_question)
-        buttons = [{"title": choice, "payload": f"option{idx+1}"}
-                   for idx, choice in enumerate(mcq_choices)]
+#         if question_count == 0:
+#             dispatcher.utter_message(
+#                 text='Sorry, there are no activities available for this topic yet!')
+#             dispatcher.utter_message(text='We will add new activities soon.')
 
-        dispatcher.utter_message(
-            text=mcq_question, buttons=buttons, button_type="vertical")
+#         mcq_question = questions_available['mcq_question'][dict_vars['i']]
+#         mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
+#         print('i: ', dict_vars['i'], 'mcq_qq: ', mcq_question)
+#         buttons = [{"title": choice, "payload": f"option{idx+1}"}
+#                    for idx, choice in enumerate(mcq_choices)]
 
-        return []
+#         dispatcher.utter_message(
+#             text=mcq_question, buttons=buttons, button_type="vertical")
 
-
-class ValidateQuestionsForm(FormValidationAction):
-
-    def name(self) -> Text:
-        return "validate_questions_form"
-
-    def validate_question(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict
-    ) -> Dict[Text, Any]:
-
-        topic_id = tracker.get_slot('topic')
-        question_count, questions_available = main.get_questions(topic_id)
-
-        right_answer = questions_available['right_answer'][dict_vars['i']]
-        pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars['i']]
-        neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars['i']]
-        # mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
-
-        if slot_value.startswith('/inform_new'):
-            return {'question': None}
-        elif slot_value == right_answer:
-            dispatcher.utter_message(text=pos_feedback)
-        else:
-            dispatcher.utter_message(text=neg_feedback)
-
-        if dict_vars['i'] < question_count-1:
-            dict_vars['i'] += 1
-            print('i ==> ', dict_vars['i'],
-                  'question_count ==> ', question_count)
-            return {'question': None}
-        dict_vars['i'] = 0  # reset value of i to loop again
-
-        return {'question': slot_value}
+#         return []
 
 # class ActionTellSubjects(Action):
 
@@ -398,6 +493,44 @@ class ValidateQuestionsForm(FormValidationAction):
 #         return []
 
 
+# class ValidateQuestionsForm(FormValidationAction):
+
+#     def name(self) -> Text:
+#         return "validate_questions_form"
+
+#     def validate_question(
+#         self,
+#         slot_value: Any,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: DomainDict
+#     ) -> Dict[Text, Any]:
+
+#         topic_id = tracker.get_slot('topic')
+#         question_count, questions_available = main.get_questions(topic_id)
+
+#         right_answer = questions_available['right_answer'][dict_vars['i']]
+#         pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars['i']]
+#         neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars['i']]
+#         # mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
+
+#         if slot_value.startswith('/inform_new'):
+#             return {'question': None}
+#         elif slot_value == right_answer:
+#             dispatcher.utter_message(text=pos_feedback)
+#         else:
+#             dispatcher.utter_message(text=neg_feedback)
+
+#         if dict_vars['i'] < question_count-1:
+#             dict_vars['i'] += 1
+#             print('i ==> ', dict_vars['i'],
+#                   'question_count ==> ', question_count)
+#             return {'question': None}
+#         dict_vars['i'] = 0  # reset value of i to loop again
+
+#         return {'question': slot_value}
+
+
 class ActionSetReminder(Action):
 
     def name(self) -> Text:
@@ -412,19 +545,25 @@ class ActionSetReminder(Action):
 
         reminder_time = None
 
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_set_reminder']
+
         try:
             reminder_time = next(tracker.get_latest_entity_values('time'))
         except:
             pass
 
         if reminder_time == 'None' or reminder_time == None:
-            dispatcher.utter_message('Please provide a time!')
+            dispatcher.utter_message(text=message["time"])
             return []
 
         time_object = dt.strptime(reminder_time, "%Y-%m-%dT%H:%M:%S.%f%z")
         print(f'{time_object=}')
         dispatcher.utter_message(
-            f"Okay, I will remind you at {time_object.time()} on {time_object.date()}.")
+            f'{message["remind"]} {time_object.time()} {message["on"]} {time_object.date()}.')
 
         entities = tracker.latest_message.get("entities")
 
@@ -451,7 +590,13 @@ class ActionReactToReminder(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(f"Hey, here is your reminder!")
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_react_to_reminder']
+
+        dispatcher.utter_message(text=message)
 
         return []
 
@@ -480,7 +625,13 @@ class ForgetReminders(Action):
         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message("Okay, I'll cancel your reminders.")
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_forget_reminders']
+
+        dispatcher.utter_message(text=message)
 
         return [ReminderCancelled()]
 
@@ -494,13 +645,20 @@ class ActionGiveProgress(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_give_progress']
+
         dispatcher.utter_message(
-            text='Please wait a moment!')
+            text=message["message1"])
 
         final_path, image_url = plot.image_url(current_time=dt.now())
         print(f'{image_url = }')
+        print(f'{final_path = }')
         dispatcher.utter_message(
-            text=f'Hey, here is your progress!: {final_path}', image=image_url)
+            text=f'{message["message2"]}:', image=image_url)
 
         return []
 
@@ -514,8 +672,16 @@ class ActionGiveImprovement(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        import socket
+
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_give_improvement']
+
         dispatcher.utter_message(
-            text='These are the topics you should improve on!')
+            text=f"{message}: {socket.gethostname()}")
 
         return []
 
@@ -529,8 +695,13 @@ class ActionGiveApproach(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(
-            text='Please watch the video to get a better understanding :)')
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_give_approach']
+
+        dispatcher.utter_message(text=message)
 
         return []
 
@@ -544,7 +715,13 @@ class ActionGetFeedback(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message('Thank you for your input!')
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_get_feedback']
+
+        dispatcher.utter_message(text=message)
 
         return []
 
@@ -557,11 +734,15 @@ class ActionAskFeedback(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        user_lang = tracker.get_slot('language')
 
-        message = ["I would like to hear it. Please provide your input in one complete message!",
-                   "Oh, please provide your input in one complete message!"]
+        user_lang = 'EN' if user_lang is None else user_lang
 
-        dispatcher.utter_message(text=random.choice(message))
+        message = data['language'][user_lang]['action_ask_feedback']
+
+        message_list = [message["choice1"], message["choice2"]]
+
+        dispatcher.utter_message(text=random.choice(message_list))
 
         return []
 
@@ -575,14 +756,20 @@ class ActionAskConfirmFeedback(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_ask_confirm_feedback']
+
         if tracker.latest_message['text'] == 'No':
             return [ActionReverted(), SlotSet('feedback', None)]
 
-        buttons = [{'title': 'Yes, proceed!👍', 'payload': 'Yes'},
-                   {'title': 'No, I want to make changes👎', 'payload': 'No'}]
+        buttons = [{'title': message["yes"], 'payload': 'Yes'},
+                   {'title': message["no"], 'payload': 'No'}]
 
         dispatcher.utter_message(
-            text='Are you sure you want to submit?', buttons=buttons, button_type="vertical")
+            text=message["confirm"], buttons=buttons, button_type="vertical")
 
         return []
 
@@ -600,8 +787,14 @@ class ValidateQuestionsForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['validate_feedback']
+
         dispatcher.utter_message(
-            text=f'Your input is: {slot_value}')
+            text=f'{message}{slot_value}')
 
         return {'feedback': slot_value}
 
@@ -628,31 +821,36 @@ class ActionShowFeatures(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = 'Here are some of the options you can choose from:'
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_show_features']
 
         if tracker.get_intent_of_latest_message() == "start":
-            message = 'Welcome. I am a bot and I\'m here to assist you in your studies. You can choose an option from below to start!'
+            message = message["start"]
 
-        buttons = [{'title': 'Do an activity', 'payload': '/ask_for_suggestion'},
-                   {'title': 'Ask for a subject', 'payload': '/find_subject'},
-                   {'title': 'Question types available',
+        buttons = [{'title': message["activity"], 'payload': '/ask_for_suggestion'},
+                   {'title': message["subject"],
+                       'payload': '/find_subject'},
+                   {'title': message["question_types"],
                        'payload': '/ask_question_types'},
-                   {'title': 'What is my progress?', 'payload': '/ask_progress'},
-                   {'title': 'What should I improve?',
+                   {'title': message["progress"],
+                       'payload': '/ask_progress'},
+                   {'title': message["improve"],
                        'payload': '/ask_improvement'},
-                   {'title': 'Show me how to solve activities',
+                   {'title': message["approach"],
                        'payload': '/ask_approach'},
-                   {'title': 'Create a reminder',
+                   {'title': message["reminder"],
                        'payload': '/ask_remind_call{"time":"None"}'},
-                   {'title': 'Cancel my reminders',
+                   {'title': message["cancel_reminder"],
                        'payload': '/ask_forget_reminders'},
-                   {'title': 'I want to give feedback',
+                   {'title': message["feedback"],
                        'payload': '/user_feedback'},
-                   {'title': 'Who are you?', 'payload': '/bot_challenge'},
-                   {'title': '', 'payload': '/'}
+                   {'title': message["bot"], 'payload': '/bot_challenge'}
                    ]
         dispatcher.utter_message(
-            text=message, buttons=buttons, button_type="vertical")
+            text=message["options"], buttons=buttons, button_type="vertical")
 
         return []
 
@@ -666,16 +864,24 @@ class ActionExplainQuestionTypes(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = 'These are the question types available. Please select an option to learn more'
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_explain_question_types']
 
         buttons = [
-            {'title': 'MCQ', 'payload': '/inform{"type":"MCQ"}'},
-            {'title': 'True/False', 'payload': '/inform{"type":"True/False"}'},
-            {'title': 'Matching Pairs', 'payload': '/inform{"type":"Matching Pairs"}'}
+            {'title': message["1"], 'payload': '/ask_types{"type":"MCQ"}'},
+            {'title': message["2"],
+                'payload': '/ask_types{"type":"True_False"}'},
+            {'title': message["3"],
+                'payload': '/ask_types{"type":"Matching_Pairs"}'},
+            {'title': message["4"],
+                'payload': '/ask_types{"type":"Open_ended"}'}
         ]
 
         dispatcher.utter_message(
-            text=message, buttons=buttons, button_type="vertical")
+            text=message["question"], buttons=buttons, button_type="vertical")
 
         return []
 
@@ -689,13 +895,62 @@ class ActionExplainQuestionTypesDefinition(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        entity = next(tracker.get_latest_entity_values('type'))
+        user_lang = tracker.get_slot('language')
 
-        explanation = {'MCQ': 'A multiple-choice question(MCQ) is composed of two parts: a stem that identifies the question or problem, and a set of alternatives or possible answers that contain a key that is the best answer to the question, and a number of distractors that are plausible but incorrect answers to the question.',
-                       'True/False': 'True/false determines whether a statement is correct. You have a 50-50 chance of guessing the correct answer',
-                       'Matching Pairs': 'Matching pairs consist of two lists of items. For each item in List A, there is an item in List B that\'s related. Find the related pairs'}
+        user_lang = 'EN' if user_lang is None else user_lang
 
-        message = explanation[entity]
+        message = data['language'][user_lang]['action_explain_question_types_definition']
+
+        entity = tracker.get_slot('type')
+
+        dispatcher.utter_message(text=f'Entity is {entity}')
+        explanation = {"MCQ": message["MCQ"],
+                       "True_False": message["True_False"],
+                       "Matching_Pairs": message["Matching_Pairs"],
+                       "Open_ended": message["Open_ended"]}
+
+        # explanation = {message["1"]: message["MCQ"],
+        #                message["2"]: message["True_False"],
+        #                message["3"]: message["Matching_Pairs"]}
+
+        if entity is not None:
+            message = explanation[entity]
+        else:
+            message = "Sorry, I'm facing a problem right now!"
         dispatcher.utter_message(text=message)
+
+        return []
+
+
+class ActionContinue(Action):
+
+    def name(self) -> Text:
+        return "action_continue"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_lang = tracker.get_slot('language')
+
+        user_lang = 'EN' if user_lang is None else user_lang
+
+        message = data['language'][user_lang]['action_continue']
+
+        question = tracker.get_slot('question')
+        print(f'{question = }')
+        if question == 'NOT AVAILABLE' or question.startswith('/inform_new'):
+            print(f'Inside {question = }')
+        else:
+            dispatcher.utter_message(text=message["continue"])
+
+        buttons = [
+            {'title': message["yes"],
+                'payload': '/ask_for_suggestion{"num_times": 1}'},
+            {'title': message["no"], 'payload': '/user_done'},
+        ]
+
+        dispatcher.utter_message(
+            text=message["one_more"], buttons=buttons, button_type="vertical")
 
         return []

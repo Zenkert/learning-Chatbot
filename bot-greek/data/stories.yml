@@ -2,19 +2,21 @@ version: "3.1"
 
 stories: 
 
-- story: FORM - User data at start of conversation - happy
+- story: SUBJECT_WITH_TOPIC_FORM - Happy path 1
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
   - action: subject_with_topic_form
   - active_loop: subject_with_topic_form
   - active_loop: null
-  - action: questions_form
-  - active_loop: questions_form
-  - active_loop: null
-  - action: utter_okay
+  - action: utter_good_time
 
-- story: interactive_story_1
+- story: user completed activity
+  steps:
+  - intent: activity_done
+  - action: action_continue
+
+- story: SUBJECT_WITH_TOPIC_FORM - Happy path 2
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
@@ -31,10 +33,76 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
-  - action: questions_form
-  - active_loop: questions_form
+  - action: utter_good_time
+
+# - story: User data at start of conversation - happy
+#   steps:
+#   - intent: learn_subject
+#   - action: action_clean_entity
+#   - action: action_ask_subj
+#   - intent: user_affirm
+#     entities:
+#     - subj: Biology
+#   - slot_was_set:
+#     - subj: Biology
+#   - action: subject_with_topic_form
+#   - active_loop: subject_with_topic_form
+#   - active_loop: null
+#   - action: utter_done
+
+# - story: User data at start of conversation - deny + happy
+#   steps:
+#   - intent: learn_subject
+#   - action: action_clean_entity
+#   - action: action_ask_subj
+#   - intent: user_deny
+#   - intent: inform_new
+#     entities:
+#     - subj: Biology
+#   - slot_was_set:
+#     - subj: Biology
+#   - action: subject_with_topic_form
+#   - active_loop: subject_with_topic_form
+#   - active_loop: null
+#   - action: utter_done
+
+- story: GIVE USER PROGRESS
+  steps:
+  - intent: ask_progress
+  - action: action_give_progress
+
+- story: GIVE USER IMPROVEMENT
+  steps:
+  - intent: ask_improvement
+  - action: action_give_improvement
+
+- story: GIVE USER APPROACH
+  steps:
+  - intent: ask_approach
+  - action: action_give_approach
+
+- story: GET USER FEEDBACK
+  steps:
+  - intent: user_feedback
+  - action: action_clean_feedbackform_slots
+  - action: feedback_form
+  - active_loop: feedback_form
   - active_loop: null
-  - action: utter_okay
+  - action: utter_thanks_feedback
+
+- story: SHOW BOT FEATURES
+  steps:
+  - or:
+    - intent: start
+    - intent: ask_features
+  - action: action_show_features
+
+- story: SHOW QUESTION TYPES
+  steps:
+  - intent: ask_question_types  
+  - action: action_explain_question_types
+  - intent: ask_types
+  - action: action_explain_question_types_definition
 
 # - story: User data at start of conversation - happy
 #   steps:
@@ -181,42 +249,21 @@ stories:
 #   - intent: user_affirm
 #   - action: utter_rest_is_okay
 
-# - story: interactive_story_1
-#   steps:
-#   - intent: ask_for_suggestion
-#   - slot_was_set:
-#     - question: i wanr to learn
-#   - action: action_clean_entity
-#   - slot_was_set:
-#     - subj: null
-#   - slot_was_set:
-#     - topic: null
-#   - action: subject_with_topic_form
-#   - active_loop: subject_with_topic_form
-#   - slot_was_set:
-#     - requested_slot: subj
-#   - slot_was_set:
-#     - subj: Biology
-#   - slot_was_set:
-#     - question: /inform_new{"subj":"Biology"}
-#   - slot_was_set:
-#     - subj: Biology
-#   - slot_was_set:
-#     - requested_slot: topic
-#   - slot_was_set:
-#     - topic: 628292ddc942dd68d1fcc42d
-#   - slot_was_set:
-#     - question: /inform_new{"topic":"628292ddc942dd68d1fcc42d"}
-#   - slot_was_set:
-#     - topic: 628292ddc942dd68d1fcc42d
-#   - slot_was_set:
-#     - requested_slot: null
-#   - active_loop: null
-#   - action: questions_form
-#   - active_loop: questions_form
-#   - slot_was_set:
-#     - question: /inform_new{"topic":"628292ddc942dd68d1fcc42d"}
-#   - slot_was_set:
-#     - requested_slot: null
-#   - active_loop: null
-#   - action: utter_okay
+- story: USER FEEDBACK STORY
+  steps:
+  - intent: user_feedback
+  - action: action_clean_feedbackform_slots
+  - action: feedback_form
+  - active_loop: feedback_form
+  - slot_was_set:
+    - requested_slot: feedback
+  - slot_was_set:
+    - feedback: it is going great
+  - slot_was_set:
+    - requested_slot: confirm_feedback
+  - slot_was_set:
+    - confirm_feedback: Yes
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_thanks_feedback
