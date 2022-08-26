@@ -19,30 +19,16 @@ services:
       - "./bot-german:/app/bot-german"
     ports:
       - "5006:5006"
-  # rasa_greek:
-  #   container_name: "rasa_server_greek"
-  #   build:
-  #     context: ./bot-greek
-  #   volumes:
-  #     - "./bot-greek:/app/bot-greek"
-  #   ports:
-  #     - "5007:5007"
-  # rasa_spanish:
-  #   container_name: "rasa_server_spanish"
-  #   build:
-  #     context: ./bot-spanish
-  #   volumes:
-  #     - "./bot-spanish:/app/bot-spanish"
-  #   ports:
-  #     - "5008:5008"
-  rasa_telegram:
-    container_name: "rasa_server_telegram"
-    build:
-      context: ./bot-telegram
-    volumes:
-      - "./bot-telegram:/app/bot-telegram"
-    ports:
-      - "5009:5009"
+    depends_on:
+      - rasa_english
+    # entrypoint: [ "/app/bot-german/german_server.sh" ]
+    # entrypoint: [ "/app/bot-german/wait-for-it.sh", "rasa_english:5005" ]
+    # command:
+    #   [
+    #     "/app/bot-german/wait-for-it.sh",
+    #     "rasa_english:5005",
+    #     "/app/bot-german/german_server.sh"
+    #   ]
   action_server:
     container_name: "action_server"
     build:

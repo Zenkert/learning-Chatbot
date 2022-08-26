@@ -337,12 +337,6 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
 
         intent_value = tracker.get_intent_of_latest_message()
 
-        dispatcher.utter_message(text=f'Subject ID is {slot_value}')
-
-        # print('intent_value: ', intent_value)
-
-        # print('slot_valuexx->>', slot_value)
-
         if intent_value == "next_option":
             dict_vars['subject_idx'] += 1
             return {'subj': None}
@@ -362,8 +356,6 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
 
         intent_value = tracker.get_intent_of_latest_message()
 
-        dispatcher.utter_message(text=f'Topic ID is {slot_value}')
-
         if intent_value == "next_option":
             dict_vars['topic_idx'] += 1
             return {'topic': None}
@@ -371,6 +363,9 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
             return {'topic': None}
 
         dict_vars['topic_idx'] = 0
+
+        if len(tracker.sender_id) == main.ID.TELEGRAM_UUID_LENGTH.value:
+            return {'topic': slot_value, 'question': None}
 
         return {'topic': slot_value}
 
@@ -866,19 +861,28 @@ class ActionExplainQuestionTypes(Action):
 
         user_lang = tracker.get_slot('language')
 
+        ANDROID_UUID_LENGTH = 16
+
         user_lang = 'EN' if user_lang is None else user_lang
 
         message = data['language'][user_lang]['action_explain_question_types']
 
-        buttons = [
-            {'title': message["1"], 'payload': '/ask_types{"type":"MCQ"}'},
-            {'title': message["2"],
-                'payload': '/ask_types{"type":"True_False"}'},
-            {'title': message["3"],
-                'payload': '/ask_types{"type":"Matching_Pairs"}'},
-            {'title': message["4"],
-                'payload': '/ask_types{"type":"Open_ended"}'}
-        ]
+        if len(tracker.sender_id) < ANDROID_UUID_LENGTH:
+            buttons = [
+                {'title': message["1"], 'payload': '/ask_types{"type":"MCQ"}'},
+                {'title': message["2"],
+                 'payload': '/ask_types{"type":"True_False"}'}
+            ]
+        else:
+            buttons = [
+                {'title': message["1"], 'payload': '/ask_types{"type":"MCQ"}'},
+                {'title': message["2"],
+                    'payload': '/ask_types{"type":"True_False"}'},
+                {'title': message["3"],
+                    'payload': '/ask_types{"type":"Matching_Pairs"}'},
+                {'title': message["4"],
+                    'payload': '/ask_types{"type":"Open_ended"}'}
+            ]
 
         dispatcher.utter_message(
             text=message["question"], buttons=buttons, button_type="vertical")

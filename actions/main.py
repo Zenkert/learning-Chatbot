@@ -2,8 +2,15 @@ from pydoc_data.topics import topics
 from urllib import response
 import requests
 
+from enum import Enum
+
 # from dataclasses import dataclass, field
 # import collections
+
+
+class ID(Enum):
+    ANDROID_UUID_LENGTH = 16
+    TELEGRAM_UUID_LENGTH = 10
 
 
 def get_subjects():

@@ -1,3 +1,4 @@
+from urllib import response
 from rasa_sdk.events import ReminderScheduled, ReminderCancelled, UserUtteranceReverted, ActionReverted
 from rasa_sdk import Action, Tracker
 import pandas as pd
@@ -25,7 +26,10 @@ class ActionAskQuestion(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         topic_id = tracker.get_slot('topic')
-        print('topic_id: ', topic_id)
+
+        if len(tracker.sender_id) > main.ID.TELEGRAM_UUID_LENGTH.value:
+            dispatcher.utter_message(response="utter_good_time")
+            return [SlotSet("question", "ANDROID APP")]
 
         question_count, questions_available = main.get_questions(topic_id)
         print(f'{question_count = }')
@@ -72,6 +76,10 @@ class ValidateQuestionsForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
+        if len(tracker.sender_id) != main.ID.TELEGRAM_UUID_LENGTH.value:
+            dispatcher.utter_message(response="utter_good_time")
+            return {'question': slot_value}
+
         topic_id = tracker.get_slot('topic')
         question_count, questions_available = main.get_questions(topic_id)
 
@@ -101,6 +109,24 @@ class ValidateQuestionsForm(FormValidationAction):
         dict_vars['i'] = 0  # reset value of i to loop again
 
         return {'question': slot_value}
+
+
+class ActionFollowQuestionsForm(Action):
+
+    def name(self) -> Text:
+        return "action_follow_questions_form"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        print(f'{main.ID.TELEGRAM_UUID_LENGTH.value = }')
+
+        if len(tracker.sender_id) == main.ID.TELEGRAM_UUID_LENGTH.value:
+            print(f'{len(tracker.sender_id) = }')
+            return [FollowupAction(name="action_continue")]
+
+        return []
 
 # class ActionSubmit(Action):
 

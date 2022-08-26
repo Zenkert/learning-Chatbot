@@ -19,7 +19,10 @@ rules:
   - action: subject_with_topic_form
   - active_loop: subject_with_topic_form
   - active_loop: null
-  - action: utter_good_time
+  - action: questions_form
+  - active_loop: questions_form
+  - active_loop: null
+  - action: action_follow_questions_form
 
 - rule: user completed activity
   steps:

@@ -53,6 +53,7 @@ nlu:
     - give me something to learn
     - please provide me some suggestions
     - suggest me something
+    - learn
 - intent: user_goodbye
   examples: |
     - see you later
@@ -150,6 +151,7 @@ nlu:
   examples: |
     - next
     - next option
+    - option2
 - intent: ask_remind_call
   examples: |
     - remind me to take lessons in 5 minutes
@@ -252,18 +254,15 @@ nlu:
 - intent: find_subject
   examples: |
     - subject name
-    - subject name
     - give subject name
 - intent: start
   examples: |
     - start
-    - start 
     - i want to start
 - intent: user_done
   examples: |
     - That's enough
     - that's done
-
 - lookup: subject
   examples: |
     - Math
