@@ -1,9 +1,11 @@
+from email.mime import image
+from time import time
 from urllib import response
 from rasa_sdk.events import ReminderScheduled, ReminderCancelled, UserUtteranceReverted, ActionReverted
 from rasa_sdk import Action, Tracker
 import pandas as pd
 from typing import Any, Text, Dict, List
-import json
+import time
 #
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
@@ -27,7 +29,7 @@ class ActionAskQuestion(Action):
 
         topic_id = tracker.get_slot('topic')
 
-        if len(tracker.sender_id) > main.ID.TELEGRAM_UUID_LENGTH.value:
+        if len(tracker.sender_id) != main.ID.TELEGRAM_UUID_LENGTH.value:
             dispatcher.utter_message(response="utter_good_time")
             return [SlotSet("question", "ANDROID APP")]
 
@@ -39,9 +41,11 @@ class ActionAskQuestion(Action):
             dispatcher.utter_message(text='We will add new activities soon.')
             return [SlotSet('question', 'NOT AVAILABLE')]
 
-        mcq_question = questions_available['mcq_question'][dict_vars['i']]
-        mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
-        print('i: ', dict_vars['i'], 'mcq_qq: ', mcq_question)
+        mcq_question = questions_available['mcq_question'][dict_vars['i']].pop(
+            0)
+        mcq_choices = questions_available['mcq_choices'][dict_vars['i']].pop(0)
+        file = questions_available['file'][dict_vars['i']].pop(0)
+
         buttons = [{"title": choice, "payload": f"option{idx+1}"}
                    for idx, choice in enumerate(mcq_choices)]
 
@@ -53,12 +57,31 @@ class ActionAskQuestion(Action):
                 true_false_question_type = True
                 buttons_new.append({"title": choice, "payload": choice})
 
+        if file != '':
+            split_file = file.split('5000')
+            secure_link = 'https://goy0tnphpd.execute-api.eu-central-1.amazonaws.com'
+            secure_file_url = secure_link+split_file[1]
+
+        # file = 'https://goy0tnphpd.execute-api.eu-central-1.amazonaws.com/api/openEnded/getImage/1660826908189mona_lisa,_by_leonardo_da_vinci,_from_c2rmf_retouched.jpg'
+
+        # dispatcher.utter_message(image=secure_file_url)
+        # dispatcher.utter_message(text=mcq_question)
+
         if true_false_question_type:
-            dispatcher.utter_message(
-                text=mcq_question, buttons=buttons_new, button_type="vertical")
+            if file == '':
+                dispatcher.utter_message(
+                    text=mcq_question, buttons=buttons_new, button_type="vertical")
+            else:
+                dispatcher.utter_message(text=mcq_question, image=secure_file_url,
+                                         buttons=buttons_new, button_type="vertical")
+
         else:
-            dispatcher.utter_message(
-                text=mcq_question, buttons=buttons, button_type="vertical")
+            if file == '':
+                dispatcher.utter_message(
+                    text=mcq_question, buttons=buttons, button_type="vertical")
+            else:
+                dispatcher.utter_message(
+                    text=mcq_question, image=secure_file_url, buttons=buttons, button_type="vertical")
 
         return []
 
@@ -89,11 +112,13 @@ class ValidateQuestionsForm(FormValidationAction):
             dispatcher.utter_message(text='We will add new activities soon.')
             return [SlotSet('question', 'NOT AVAILABLE')]
 
-        right_answer = questions_available['right_answer'][dict_vars['i']]
-        pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars['i']]
-        neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars['i']]
-        # mcq_choices = questions_available['mcq_choices'][dict_vars['i']]
-        print('slot:', slot_value, 'right:', right_answer)
+        right_answer = questions_available['right_answer'][dict_vars['i']].pop(
+            0)
+        pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars['i']].pop(
+            0)
+        neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars['i']].pop(
+            0)
+
         if slot_value.startswith('/inform_new'):
             return {'question': None}
         elif slot_value.lower() == right_answer.lower():
@@ -120,46 +145,24 @@ class ActionFollowQuestionsForm(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print(f'{main.ID.TELEGRAM_UUID_LENGTH.value = }')
+        user_id = tracker.sender_id  # sender ID
+        subject = tracker.get_slot('subj')  # slot value of subject
+
+        student_data = pd.read_excel(
+            'actions/student_db_new.xlsx')  # read data
+
+        try:
+            for index, row in student_data.iterrows():  # iterating over rows
+                if str(row['User']) == str(user_id):
+                    student_data.loc[student_data['User']
+                                     == user_id, subject] += 1  # Increamenting number of times the user has chosen a subject
+                    break  # out of loop once unique user is found
+
+            student_data.to_excel('actions/student_db_new.xlsx', index=False)
+        except:
+            pass
 
         if len(tracker.sender_id) == main.ID.TELEGRAM_UUID_LENGTH.value:
-            print(f'{len(tracker.sender_id) = }')
             return [FollowupAction(name="action_continue")]
 
         return []
-
-# class ActionSubmit(Action):
-
-#     def name(self) -> Text:
-#         return "action_submit"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-#         tracker_events = tracker.events
-
-#         transcript = []
-
-#         for data in tracker_events:
-#             m = 1
-#             if data['event'] == 'user':
-#                 try:
-#                     user_uttered = data['text']
-#                     user_uttered_formatted = f'User: {user_uttered}'
-#                     transcript.append(user_uttered_formatted)
-#                 except KeyError:
-#                     pass
-
-#             elif data['event'] == 'bot':
-#                 try:
-#                     bot_uttered = data['text']
-#                     user_uttered_formatted = f'Bot: {bot_uttered}'
-#                     transcript.append(user_uttered_formatted)
-#                 except KeyError:
-#                     pass
-
-#         dj = pd.DataFrame(transcript, columns=['Transcript'])
-#         dj.to_excel('user_transcript.xlsx')
-
-#         return []

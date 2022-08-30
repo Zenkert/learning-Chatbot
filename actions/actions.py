@@ -89,8 +89,6 @@ class ActionTellSubjects(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # name = tracker.get_slot('name')
-        # print('name: ', name)
 
         user_lang = tracker.get_slot('language')
 
@@ -139,7 +137,7 @@ class ActionTellSubjects(Action):
                 buttons = [{'title': message["yes"], 'payload': '/inform_new{"subj":"'+fnd+'"}'},  # add subject as entity
                            {'title': message["no"], 'payload': '/user_deny{"subj":"None"}'}]
                 dispatcher.utter_message(
-                    text=f'{message["mean"]}', buttons=buttons)
+                    text=f'{message["mean"]}', buttons=buttons, button_type="vertical")
                 return []
 
             # elif 50 <= common_value < 70 and not user_input.startswith('/'):
@@ -649,7 +647,9 @@ class ActionGiveProgress(Action):
         dispatcher.utter_message(
             text=message["message1"])
 
-        final_path, image_url = plot.image_url(current_time=dt.now())
+        user_id = tracker.sender_id
+
+        final_path, image_url = plot.image_url(user_id, current_time=dt.now())
         print(f'{image_url = }')
         print(f'{final_path = }')
         dispatcher.utter_message(
@@ -675,8 +675,7 @@ class ActionGiveImprovement(Action):
 
         message = data['language'][user_lang]['action_give_improvement']
 
-        dispatcher.utter_message(
-            text=f"{message}: {socket.gethostname()}")
+        dispatcher.utter_message(text=message)
 
         return []
 
@@ -815,6 +814,18 @@ class ActionShowFeatures(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_id = tracker.sender_id
+        print(type(user_id))
+        user_id = str(tracker.sender_id)
+        print(type(user_id))
+        student_data = pd.read_excel('actions/student_db_new.xlsx')
+        if user_id not in student_data.values:
+            student_data = pd.concat(
+                [student_data, pd.DataFrame({'User': [user_id]})], ignore_index=True)
+            student_data.fillna(0, inplace=True)
+            # student_data.set_index('User', inplace=True)
+            student_data.to_excel('actions/student_db_new.xlsx')
 
         user_lang = tracker.get_slot('language')
 

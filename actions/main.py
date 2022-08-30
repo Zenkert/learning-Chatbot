@@ -49,7 +49,7 @@ def get_questions(topic_id):
     response = requests.get(
         f'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic/getByTopic/{topic_id}').json()
 
-    queried_data = {'mcq_question': [], 'mcq_choices': [],  'right_answer': [], 'feedback': {
+    queried_data = {'mcq_question': [], 'mcq_choices': [], 'file': [], 'right_answer': [], 'feedback': {
         'pos_feedback': [], 'neg_feedback': []}}
 
     # queried_data = {'mcq': {'mcq_question': [], 'mcq_choices': [],  'right_answer': [], 'feedback': {
@@ -65,47 +65,40 @@ def get_questions(topic_id):
             if val['questionType'] == 'mcqs':
                 question_count += 1
                 try:
-                    queried_data['mcq_question'].append(val['mcqs'])
+                    queried_data['mcq_question'].append([val['mcqs']])
                     num_of_options = [val['option1'], val['option2']]
                     if val.get('option3', None) != None:
                         num_of_options.append(val['option3'])
                         if val.get('option4', None) != None:
                             num_of_options.append(val['option4'])
-                    queried_data['mcq_choices'].append(num_of_options)
-                    queried_data['right_answer'].append(val['answer'])
+                    queried_data['mcq_choices'].append([num_of_options])
+                    queried_data['file'].append([val.get('file', '')])
+                    queried_data['right_answer'].append([val['answer']])
                     queried_data['feedback']['pos_feedback'].append(
-                        val['posFeedback'])
+                        [val['posFeedback']])
                     queried_data['feedback']['neg_feedback'].append(
-                        val['negFeedback'])
+                        [val['negFeedback']])
                 except:
-                    print('----- ERROR -----')
+                    pass
+
             elif val['questionType'] == 'trueFalse':
                 question_count += 1
                 try:
                     queried_data['mcq_question'].append(
-                        val['question'])
+                        [val['question']])
                     num_of_options = ['True', 'False']
                     queried_data['mcq_choices'].append(
-                        num_of_options)
+                        [num_of_options])
+                    queried_data['file'].append([val.get('file', '')])
                     queried_data['right_answer'].append(
-                        val['answer'])
+                        [val['answer']])
                     queried_data['feedback']['pos_feedback'].append(
-                        val['posFeedback'])
+                        [val['posFeedback']])
                     queried_data['feedback']['neg_feedback'].append(
-                        val['negFeedback'])
-                    # queried_data['truefalse']['true_false'].append(
-                    #     val['question'])
-                    # num_of_options = ['True', 'False']
-                    # queried_data['truefalse']['choices'].append(
-                    #     num_of_options)
-                    # queried_data['truefalse']['right_answer'].append(
-                    #     val['answer'])
-                    # queried_data['truefalse']['feedback']['pos_feedback'].append(
-                    #     val['posFeedback'])
-                    # queried_data['truefalse']['feedback']['neg_feedback'].append(
-                    #     val['negFeedback'])
+                        [val['negFeedback']])
+
                 except:
-                    print('----- ERROR -----')
+                    pass
 
     return question_count, queried_data
 
@@ -118,7 +111,7 @@ if __name__ == '__main__':
     # print(topic_list, topics_available)
 
     question_count, queried_data = get_questions(
-        '62f22b06c992eabdda6fbd93')
+        '62fe346d9c4afe7b1a0bee1d')
     print(question_count, queried_data)
 
 

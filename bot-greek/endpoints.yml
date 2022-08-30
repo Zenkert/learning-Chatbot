@@ -1,3 +1,6 @@
 action_endpoint:
 #  url: "http://localhost:5055/webhook"
  url: "http://action_server:5055/webhook"
+
+# nlu:
+#   url: "http://bot-greek:5007"

@@ -4,13 +4,13 @@ WORKDIR /app/bot-german
 
 COPY . /app/bot-german
 
-COPY wait-for-it.sh /app/bot-german
+COPY /models /app/bot-german/models
 
 COPY german_server.sh /app/bot-german
 
 USER root
 
-RUN rasa train
+# RUN rasa train
 
 RUN chmod +x /app/bot-german/german_server.sh
 
