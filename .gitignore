@@ -1,7 +1,3 @@
-bot-english/models
-bot-german/models
-bot-greek/models
-bot-spanish/models
 bot-telegram
 tests/
 results/
