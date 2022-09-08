@@ -5,68 +5,97 @@ session_config:
 config:
   store_entities_as_slots: true
 intents:
-- EXTERNAL_dry_plant
 - EXTERNAL_reminder
 - EXT_reminder
+- activity_done
 - ask_approach
+- ask_features
 - ask_for_suggestion
 - ask_forget_reminders
 - ask_id
 - ask_improvement
 - ask_progress
+- ask_question_types
 - ask_remind_call
+- ask_types
 - bot_challenge
+- find_subject
 - inform
 - inform_new
+- inform_new_topic
 - learn_subject
 - next_option
+- start
 - user_affirm
 - user_data
 - user_deny
+- user_done
 - user_feedback
 - user_goodbye
 - user_greet
 - user_happy
+- user_language
 - user_stress
 - user_thanks
 - user_unhappy
-- ask_features
-- ask_question_types
-- ask_types
-- find_subject
-- start
-- user_done
-- activity_done
-- user_language
 entities:
 - topic
-- subj
 - subject
+- subject_from_entity
 - name
 - id
 - language
 - time
 - type
 - num_times
+- question
+- score1
+- score2
+- topic_id
+- topic_completed
 slots:
+  subject_from_entity:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: subject_from_entity
   subject:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
       entity: subject
-  subj:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: subj
   topic:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
       entity: topic
+  score1:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: score1
+  score2:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: score2
+  topic_id:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: topic_id
+  topic_completed:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: topic_completed
   name:
     type: text
     influence_conversation: false
@@ -82,7 +111,7 @@ slots:
   language:
     type: text
     influence_conversation: false
-    initial_value: 'ES'
+    initial_value: ES
     mappings:
     - type: from_entity
       entity: language
@@ -98,12 +127,6 @@ slots:
     mappings:
     - type: from_text
       action: action_ask_question
-  # time:
-  #   type: text
-  #   influence_conversation: false
-  #   mappings:
-  #   - type: from_entity
-  #     entity: time
   feedback:
     type: text
     influence_conversation: false
@@ -123,7 +146,7 @@ slots:
 forms:
   subject_with_topic_form:
     required_slots:
-    - subj
+    - subject
     - topic
   questions_form:
     required_slots:
@@ -134,77 +157,82 @@ forms:
     - confirm_feedback
 responses:
   utter_continue:
-  - text: La actividad ha terminado. ¿Quieres hacer una actividad más?
-  utter_greet:
-  - text: Hola, bienvenido. ¿Qué te gustaría hacer hoy?
-  - text: Saludos. ¿Qué te gustaría hacer?
+  - text: The activity is done. Do you want to do one more activity?
+  # utter_greet:
+  # - text: Hey, welcome. What would you like to do today!
+  # - text: Greetings. What would you like to do!
   utter_did_that_help:
-  - text: ¿Te ha ayudado eso?
+  - text: Did that help you?
   utter_good_time:
-  - text: Pásalo bien resolviendo las actividades :)
+  - text: Have a good time solving the activities :)
   utter_happy:
-  - text: Genial, ¡sigue adelante!
-  utter_goodbye:
-  - text: Adiós.
-  - text: Adiós, espero verte pronto :)
-  - text: Adiós, adiós :)
-  - text: Adiós a ti también :)
-  utter_done:
-  - text: Bien, eso es todo, ¡hecho!
-  - text: Bien, eso es todo, ¡hecho!
+  - text: Great, carry on!
+  # utter_goodbye:
+  # - text: Bye Bye
+  # - text: Goodbye, hope to see you soon :)
+  # - text: Bye Bye :)
+  # - text: Bye to you too :)
+  # utter_done:
+  # - text: Okay, that's it, done!
+  # - text: Well, that's it, done!
   utter_joke:
-  - text: ¿Te gusta escuchar un chiste?
-  utter_great:
-  - text: Eso es bueno
-  - text: ¡Es bueno escuchar eso!
-  - text: Me alegro :)
+  - text: Do you like to hear a joke?
+  # utter_great:
+  # - text: That's good
+  # - text: Good to hear that!
+  # - text: I am glad :)
   utter_sorry:
-  - text: No pasa nada, mejorará :)
-  - text: Lamento escuchar eso, espero que estés bien :)
+  - text: That's okay, it will get better :)
+  - text: I am sorry to hear that, I hope you'll be fine :)
   utter_available_subjects:
-  - text: La entidad/ranura es {sujeto}
-  utter_rephrase:
-  - text: Lo siento, no he podido entenderlo. ¿Puedes reformularlo?
-  - text: ¿Puedes reformular tu texto para que pueda entenderlo correctamente?
-  utter_default:
-  - text: ¡Oh, no soy capaz de hacer eso!
-  - text: ¡Me temo que eso está más allá de mis capacidades!
-  utter_i_am_a_bot:
-  - text: ¡Soy un bot y estoy aquí para ayudarte!
-  - text: ¡Soy un bot y mi propósito es asistirte!
-  - text: Soy un asistente y estaré encantado de ayudarte :)
+  - text: The entity/slot is {subject}
+  # utter_rephrase:
+  # - text: Sorry, I couldn't understand. Can you please rephrase that?
+  # - text: Can you please rephrase your text so that I can understand it correctly?
+  # utter_default:
+  # - text: Oh, I am not capable of doing that!
+  # - text: I am afraid that's beyond my capabilities!
+  # utter_i_am_a_bot:
+  # - text: I am a bot and I'm here to assist you!
+  # - text: I am a bot and my purpose is to assist you!
+  # - text: I am an assistant and I'll happily help you :)
   utter_name:
-  - text: Hola {nombre}, ¿cómo estás?
+  - text: Hey {name}, how are you doing?
   utter_sub:
-  - text: Esta es tu selección - {sujeto}
+  - text: This is your selection - {subject_from_entity}
   utter_ask_subject:
-  - text: Qué bien. ¿Qué te gustaría aprender hoy?
+  - text: That's great. What would you like to learn today?
   utter_okay:
-  - text: De acuerdo, ¡lo haré!
+  - text: Okay, I'll do it!
   utter_okay_subj:
-  - text: Te proporcionaré actividades para {topic}
+  - text: I'll provide you activites for {topic}
   utter_rest:
-  - text: Lamento escuchar eso. ¿Quieres descansar?
+  - text: I'm sorry to hear that. Would you like to take rest?
   utter_rest_is_okay:
-  - text: A veces está bien descansar. Te veré más tarde con más energía :)
-  utter_welcome:
-  - text: ¡De nada!
-  - text: De nada :)
-  - text: ¡Me alegro de haberte ayudado!
-  - text: Me alegro de haberte ayudado :)
-  utter_thanks_feedback:
-  - text: Gracias por tu aportación
-  - text: Gracias por la aportación
-  utter_find_subject:
-  - text: Por favor, pregunta 'Quiero aprender <nombre de la asignatura>' o 'Quiero estudiar <nombre de la asignatura>', para encontrar una asignatura directamente
+  - text: Sometimes it's okay take rest. I'll see you later re-energized :)
+  # utter_welcome:
+  # - text: You are welcome!
+  # - text: You're welcome :)
+  # - text: Glad I could help!
+  # - text: Glad I could help :)
+  # utter_thanks_feedback:
+  # - text: Thanks for your input
+  # - text: Thank you for the input
+  # utter_find_subject:
+  # - text: Please ask 'I want to learn <subject name>' or 'I want to study <subject name>', to find a subject directly!
 actions:
 - action_ask_confirm_feedback
 - action_ask_feedback
 - action_ask_question
-- action_ask_subj
+- action_ask_subject
 - action_ask_topic
 - action_clean_entity
 - action_clean_feedbackform_slots
+- action_clean_time_slot
+- action_continue
+- action_explain_question_types
+- action_explain_question_types_definition
+- action_follow_questions_form
 - action_forget_reminders
 - action_get_feedback
 - action_give_approach
@@ -213,16 +241,25 @@ actions:
 - action_give_suggestion
 - action_react_to_reminder
 - action_save_data
+- action_set_language
 - action_set_reminder
+- action_show_features
 - action_show_questions
 - action_submit
 - action_tell_id
-- action_show_features
-- action_explain_question_types
-- action_explain_question_types_definition
-- action_clean_time_slot
-- action_continue
-- action_set_language
 - validate_feedback_form
 - validate_questions_form
 - validate_subject_with_topic_form
+- action_greet
+- action_goodbye
+- action_done
+- action_rephrase
+- action_default
+- action_i_am_a_bot
+- action_welcome
+- action_thanks_feedback
+- action_find_subject
+- action_great
+- action_it_is_okay
+- action_happy
+- action_good_time

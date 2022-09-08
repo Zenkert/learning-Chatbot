@@ -18,9 +18,9 @@ pipeline:
     url: http://duckling_server:8000
     # url: http://localhost:8000
     dimensions: ["time"]
+    locale: "de_DE"
     timezone: "Europe/Berlin"
     timeout: 10
-  - name: RegexEntityExtractor
   - name: ResponseSelector
     epochs: 100
   - name: FallbackClassifier

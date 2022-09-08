@@ -5,3 +5,4 @@ python-dotenv==0.20.0
 fuzzywuzzy==0.18.0
 matplotlib==3.3.4
 numpy==1.19.5
+openpyxl==3.0.3

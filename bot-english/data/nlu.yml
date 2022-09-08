@@ -27,24 +27,25 @@ nlu:
     - thankss
 - intent: ask_for_suggestion
   examples: |
-    - i want to learn [Maths](subject)
-    - i want to learn [Physics](subject)
-    - i want to learn about [Business](subject)
-    - i want to learn [Chemistry](subject)
-    - i would like to learn [Maths](subject)
-    - i would like to learn [Physics](subject)
-    - i would like to learn [Pyschology](subject)
-    - i would like to learn [History](subject)
-    - i would like to learn about [Humanities](subject)
-    - i would like to learn about [Social Studies](subject)
-    - i want to learn about [Art and Design](subject)
-    - i want to study [mathematics](subject)
-    - i want to learn [maths](subject)
+    - i want to learn [Maths](subject_from_entity)
+    - i want to learn [Physics](subject_from_entity)
+    - i want to learn about [Business](subject_from_entity)
+    - i want to learn [Chemistry](subject_from_entity)
+    - i would like to learn [Maths](subject_from_entity)
+    - i would like to learn [Physics](subject_from_entity)
+    - i would like to learn [Pyschology](subject_from_entity)
+    - i would like to learn [History](subject_from_entity)
+    - i would like to learn about [Humanities](subject_from_entity)
+    - i would like to learn about [Social Studies](subject_from_entity)
+    - i want to learn about [Art and Design](subject_from_entity)
+    - i want to study [mathematics](subject_from_entity)
+    - i want to learn [maths](subject_from_entity)
     - i want to learn
     - i would like to learn
     - what are the subjects available
     - what can i learn
     - give me a subject
+    - give me a topic
     - give me a suggestion
     - i want to do an activity
     - i would to do an activity
@@ -66,12 +67,20 @@ nlu:
     - see ya
 - intent: user_stress
   examples: |
-    - i am stressed
-    - i am feeling stressed
-    - i have stress
-    - i am kind of feeling stressed
-    - i am not feeling good
-    - i am feeling sad
+    - i don't feel like doing anything
+    - i don't want to do anything
+    - its not the right time
+    - i don't want to do 
+    - i am not in mood
+    - i dont feel like it
+    - i will do it later
+    - i'll do it later
+    - not interested now
+    - not interested to do now
+    - i'm not interested in doing it now
+    - i can't focus now
+    - i can't do now
+    - i need some free time
 - intent: user_happy
   examples: |
     - good
@@ -79,6 +88,7 @@ nlu:
     - i am great
     - i am happy
     - doing fine
+    - okay
     - it is going great
     - it is a fine day
 - intent: user_unhappy
@@ -103,10 +113,7 @@ nlu:
   examples: |
     - no
     - nope
-    - i dont want to
     - nah
-    - i am not in mood
-    - i dont feel like it
     - No
 - intent: user_data
   examples: |
@@ -134,19 +141,6 @@ nlu:
     - are you real?
     - who build you?
     - who developed you?
-- intent: inform
-  examples: |
-    - maths
-    - business
-    - technology
-    - biology
-    - science
-- intent: inform_new
-  examples: |
-    - This is a random[](subj) example
-    - This is another random[](subj) example
-    - This is last random example[](topic)
-    - This is final random example[](topic)
 - intent: next_option
   examples: |
     - next
@@ -241,6 +235,7 @@ nlu:
     - list me the things you can do
     - list me your features
     - list me all your features
+    - show me what you can do
     - show me all the things you can do
     - show me all of your features
 - intent: ask_question_types
@@ -263,7 +258,7 @@ nlu:
   examples: |
     - That's enough
     - that's done
-- lookup: subject
+- lookup: subject_from_entity
   examples: |
     - Math
     - Business

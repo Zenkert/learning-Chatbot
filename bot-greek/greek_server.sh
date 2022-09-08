@@ -4,8 +4,8 @@ cd /app/bot-greek
 
 while :
 do
-  sleep 480
-  echo "Waited for 480 seconds"
+  sleep 420
+  echo "Waited for 420 seconds"
   break
 done
 

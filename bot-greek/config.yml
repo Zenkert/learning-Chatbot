@@ -18,10 +18,8 @@ pipeline:
     url: http://duckling_server:8000
     # url: http://localhost:8000
     dimensions: ["time"]
+    locale: "el_EL"
     timezone: "Europe/Berlin"
-  - name: RegexEntityExtractor
-  - name: ResponseSelector
-    epochs: 100
   - name: FallbackClassifier
     threshold: 0.4
 

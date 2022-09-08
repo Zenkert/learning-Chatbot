@@ -1,4 +1,4 @@
-Version: "3.1"
+version: "3.1"
 nlu:
 - intent: user_greet
   examples: |
@@ -13,7 +13,6 @@ nlu:
     - hey, guten Morgen
     - Guten Abend
     - Guten Morgen
-    - Guten Abend
 - intent: user_thanks
   examples: |
     - Dank
@@ -21,30 +20,24 @@ nlu:
     - vielen Dank
     - danke für die Hilfe
     - Danke für Ihre Hilfe
-    - danke für die Hilfe
     - Ich weiß die Hilfe zu schätzen
-    - Dankeschön
 - intent: ask_for_suggestion
   examples: |
-    - ich möchte [Mathe](subject) lernen
-    - ich möchte [Mathe](subject) lernen
-    - ich mochte [Physik](subject) lernen
-    - ich mochte [Physik](subject) lernen
-    - ich möchte [Informatik](subject) lernen
-    - Ich möchte etwas über [Maschinelles Lernen](subject) lernen
-    - Ich möchte etwas über [Wirtschaft](subject) lernen
-    - ich möchte [Chemie](subject) lernen
-    - ich möchte [Mathe](subject) lernen
-    - ich möchte [Physik](subject) lernen
-    - ich möchte [Pyschologie](subject) lernen
-    - ich möchte [Geschichte](subject) lernen
-    - ich möchte etwas über [Geisteswissenschaften](subject) lernen
-    - ich möchte etwas über [Sozialkunde](subject) lernen
-    - ich möchte etwas über [Kunst und Design](subject) lernen
-    - ich möchte [Mathematik](subject) studieren
-    - ich möchte [Mathe](subject) lernen
-    - Ich möchte etwas über [Astronomie](subject) lernen
-    - ich möchte etwas über [Astronomie](subject) lernen
+    - ich möchte [Mathe](subject_from_entity) lernen
+    - ich mochte [Physik](subject_from_entity) lernen
+    - ich möchte [Informatik](subject_from_entity) lernen
+    - Ich möchte etwas über [Maschinelles Lernen](subject_from_entity) lernen
+    - Ich möchte etwas über [Wirtschaft](subject_from_entity) lernen
+    - ich möchte [Chemie](subject_from_entity) lernen
+    - ich möchte [Physik](subject_from_entity) lernen
+    - ich möchte [Pyschologie](subject_from_entity) lernen
+    - ich möchte [Geschichte](subject_from_entity) lernen
+    - ich möchte etwas über [Geisteswissenschaften](subject_from_entity) lernen
+    - ich möchte etwas über [Sozialkunde](subject_from_entity) lernen
+    - ich möchte etwas über [Kunst und Design](subject_from_entity) lernen
+    - ich möchte [Mathematik](subject_from_entity) studieren
+    - Ich möchte etwas über [Astronomie](subject_from_entity) lernen
+    - ich möchte etwas über [Astronomie](subject_from_entity) lernen
     - ich möchte lernen
     - ich mochte lernen
     - ich würde gerne lernen
@@ -59,24 +52,29 @@ nlu:
     - gib mir etwas zu lernen
     - bitte geben Sie mir einige Vorschläge
     - mir etwas vorschlagen
+    - lernen
 - intent: user_goodbye
   examples: |
     - auf Wiedersehen
-    - auf Wiedersehen
-    - auf Wiedersehen
-    - Auf Wiedersehen
     - Auf Wiedersehen
     - ciao
-    - Auf Wiedersehen
     - Tschüss
 - intent: user_stress
   examples: |
-    - ich bin gestresst
-    - ich fühle mich gestresst
-    - ich habe Stress
-    - ich fühle mich irgendwie gestresst
-    - Ich fühle mich nicht gut
-    - ich fühle mich traurig
+    - ich habe keine Lust, etwas zu tun
+    - ich will nichts tun
+    - Es ist nicht der richtige Zeitpunkt
+    - Ich möchte nichts tun 
+    - ich bin nicht in Stimmung
+    - Ich fühle mich nicht danach
+    - Ich werde es später tun
+    - Ich werde es später tun
+    - jetzt nicht interessiert
+    - kein Interesse jetzt zu tun
+    - Ich bin jetzt nicht daran interessiert, es zu tun
+    - Ich kann mich jetzt nicht konzentrieren
+    - ich kann es jetzt nicht tun
+    - Ich brauche etwas freie Zeit
 - intent: user_happy
   examples: |
     - gut
@@ -84,6 +82,7 @@ nlu:
     - ich bin großartig
     - ich bin glücklich
     - es geht gut
+    - okay
     - es läuft großartig
     - es ist ein schöner Tag
 - intent: user_unhappy
@@ -93,7 +92,6 @@ nlu:
     - kein guter Tag
     - er ist schlecht
     - hätte besser sein können
-    - nicht gut
     - es ist sehr schlecht
 - intent: user_affirm
   examples: |
@@ -102,16 +100,12 @@ nlu:
     - jaaaa
     - sicher
     - natürlich
-    - natürlich
     - Ja
 - intent: user_deny
   examples: |
     - nein
     - Nö
     - ich will nicht
-    - nein
-    - ich bin nicht in Stimmung
-    - Ich fühle mich nicht danach
     - Nein
 - intent: user_data
   examples: |
@@ -139,19 +133,6 @@ nlu:
     - Bist du echt?
     - Wer hat dich gebaut?
     - Wer hat dich entwickelt?
-- intent: inform
-  examples: |
-    - Mathe
-    - Wirtschaft
-    - Technik
-    - Biologie
-    - Wissenschaft
-- intent: inform_new
-  examples: |
-    - Dies ist ein random[](subj)-Beispiel
-    - Dies ist ein weiteres random[](subj) Beispiel
-    - Dies ist das letzte zufällige Beispiel[](Thema)
-    - Dies ist das letzte zufällige Beispiel[](Thema)
 - intent: next_option
   examples: |
     - nächste
@@ -188,7 +169,6 @@ nlu:
     - bitte alle Erinnerungen löschen
     - Vergiss die Erinnerung an mich
     - Vergiss die Erinnerung an mich!
-
 - intent: ask_progress
   examples: |
     - was ist mein Fortschritt
@@ -205,12 +185,10 @@ nlu:
     - Wie kann ich mich verbessern?
     - worauf sollte ich mich konzentrieren
     - auf welches Thema sollte ich mich konzentrieren
-    - auf welches Thema sollte ich mich konzentrieren
     - Muss ich etwas verbessern?
     - Brauche ich eine Verbesserung?
     - muss ich mich auf ein Thema konzentrieren
     - muss ich mich in irgendeinem Fach verbessern
-    - muss ich mich auf ein Thema konzentrieren
     - muss ich mich in einem Thema verbessern
 - intent: ask_approach
   examples: |
@@ -229,7 +207,6 @@ nlu:
 - intent: user_feedback
   examples: |
     - es gibt ein Problem mit einer Aktivität
-    - es gibt ein Problem mit einem Thema
     - es gibt ein Problem mit einem Thema
     - es gibt ein Problem mit der App
     - Es gibt ein Problem mit einer Aktivität
@@ -252,8 +229,6 @@ nlu:
   examples: |
     - Welche Fragetypen sind verfügbar?
     - Welche Arten von Fragen sind verfügbar?
-    - Welche Arten von Fragen sind verfügbar?
-    - Welche Arten von Fragen sind verfügbar?
     - Welche Fragen gibt es zu einer Aktivität?
     - Wie viele Fragetypen sind verfügbar?
 - intent: find_subject
@@ -264,5 +239,5 @@ nlu:
 - intent: start
   examples: |
     - Beginn
-    - anfangen 
+    - anfangen
     - ich möchte beginnen

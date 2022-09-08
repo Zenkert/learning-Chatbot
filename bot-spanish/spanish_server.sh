@@ -4,8 +4,8 @@ cd /app/bot-spanish
 
 while :
 do
-  sleep 700
-  echo "Waited for 700 seconds"
+  sleep 660
+  echo "Waited for 660 seconds"
   break
 done
 

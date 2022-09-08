@@ -5,7 +5,7 @@ rules:
 - rule: GREET USER
   steps:
   - intent: user_greet
-  - action: utter_greet
+  - action: action_greet
 
 - rule: SET LANGUAGE
   steps:
@@ -36,7 +36,7 @@ rules:
   - action: feedback_form
   - active_loop: feedback_form
   - active_loop: null
-  - action: utter_thanks_feedback
+  - action: action_thanks_feedback
 
 - rule: save user data
   steps:
@@ -46,17 +46,17 @@ rules:
 - rule: out of scope
   steps:
   - intent: out_of_scope
-  - action: utter_default
+  - action: action_default
 
 - rule: user bot challenge
   steps:
   - intent: bot_challenge
-  - action: utter_i_am_a_bot
+  - action: action_i_am_a_bot
 
 - rule: ask user to rephrase
   steps:
   - intent: nlu_fallback
-  - action: utter_rephrase
+  - action: action_rephrase
 
 - rule: remind call
   steps:
@@ -72,7 +72,7 @@ rules:
 - rule: say goodbye to user
   steps:
   - intent: user_goodbye
-  - action: utter_goodbye
+  - action: action_goodbye
 
 - rule: react to reminder
   steps:
@@ -82,7 +82,12 @@ rules:
 - rule: say thanks to user
   steps:
   - intent: user_thanks
-  - action: utter_welcome
+  - action: action_welcome
+
+- rule: USER STRESS
+  steps:
+  - intent: user_stress
+  - action: action_it_is_okay
 
 # - rule: explain question types available
 #   steps:
@@ -100,12 +105,22 @@ rules:
 - rule: UTTER FIND SUBJECT
   steps:
   - intent: find_subject
-  - action: utter_find_subject
+  - action: action_find_subject
 
 - rule: ASK IF USER WANTS TO CONTINUE
   steps:
   - intent: user_done
-  - action: utter_done
+  - action: action_done
+
+- rule: ACTION HAPPY
+  steps:
+  - intent: user_happy
+  - action: action_happy
+
+- rule: ACTION GOOD TIME
+  steps:
+  - intent: inform_new_topic
+  - action: action_good_time
 # misc
 # - rule: Respond to ask_what_can_do
 #   steps:

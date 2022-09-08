@@ -1,16 +1,27 @@
-from pydoc_data.topics import topics
-from urllib import response
+# from urllib import response
 import requests
+import json
 
-from enum import Enum
+from operator import itemgetter
 
-# from dataclasses import dataclass, field
-# import collections
+from actions.enum_uniques import ID
 
 
-class ID(Enum):
-    ANDROID_UUID_LENGTH = 16
-    TELEGRAM_UUID_LENGTH = 10
+# with open('responses.json', 'r') as file:
+#     data = json.load(file)
+with open('actions/responses.json', 'r') as file:
+    data = json.load(file)
+
+
+english_subjects = ['Business', 'Chemistry', 'Psychology', 'Technology', 'Language',
+                    'Math', 'History', 'Biology', 'Physics', 'Humanities', 'Art and Design']
+
+
+def chunks(list_to_chunk, length):
+
+    # looping till length of the list_to_chunk
+    for i in range(0, len(list_to_chunk), length):
+        yield list_to_chunk[i:i + length]
 
 
 def get_subjects():
@@ -19,29 +30,33 @@ def get_subjects():
 
     subject_list = [s['subject'] for s in response]
 
-    subjects = {s['subject']: s['_id'] for s in response}
+    subjects = [(s['subject'], s['_id']) for s in response]
 
-    return subject_list, subjects
+    subjects_chunk = list(chunks(subjects, ID.SUBJECT_BUTTONS.value))
+
+    return subject_list, subjects_chunk
 
 
-def get_topics(subj):
+def get_topics(subject, language):
     subject_response = requests.get(
         'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/subject/get').json()
 
     for s in subject_response:
-        if s['subject'] == subj:
+        if s['subject'] == subject:
             subject_id = s['_id']
 
     response = requests.get(
         'http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic').json()
 
     topic_list = [s['topic']
-                  for s in response if s['subId'] == subject_id]
+                  for s in response if s['subId'] == subject_id and s["language"] == ID[language].value]
 
-    topics = {s['topic']: s['_id']
-              for s in response if s['subId'] == subject_id}
+    topics = [(s['topic'], s['_id'])
+              for s in response if s['subId'] == subject_id and s["language"] == ID[language].value]
 
-    return topic_list, topics
+    topics_chunk = list(chunks(topics, ID.TOPIC_BUTTONS.value))
+
+    return topic_list, topics_chunk
 
 
 def get_questions(topic_id):
@@ -52,15 +67,13 @@ def get_questions(topic_id):
     queried_data = {'mcq_question': [], 'mcq_choices': [], 'file': [], 'right_answer': [], 'feedback': {
         'pos_feedback': [], 'neg_feedback': []}}
 
-    # queried_data = {'mcq': {'mcq_question': [], 'mcq_choices': [],  'right_answer': [], 'feedback': {
-    #     'pos_feedback': [], 'neg_feedback': []}},
-    #     'truefalse': {'true_false': [], 'choices': [],  'right_answer': [], 'feedback': {
-    #         'pos_feedback': [], 'neg_feedback': []}}}
     question_count = 0
 
     for value in response:
-        all_questions = value['allQuestions']
-        # print(type(zz), zz)
+        get_all_questions = value['allQuestions']
+        all_questions = sorted(get_all_questions, key=itemgetter(
+            'sequence'), reverse=False)  # sorted by sequence number
+
         for val in all_questions:
             if val['questionType'] == 'mcqs':
                 question_count += 1
@@ -104,27 +117,12 @@ def get_questions(topic_id):
 
 
 if __name__ == '__main__':
-    # subject_list, subjects = get_subjects()
-    # print(subject_list, subjects)
+    subject_list, subjects = get_subjects()
+    print(subject_list, subjects)
 
-    # topic_list, topics_available = get_topics('Humanities')
-    # print(topic_list, topics_available)
+    topic_list, topics_available = get_topics('Art and Design', 'DE')
+    print(topic_list, topics_available)
 
-    question_count, queried_data = get_questions(
-        '62fe346d9c4afe7b1a0bee1d')
-    print(question_count, queried_data)
-
-
-# All mcqs: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/mcqs
-
-# All topics: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic
-
-# All grades: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/grade/get
-
-# All age groups: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/age/get
-
-# All subjects: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/subject/get
-
-# All true false: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/true_false
-
-# Get quiz by topic ID: http://ec2-3-71-216-21.eu-central-1.compute.amazonaws.com:5000/api/topic/getByTopic/62f22b06c992eabdda6fbd93
+    # question_count, queried_data = get_questions(
+    #     '6315ff84c9b400710c0ebea6')
+    # print(question_count, queried_data)

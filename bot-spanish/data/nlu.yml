@@ -23,23 +23,23 @@ nlu:
     - gracias
 - intent: ask_for_suggestion
   examples: |
-    - quiero aprender [Matemáticas](subject)
-    - quiero aprender [Física](subject)
-    - quiero aprender [Informática](subject)
-    - quiero aprender sobre [Aprendizaje automático](subject)
-    - quiero aprender sobre [Negocios](subject)
-    - quiero aprender [Química](subject)
-    - quiero aprender [Matemáticas](subject)
-    - me gustaría aprender [Física](subject)
-    - me gustaría aprender [Psicología](subject)
-    - me gustaría aprender [Historia](subject)
-    - me gustaría aprender sobre [Humanidades](subject)
-    - me gustaría aprender sobre [Estudios Sociales](subject)
-    - quiero aprender sobre [Arte y Diseño](subject)
-    - quiero estudiar [matemáticas](subject)
-    - quiero aprender [matemáticas](subject)
-    - quiero aprender sobre [astronomía](subject)
-    - quiero aprender sobre [astronomía](subject)
+    - quiero aprender [Matemáticas](subject_from_entity)
+    - quiero aprender [Física](subject_from_entity)
+    - quiero aprender [Informática](subject_from_entity)
+    - quiero aprender sobre [Aprendizaje automático](subject_from_entity)
+    - quiero aprender sobre [Negocios](subject_from_entity)
+    - quiero aprender [Química](subject_from_entity)
+    - quiero aprender [Matemáticas](subject_from_entity)
+    - me gustaría aprender [Física](subject_from_entity)
+    - me gustaría aprender [Psicología](subject_from_entity)
+    - me gustaría aprender [Historia](subject_from_entity)
+    - me gustaría aprender sobre [Humanidades](subject_from_entity)
+    - me gustaría aprender sobre [Estudios Sociales](subject_from_entity)
+    - quiero aprender sobre [Arte y Diseño](subject_from_entity)
+    - quiero estudiar [matemáticas](subject_from_entity)
+    - quiero aprender [matemáticas](subject_from_entity)
+    - quiero aprender sobre [astronomía](subject_from_entity)
+    - quiero aprender sobre [astronomía](subject_from_entity)
     - quiero aprender
     - me gustaría aprender
     - cuáles son las asignaturas disponibles
@@ -65,18 +65,28 @@ nlu:
     - nos vemos
 - intent: user_stress
   examples: |
-    - estoy estresado
-    - me siento estresado
-    - tengo estrés
-    - me siento estresado
-    - no me siento bien
-    - me siento triste
+    - no tengo ganas de hacer nada
+    - no quiero hacer nada
+    - no es el momento adecuado
+    - no quiero hacer 
+    - no estoy de humor
+    - no tengo ganas
+    - lo haré más tarde
+    - lo haré más tarde
+    - no me interesa ahora
+    - no me interesa hacerlo ahora
+    - no me interesa hacerlo ahora
+    - no puedo concentrarme ahora
+    - no puedo hacerlo ahora
+    - necesito tiempo libre
 - intent: user_happy
   examples: |
     - bien
     - me va bien
     - estoy bien
     - soy feliz
+    - okay
+    - ok
     - me va bien
     - va muy bien
     - es un buen día
@@ -86,9 +96,6 @@ nlu:
     - no es bueno
     - no es un buen día
     - es malo
-    - podría haber sido mejor
-    - no está bien
-    - es muy peor
 - intent: user_affirm
   examples: |
     - sí

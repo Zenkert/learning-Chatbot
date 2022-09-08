@@ -6,8 +6,10 @@ services:
       context: ./bot-english
     volumes:
       - "./bot-english:/app/bot-english"
+      - "./bot-english/models:/app/bot-english/models"
     ports:
       - "5005:5005"
+    restart: always
   # depends_on:
   #   - action_server
   #   - duckling_server
@@ -17,18 +19,22 @@ services:
       context: ./bot-german
     volumes:
       - "./bot-german:/app/bot-german"
+      - "./bot-german/models:/app/bot-german/models"
     ports:
       - "5006:5006"
-  # depends_on:
-  #   - rasa_english
+    restart: always
+    # depends_on:
+    #   - rasa_english
   rasa_greek:
     container_name: "rasa_server_greek"
     build:
       context: ./bot-greek
     volumes:
       - "./bot-greek:/app/bot-greek"
+      - "./bot-greek/models:/app/bot-greek/models"
     ports:
       - "5007:5007"
+    restart: always
     # depends_on:
     #   - rasa_english
   rasa_spanish:
@@ -37,8 +43,10 @@ services:
       context: ./bot-spanish
     volumes:
       - "./bot-spanish:/app/bot-spanish"
+      - "./bot-spanish/models:/app/bot-spanish/models"
     ports:
       - "5008:5008"
+    restart: always
     # depends_on:
     #   - rasa_english
   action_server:
@@ -50,11 +58,13 @@ services:
       - ./data:/app/data
     ports:
       - "5055:5055"
+    restart: always
   duckling_server:
     container_name: "duckling_server"
     image: rasa/duckling:latest
     ports:
       - "8000:8000"
+    restart: always
   # nginx:
   #   image: nginx:latest
   #   volumes:

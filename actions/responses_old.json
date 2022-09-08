@@ -1,0 +1,488 @@
+{
+    "language": {
+        "EN": {
+            "action_ask_subj": {
+                "found": "I found: ",
+                "mean": "Is this what you mean?",
+                "query": "I will query my database about",
+                "available": "These are some of the subjects available",
+                "choose": "Please choose a subject: ",
+                "yes": "Yes",
+                "no": "No",
+                "next": "Next",
+                "back": "back"
+            },
+            "action_give_suggestion": "These are some of the subjects I'd suggest: ",
+            "action_ask_topic": {
+                "topic": "Please select a topic: ",
+                "not_available": "Sorry, no topics are available for this subject yet.",
+                "next": "Next",
+                "back": "back"
+            },
+            "action_ask_question": "",
+            "validate_question": {
+                "sorry": "Sorry, there are no activities available for this topic yet!",
+                "add_soon": "We will add new activities soon."
+            },
+            "action_set_reminder": {
+                "time": "Please provide a time!",
+                "remind": "Okay, I will remind you at",
+                "on": "on"
+            },
+            "action_react_to_reminder": "Hey, here is your reminder",
+            "action_forget_reminders": "Okay, I'll cancel your reminder",
+            "action_give_progress": {
+                "message1": "Please wait a moment",
+                "message2": "Hey, here is your progress"
+            },
+            "action_give_improvement": "I think these are the subjects you should improve:",
+            "action_give_approach": "Please watch the video to get a better understanding :)",
+            "action_get_feedback": "Thank you for your input!",
+            "action_ask_feedback": {
+                "choice1": "I would like to hear it. Please provide your input in one complete message!",
+                "choice2": "Oh, please provide your input in one complete message!"
+            },
+            "action_ask_confirm_feedback": {
+                "yes": "Yes, proceed!👍",
+                "no": "No, I want to make changes👎",
+                "confirm": "Are you sure you want to submit?"
+            },
+            "validate_feedback": "Your input is: ",
+            "action_show_features": {
+                "options": "Here are some of the options you can choose from: ",
+                "start": "Welcome. I am a bot and I'm here to assist you in your studies. You can choose an option from below to start!",
+                "activity": "Do an activity",
+                "subject": "Ask for a subject",
+                "question_types": "Question types available",
+                "progress": "What is my progress?",
+                "improve": "What should I improve?",
+                "approach": "Show me how to solve activities",
+                "reminder": "Create a reminder",
+                "cancel_reminder": "Cancel my reminders",
+                "feedback": "I want to give feedback",
+                "bot": "Who are you?"
+            },
+            "action_explain_question_types": {
+                "question": "These are the question types available. Please select an option to learn more about them!",
+                "1": "MCQ",
+                "2": "True/False",
+                "3": "Matching Pairs",
+                "4": "Open ended"
+            },
+            "action_explain_question_types_definition": {
+                "1": "MCQ",
+                "2": "True/False",
+                "3": "Matching Pairs",
+                "error": "Sorry, I'm facing a problem right now!",
+                "MCQ": "A multiple-choice question(MCQ) is composed of two parts: a stem that identifies the question or problem, and a set of alternatives or possible answers that contain a key that is the best answer to the question, and a number of distractors that are plausible but incorrect answers to the question.",
+                "True_False": "True/false determines whether a statement is correct. You have a 50-50 chance of guessing the correct answer",
+                "Matching_Pairs": "Matching pairs consist of two lists of items. For each item in List A, there is an item in List B that's related. Find the related pairs",
+                "Open_ended": "An open-ended question is a question that cannot be answered with a 'yes' or 'no' response, or with a static response. Open-ended questions are phrased as a statement which requires a longer response."
+            },
+            "action_continue": {
+                "continue": "Well done, you completed the activity.",
+                "one_more": "Do you want to do one more activity?",
+                "yes": "Yes",
+                "no": "No"
+            },
+            "main_true_false": {
+                "true": "True",
+                "false": "False"
+            }
+        },
+        "DE": {
+            "action_ask_subj": {
+                "found": [
+                    "Ich fand:"
+                ],
+                "mean": [
+                    "Ist es das, was Sie meinen?",
+                    "Meinen Sie dieses Thema"
+                ],
+                "query": [
+                    "Ich werde meine Datenbank abfragen über"
+                ],
+                "available": [
+                    "Dies sind einige der verfügbaren Themen"
+                ],
+                "choose": [
+                    "Bitte wählen Sie ein Thema:"
+                ],
+                "yes": [
+                    "Ja"
+                ],
+                "no": [
+                    "Nein"
+                ],
+                "next": [
+                    "Weiter"
+                ],
+                "back": [
+                    "zurück"
+                ]
+            },
+            "action_give_suggestion": [
+                "Dies sind einige der Themen, die ich vorschlagen würde:"
+            ],
+            "action_ask_topic": {
+                "topic": [
+                    "Bitte wählen Sie ein Thema aus:"
+                ],
+                "not_available": [
+                    "Leider sind zu diesem Thema noch keine Themen vorhanden.",
+                    "leider nicht verfügbar"
+                ],
+                "next": [
+                    "Weiter"
+                ],
+                "back": [
+                    "zurück"
+                ]
+            },
+            "action_ask_question": "",
+            "validate_question": {
+                "sorry": [
+                    "Leider sind für dieses Thema noch keine Aktivitäten verfügbar!",
+                    "leider nicht verfügbar"
+                ],
+                "add_soon": [
+                    "Wir werden bald neue Aktivitäten hinzufügen."
+                ]
+            },
+            "action_set_reminder": {
+                "time": [
+                    "Bitte geben Sie eine Uhrzeit an!"
+                ],
+                "remind": [
+                    "Okay, ich werde Sie daran erinnern, wenn"
+                ],
+                "on": [
+                    "auf"
+                ]
+            },
+            "action_react_to_reminder": [
+                "Hey, hier ist deine Erinnerung"
+            ],
+            "action_forget_reminders": [
+                "Okay, ich werde Ihre Erinnerung löschen."
+            ],
+            "action_give_progress": {
+                "message1": [
+                    "Bitte warten Sie einen Moment"
+                ],
+                "message2": [
+                    "Hey, hier ist dein Fortschritt"
+                ]
+            },
+            "action_give_improvement": [
+                "Ich denke, das sind die Themen, die Sie verbessern sollten:"
+            ],
+            "action_give_approach": [
+                "Bitte schauen Sie sich das Video an, um ein besseres Verständnis zu bekommen :)"
+            ],
+            "action_get_feedback": [
+                "Vielen Dank für Ihren Beitrag!"
+            ],
+            "action_ask_feedback": {
+                "choice1": [
+                    "Ich würde es gerne hören. Bitte geben Sie Ihren Beitrag in einer vollständigen Nachricht ab!"
+                ],
+                "choice2": [
+                    "Oh, bitte geben Sie Ihren Beitrag in einer vollständigen Nachricht ab!"
+                ]
+            },
+            "action_ask_confirm_feedback": {
+                "yes": [
+                    "Ja, fahren Sie fort!👍"
+                ],
+                "no": [
+                    "Nein, ich möchte Änderungen vornehmen👎"
+                ],
+                "confirm": [
+                    "Sind Sie sicher, dass Sie sich bewerben wollen?"
+                ]
+            },
+            "validate_feedback": [
+                "Ihr Beitrag ist:"
+            ],
+            "action_show_features": {
+                "options": [
+                    "Hier sind einige der Optionen, aus denen Sie wählen können:"
+                ],
+                "start": [
+                    "Willkommen! Ich bin ein Bot und ich bin hier, um dir bei deinem Studium zu helfen. Du kannst unten eine Option wählen, um zu beginnen!"
+                ],
+                "activity": [
+                    "Eine Aktivität durchführen"
+                ],
+                "subject": [
+                    "Fragen Sie nach einem Thema"
+                ],
+                "question_types": [
+                    "Verfügbare Fragetypen"
+                ],
+                "progress": [
+                    "Wie ist mein Fortschritt?"
+                ],
+                "improve": [
+                    "Was sollte ich verbessern?"
+                ],
+                "approach": [
+                    "Zeigen Sie mir, wie man Aktivitäten löst"
+                ],
+                "reminder": [
+                    "Eine Erinnerung erstellen"
+                ],
+                "cancel_reminder": [
+                    "Meine Mahnungen löschen"
+                ],
+                "feedback": [
+                    "Ich möchte eine Rückmeldung geben"
+                ],
+                "bot": [
+                    "Wer sind Sie?"
+                ]
+            },
+            "action_explain_question_types": {
+                "question": [
+                    "Dies sind die verfügbaren Fragetypen. Bitte wählen Sie eine Option aus, um mehr über sie zu erfahren!"
+                ],
+                "1": [
+                    "MCQ"
+                ],
+                "2": [
+                    "Richtig/Falsch"
+                ],
+                "3": [
+                    "Passende Paare"
+                ],
+                "4": [
+                    "Offenes Ende"
+                ]
+            },
+            "action_explain_question_types_definition": {
+                "1": [
+                    "MCQ"
+                ],
+                "2": [
+                    "Richtig/Falsch"
+                ],
+                "3": [
+                    "Passende Paare"
+                ],
+                "MCQ": [
+                    "Eine Multiple-Choice-Frage (MCQ) besteht aus zwei Teilen: einem Stamm, der die Frage oder das Problem identifiziert, und einer Reihe von Alternativen oder möglichen Antworten, die einen Schlüssel enthalten, der die beste Antwort auf die Frage darstellt, und eine Reihe von Ablenkungen, die plausible, aber falsche Antworten auf die Frage darstellen."
+                ],
+                "True_False": [
+                    "Richtig/Falsch bestimmt, ob eine Aussage richtig ist. Sie haben eine 50:50 Chance, die richtige Antwort zu erraten."
+                ],
+                "Matching_Pairs": [
+                    "Übereinstimmende Paare bestehen aus zwei Listen von Elementen. Für jedes Element in Liste A gibt es ein Element in Liste B, das damit in Beziehung steht. Finden Sie die verwandten Paare"
+                ],
+                "Open_ended": [
+                    "Eine offene Frage ist eine Frage, die nicht mit 'Ja' oder 'Nein' oder mit einer statischen Antwort beantwortet werden kann. Offene Fragen werden als Aussage formuliert, die eine längere Antwort erfordert."
+                ]
+            },
+            "action_continue": {
+                "continue": [
+                    "Gut gemacht, du hast die Aktivität abgeschlossen."
+                ],
+                "one_more": [
+                    "Möchten Sie noch eine weitere Aktivität durchführen?"
+                ],
+                "yes": [
+                    "Ja"
+                ],
+                "no": [
+                    "Nein"
+                ]
+            },
+            "main_true_false": {
+                "true": [
+                    "Richtig"
+                ],
+                "false": [
+                    "Falsch"
+                ]
+            }
+        },
+        "ES": {
+            "action_ask_subj": {
+                "found": "Lo he encontrado:",
+                "mean": "¿Se refiere a esto?",
+                "query": "Voy a consultar mi base de datos sobre",
+                "available": "Estos son algunos de los temas disponibles",
+                "choose": "Por favor, elija un tema:",
+                "yes": "Sí",
+                "no": "No",
+                "next": "Siguiente",
+                "back": "back"
+            },
+            "action_give_suggestion": "Estos son algunos de los temas que yo sugeriría:",
+            "action_ask_topic": {
+                "topic": "Seleccione un tema:",
+                "not_available": "Lo sentimos, todavía no hay temas disponibles para este asunto.",
+                "next": "Siguiente",
+                "back": "back"
+            },
+            "action_ask_question": "",
+            "validate_question": {
+                "sorry": "Lo sentimos, aún no hay actividades disponibles para este tema.",
+                "add_soon": "Pronto añadiremos nuevas actividades."
+            },
+            "action_set_reminder": {
+                "time": "Por favor, indique la hora.",
+                "remind": "Bien, te lo recordaré en",
+                "on": "en"
+            },
+            "action_react_to_reminder": "Hey, aquí está su recordatorio",
+            "action_forget_reminders": "De acuerdo, cancelaré tu recordatorio",
+            "action_give_progress": {
+                "message1": "Por favor, espere un momento",
+                "message2": "Oye, aquí está tu progreso"
+            },
+            "action_give_improvement": "Creo que estos son los temas que debes mejorar:",
+            "action_give_approach": "Por favor, vea el vídeo para comprender mejor :)",
+            "action_get_feedback": "Gracias por su aportación.",
+            "action_ask_feedback": {
+                "choice1": "Me gustaría escucharlo. Por favor, ¡ponga su opinión en un mensaje completo!",
+                "choice2": "Oh, ¡por favor, proporcione su información en un mensaje completo!"
+            },
+            "action_ask_confirm_feedback": {
+                "yes": "Sí, ¡procede! 👍",
+                "no": "No, quiero hacer cambios👎",
+                "confirm": "¿Seguro que quieres presentarte?"
+            },
+            "validate_feedback": "Su aportación es:",
+            "action_show_features": {
+                "options": "Estas son algunas de las opciones que puede elegir:",
+                "start": "Bienvenido. Soy un bot y estoy aquí para ayudarte en tus estudios. ¡Puedes elegir una opción de abajo para empezar!",
+                "activity": "Hacer una actividad",
+                "subject": "Pedir un tema",
+                "question_types": "Tipos de preguntas disponibles",
+                "progress": "¿Cuál es mi progreso?",
+                "improve": "¿Qué debo mejorar?",
+                "approach": "Muéstrame cómo resolver las actividades",
+                "reminder": "Crear un recordatorio",
+                "cancel_reminder": "Cancelar mis recordatorios",
+                "feedback": "Quiero dar mi opinión",
+                "bot": "¿Quién es usted?"
+            },
+            "action_explain_question_types": {
+                "question": "Estos son los tipos de preguntas disponibles. Seleccione una opción para obtener más información.",
+                "1": "MCQ",
+                "2": "Verdadero/Falso",
+                "3": "Parejas que coinciden",
+                "4": "Abierto"
+            },
+            "action_explain_question_types_definition": {
+                "1": "MCQ",
+                "2": "Verdadero/Falso",
+                "3": "Parejas que coinciden",
+                "MCQ": "Una pregunta de opción múltiple (MCQ) se compone de dos partes: un tallo que identifica la pregunta o el problema, y un conjunto de alternativas o posibles respuestas que contienen una clave que es la mejor respuesta a la pregunta, y una serie de distractores que son respuestas plausibles pero incorrectas a la pregunta.",
+                "True_False": "Verdadero/falso determina si una afirmación es correcta. Tienes un 50-50 de posibilidades de adivinar la respuesta correcta",
+                "Matching_Pairs": "Los pares de correspondencia consisten en dos listas de elementos. Para cada elemento de la lista A, hay un elemento de la lista B que está relacionado. Encuentre los pares relacionados",
+                "Open_ended": "Una pregunta abierta es una pregunta que no puede responderse con un 'sí' o un 'no', o con una respuesta estática. Las preguntas abiertas se formulan como una afirmación que requiere una respuesta más larga."
+            },
+            "action_continue": {
+                "continue": "Bien hecho, has completado la actividad.",
+                "one_more": "¿Quieres hacer una actividad más?",
+                "yes": "Sí",
+                "no": "No"
+            },
+            "main_true_false": {
+                "true": "Verdadero",
+                "false": "Falso"
+            }
+        },
+        "EL": {
+            "action_ask_subj": {
+                "found": "Βρήκα:",
+                "mean": "Αυτό εννοείτε;",
+                "query": "Θα κάνω ερώτημα στη βάση δεδομένων μου σχετικά με",
+                "available": "Αυτά είναι μερικά από τα διαθέσιμα θέματα",
+                "choose": "Παρακαλώ επιλέξτε ένα θέμα:",
+                "yes": "Ναι",
+                "no": "Όχι",
+                "next": "Επόμενο",
+                "back": "back"
+            },
+            "action_give_suggestion": "Αυτά είναι μερικά από τα θέματα που θα πρότεινα:",
+            "action_ask_topic": {
+                "topic": "Παρακαλώ επιλέξτε ένα θέμα:",
+                "not_available": "Λυπάμαι, δεν υπάρχουν ακόμη διαθέσιμα θέματα για αυτό το θέμα.",
+                "next": "Επόμενο",
+                "back": "back"
+            },
+            "action_ask_question": "",
+            "validate_question": {
+                "sorry": "Λυπάμαι, δεν υπάρχουν διαθέσιμες δραστηριότητες για αυτό το θέμα ακόμα!",
+                "add_soon": "Σύντομα θα προσθέσουμε νέες δραστηριότητες."
+            },
+            "action_set_reminder": {
+                "time": "Παρακαλώ δώστε μια ώρα!",
+                "remind": "Εντάξει, θα σας το υπενθυμίσω στο",
+                "on": "στο"
+            },
+            "action_react_to_reminder": "Έι, εδώ είναι η υπενθύμισή σας",
+            "action_forget_reminders": "Εντάξει, θα ακυρώσω την υπενθύμισή σας",
+            "action_give_progress": {
+                "message1": "Παρακαλώ περιμένετε ένα λεπτό",
+                "message2": "Έι, εδώ είναι η πρόοδός σας"
+            },
+            "action_give_improvement": "Νομίζω ότι αυτά είναι τα θέματα που πρέπει να βελτιώσετε:",
+            "action_give_approach": "Παρακαλούμε δείτε το βίντεο για να το κατανοήσετε καλύτερα :)",
+            "action_get_feedback": "Σας ευχαριστώ για τη συμβολή σας!",
+            "action_ask_feedback": {
+                "choice1": "Θα ήθελα να το ακούσω. Παρακαλείστε να δώσετε τη γνώμη σας σε ένα πλήρες μήνυμα!",
+                "choice2": "Ω, παρακαλείσθε να παρέχετε τα σχόλιά σας σε ένα πλήρες μήνυμα!"
+            },
+            "action_ask_confirm_feedback": {
+                "yes": "Ναι, προχωρήστε!👍",
+                "no": "Όχι, θέλω να κάνω αλλαγές👎",
+                "confirm": "Είστε σίγουρος ότι θέλετε να υποβάλετε;"
+            },
+            "validate_feedback": "Η συμβολή σας είναι:",
+            "action_show_features": {
+                "options": "Ακολουθούν ορισμένες από τις επιλογές που μπορείτε να επιλέξετε:",
+                "start": "Καλώς ήρθατε. Είμαι ένα bot και είμαι εδώ για να σας βοηθήσω στις σπουδές σας. Μπορείτε να επιλέξετε μια επιλογή από τις παρακάτω για να ξεκινήσετε!",
+                "activity": "Κάντε μια δραστηριότητα",
+                "subject": "Ζητήστε ένα θέμα",
+                "question_types": "Διαθέσιμοι τύποι ερωτήσεων",
+                "progress": "Ποια είναι η πρόοδός μου;",
+                "improve": "Τι πρέπει να βελτιώσω;",
+                "approach": "Δείξτε μου πώς να επιλύω δραστηριότητες",
+                "reminder": "Δημιουργήστε μια υπενθύμιση",
+                "cancel_reminder": "Ακυρώστε τις υπενθυμίσεις μου",
+                "feedback": "Θέλω να δώσω ανατροφοδότηση",
+                "bot": "Ποιος είσαι εσύ;"
+            },
+            "action_explain_question_types": {
+                "question": "Αυτοί είναι οι διαθέσιμοι τύποι ερωτήσεων. Παρακαλούμε επιλέξτε μια επιλογή για να μάθετε περισσότερα γι' αυτές!",
+                "1": "MCQ",
+                "2": "Σωστό/Λάθος",
+                "3": "Αντιστοίχιση ζευγαριών",
+                "4": "Ανοιχτό τέλος"
+            },
+            "action_explain_question_types_definition": {
+                "1": "MCQ",
+                "2": "Σωστό/Λάθος",
+                "3": "Αντιστοίχιση ζευγαριών",
+                "MCQ": "Μια ερώτηση πολλαπλής επιλογής (MCQ) αποτελείται από δύο μέρη: ένα στέλεχος που προσδιορίζει την ερώτηση ή το πρόβλημα, και ένα σύνολο εναλλακτικών ή πιθανών απαντήσεων που περιέχουν ένα κλειδί που είναι η καλύτερη απάντηση στην ερώτηση και έναν αριθμό αποσπασματικών απαντήσεων που είναι πιθανές αλλά λανθασμένες απαντήσεις στην ερώτηση.",
+                "True_False": "Το σωστό/λάθος καθορίζει αν μια δήλωση είναι σωστή. Έχετε 50-50 πιθανότητες να μαντέψετε τη σωστή απάντηση.",
+                "Matching_Pairs": "Τα ζεύγη αντιστοίχισης αποτελούνται από δύο λίστες στοιχείων. Για κάθε στοιχείο της λίστας Α, υπάρχει ένα στοιχείο της λίστας Β που σχετίζεται. Βρείτε τα σχετικά ζεύγη",
+                "Open_ended": "Μια ανοιχτή ερώτηση είναι μια ερώτηση που δεν μπορεί να απαντηθεί με ένα 'ναι' ή 'όχι' ή με μια στατική απάντηση. Οι ερωτήσεις ανοικτού τύπου διατυπώνονται ως δήλωση που απαιτεί μεγαλύτερης διάρκειας απάντηση."
+            },
+            "action_continue": {
+                "continue": "Μπράβο, ολοκληρώσατε τη δραστηριότητα.",
+                "one_more": "Θέλετε να κάνετε μια ακόμη δραστηριότητα;",
+                "yes": "Ναι",
+                "no": "Όχι"
+            },
+            "main_true_false": {
+                "true": "Σωστό",
+                "false": "Λάθος"
+            }
+        }
+    }
+}
