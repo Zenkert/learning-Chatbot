@@ -6,6 +6,7 @@ rules:
   steps:
   - intent: user_greet
   - action: action_greet
+  - action: action_show_features
 
 - rule: SET LANGUAGE
   steps:
