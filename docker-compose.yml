@@ -9,10 +9,12 @@ services:
       - "./bot-english/models:/app/bot-english/models"
     ports:
       - "5005:5005"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
     restart: always
-  # depends_on:
-  #   - action_server
-  #   - duckling_server
+
   rasa_german:
     container_name: "rasa_server_german"
     build:
@@ -22,9 +24,11 @@ services:
       - "./bot-german/models:/app/bot-german/models"
     ports:
       - "5006:5006"
-    restart: always
-    # depends_on:
-    #   - rasa_english
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
+
   rasa_greek:
     container_name: "rasa_server_greek"
     build:
@@ -34,9 +38,12 @@ services:
       - "./bot-greek/models:/app/bot-greek/models"
     ports:
       - "5007:5007"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
     restart: always
-    # depends_on:
-    #   - rasa_english
+
   rasa_spanish:
     container_name: "rasa_server_spanish"
     build:
@@ -46,9 +53,12 @@ services:
       - "./bot-spanish/models:/app/bot-spanish/models"
     ports:
       - "5008:5008"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
     restart: always
-    # depends_on:
-    #   - rasa_english
+
   action_server:
     container_name: "action_server"
     build:
@@ -59,6 +69,7 @@ services:
     ports:
       - "5055:5055"
     restart: always
+
   duckling_server:
     container_name: "duckling_server"
     image: rasa/duckling:latest
