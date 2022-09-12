@@ -1,30 +1,43 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from datetime import datetime as dt
 import os
-
-import base64
 import json
+import base64
 import requests
-from dotenv import load_dotenv
-import os
 import pandas as pd
+import numpy as np
+from dotenv import load_dotenv
+import matplotlib.pyplot as plt
 from collections import Counter
-from typing import List, Tuple
+from datetime import datetime as dt
+from typing import Any, Text, Dict, List, Tuple
+
+from actions.enum_uniques import Id
 
 
-def make_autopct(values):
-    def my_autopct(pct):
-        total = sum(values)
-        val = int(round(pct*total/100.0))
-        return '{p:.0f}%'.format(p=pct)
-    return my_autopct
+def plot_graph(user_id, user_language, current_time) -> Text:
 
+    show_num_of_subjects = Id.PLOT_GRAPH_NUM_OF_SUBJECTS.value
 
-def plot_graph(user_id, current_time):
+    date_response = {
+        'EN': 'DATE',
+        'DE': 'DATUM',
+        'EL': 'ΗΜΕΡΟΜΗΝΙΑ',
+        'ES': 'FECHA'
+    }
+    xaxis_response = {
+        'EN': f'Top {show_num_of_subjects} Subjects',
+        'DE': f'Top {show_num_of_subjects} Fächer',
+        'EL': f'{show_num_of_subjects} κορυφαία θέματα',
+        'ES': f'Las {show_num_of_subjects} mejores asignaturas'
+    }
+    yaxis_response = {
+        'EN': 'Activity completed related to Subject(no of times)',
+        'DE': 'Abgeschlossene Aktivität im Zusammenhang mit dem Subjekt (Anzahl der Male)',
+        'EL': 'Δραστηριότητα που ολοκληρώθηκε σε σχέση με το θέμα (αριθμός φορών)',
+        'ES': 'Actividad realizada relacionada con la asignatura (nº de veces)'
+    }
 
     file_name = f'{current_time}_plot.png'
-    title = 'DATE: ' + str(current_time.date())
+    title = f'{date_response[user_language]}: ' + str(current_time.date())
 
     student_data = pd.read_excel('actions/student_db_new.xlsx')
     student_data = student_data.loc[:, ~
@@ -45,9 +58,9 @@ def plot_graph(user_id, current_time):
                 current_row = row.to_dict()  # converting row to dictionary
                 # popping <'User':value> since it is not utilized in graph
                 current_row.pop('User')
-                # finding top 5 values in the dictionary
+                # finding top n = {show_num_of_subjects} values in the dictionary
                 largest_values: List[Tuple] = Counter.most_common(
-                    current_row, 5)
+                    current_row, show_num_of_subjects)
 
         # largest_values: List[Tuple] = [(a,b), (c,d), ...]
         for value in largest_values:
@@ -62,19 +75,19 @@ def plot_graph(user_id, current_time):
     plt.bar(subjects, values, color=colors,
             width=0.4)
 
-    plt.xlabel("Subjects")
-    plt.ylabel("Activity completed related to Subject(no of times)")
+    plt.xlabel(f'{xaxis_response[user_language]}')
+    plt.ylabel(f'{yaxis_response[user_language]}')
     plt.title(title)
     plt.savefig(file_name)
     # plt.show()
     return file_name
 
 
-def image_url(user_id, current_time):
+def image_url(user_id, user_language, current_time) -> Tuple[Text, Text]:
 
     load_dotenv()
 
-    final_path = plot_graph(user_id, current_time)
+    final_path = plot_graph(user_id, user_language, current_time)
     with open(final_path, "rb") as f:
         image_data = f.read()
 
@@ -102,4 +115,4 @@ def image_url(user_id, current_time):
 
 
 if __name__ == '__main__':
-    image_url(user_id='', current_time=dt.now())
+    image_url(user_id='', user_language='EN', current_time=dt.now())
