@@ -9,3 +9,4 @@ events.db-wal
 rasa.db
 story_graph.dot
 .rasa/
+actions/.env
