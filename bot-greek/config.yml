@@ -12,14 +12,13 @@ pipeline:
     min_ngram: 2
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 100
+    epochs: 160
     constrain_similarities: true
   - name: DucklingEntityExtractor
     url: http://duckling_server:8000
-    # url: http://localhost:8000
     dimensions: ["time"]
     locale: "el_EL"
-    timezone: "Europe/Berlin"
+    timezone: "Europe/Athens"
   - name: FallbackClassifier
     threshold: 0.4
 
