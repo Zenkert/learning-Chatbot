@@ -258,6 +258,14 @@ nlu:
   examples: |
     - That's enough
     - that's done
+- intent: user_stop
+  examples: |
+    - stop
+    - please stop
+    - i want to stop
+    - can you stop
+    - stop it
+    - pls stop
 - lookup: subject_from_entity
   examples: |
     - Math

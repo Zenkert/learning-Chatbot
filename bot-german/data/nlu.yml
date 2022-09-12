@@ -241,3 +241,11 @@ nlu:
     - Beginn
     - anfangen
     - ich möchte beginnen
+- intent: user_stop
+  examples: |
+    - aufhören
+    - Bitte aufhören
+    - Ich möchte aufhören.
+    - Kannst du aufhören?
+    - Hör auf!
+    - Bitte aufhören

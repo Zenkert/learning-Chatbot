@@ -140,19 +140,6 @@ nlu:
     - ¿eres real?
     - ¿quién te construyó?
     - ¿quién te ha desarrollado?
-- intent: inform
-  examples: |
-    - matemáticas
-    - negocios
-    - tecnología
-    - biología
-    - ciencia
-- intent: inform_new
-  examples: |
-    - Este es un ejemplo de random[](subj)
-    - Este es otro ejemplo aleatorio[](subj)
-    - Este es el último ejemplo aleatorio[](tema)
-    - Este es el último ejemplo aleatorio[](tema)
 - intent: next_option
   examples: |
     - siguiente
@@ -266,3 +253,11 @@ nlu:
     - inicio
     - empezar 
     - quiero empezar
+- intent: user_stop
+  examples: |
+    - parar
+    - por favor, detente
+    - quiero parar
+    - puedes parar
+    - parar
+    - por favor, deténgase
