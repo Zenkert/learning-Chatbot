@@ -2,10 +2,13 @@
 
 cd /app/bot-german
 
+time_to_sleep=180
+
 while :
 do
-  sleep 180
-  echo "Waited for 180 seconds"
+  echo "Sleeping for $time_to_sleep seconds"
+  sleep $time_to_sleep
+  echo "Slept for $time_to_sleep seconds"
   break
 done
 

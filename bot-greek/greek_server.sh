@@ -2,10 +2,13 @@
 
 cd /app/bot-greek
 
+time_to_sleep=420
+
 while :
 do
-  sleep 420
-  echo "Waited for 420 seconds"
+  echo "Sleeping for $time_to_sleep seconds"
+  sleep $time_to_sleep
+  echo "Slept for $time_to_sleep seconds"
   break
 done
 
