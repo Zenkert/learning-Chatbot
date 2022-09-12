@@ -80,19 +80,10 @@
                     "No"
                 ],
                 "next": [
-                    "Next",
-                    "Show other options",
-                    "Other options",
-                    "More options",
-                    "Show me more",
-                    "I want more",
-                    "Go next"
+                    "NEXT"
                 ],
                 "back": [
-                    "back",
-                    "I want to go back",
-                    "Go back",
-                    "Take me one step back"
+                    "BACK"
                 ]
             },
             "action_give_suggestion": [
@@ -121,19 +112,10 @@
                     "Sorry, no topics are available for this subject yet."
                 ],
                 "next": [
-                    "Next",
-                    "Show other options",
-                    "Other options",
-                    "More options",
-                    "Show me more",
-                    "I want more",
-                    "Go next"
+                    "NEXT"
                 ],
                 "back": [
-                    "back",
-                    "I want to go back",
-                    "Go back",
-                    "Take me one step back"
+                    "BACK"
                 ]
             },
             "action_ask_question": {
@@ -223,11 +205,7 @@
                     "Please do more activities, so that I can suggest any improvements"
                 ],
                 "do_later": [
-                    "I'll do it later",
-                    "I can do it later",
-                    "I want to do it later",
-                    "Not now",
-                    "Do it later"
+                    "Not now"
                 ]
             },
             "action_give_approach": [
@@ -575,19 +553,10 @@
                     "Nein"
                 ],
                 "next": [
-                    "Weiter",
-                    "Andere Optionen anzeigen",
-                    "Andere Optionen",
-                    "Weitere Optionen",
-                    "Mehr anzeigen",
-                    "Ich möchte mehr",
-                    "Gehe weiter"
+                    "WEITER"
                 ],
                 "back": [
-                    "zurück",
-                    "Ich will zurück",
-                    "Zurückgehen",
-                    "Geh einen Schritt zurück"
+                    "ZURÜCK"
                 ]
             },
             "action_give_suggestion": [
@@ -632,19 +601,10 @@
                     "leider nicht verfügbar"
                 ],
                 "next": [
-                    "Weiter",
-                    "Andere Optionen anzeigen",
-                    "Andere Optionen",
-                    "Weitere Optionen",
-                    "Mehr anzeigen",
-                    "Ich möchte mehr",
-                    "Gehe weiter"
+                    "WEITER"
                 ],
                 "back": [
-                    "zurück",
-                    "Ich will zurück",
-                    "Zurückgehen",
-                    "Geh einen Schritt zurück"
+                    "ZURÜCK"
                 ]
             },
             "action_ask_question": {
@@ -1088,19 +1048,10 @@
                     "No"
                 ],
                 "next": [
-                    "Siguiente",
-                    "Mostrar otras opciones",
-                    "Otras opciones",
-                    "Más opciones",
-                    "Muéstrame más",
-                    "Quiero más",
-                    "Ir al siguiente"
+                    "SIGUIENTE"
                 ],
                 "back": [
-                    "atrás",
-                    "Quiero volver",
-                    "Vuelve",
-                    "Llévame un paso atrás"
+                    "VOLVER"
                 ]
             },
             "action_give_suggestion": [
@@ -1129,19 +1080,10 @@
                     "Lo sentimos, todavía no hay temas disponibles para este asunto."
                 ],
                 "next": [
-                    "Siguiente",
-                    "Mostrar otras opciones",
-                    "Otras opciones",
-                    "Más opciones",
-                    "Muéstrame más",
-                    "Quiero más",
-                    "Ir al siguiente"
+                    "SIGUIENTE"
                 ],
                 "back": [
-                    "atrás",
-                    "Quiero volver",
-                    "Vuelve",
-                    "Llévame un paso atrás"
+                    "VOLVER"
                 ]
             },
             "action_ask_question": {
@@ -1582,18 +1524,10 @@
                     "Όχι"
                 ],
                 "next": [
-                    "Επόμενος",
-                    "Εμφάνιση άλλων επιλογών",
-                    "Άλλες επιλογές",
-                    "Περισσότερες επιλογές",
-                    "Εμφάνιση περισσότερων επιλογών",
-                    "Θέλω περισσότερα"
+                    "ΕΠΟΜΕΝΟ"
                 ],
                 "back": [
-                    "πίσω",
-                    "Θέλω να γυρίσω πίσω",
-                    "Πήγαινε πίσω",
-                    "Take me one step back"
+                    "ΠΙΣΩ"
                 ]
             },
             "action_give_suggestion": [
@@ -1622,18 +1556,10 @@
                     "Λυπάμαι, δεν υπάρχουν ακόμη διαθέσιμα θέματα για αυτό το θέμα."
                 ],
                 "next": [
-                    "Επόμενος",
-                    "Εμφάνιση άλλων επιλογών",
-                    "Άλλες επιλογές",
-                    "Περισσότερες επιλογές",
-                    "Εμφάνιση περισσότερων επιλογών",
-                    "Θέλω περισσότερα"
+                    "ΕΠΟΜΕΝΟ"
                 ],
                 "back": [
-                    "πίσω",
-                    "Θέλω να γυρίσω πίσω",
-                    "Πήγαινε πίσω",
-                    "Take me one step back"
+                    "ΠΙΣΩ"
                 ]
             },
             "action_ask_question": {

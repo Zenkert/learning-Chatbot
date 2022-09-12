@@ -1,20 +1,17 @@
-from unittest import result
-from urllib import response
-import pandas as pd
-from typing import Any, Text, Dict, List
 import json
 import random
+import pandas as pd
+from typing import Any, Text, Dict, List
 
-from actions import main
+from actions import query_db
+from actions.enum_uniques import Id
 from actions.actions import get_language_and_response
-from actions.enum_uniques import ID
-#
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.types import DomainDict
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.types import DomainDict
-from rasa_sdk.events import ReminderScheduled, ReminderCancelled, UserUtteranceReverted, ActionReverted
-from rasa_sdk import Action, Tracker
 
 
 with open('actions/responses.json', 'r') as file:
@@ -39,7 +36,7 @@ with open('actions/responses.json', 'r') as file:
 #         topic_id = tracker.get_slot('topic')
 
 #         # Base condition to check if Telegram user or Android user
-#         if len(tracker.sender_id) > ID.TELEGRAM_UUID_LENGTH.value:
+#         if len(tracker.sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
 #             dispatcher.utter_message(text=random.choice(
 #                 response_query["good_time"]))
 #             return [SlotSet("question", "ANDROID APP")]
@@ -139,7 +136,7 @@ with open('actions/responses.json', 'r') as file:
 
 #         sender_id = tracker.sender_id
 
-#         if len(sender_id) > ID.TELEGRAM_UUID_LENGTH.value:
+#         if len(sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
 #             dispatcher.utter_message(random.choice(
 #                 response_query["good_time"]))
 #             return {'question': 'ANDROID_APP'}
@@ -199,10 +196,12 @@ class ActionFollowQuestionsForm(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        user_id = tracker.sender_id  # sender ID
+        user_id = tracker.sender_id  # sender Id
         subject = tracker.get_slot('subject')  # slot value of subject
+        topic = tracker.get_slot('topic')  # slot value of topic
+        intent_value = tracker.get_intent_of_latest_message()
 
-        if len(user_id) > ID.TELEGRAM_UUID_LENGTH.value:
+        if len(user_id) > Id.TELEGRAM_UUID_LENGTH.value or topic == "STOP":
             return []
 
         student_data = pd.read_excel(
@@ -220,7 +219,7 @@ class ActionFollowQuestionsForm(Action):
         except:
             pass
 
-        if len(tracker.sender_id) < ID.ANDROID_UUID_LENGTH.value:
+        if len(tracker.sender_id) < Id.ANDROID_UUID_LENGTH.value:
             return [FollowupAction(name="action_continue")]
 
         return []

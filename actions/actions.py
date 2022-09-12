@@ -1,21 +1,23 @@
-from datetime import datetime as dt
-from urllib import response
-import pandas as pd
-from typing import Any, Text, Dict, List
+import os
 import json
 import random
-from bson import ObjectId
-
-from actions import main, plot
-from actions.enum_uniques import ID
+import pandas as pd
+from urllib import response
+from dotenv import load_dotenv
 from fuzzywuzzy import process
+from datetime import datetime as dt
+from typing import Any, Text, Dict, List, Tuple
 
+from actions import plot
+from actions import query_db
+from actions.enum_uniques import Id
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.types import DomainDict
+from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
-from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.types import DomainDict
-from rasa_sdk.events import ReminderScheduled, ReminderCancelled, UserUtteranceReverted, ActionReverted
-from rasa_sdk import Action, Tracker
+from rasa_sdk.events import ReminderScheduled, ReminderCancelled, ActionReverted
 
 
 with open('actions/responses.json', 'r') as file:
@@ -24,13 +26,18 @@ with open('actions/responses.json', 'r') as file:
 with open('actions/subjects.json', 'r') as file:
     subjects = json.load(file)
 
-dict_vars = {'subject_idx': 0, 'topic_idx': 0, 'idx': 0}
+# to keep track of unique sender_id for the session {'sender_id': interaction_count}
+user_interaction = dict()
 
 
-def get_language_and_response(tracker: Tracker):
+def get_language_and_response(tracker: Tracker) -> Tuple[Text, Dict[Text, Text]]:
+    '''
+    returns the language in which the user is conversing and the corresponding responses in that language.
+    '''
 
     user_language = tracker.get_slot('language')
 
+    # set a default language 'EN' if there is no user language present
     user_language = 'EN' if user_language is None else user_language
 
     response_query = data['language'][user_language]
@@ -47,20 +54,7 @@ class ActionSetLanguage(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        user_lang1 = tracker.get_slot('language')
-
-        user_lang2 = 'EN' if user_lang1 is None else user_lang1
-
-        # user_ent = 'None'
-        # try:
-        #     user_ent = next(tracker.get_latest_entity_values('language'))
-        # except:
-        #     pass
-
-        dispatcher.utter_message(
-            text=f'User language is {user_lang1}, {user_lang2}')
-
-        return [SlotSet("language", "EN")]
+        raise NotImplementedError
 
 
 class ActionUserData(Action):
@@ -80,11 +74,11 @@ class ActionUserData(Action):
             message = json.loads(msg)
             print('message: ', message)
             name: str = message['name']
-            id: int = message['id']
+            Id: int = message['Id']
             language: str = message['lang']
-            print('name: ', name, id, language)
+            print('name: ', name, Id, language)
             dispatcher.utter_message(text=f'Hey {name}, how are you doing?')
-            return [SlotSet("name", name), SlotSet("id", id), SlotSet("language", language)]
+            return [SlotSet("name", name), SlotSet("Id", Id), SlotSet("language", language)]
         except:
             print("This is an error!")
 
@@ -104,23 +98,34 @@ class ActionTellSubjects(Action):
         if tracker.get_intent_of_latest_message() == "user_greet":
             return []
 
+        sender_id = tracker.sender_id
+
         user_language, response_query = get_language_and_response(tracker)
 
         message = response_query['action_ask_subject']
 
-        _, subject_dict = main.get_subjects()
+        _, subject_dict = query_db.get_subjects()
 
-        fixed_subjects = subject_dict[dict_vars['subject_idx']]
+        user_interaction[sender_id] = 0 if user_interaction.get(
+            sender_id, None) == None else user_interaction[sender_id]
 
+        fixed_subjects = subject_dict[user_interaction[sender_id]]
+
+        # subject[0]:str is the name of the subject
+        # subjects["choices"][user_language][subject[0]]:str is the translated name of the respective subject[0]
         buttons = [{'title': subjects["choices"][user_language][subject[0]],
                     'payload': '/inform_new{"subject":"'+subject[0]+'"}'} for subject in fixed_subjects]
 
-        if dict_vars['subject_idx'] == 0:
+        if user_interaction[sender_id] == 0:
             buttons.append(
                 {"title": random.choice(message["next"]), "payload": '/next_option{"subject":"None"}'})
         else:
             buttons.append(
                 {"title": random.choice(message["back"]), "payload": '/next_option{"subject":"BACK"}'})
+
+        if len(sender_id) < Id.TELEGRAM_UUID_LENGTH.value:
+            buttons.append(
+                {"title": 'STOP', "payload": '/user_stop{"subject":"STOP"}'})
 
         user_input = tracker.latest_message.get('text')
 
@@ -136,7 +141,6 @@ class ActionTellSubjects(Action):
         if subject_found is not None and not user_input.startswith('/'):
 
             if common_value >= 70:
-                print("common_value is: ", common_value)
                 my_dict = subjects["choices"][user_language]
                 dispatcher.utter_message(
                     f'{random.choice(message["found"])} {subject_found!r}')
@@ -174,7 +178,7 @@ class ActionGiveSuggestion(Action):
 
         message = response_query['action_give_suggestion']
 
-        subs = main.get_subjects(collection_name='subjects')
+        subs = query_db.get_subjects(collection_name='subjects')
 
         buttons = [{"title": sub, "payload": '/inform_new{"subject":"'+sub+'"}'}
                    for sub in subs]
@@ -199,27 +203,45 @@ class ActionTellTopics(Action):
         message = response_query['action_ask_topic']
 
         subject = tracker.get_slot('subject')
+        sender_id = tracker.sender_id
 
-        topic_length, topic_dict = main.get_topics(
-            subject, user_language)  # List[List]
+        subject_from_entity = tracker.get_slot('subject_from_entity')
+
+        user_interaction[sender_id] = 0 if user_interaction.get(
+            sender_id, None) == None else user_interaction[sender_id]
+
+        if len(sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
+            dispatcher.utter_message(
+                text=f"The language is {subject_from_entity}")
+            subject_from_enum = Id[subject_from_entity].value
+            topic_length, topic_dict = query_db.get_topics_android(
+                subject, subject_from_enum)
+        else:
+            language_from_enum = Id[user_language].value
+            topic_length, topic_dict = query_db.get_topics_telegram(
+                subject, language_from_enum)  # List[List]
 
         if not topic_dict:
             dispatcher.utter_message(
                 text=random.choice(message['not_available']))
             return [SlotSet('topic', 'NOT AVAILABLE'), SlotSet('question', 'NOT AVAILABLE')]
 
-        topics = topic_dict[dict_vars['topic_idx']]
+        topics = topic_dict[user_interaction[sender_id]]
 
         buttons = [{'title': topic[0],
                     'payload': '/inform_new{"topic":"'+topic[1]+'"}'} for topic in topics]
 
-        if dict_vars['topic_idx'] != 0:
+        if user_interaction[sender_id] != 0:
             buttons.append(
                 {"title": random.choice(message["back"]), "payload": '/next_option{"topic":"BACK"}'})
 
-        if len(topics) >= ID.TOPIC_BUTTONS.value and topics != topic_dict[-1]:
+        if len(topics) >= Id.TOPIC_BUTTONS.value and topics != topic_dict[-1]:
             buttons.append(
                 {"title": random.choice(message["next"]), "payload": '/next_option{"topic":"None"}'})
+
+        if len(sender_id) < Id.TELEGRAM_UUID_LENGTH.value:
+            buttons.append(
+                {"title": 'STOP', "payload": '/user_stop{"subject":"topic"}'})
 
         response = random.choice(message['topic'])
 
@@ -242,23 +264,31 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
-        intent_value = tracker.get_intent_of_latest_message()
+        user_intent = tracker.get_intent_of_latest_message()
+        sender_id = tracker.sender_id
 
-        if intent_value == "next_option":
+        def next_option() -> Dict[Text, Any]:
             if slot_value == "BACK":
-                dict_vars['subject_idx'] -= 1
+                user_interaction[sender_id] -= 1
                 return {'subject': None}
 
-            dict_vars['subject_idx'] += 1
+            user_interaction[sender_id] += 1
             return {'subject': None}
 
-        elif intent_value == "user_deny":
+        def user_deny() -> Dict[Text, Any]:
             return {'subject': None}
 
-        dict_vars['subject_idx'] = 0
+        def user_stop() -> Dict[Text, Any]:
+            return {'subject': 'STOP', 'topic': 'STOP', 'question': 'STOP'}
 
-        sender_id = tracker.sender_id
-        dict_vars[sender_id] = 0
+        functions_available = {'next_option': next_option,
+                               'user_deny': user_deny, 'user_stop': user_stop}
+
+        if user_intent in functions_available:
+            return functions_available[user_intent]()
+
+        # user_interaction[sender_id] needed only for respective session
+        user_interaction.pop(sender_id)
 
         return {'subject': slot_value}
 
@@ -270,22 +300,33 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
-        intent_value = tracker.get_intent_of_latest_message()
+        user_intent = tracker.get_intent_of_latest_message()
+        sender_id = tracker.sender_id
 
-        if intent_value == "next_option":
+        def next_option() -> Dict[Text, Any]:
             if slot_value == "BACK":
-                dict_vars['topic_idx'] -= 1
+                user_interaction[sender_id] -= 1
                 return {'topic': None}
 
-            dict_vars['topic_idx'] += 1
+            user_interaction[sender_id] += 1
             return {'topic': None}
 
-        elif intent_value == "user_deny":
+        def user_deny() -> Dict[Text, Any]:
             return {'topic': None}
 
-        dict_vars['topic_idx'] = 0  # reset to start again
+        def user_stop() -> Dict[Text, Any]:
+            return {'topic': 'STOP', 'question': 'STOP'}
 
-        if len(tracker.sender_id) < ID.ANDROID_UUID_LENGTH.value:
+        functions_available = {'next_option': next_option,
+                               'user_deny': user_deny, 'user_stop': user_stop}
+
+        if user_intent in functions_available:
+            return functions_available[user_intent]()
+
+        # user_interaction[sender_id] needed only for respective session
+        user_interaction.pop(sender_id)
+
+        if len(sender_id) < Id.ANDROID_UUID_LENGTH.value:
             return {'topic': slot_value, 'question': None}
 
         return {'topic': slot_value}
@@ -300,10 +341,7 @@ class ActionCleanEntity(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        # reset dict before activation of form
-
-        dict_vars['idx'] = 0
-        dict_vars['subject_idx'] = 0
+        # clean subject and topic slot before activation of form
 
         return [SlotSet("subject", None), SlotSet("topic", None)]
 
@@ -316,6 +354,8 @@ class ActionCleanFeedbackformSlots(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # clean feedback and confirm_feedback slot before activation of form
 
         return [SlotSet("feedback", None), SlotSet("confirm_feedback", None)]
 
@@ -348,7 +388,7 @@ class ActionSetReminder(Action):
             return []
 
         time_object = dt.strptime(reminder_time, "%Y-%m-%dT%H:%M:%S.%f%z")
-        print(f'{time_object=}')
+
         dispatcher.utter_message(
             f'{random.choice(message["remind"])} {time_object.time()}.')
 
@@ -398,6 +438,8 @@ class ActionCleanTimeSlot(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
+        # clean time slot to use the slot for futher interactions
+
         return [SlotSet('time', None)]
 
 
@@ -416,6 +458,7 @@ class ForgetReminders(Action):
 
         dispatcher.utter_message(text=random.choice(message))
 
+        # ReminderCancelled event to cancel the reminder
         return [ReminderCancelled()]
 
 
@@ -437,7 +480,8 @@ class ActionGiveProgress(Action):
 
         user_id = tracker.sender_id
 
-        final_path, image_url = plot.image_url(user_id, current_time=dt.now())
+        final_path, image_url = plot.image_url(
+            user_id, user_language, current_time=dt.now())
 
         dispatcher.utter_message(
             text=f'{random.choice(message["message2"])}:', image=image_url)
@@ -626,7 +670,7 @@ class ActionShowFeatures(Action):
         # user_id = tracker.sender_id
 
         user_id = str(tracker.sender_id)
-        print(type(user_id))
+
         student_data = pd.read_excel('actions/student_db_new.xlsx')
         student_data = student_data.loc[:, ~
                                         student_data.columns.str.contains('^Unnamed')]  # removing "Unnamed" column
@@ -652,7 +696,7 @@ class ActionShowFeatures(Action):
         message_response = message["start"] if tracker.get_intent_of_latest_message(
         ) == "start" else message_response
 
-        if len(tracker.sender_id) > ID.TELEGRAM_UUID_LENGTH.value:
+        if len(tracker.sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
             buttons = [
                 {'title': random.choice(
                     message["activity"]), 'payload': '/ask_for_suggestion'},
@@ -708,7 +752,7 @@ class ActionExplainQuestionTypes(Action):
 
         message = response_query['action_explain_question_types']
 
-        if len(tracker.sender_id) <= ID.ANDROID_UUID_LENGTH.value:
+        if len(tracker.sender_id) <= Id.ANDROID_UUID_LENGTH.value:
             buttons = [
                 {'title': random.choice(
                     message["1"]), 'payload': '/ask_types{"type":"MCQ"}'},
@@ -819,10 +863,13 @@ class ActionContinue(Action):
             if topic_dictionary[user_language].get(sender_id, None) == None:
                 topic_dictionary[user_language][sender_id] = {}
 
-            if score_ratio <= 0.7:
+            if score_ratio <= Id.IMPROVEMENT_SUGGESTION_RATIO.value:
                 topic_dictionary[user_language][sender_id][topic_completed] = topic_id
 
-            print(data)
+            else:
+                # remove topic from dictionary if user gets good score
+                _ = topic_dictionary[user_language][sender_id].pop(
+                    topic_completed, None)
 
             with open('actions/improvements.json', 'w') as file:
                 json.dump(data, file)
@@ -852,19 +899,27 @@ class ActionAskQuestion(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        load_dotenv()
+
         user_language, response_query = get_language_and_response(tracker)
 
         message = response_query['validate_question']
 
         topic_id = tracker.get_slot('topic')
 
+        sender_id = tracker.sender_id
+
+        user_interaction[sender_id] = 0 if user_interaction.get(
+            sender_id, None) == None else user_interaction[sender_id]
+
         # Base condition to check if Telegram user or Android user
-        if len(tracker.sender_id) > ID.TELEGRAM_UUID_LENGTH.value:
+        if len(sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
             dispatcher.utter_message(text=random.choice(
                 response_query["good_time"]))
             return [SlotSet("question", "ANDROID APP")]
 
-        question_count, questions_available = main.get_questions(topic_id)
+        question_count, questions_available, question_intro = query_db.get_questions(
+            topic_id)
 
         if question_count == 0:
             dispatcher.utter_message(
@@ -872,25 +927,25 @@ class ActionAskQuestion(Action):
             dispatcher.utter_message(text=random.choice(message["add_soon"]))
             return [SlotSet('question', 'NOT AVAILABLE')]
 
-        sender_id = tracker.sender_id
+        if user_interaction[sender_id] == 0 and question_intro:
+            dispatcher.utter_message(text=question_intro['introduction'])
+            if question_intro.get('link', None) != None:
+                dispatcher.utter_message(text=question_intro['link'])
+            if question_intro.get('file', None) != None:
+                file_split = question_intro['file'].split('5000')
+                link_secure = os.getenv('SECURE_HTTPS')
+                url_secure = link_secure+file_split[1]
+                dispatcher.utter_message(image=url_secure)
 
-        mcq_question = questions_available['mcq_question'][dict_vars[sender_id]].pop(
+        mcq_question = questions_available['mcq_question'][user_interaction[sender_id]].pop(
             0)
-        mcq_choices = questions_available['mcq_choices'][dict_vars[sender_id]].pop(
+        mcq_choices = questions_available['mcq_choices'][user_interaction[sender_id]].pop(
             0)
-        file = questions_available['file'][dict_vars[sender_id]].pop(0)
+        file = questions_available['file'][user_interaction[sender_id]].pop(0)
 
+        # option{idx+1} gives option1, option2,... as the payload for the respective choices
         buttons = [{"title": choice, "payload": f"option{idx+1}"}
                    for idx, choice in enumerate(mcq_choices)]
-
-        # mcq_question = questions_available['mcq_question'][dict_vars['idx']].pop(
-        #     0)
-        # mcq_choices = questions_available['mcq_choices'][dict_vars['idx']].pop(
-        #     0)
-        # file = questions_available['file'][dict_vars['idx']].pop(0)
-
-        # buttons = [{"title": choice, "payload": f"option{idx+1}"}
-        #            for idx, choice in enumerate(mcq_choices)]
 
         buttons_new = []
         true_false_question_type = False
@@ -909,10 +964,10 @@ class ActionAskQuestion(Action):
 
         if file != '':
             split_file = file.split('5000')
-            secure_link = 'https://goy0tnphpd.execute-api.eu-central-1.amazonaws.com'
+            secure_link = os.getenv('SECURE_HTTPS')
             secure_file_url = secure_link+split_file[1]
 
-        # file = 'https://goy0tnphpd.execute-api.eu-central-1.amazonaws.com/api/openEnded/getImage/1660826908189mona_lisa,_by_leonardo_da_vinci,_from_c2rmf_retouched.jpg'
+        # file = os.getenv('SECURE_HTTPS')+'/api/openEnded/getImage/1660826908189mona_lisa,_by_leonardo_da_vinci,_from_c2rmf_retouched.jpg'
 
         # dispatcher.utter_message(image=secure_file_url)
         # dispatcher.utter_message(text=mcq_question)
@@ -949,19 +1004,32 @@ class ValidateQuestionsForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
+        intent_value = tracker.get_intent_of_latest_message()
+
+        # exit form if user doesn't want to continue
+        if intent_value == "user_stop":
+            _, response_query = get_language_and_response(tracker)
+
+            message = response_query['action_done']
+
+            dispatcher.utter_message(
+                text=random.choice(message["done"]))
+
+            return {'question': 'STOP'}
+
         user_language, response_query = get_language_and_response(tracker)
 
         message = response_query['validate_question']
 
         sender_id = tracker.sender_id
 
-        if len(sender_id) > ID.TELEGRAM_UUID_LENGTH.value:
+        if len(sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
             dispatcher.utter_message(random.choice(
                 response_query["good_time"]))
             return {'question': 'ANDROID_APP'}
 
         topic_id = tracker.get_slot('topic')
-        question_count, questions_available = main.get_questions(
+        question_count, questions_available, _ = query_db.get_questions(
             topic_id)
 
         if question_count == 0:
@@ -973,12 +1041,19 @@ class ValidateQuestionsForm(FormValidationAction):
         if slot_value.startswith('/inform_new'):
             return {'question': None}
 
-        right_answer = questions_available['right_answer'][dict_vars[sender_id]].pop(
+        right_answer = questions_available['right_answer'][user_interaction[sender_id]].pop(
             0)
-        pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars[sender_id]].pop(
+        pos_feedback = questions_available['feedback']['pos_feedback'][user_interaction[sender_id]].pop(
             0)
-        neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars[sender_id]].pop(
+        neg_feedback = questions_available['feedback']['neg_feedback'][user_interaction[sender_id]].pop(
             0)
+
+        # right_answer = questions_available['right_answer'][dict_vars[sender_id]].pop(
+        #     0)
+        # pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars[sender_id]].pop(
+        #     0)
+        # neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars[sender_id]].pop(
+        #     0)
 
         if slot_value.startswith('/inform_new'):
             return {'question': None}
@@ -987,11 +1062,11 @@ class ValidateQuestionsForm(FormValidationAction):
         else:
             dispatcher.utter_message(text=neg_feedback)
 
-        if dict_vars[sender_id] < question_count-1:
-            dict_vars[sender_id] += 1
+        if user_interaction[sender_id] < question_count-1:
+            user_interaction[sender_id] += 1
             return {'question': None}
 
-        # dict_vars['idx'] = 0  # reset value of idx for the next interaction
-        dict_vars.pop(sender_id)
+        # user_interaction[sender_id] needed only for respective session
+        user_interaction.pop(sender_id)
 
         return {'question': 'FILLED'}
