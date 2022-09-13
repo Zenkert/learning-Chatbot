@@ -39,39 +39,34 @@
                     "These are some of the subjects available. You can select one: ",
                     "I can provide you with diverse subjects. Here are some of them: ",
                     "I have so many interesting subjects. Please choose one: ",
-                    "I heard Math is really interesting. There is also Math involved in developing me. You can select it and see if you'll like it",
-                    "Math is one of my favorite subjects. I suggest you to try it out sometime. You'll have fun",
-                    "Here are some of the subjects. I like Math very much because it is very interesting. I believe you'll find it interesting as well",
-                    "These are some of the subjects available. Technology is a very intriguing subject. You can learn about many advancements from this subject",
-                    "Technology is one of the fun subjects to learn. Maybe you'll like it. And there are many other subjects available to you as well",
-                    "In this decade Technology is growing rapidly. You can solve the activity to learn more about this subject",
-                    "These are some of the options. Also I want to tell you that Psychology is the scientific study of the ways that people think, feel, and behave. It is an interesting subject",
-                    "I found some interesting definition for you - Psychology is the scientific study of the mind and behavior. Psychologists are actively involved in studying and understanding mental processes, brain functions, and behavior. Maybe this might interest you in doing an activity regarding Psychology :)",
-                    "Chemistry is the branch of science and is closely related to physics. Sometimes chemistry is called the \"central science\" because it is an important part of other major sciences such as biology, Earth science, and physics. Scientists who specialize in chemistry are called chemists. Maybe this might interest you :)",
-                    "Are you interested in Chemistry? Chemistry is a branch of science that studies what everything is made of and how it works. Cooking and making ice are chemistry as well as medicines and paint. You can find more about selecting this subject",
-                    "Language is one of the fun subjects. You can learn more by doing the activity. Also I have something to tell you. I can converse in 4 different languages - English, German, Greek, Spanish",
-                    "You can select a subject from below. Also, do you know that Written language is separate from spoken language. Children learn to speak without any special training. But reading and writing—written language—have to be specially taught. I find this interesting. Language is one of the fun subjects to learn. Maybe you can learn it sometime by doing the activity :)",
-                    "I think Business is one of the subjects everyone should learn. It might interest you if you try to do an activity"
-                ],
-                "choose": [
-                    "Please choose a subject: ",
-                    "Here are some more options for you: ",
+                    "Please choose a subject from the options below: ",
+                    "Here are some options for you to choose: ",
+                    "These are the subjects I have. Please choose one: ",
                     "You can choose a subject from the options below: ",
                     "You might find these subjects interesting: ",
-                    "Do you know that History is the study of the past? The study of history helps make sense of humankind. It also helps people understand the things that happen today and that may happen in the future. People trained in history are called historians.",
-                    "History is the story of the people on our planet. It is the human story. The story of everything that people have ever done since recognizable humans first evolved. Isn't it interesting?",
-                    "I found this fact very interesting - The first humans emerged in Africa around two million years ago, long before the modern humans known as Homo sapiens appeared on the same continent. You can also learn such things by doing the activity",
-                    "Before selecting a subject, I have something for you. Biology is the study of living things. A biologist is a scientist who studies biology. I also find this subject interesting",
-                    "A biologist is a scientist who studies biology. Biologists try to understand the natural world and the things that live in it. These things include plants, animals, fungi, protozoa, algae, bacteria, and viruses. I think this might interest you in doing the activity in Biology. You can also select any subject you like :)",
-                    "Biology is a branch of science that deals with the study of living organisms like human beings, plants, and animals. This study of life includes the behavior and all other qualities of a specific living organism or a class of living organisms. I think this might interest you in doing the activity in Biology. You can also select any subject you like :)",
-                    "Do you know that Physics is the study of the relationship of objects, forces, and energy? Physics explains gravity, and the way things move, according to Newton's Laws of Motion. Let's see if you like Physics",
-                    "Physics is one of the major branches of science. People who work in physics are called physicists. Physicists study many different forms of energy. You can learn more by doing the activity",
-                    "Do you know that People who work in physics are called physicists? The objects that physicists study range in size from the tiny building blocks of matter to huge groups of stars. It is a very interesting subject",
-                    "The humanities are studies about human culture, such as literature, philosophy, and history. Studying the humanities gives you general knowledge. There are many topics available in this subject",
-                    "Did you know that Humanities include the study of ancient and modern languages, literature, philosophy, and others. Scholars in the humanities are \"humanities scholars\" or humanists.",
-                    "Here is something that might interest you - Humanities offer insight into nearly every aspect of life, they have been considered a core element of a well-rounded education since ancient times. Shall we learn about Humanities today?",
-                    "I find Art and Design interesting. It helps you develop creative skills. You can learn more by solving the activity",
-                    "Art and Design is an interesting subject. Art represents imagination and creativity while Design represents developing and applying ideas. I like to learn Art and Design someday. Maybe you can learn it today or you can choose a subject you like :)"
+                    "I have many interesting subjects for you. Please select one: ",
+                    "Please select a subject and I will provide you topics for that subject"
+                ],
+                "available_2": [
+                    "These are some of the other subjects available. You can select one: ",
+                    "I can provide you with more subjects. You can go back and select other subjects as well",
+                    "I have so many more interesting subjects for you. Please choose one: ",
+                    "Please choose a subject from the options below. You can go back to select other subjects as well",
+                    "Here are some other options for you to choose: ",
+                    "These are some of the other subjects I have. Please choose one: ",
+                    "You can choose a subject from the options below. You can go back to select other subjects as well",
+                    "You might find these other subjects interesting: ",
+                    "I have many more interesting subjects for you. Please select one: ",
+                    "Please select a subject and I will provide you topics for that subject"
+                ],
+                "choose": [
+                    "Great. Here are the options for you to choose",
+                    "I'm glad you want to learn more. Here are the subjects you can choose:",
+                    "Good you are learning more. Please select a subject: ",
+                    "Great, Please select a subject: ",
+                    "You can now select a different subject and learn new things",
+                    "You can learn a different subject. Here are the options:",
+                    "Maybe a different subject might interest you. Please select one from options below:"
                 ],
                 "yes": [
                     "Yes"
@@ -108,6 +103,61 @@
                     "Here are some possibilities I've got for you, some nice topics",
                     "Choose one to begin the activity. It appears that teachers have added additional topics"
                 ],
+                "sub_choice": {
+                    "Art and Design": [
+                        "Art and Design is an interesting subject. It helps you develop creative skills.",
+                        "I like Art and Design too :)",
+                        "Do you know that Art represents imagination and creativity while Design represents developing and applying ideas?"
+                    ],
+                    "Biology": [
+                        "Biology is the study of living things. A biologist is a scientist who studies biology.",
+                        "A biologist is a scientist who studies biology. Biologists try to understand the natural world and the things that live in it.",
+                        "Biology is a branch of science that deals with the study of living organisms like human beings, plants, and animals."
+                    ],
+                    "Business": [
+                        "Business is an interesting subject to learn.",
+                        "I like learning Business too :)"
+                    ],
+                    "Chemistry": [
+                        "Chemistry is a branch of science and is closely related to physics. Sometimes chemistry is called the \"central science\"",
+                        "Do you know that scientists who specialize in chemistry are called chemists?",
+                        "Chemistry is a branch of science that studies what everything is made of and how it works. Cooking and making ice are chemistry as well"
+                    ],
+                    "History": [
+                        "Do you know that History is the study of the past? The study of history helps make sense of humankind.",
+                        "History is the story of people on our planet and story of everything that people have ever done since recognizable humans first evolved.",
+                        "History is an interesting subject. You can learn so many things."
+                    ],
+                    "Humanities": [
+                        "Humanities offer insight into aspect of life. It is considered as a core element of a well-rounded education since ancient times.",
+                        "Humanities is the study about human culture, such as literature, philosophy, and history.",
+                        "Humanities include the study of ancient and modern languages, literature, philosophy, and others."
+                    ],
+                    "Language": [
+                        "Language is one of the fun subjects to learn.",
+                        "Fact: Children learn to speak without any special training. But reading and writing has to be specially taught."
+                    ],
+                    "Math": [
+                        "Math is a really interesting subject. There is also Math involved in developing me :)",
+                        "I like Math too :)",
+                        "Math is really fun to learn. It is very interesting",
+                        "Math is really fun and interesting to learn"
+                    ],
+                    "Physics": [
+                        "Physics is the study of the relationship of objects, forces, and energy.",
+                        "Physics is one of the major branches of science. People who work in physics are called physicists.",
+                        "Physics is a very interesting subject"
+                    ],
+                    "Psychology": [
+                        "Psychology is the scientific study of the ways that people think, feel, and behave. It is an interesting subject",
+                        "Psychology is the study of the mind and behavior. Psychologists study and understand mental processes, brain functions, and behavior."
+                    ],
+                    "Technology": [
+                        "Technology is a very intriguing subject. You can learn about many advancements from this subject",
+                        "Technology is one of the fun subjects. You have so many things to learn.",
+                        "In this decade Technology is growing rapidly. You'll have a good time learning it!"
+                    ]
+                },
                 "not_available": [
                     "Sorry, no topics are available for this subject yet."
                 ],
@@ -508,43 +558,37 @@
                     "Ich werde meine Datenbank abfragen über"
                 ],
                 "available": [
-                    "Dies sind einige der verfügbaren Themen",
                     "Dies sind einige der verfügbaren Themen. Sie können eines auswählen: ",
                     "Ich kann Ihnen verschiedene Themen anbieten. Hier sind einige von ihnen: ",
                     "Ich habe so viele interessante Themen. Bitte wählen Sie eines aus: ",
-                    "Ich habe gehört, dass Mathe sehr interessant ist. Auch bei meiner Entwicklung spielt Mathe eine Rolle. Du kannst es auswählen und sehen, ob es dir gefällt",
-                    "Mathe ist eines meiner Lieblingsfächer. Ich empfehle dir, es einmal auszuprobieren. Es wird dir Spaß machen",
-                    "Hier sind einige der Fächer. Ich mag Mathe sehr gerne, weil es sehr interessant ist. Ich glaube, du wirst es auch interessant finden",
-                    "Das sind einige der verfügbaren Fächer. Technik ist ein sehr interessantes Fach. In diesem Fach kann man viel über den Fortschritt lernen",
-                    "Technik ist eines der Fächer, die Spaß machen. Vielleicht wird es dir gefallen. Und es gibt auch noch viele andere Fächer, die man wählen kann",
-                    "In diesem Jahrzehnt wächst die Technik rasant. Du kannst die Aufgabe lösen, um mehr über dieses Thema zu erfahren",
-                    "Das sind einige der Möglichkeiten. Ich möchte Ihnen auch sagen, dass Psychologie die wissenschaftliche Untersuchung der Art und Weise ist, wie Menschen denken, fühlen und sich verhalten. Das ist ein interessantes Thema",
-                    "Ich habe eine interessante Definition für Sie gefunden - Psychologie ist die wissenschaftliche Untersuchung des Geistes und des Verhaltens. Psychologen befassen sich aktiv mit der Untersuchung und dem Verständnis mentaler Prozesse, der Gehirnfunktionen und des Verhaltens. Vielleicht interessiert dich das für eine Aktivität zum Thema Psychologie :)",
-                    "Chemie ist ein Wissenschaftszweig, der eng mit der Physik verbunden ist. Manchmal wird die Chemie als \"zentrale Wissenschaft\" bezeichnet, weil sie ein wichtiger Bestandteil anderer wichtiger Wissenschaften wie Biologie, Geowissenschaften und Physik ist. Wissenschaftler, die sich auf Chemie spezialisieren, werden Chemiker genannt. Das könnte Sie vielleicht interessieren :)",
-                    "Interessierst du dich für Chemie? Chemie ist ein Wissenschaftszweig, der untersucht, woraus alles besteht und wie es funktioniert. Kochen und Eisherstellung gehören zur Chemie, ebenso wie Medikamente und Farben. Du kannst mehr über die Wahl dieses Faches erfahren",
-                    "Sprache ist eines der lustigsten Fächer. Du kannst mehr lernen, wenn du die Aktivitäten machst. Auch ich habe dir etwas zu erzählen. Ich kann mich in 4 verschiedenen Sprachen unterhalten - Englisch, Deutsch, Griechisch, Spanisch",
-                    "Du kannst ein Fach von unten auswählen. Wussten Sie auch, dass die geschriebene Sprache von der gesprochenen Sprache getrennt ist. Kinder lernen das Sprechen ohne besondere Ausbildung. Aber Lesen und Schreiben - die Schriftsprache - müssen speziell unterrichtet werden. Ich finde das interessant. Sprache ist eines der Fächer, die Spaß machen. Vielleicht kannst du es irgendwann lernen, indem du diese Aktivität machst :)",
-                    "Ich denke, Wirtschaft ist eines der Fächer, die jeder lernen sollte. Es könnte dich interessieren, wenn du versuchst, eine Aktivität zu machen"
+                    "Bitte wählen Sie ein Thema aus den unten stehenden Optionen: ",
+                    "Hier sind einige Optionen, die Sie auswählen können: ",
+                    "Das sind die Themen, die ich habe. Bitte wählen Sie eines aus: ",
+                    "Sie können ein Thema aus den unten stehenden Optionen wählen: ",
+                    "Diese Themen könnten für Sie interessant sein: ",
+                    "Ich habe viele interessante Themen für Sie. Bitte wählen Sie eines aus: ",
+                    "Bitte wählen Sie ein Thema aus und ich werde Ihnen Themen zu diesem Thema anbieten"
+                ],
+                "available_2": [
+                    "Dies sind einige der anderen verfügbaren Themen. Sie können eines auswählen: ",
+                    "Ich kann Ihnen weitere Fächer anbieten. Sie können zurückgehen und auch andere Fächer wählen",
+                    "Ich habe noch so viele weitere interessante Themen für Sie. Bitte wählen Sie eines aus: ",
+                    "Bitte wählen Sie ein Thema aus den unten stehenden Optionen. Sie können auch zurückgehen und andere Fächer auswählen",
+                    "Hier sind einige andere Optionen, die Sie auswählen können: ",
+                    "Dies sind einige der anderen Fächer, die ich habe. Bitte wählen Sie eines aus: ",
+                    "Sie können ein Fach aus den unten stehenden Optionen wählen. Sie können auch zurückgehen, um andere Fächer zu wählen",
+                    "Diese anderen Fächer könnten für Sie interessant sein: ",
+                    "Ich habe viele weitere interessante Themen für Sie. Bitte wählen Sie eines aus: ",
+                    "Bitte wählen Sie ein Thema aus und ich werde Ihnen Themen zu diesem Thema anbieten"
                 ],
                 "choose": [
-                    "Bitte wählen Sie ein Thema:",
-                    "Hier sind noch ein paar Optionen für Sie: ",
-                    "Sie können ein Thema aus den unten stehenden Optionen wählen: ",
-                    "Diese Fächer könnten Sie interessieren: ",
-                    "Wussten Sie, dass Geschichte die Lehre von der Vergangenheit ist? Das Studium der Geschichte trägt dazu bei, den Sinn der Menschheit zu verstehen. Sie hilft den Menschen auch, die Dinge zu verstehen, die heute passieren und die in der Zukunft passieren könnten. Geschichtswissenschaftler werden Historiker genannt.",
-                    "Geschichte ist die Geschichte der Menschen auf unserem Planeten. Es ist die menschliche Geschichte. Die Geschichte von allem, was die Menschen je getan haben, seit sich erkennbare Menschen entwickelt haben. Ist das nicht interessant?",
-                    "Ich fand diese Tatsache sehr interessant: Die ersten Menschen tauchten vor etwa zwei Millionen Jahren in Afrika auf, lange bevor der moderne Mensch, bekannt als Homo sapiens, auf demselben Kontinent auftauchte. Solche Dinge kann man auch lernen, wenn man die Aktivität durchführt",
-                    "Bevor du ein Thema auswählst, habe ich etwas für dich. Biologie ist die Lehre von den Lebewesen. Ein Biologe ist ein Wissenschaftler, der Biologie studiert. Ich finde dieses Fach auch sehr interessant",
-                    "Ein Biologe ist ein Wissenschaftler, der sich mit Biologie beschäftigt. Biologen versuchen, die natürliche Welt und die Dinge, die in ihr leben, zu verstehen. Zu diesen Dingen gehören Pflanzen, Tiere, Pilze, Protozoen, Algen, Bakterien und Viren. Ich denke, das könnte dich interessieren, wenn du die Aktivität in Biologie machst. Du kannst aber auch jedes andere Fach wählen, das dir gefällt :)",
-                    "Die Biologie ist ein Wissenschaftszweig, der sich mit dem Studium von lebenden Organismen wie Menschen, Pflanzen und Tieren beschäftigt. Dieses Studium des Lebens umfasst das Verhalten und alle anderen Eigenschaften eines bestimmten lebenden Organismus oder einer Klasse von lebenden Organismen. Ich denke, das könnte Sie interessieren, wenn Sie die Aktivität in Biologie durchführen. Du kannst aber auch ein anderes Fach wählen :)",
-                    "Wusstest du, dass Physik die Lehre von den Beziehungen zwischen Objekten, Kräften und Energie ist? Physik erklärt die Schwerkraft und die Art und Weise, wie sich Dinge bewegen, gemäß den Newtonschen Bewegungsgesetzen. Mal sehen, ob du Physik magst",
-                    "Die Physik ist einer der wichtigsten Zweige der Wissenschaft. Menschen, die in der Physik arbeiten, werden Physiker genannt. Physiker untersuchen viele verschiedene Formen von Energie. Du kannst mehr lernen, wenn du die Aktivität machst",
-                    "Wusstest du, dass man Menschen, die in der Physik arbeiten, Physiker nennt? Die Objekte, die Physiker untersuchen, reichen von winzigen Bausteinen der Materie bis hin zu riesigen Sternengruppen. Es ist ein sehr interessantes Fach",
-                    "Geisteswissenschaften sind Studien über die menschliche Kultur, wie Literatur, Philosophie und Geschichte. Durch das Studium der Geisteswissenschaften erwirbt man Allgemeinwissen. Es gibt viele Themen in diesem Fach",
-                    "Wussten Sie, dass die Geisteswissenschaften das Studium der alten und modernen Sprachen, der Literatur, der Philosophie und anderer Bereiche umfassen? Geisteswissenschaftler sind \"Geisteswissenschaftler\" oder Humanisten.",
-                    "Das könnte Sie interessieren - Geisteswissenschaften bieten Einblicke in fast jeden Aspekt des Lebens und gelten seit der Antike als Kernelement einer umfassenden Bildung. Sollen wir heute etwas über Geisteswissenschaften lernen?",
-                    "Ich finde Kunst und Design interessant. Es hilft einem, kreative Fähigkeiten zu entwickeln. Man kann mehr lernen, wenn man eine Aufgabe löst",
-                    "Kunst und Design ist ein interessantes Fach. Kunst steht für Fantasie und Kreativität, während Design für die Entwicklung und Anwendung von Ideen steht. Ich würde gerne eines Tages Kunst und Design lernen. Vielleicht kannst du es heute lernen oder du kannst ein Fach wählen, das dir gefällt :)"
+                    "Großartig. Hier sind die Optionen, die Sie auswählen können",
+                    "Ich freue mich, dass Sie mehr lernen wollen. Hier sind die Themen, die Sie wählen können:",
+                    "Gut, dass Sie mehr lernen wollen. Bitte wählen Sie ein Fach: ",
+                    "Gut, bitte wählen Sie ein Thema: ",
+                    "Sie können jetzt ein anderes Fach wählen und neue Dinge lernen",
+                    "Sie können ein anderes Thema lernen. Hier sind die Möglichkeiten:",
+                    "Vielleicht interessiert Sie ein anderes Fach. Bitte wählen Sie eine der folgenden Optionen:"
                 ],
                 "yes": [
                     "Ja"
@@ -605,7 +649,62 @@
                 ],
                 "back": [
                     "ZURÜCK"
-                ]
+                ],
+                "sub_choice": {
+                    "Art and Design": [
+                        "Kunst und Design ist ein interessantes Fach. Es hilft einem, kreative Fähigkeiten zu entwickeln.",
+                        "Ich mag Kunst und Design auch :)",
+                        "Wusstest du, dass Kunst für Fantasie und Kreativität steht, während Design für die Entwicklung und Anwendung von Ideen steht?"
+                    ],
+                    "Biology": [
+                        "Biologie ist das Studium der Lebewesen. Ein Biologe ist ein Wissenschaftler, der Biologie studiert.",
+                        "Ein Biologe ist ein Wissenschaftler, der sich mit der Biologie beschäftigt. Biologen versuchen, die natürliche Welt und die Dinge, die in ihr leben, zu verstehen.",
+                        "Die Biologie ist ein Wissenschaftszweig, der sich mit dem Studium von Lebewesen wie Menschen, Pflanzen und Tieren beschäftigt."
+                    ],
+                    "Business": [
+                        "Wirtschaft ist ein interessantes Fach, das man lernen kann.",
+                        "Ich lerne auch gerne Wirtschaft :)"
+                    ],
+                    "Chemistry": [
+                        "Chemie ist ein Wissenschaftszweig, der eng mit der Physik verbunden ist. Manchmal wird die Chemie als \"zentrale Wissenschaft\" bezeichnet",
+                        "Wussten Sie, dass Wissenschaftler, die sich auf Chemie spezialisiert haben, Chemiker genannt werden?",
+                        "Die Chemie ist ein Wissenschaftszweig, der untersucht, woraus alles besteht und wie es funktioniert. Kochen und Eis machen gehören auch zur Chemie."
+                    ],
+                    "History": [
+                        "Wusstest du, dass Geschichte die Lehre von der Vergangenheit ist? Das Studium der Geschichte hilft, den Sinn der Menschheit zu verstehen.",
+                        "Geschichte ist die Geschichte der Menschen auf unserem Planeten und die Geschichte von allem, was die Menschen je getan haben, seit sich erkennbare Menschen entwickelt haben.",
+                        "Geschichte ist ein interessantes Fach. Man kann so viele Dinge lernen."
+                    ],
+                    "Humanities": [
+                        "Die Geisteswissenschaften bieten einen Einblick in alle Aspekte des Lebens. Sie werden seit der Antike als Kernelement einer umfassenden Bildung betrachtet.",
+                        "Geisteswissenschaften ist das Studium der menschlichen Kultur, wie Literatur, Philosophie und Geschichte.",
+                        "Die Geisteswissenschaften umfassen das Studium der alten und modernen Sprachen, der Literatur, der Philosophie und anderer Gebiete."
+                    ],
+                    "Language": [
+                        "Sprache ist eines der lustigsten Fächer, die man lernen kann.",
+                        "Tatsache: Kinder lernen sprechen, ohne dass sie dafür besonders ausgebildet werden müssen. Aber Lesen und Schreiben muss speziell gelehrt werden."
+                    ],
+                    "Math": [
+                        "Mathe ist ein wirklich interessantes Fach. Mathe hat auch mit meiner Entwicklung zu tun :)",
+                        "Ich mag Mathe auch :)",
+                        "Mathe macht wirklich Spaß zu lernen. Es ist sehr interessant",
+                        "Mathe macht wirklich Spaß und ist interessant zu lernen"
+                    ],
+                    "Physics": [
+                        "Physik ist die Lehre von den Beziehungen zwischen Objekten, Kräften und Energie",
+                        "Physik ist einer der wichtigsten Zweige der Wissenschaft. Menschen, die in der Physik arbeiten, werden Physiker genannt.",
+                        "Physik ist ein sehr interessantes Fach"
+                    ],
+                    "Psychology": [
+                        "Psychologie ist die wissenschaftliche Untersuchung der Art und Weise, wie Menschen denken, fühlen und sich verhalten. Es ist ein interessantes Fach",
+                        "Psychologie ist das Studium des Geistes und des Verhaltens. Psychologen untersuchen und verstehen mentale Prozesse, Gehirnfunktionen und Verhalten."
+                    ],
+                    "Technology": [
+                        "Technologie ist ein sehr interessantes Thema. Man kann in diesem Fach viele Fortschritte kennen lernen",
+                        "Technik ist eines der interessantesten Fächer. Es gibt so viele Dinge zu lernen.",
+                        "In diesem Jahrzehnt entwickelt sich die Technik rasant. Du wirst viel Spaß beim Lernen haben!"
+                    ]
+                }
             },
             "action_ask_question": {
                 "true": [
@@ -1020,26 +1119,37 @@
                     "Arte y Diseño es una asignatura interesante. El arte representa la imaginación y la creatividad, mientras que el diseño representa el desarrollo y la aplicación de ideas. Me gustaría aprender Arte y Diseño algún día. Quizás puedas aprenderlo hoy o puedes elegir una asignatura que te guste :)"
                 ],
                 "available": [
-                    "Estos son algunos de los temas disponibles",
                     "Estos son algunos de los temas disponibles. Puede seleccionar uno: ",
                     "Puedo proporcionarle diversos temas. Estos son algunos de ellos: ",
                     "Tengo muchos temas interesantes. Por favor, elija uno: ",
-                    "He oído que las Matemáticas son muy interesantes. También hay Matemáticas en mi desarrollo. Puedes elegirla y ver si te gusta",
-                    "Las matemáticas son una de mis asignaturas favoritas. Te sugiero que la pruebes alguna vez. Te divertirás",
-                    "Estas son algunas de las asignaturas. Me gustan mucho las matemáticas porque son muy interesantes. Creo que a ti también te parecerá interesante",
-                    "Estas son algunas de las asignaturas disponibles. La tecnología es una asignatura muy interesante. Puedes conocer muchos avances gracias a esta asignatura",
-                    "La tecnología es una de las asignaturas más divertidas de aprender. Puede que te guste. Y también hay muchas otras asignaturas disponibles",
-                    "En esta década la Tecnología está creciendo rápidamente. Puedes resolver la actividad para aprender más sobre este tema",
-                    "Estas son algunas de las opciones. También quiero decirte que la Psicología es el estudio científico de la forma en que las personas piensan, sienten y se comportan. Es un tema interesante",
-                    "He encontrado una definición interesante para ti - La psicología es el estudio científico de la mente y el comportamiento. Los psicólogos se dedican a estudiar y comprender los procesos mentales, las funciones cerebrales y el comportamiento. Tal vez esto pueda interesarte para hacer una actividad relacionada con la Psicología :)",
-                    "La química es la rama de la ciencia y está estrechamente relacionada con la física. A veces se llama a la química la \"ciencia central\" porque es una parte importante de otras ciencias importantes como la biología, la ciencia de la Tierra y la física. Los científicos especializados en química se llaman químicos. Quizá esto te interese :)",
-                    "¿Te interesa la química? La química es una rama de la ciencia que estudia de qué está hecho todo y cómo funciona. La cocina y la fabricación de hielo son química, así como los medicamentos y la pintura. Puedes encontrar más información sobre la selección de esta asignatura",
-                    "La lengua es una de las asignaturas más divertidas. Puedes aprender más haciendo la actividad. Además, tengo algo que contarte. Puedo hablar en 4 idiomas diferentes: inglés, alemán, griego y español",
-                    "Puedes seleccionar un tema de los que aparecen a continuación. Además, ¿sabes que la lengua escrita es distinta de la lengua hablada? Los niños aprenden a hablar sin ninguna formación especial. Pero la lectura y la escritura -el lenguaje escrito- tienen que ser enseñadas especialmente. Esto me parece interesante. La lengua es una de las materias más divertidas de aprender. Quizá puedas aprenderla alguna vez haciendo la actividad :)",
-                    "Creo que Negocios es una de las asignaturas que todo el mundo debería aprender. Puede que te interese si intentas hacer una actividad"
+                    "Por favor, elija un tema de las opciones de abajo: ",
+                    "Aquí hay algunas opciones para que elijas: ",
+                    "Estos son los temas que tengo. Por favor, elija uno: ",
+                    "Puedes elegir un tema de las opciones de abajo: ",
+                    "Puedes encontrar estos temas interesantes: ",
+                    "Tengo muchos temas interesantes para ti. Por favor, seleccione uno: ",
+                    "Por favor, seleccione un tema y le proporcionaré temas para ese tema"
+                ],
+                "available_2": [
+                    "Estos son algunos de los otros temas disponibles. Puede seleccionar una: ",
+                    "Puedo proporcionarle más asignaturas. Puedes volver y seleccionar otras asignaturas también",
+                    "Tengo muchos más temas interesantes para ti. Por favor, elige uno: ",
+                    "Por favor, elija una asignatura de las opciones de abajo. Puedes volver a seleccionar otras asignaturas también",
+                    "Aquí tienes otras opciones para que elijas: ",
+                    "Estas son algunas de las otras asignaturas que tengo. Por favor, elija una: ",
+                    "Puedes elegir una asignatura de las opciones de abajo. Puedes volver a seleccionar otras asignaturas también",
+                    "Puedes encontrar estos otros temas interesantes: ",
+                    "Tengo muchos más temas interesantes para ti. Por favor, seleccione uno: ",
+                    "Por favor, seleccione un tema y le proporcionaré temas para ese tema"
                 ],
                 "choose": [
-                    "Por favor, elija un tema:"
+                    "Genial. Aquí están las opciones para que elijas",
+                    "Me alegro de que quieras aprender más. Aquí tienes los temas que puedes elegir:",
+                    "Me alegro de que quieras aprender más. Por favor, elige un tema: ",
+                    "Genial, por favor, selecciona un tema: ",
+                    "Ahora puedes seleccionar un tema diferente y aprender cosas nuevas",
+                    "Puedes aprender un tema diferente. Estas son las opciones:",
+                    "Tal vez un tema diferente pueda interesarte. Por favor, selecciona una de las opciones de abajo:"
                 ],
                 "yes": [
                     "Sí"
@@ -1084,7 +1194,62 @@
                 ],
                 "back": [
                     "VOLVER"
-                ]
+                ],
+                "sub_choice": {
+                    "Art and Design": [
+                        "Arte y Diseño es una asignatura interesante. Te ayuda a desarrollar habilidades creativas",
+                        "A mí también me gusta el Arte y el Diseño :)",
+                        "¿Sabes que el Arte representa la imaginación y la creatividad mientras que el Diseño representa el desarrollo y la aplicación de ideas?"
+                    ],
+                    "Biology": [
+                        "La biología es el estudio de los seres vivos. Un biólogo es un científico que estudia la biología",
+                        "Un biólogo es un científico que estudia la biología. Los biólogos tratan de entender el mundo natural y las cosas que viven en él",
+                        "La biología es una rama de la ciencia que se ocupa del estudio de los organismos vivos como los seres humanos, las plantas y los animales"
+                    ],
+                    "Business": [
+                        "Negocios es un tema interesante para aprender",
+                        "A mí también me gusta aprender Negocios :)"
+                    ],
+                    "Chemistry": [
+                        "La química es una rama de la ciencia y está estrechamente relacionada con la física. A veces se llama a la química la \"ciencia central\"",
+                        "¿Sabes que los científicos especializados en química se llaman químicos?",
+                        "La química es una rama de la ciencia que estudia de qué está hecho todo y cómo funciona. Cocinar y hacer hielo también son química"
+                    ],
+                    "History": [
+                        "¿Sabes que la Historia es el estudio del pasado? El estudio de la historia ayuda a dar sentido a la humanidad",
+                        "La historia es la historia de la gente en nuestro planeta y la historia de todo lo que la gente ha hecho desde que los humanos reconocibles evolucionaron por primera vez",
+                        "La historia es una asignatura interesante. Se pueden aprender muchas cosas"
+                    ],
+                    "Humanities": [
+                        "Las humanidades ofrecen una visión de los aspectos de la vida. Se considera un elemento central de una educación completa desde la antigüedad",
+                        "Las humanidades son el estudio sobre la cultura humana, como la literatura, la filosofía y la historia",
+                        "Las humanidades incluyen el estudio de las lenguas antiguas y modernas, la literatura y la filosofía, entre otros"
+                    ],
+                    "Language": [
+                        "La lengua es una de las asignaturas más divertidas de aprender",
+                        "Hecho: los niños aprenden a hablar sin ningún entrenamiento especial. Pero la lectura y la escritura tienen que ser especialmente enseñadas"
+                    ],
+                    "Math": [
+                        "Las matemáticas son una asignatura muy interesante. También hay Matemáticas en mi desarrollo :)",
+                        "A mí también me gustan las Matemáticas :)",
+                        "Las matemáticas son realmente divertidas de aprender. Es muy interesante",
+                        "Las matemáticas son muy divertidas e interesantes de aprender"
+                    ],
+                    "Physics": [
+                        "La física es el estudio de la relación de los objetos, las fuerzas y la energía",
+                        "La física es una de las principales ramas de la ciencia. Las personas que trabajan en física se llaman físicos",
+                        "La física es un tema muy interesante"
+                    ],
+                    "Psychology": [
+                        "La psicología es el estudio científico de la forma en que las personas piensan, sienten y se comportan. Es una asignatura interesante",
+                        "La psicología es el estudio de la mente y el comportamiento. Los psicólogos estudian y comprenden los procesos mentales, las funciones cerebrales y el comportamiento."
+                    ],
+                    "Tecnology": [
+                        "La tecnología es un tema muy intrigante. Puedes aprender sobre muchos avances de esta asignatura",
+                        "La tecnología es una de las asignaturas más divertidas. Tienes muchas cosas que aprender",
+                        "En esta década la Tecnología está creciendo rápidamente. Te lo pasarás bien aprendiéndola"
+                    ]
+                }
             },
             "action_ask_question": {
                 "true": [
@@ -1496,26 +1661,37 @@
                     "Η τέχνη και ο σχεδιασμός είναι ένα ενδιαφέρον θέμα. Η τέχνη αντιπροσωπεύει τη φαντασία και τη δημιουργικότητα, ενώ ο σχεδιασμός αντιπροσωπεύει την ανάπτυξη και την εφαρμογή ιδεών. Θα ήθελα να μάθω τέχνη και σχέδιο μια μέρα. Ίσως μπορείς να το μάθεις σήμερα ή μπορείς να διαλέξεις ένα θέμα που σου αρέσει :)"
                 ],
                 "available": [
-                    "Αυτά είναι μερικά από τα διαθέσιμα θέματα",
                     "Αυτά είναι μερικά από τα διαθέσιμα θέματα. Μπορείτε να επιλέξετε ένα: ",
-                    "Μπορώ να σας προσφέρω διάφορα θέματα. Εδώ είναι μερικά από αυτά: ",
-                    "Έχω τόσα πολλά ενδιαφέροντα θέματα. Επιλέξτε ένα: ",
-                    "Έχω ακούσει ότι τα μαθηματικά είναι πολύ ενδιαφέροντα. Τα μαθηματικά παίζουν επίσης ρόλο στην ανάπτυξή μου. Μπορείτε να το επιλέξετε και να δείτε αν σας αρέσει",
-                    "Τα μαθηματικά είναι ένα από τα αγαπημένα μου μαθήματα. Σας συνιστώ να το δοκιμάσετε μία φορά. Θα το απολαύσετε",
-                    "Εδώ είναι μερικά από τα θέματα. Μου αρέσουν πολύ τα μαθηματικά γιατί είναι πολύ ενδιαφέροντα. Νομίζω ότι θα το βρείτε κι εσείς ενδιαφέρον",
-                    "Αυτά είναι μερικά από τα θέματα που προσφέρονται. Η μηχανική είναι ένα πολύ ενδιαφέρον θέμα. Μπορείτε να μάθετε για πολλές εξελίξεις σε αυτό το θέμα",
-                    "Η μηχανική είναι ένα από τα διασκεδαστικά μαθήματα. Ίσως σας αρέσει. Και υπάρχουν επίσης πολλά άλλα θέματα που μπορείτε να επιλέξετε",
-                    "Σε αυτή τη δεκαετία, η τεχνολογία αναπτύσσεται ραγδαία. Μπορείτε να κάνετε την εργασία για να μάθετε περισσότερα για το θέμα αυτό",
-                    "Αυτές είναι μερικές από τις επιλογές. Θα ήθελα επίσης να σας πω ότι η ψυχολογία είναι η επιστημονική μελέτη του τρόπου με τον οποίο οι άνθρωποι σκέφτονται, αισθάνονται και συμπεριφέρονται. Είναι ένα ενδιαφέρον θέμα",
-                    "Βρήκα έναν ενδιαφέροντα ορισμό για εσάς: Ψυχολογία είναι η επιστημονική μελέτη του νου και της συμπεριφοράς. Οι ψυχολόγοι ασχολούνται ενεργά με τη μελέτη και την κατανόηση των νοητικών διεργασιών, των εγκεφαλικών λειτουργιών και της συμπεριφοράς. Μπορεί να το βρείτε ενδιαφέρον αν κάνετε μια δραστηριότητα για την ψυχολογία :)",
-                    "Η χημεία είναι ένας κλάδος της επιστήμης που συνδέεται στενά με τη φυσική. Μερικές φορές η χημεία αποκαλείται \"κεντρική επιστήμη\", επειδή αποτελεί σημαντικό συστατικό άλλων σημαντικών επιστημών, όπως η βιολογία, οι γεωεπιστήμες και η φυσική. Οι επιστήμονες που ειδικεύονται στη χημεία ονομάζονται χημικοί. Μπορεί να σας ενδιαφέρει αυτό :)",
-                    "Σας ενδιαφέρει η χημεία; Η χημεία είναι ένας κλάδος της επιστήμης που μελετά από τι είναι φτιαγμένα τα πάντα και πώς λειτουργούν. Το μαγείρεμα και η παρασκευή παγωτού είναι μέρος της χημείας, όπως και τα φάρμακα και τα χρώματα. Μπορείτε να μάθετε περισσότερα σχετικά με την επιλογή αυτού του θέματος",
-                    "Η γλώσσα είναι ένα από τα πιο διασκεδαστικά μαθήματα. Μπορείτε να μάθετε περισσότερα κάνοντας τη δραστηριότητα. Έχω επίσης κάτι να σας πω. Μπορώ να μιλήσω σε 4 διαφορετικές γλώσσες - αγγλικά, γερμανικά, ελληνικά, ισπανικά",
-                    "Μπορείτε να επιλέξετε ένα θέμα από τα παρακάτω. Γνωρίζατε επίσης ότι η γραπτή γλώσσα είναι ξεχωριστή από την προφορική γλώσσα. Τα παιδιά μαθαίνουν να μιλούν χωρίς ειδική εκπαίδευση. Αλλά η ανάγνωση και η γραφή - η γραπτή γλώσσα - πρέπει να διδάσκονται ειδικά. Το βρίσκω ενδιαφέρον αυτό. Η γλώσσα είναι ένα από τα θέματα που είναι διασκεδαστικά. Ίσως μπορέσετε να το μάθετε κάποια στιγμή κάνοντας τη δραστηριότητα :)",
-                    "Νομίζω ότι τα οικονομικά είναι ένα από τα μαθήματα που όλοι πρέπει να μαθαίνουν. Μπορεί να σας ενδιαφέρει αν προσπαθήσετε να κάνετε μια δραστηριότητα"
+                    "Μπορώ να σας παρέχω διάφορα θέματα. Εδώ είναι μερικά από αυτά: ",
+                    "Έχω τόσα πολλά ενδιαφέροντα θέματα. Παρακαλώ επιλέξτε ένα: ",
+                    "Παρακαλώ επιλέξτε ένα θέμα από τις παρακάτω επιλογές: ",
+                    "Εδώ είναι μερικές επιλογές για να επιλέξετε: ",
+                    "These are the subjects I have. Παρακαλώ επιλέξτε ένα: ",
+                    "Μπορείτε να επιλέξετε ένα θέμα από τις παρακάτω επιλογές: ",
+                    "Μπορεί να βρείτε αυτά τα θέματα ενδιαφέροντα: ",
+                    "Έχω πολλά ενδιαφέροντα θέματα για εσάς. Παρακαλώ επιλέξτε ένα: ",
+                    "Παρακαλώ επιλέξτε ένα θέμα και θα σας δώσω θέματα για αυτό το θέμα"
+                ],
+                "available_2": [
+                    "Αυτά είναι μερικά από τα άλλα διαθέσιμα θέματα. Μπορείτε να επιλέξετε ένα: ",
+                    "Μπορώ να σας δώσω περισσότερα θέματα. Μπορείτε να επιστρέψετε και να επιλέξετε και άλλα θέματα",
+                    "Έχω τόσα πολλά άλλα ενδιαφέροντα θέματα για εσάς. Παρακαλώ επιλέξτε ένα: ",
+                    "Παρακαλώ επιλέξτε ένα θέμα από τις παρακάτω επιλογές. Μπορείτε να επιστρέψετε και να επιλέξετε και άλλα θέματα",
+                    "Εδώ είναι μερικές άλλες επιλογές για να επιλέξετε: ",
+                    "Αυτά είναι μερικά από τα άλλα θέματα που έχω. Παρακαλώ επιλέξτε ένα: ",
+                    "Μπορείτε να επιλέξετε ένα θέμα από τις παρακάτω επιλογές. Μπορείτε να επιστρέψετε για να επιλέξετε και άλλα θέματα",
+                    "Μπορεί να βρείτε ενδιαφέροντα αυτά τα άλλα θέματα: ",
+                    "Έχω πολλά άλλα ενδιαφέροντα θέματα για εσάς. Παρακαλώ επιλέξτε ένα: ",
+                    "Παρακαλώ επιλέξτε ένα θέμα και θα σας δώσω θέματα για αυτό το θέμα"
                 ],
                 "choose": [
-                    "Παρακαλώ επιλέξτε ένα θέμα:"
+                    "Υπέροχα. Εδώ είναι οι επιλογές που μπορείτε να επιλέξετε",
+                    "Χαίρομαι που θέλετε να μάθετε περισσότερα. Εδώ είναι τα θέματα που μπορείτε να επιλέξετε:",
+                    "Χαίρομαι που μαθαίνεις περισσότερα. Παρακαλώ επιλέξτε ένα θέμα: ",
+                    "Ωραία, παρακαλώ επιλέξτε ένα θέμα: ",
+                    "Μπορείτε τώρα να επιλέξετε ένα διαφορετικό θέμα και να μάθετε νέα πράγματα",
+                    "Μπορείτε να μάθετε ένα διαφορετικό θέμα. Εδώ είναι οι επιλογές:",
+                    "Ίσως ένα διαφορετικό θέμα να σας ενδιαφέρει. Παρακαλώ επιλέξτε ένα από τις παρακάτω επιλογές:"
                 ],
                 "yes": [
                     "Ναι"
@@ -1560,7 +1736,62 @@
                 ],
                 "back": [
                     "ΠΙΣΩ"
-                ]
+                ],
+                "sub_choice": {
+                    "Art and Design": [
+                        "Η τέχνη και το σχέδιο είναι ένα ενδιαφέρον θέμα. Σε βοηθά να αναπτύξεις δημιουργικές δεξιότητες.",
+                        "Και εμένα μου αρέσει η Τέχνη και ο Σχεδιασμός :)",
+                        "Ξέρεις ότι η Τέχνη αντιπροσωπεύει τη φαντασία και τη δημιουργικότητα, ενώ το Design αντιπροσωπεύει την ανάπτυξη και την εφαρμογή ιδεών;"
+                    ],
+                    "Biology": [
+                        "Η Βιολογία είναι η μελέτη των ζωντανών οργανισμών. Ο βιολόγος είναι ένας επιστήμονας που μελετά τη βιολογία.",
+                        "Ένας βιολόγος είναι ένας επιστήμονας που μελετά τη βιολογία. Οι βιολόγοι προσπαθούν να κατανοήσουν τον φυσικό κόσμο και τα πράγματα που ζουν σε αυτόν.",
+                        "Η βιολογία είναι ένας κλάδος της επιστήμης που ασχολείται με τη μελέτη των ζωντανών οργανισμών, όπως οι άνθρωποι, τα φυτά και τα ζώα."
+                    ],
+                    "Business": [
+                        "Οι επιχειρήσεις είναι ένα ενδιαφέρον αντικείμενο για να μάθει κανείς.",
+                        "Και εμένα μου αρέσει να μαθαίνω Επιχειρήσεις :)"
+                    ],
+                    "Chemistry": [
+                        "Η Χημεία είναι ένας κλάδος της επιστήμης και σχετίζεται στενά με τη φυσική. Μερικές φορές η χημεία αποκαλείται \"κεντρική επιστήμη\"",
+                        "Γνωρίζετε ότι οι επιστήμονες που ειδικεύονται στη χημεία ονομάζονται χημικοί;",
+                        "Η Χημεία είναι ένας κλάδος της επιστήμης που μελετά από τι είναι φτιαγμένα τα πάντα και πώς λειτουργούν. Το μαγείρεμα και η παρασκευή πάγου είναι επίσης χημεία"
+                    ],
+                    "History": [
+                        "Γνωρίζετε ότι η Ιστορία είναι η μελέτη του παρελθόντος; Η μελέτη της ιστορίας βοηθάει να κατανοήσουμε την ανθρωπότητα",
+                        "Ιστορία είναι η ιστορία των ανθρώπων στον πλανήτη μας και η ιστορία όλων όσων έκαναν ποτέ οι άνθρωποι από τότε που πρωτοεξελίχθηκαν οι αναγνωρίσιμοι άνθρωποι.",
+                        "Η ιστορία είναι ένα ενδιαφέρον θέμα. Μπορείς να μάθεις τόσα πολλά πράγματα"
+                    ],
+                    "Humanities": [
+                        "Οι ανθρωπιστικές επιστήμες προσφέρουν εικόνα για μια πτυχή της ζωής. Θεωρούνται ως βασικό στοιχείο μιας ολοκληρωμένης εκπαίδευσης από την αρχαιότητα.",
+                        "Ανθρωπιστικές επιστήμες είναι η μελέτη σχετικά με τον ανθρώπινο πολιτισμό, όπως η λογοτεχνία, η φιλοσοφία και η ιστορία.",
+                        "Οι ανθρωπιστικές επιστήμες περιλαμβάνουν τη μελέτη των αρχαίων και σύγχρονων γλωσσών, της λογοτεχνίας, της φιλοσοφίας και άλλων."
+                    ],
+                    "Language": [
+                        "Η γλώσσα είναι ένα από τα διασκεδαστικά μαθήματα που μαθαίνει κανείς.",
+                        "Γεγονός: Τα παιδιά μαθαίνουν να μιλούν χωρίς ιδιαίτερη εκπαίδευση. Αλλά η ανάγνωση και η γραφή πρέπει να διδάσκονται ειδικά."
+                    ],
+                    "Math": [
+                        "Τα μαθηματικά είναι ένα πραγματικά ενδιαφέρον μάθημα. Υπάρχουν επίσης Μαθηματικά που εμπλέκονται στην ανάπτυξή μου :)",
+                        "Μου αρέσουν και εμένα τα Μαθηματικά :)",
+                        "Τα μαθηματικά είναι πραγματικά διασκεδαστικό να τα μαθαίνεις. Είναι πολύ ενδιαφέρον",
+                        "Τα Μαθηματικά είναι πραγματικά διασκεδαστικά και ενδιαφέροντα να τα μαθαίνεις"
+                    ],
+                    "Physics": [
+                        "Φυσική είναι η μελέτη της σχέσης των αντικειμένων, των δυνάμεων και της ενέργειας",
+                        "Η φυσική είναι ένας από τους σημαντικότερους κλάδους της επιστήμης. Οι άνθρωποι που ασχολούνται με τη φυσική ονομάζονται φυσικοί.",
+                        "Η φυσική είναι ένα πολύ ενδιαφέρον αντικείμενο"
+                    ],
+                    "Psychology": [
+                        "Ψυχολογία είναι η επιστημονική μελέτη των τρόπων με τους οποίους οι άνθρωποι σκέφτονται, αισθάνονται και συμπεριφέρονται. Είναι ένα ενδιαφέρον αντικείμενο",
+                        "Ψυχολογία είναι η μελέτη του νου και της συμπεριφοράς. Οι ψυχολόγοι μελετούν και κατανοούν τις νοητικές διεργασίες, τις λειτουργίες του εγκεφάλου και τη συμπεριφορά"
+                    ],
+                    "Technology": [
+                        "Η τεχνολογία είναι ένα πολύ ενδιαφέρον θέμα. Μπορείτε να μάθετε για πολλές εξελίξεις από αυτό το θέμα",
+                        "Η τεχνολογία είναι ένα από τα διασκεδαστικά θέματα. Έχεις τόσα πολλά πράγματα να μάθεις.",
+                        "Σε αυτή τη δεκαετία η τεχνολογία αναπτύσσεται ραγδαία. Θα περάσετε καλά μαθαίνοντάς την!"
+                    ]
+                }
             },
             "action_ask_question": {
                 "true": [
