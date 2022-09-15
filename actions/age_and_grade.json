@@ -1,0 +1,30 @@
+{
+    "age_group": {
+        "6-7": "62f22a7dc992eabdda6fbd73",
+        "7-8": "62f22a83c992eabdda6fbd75",
+        "8-9": "62f22a8ac992eabdda6fbd77",
+        "9-10": "62f22a92c992eabdda6fbd79",
+        "10-11": "62f22a98c992eabdda6fbd7b",
+        "11-12": "62f22a9fc992eabdda6fbd7d",
+        "12-13": "62f22aa6c992eabdda6fbd7f",
+        "13-14": "62f22aacc992eabdda6fbd81",
+        "14-15": "62f22ab8c992eabdda6fbd83",
+        "15-16": "62f22ac1c992eabdda6fbd85",
+        "16-17": "62f22ac8c992eabdda6fbd87",
+        "17-18": "62f22ad3c992eabdda6fbd89"
+    },
+    "grade_list": [
+        "ELEMENTARY SCHOOL Grade 1",
+        "ELEMENTARY SCHOOL Grade 2",
+        "ELEMENTARY SCHOOL Grade 3",
+        "ELEMENTARY SCHOOL Grade 4",
+        "ELEMENTARY SCHOOL Grade 5",
+        "ELEMENTARY SCHOOL Grade 6",
+        "ELEMENTARY SCHOOL Grade 7",
+        "ELEMENTARY SCHOOL Grade 8",
+        "HIGH SCHOOL 9",
+        "HIGH SCHOOL 10",
+        "HIGH SCHOOL 11",
+        "HIGH SCHOOL 12"
+    ]
+}
