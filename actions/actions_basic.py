@@ -17,213 +17,6 @@ from rasa_sdk.executor import CollectingDispatcher
 with open('actions/responses.json', 'r') as file:
     data = json.load(file)
 
-# dict_vars = {'subject_idx': 0, 'topic_idx': 0, 'idx': 0}
-
-
-# class ActionAskQuestion(Action):
-
-#     def name(self) -> Text:
-#         return "action_ask_question"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-#         user_language, response_query = get_language_and_response(tracker)
-
-#         message = response_query['validate_question']
-
-#         topic_id = tracker.get_slot('topic')
-
-#         # Base condition to check if Telegram user or Android user
-#         if len(tracker.sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
-#             dispatcher.utter_message(text=random.choice(
-#                 response_query["good_time"]))
-#             return [SlotSet("question", "ANDROID APP")]
-
-#         question_count, questions_available = main.get_questions(topic_id)
-
-#         if question_count == 0:
-#             dispatcher.utter_message(
-#                 text=random.choice(message["sorry"]))
-#             dispatcher.utter_message(text=random.choice(message["add_soon"]))
-#             return [SlotSet('question', 'NOT AVAILABLE')]
-
-#         sender_id = tracker.sender_id
-#         # if sender_idx := dict_vars.get(sender_id, None) == None:
-#         #     dict_vars[sender_id] = 0
-
-#         print(dict_vars)
-
-#         mcq_question = questions_available['mcq_question'][dict_vars[sender_id]].pop(
-#             0)
-#         mcq_choices = questions_available['mcq_choices'][dict_vars[sender_id]].pop(
-#             0)
-#         file = questions_available['file'][dict_vars[sender_id]].pop(0)
-
-#         buttons = [{"title": choice, "payload": f"option{idx+1}"}
-#                    for idx, choice in enumerate(mcq_choices)]
-
-#         # mcq_question = questions_available['mcq_question'][dict_vars['idx']].pop(
-#         #     0)
-#         # mcq_choices = questions_available['mcq_choices'][dict_vars['idx']].pop(
-#         #     0)
-#         # file = questions_available['file'][dict_vars['idx']].pop(0)
-
-#         # buttons = [{"title": choice, "payload": f"option{idx+1}"}
-#         #            for idx, choice in enumerate(mcq_choices)]
-
-#         buttons_new = []
-#         true_false_question_type = False
-
-#         message_2 = response_query['action_ask_question']
-
-#         for idx, choice in enumerate(mcq_choices):
-#             if choice == 'True' or choice == 'False':
-#                 true_false_question_type = True
-#                 buttons_new.append({"title": random.choice(
-#                     message_2["true"]), "payload": "true"})
-#                 buttons_new.append({"title": random.choice(
-#                     message_2["false"]), "payload": "false"})
-
-#                 break
-
-#         if file != '':
-#             split_file = file.split('5000')
-#             secure_link = 'https://goy0tnphpd.execute-api.eu-central-1.amazonaws.com'
-#             secure_file_url = secure_link+split_file[1]
-
-#         # file = 'https://goy0tnphpd.execute-api.eu-central-1.amazonaws.com/api/openEnded/getImage/1660826908189mona_lisa,_by_leonardo_da_vinci,_from_c2rmf_retouched.jpg'
-
-#         # dispatcher.utter_message(image=secure_file_url)
-#         # dispatcher.utter_message(text=mcq_question)
-
-#         if true_false_question_type:
-#             if file == '':
-#                 dispatcher.utter_message(
-#                     text=mcq_question, buttons=buttons_new, button_type="vertical")
-#             else:
-#                 dispatcher.utter_message(text=mcq_question, image=secure_file_url,
-#                                          buttons=buttons_new, button_type="vertical")
-
-#         else:
-#             if file == '':
-#                 dispatcher.utter_message(
-#                     text=mcq_question, buttons=buttons, button_type="vertical")
-#             else:
-#                 dispatcher.utter_message(
-#                     text=mcq_question, image=secure_file_url, buttons=buttons, button_type="vertical")
-
-#         return []
-
-
-# class ValidateQuestionsForm(FormValidationAction):
-
-#     def name(self) -> Text:
-#         return "validate_questions_form"
-
-#     def validate_question(
-#         self,
-#         slot_value: Any,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: DomainDict
-#     ) -> Dict[Text, Any]:
-
-#         user_language, response_query = get_language_and_response(tracker)
-
-#         message = response_query['validate_question']
-
-#         sender_id = tracker.sender_id
-
-#         if len(sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
-#             dispatcher.utter_message(random.choice(
-#                 response_query["good_time"]))
-#             return {'question': 'ANDROID_APP'}
-
-#         topic_id = tracker.get_slot('topic')
-#         question_count, questions_available = main.get_questions(
-#             topic_id)
-
-#         if question_count == 0:
-#             dispatcher.utter_message(
-#                 text=random.choice(message["sorry"]))
-#             dispatcher.utter_message(text=random.choice(message["add_soon"]))
-#             return [SlotSet('question', 'NOT AVAILABLE')]
-
-#         # if sender_idx := dict_vars.get('sender_id', None) == None:
-#         #     dict_vars[sender_id] = 0
-
-#         print(dict_vars)
-
-#         if slot_value.startswith('/inform_new'):
-#             return {'question': None}
-
-#         right_answer = questions_available['right_answer'][dict_vars[sender_id]].pop(
-#             0)
-#         pos_feedback = questions_available['feedback']['pos_feedback'][dict_vars[sender_id]].pop(
-#             0)
-#         neg_feedback = questions_available['feedback']['neg_feedback'][dict_vars[sender_id]].pop(
-#             0)
-
-#         if slot_value.startswith('/inform_new'):
-#             return {'question': None}
-#         elif slot_value.lower() == right_answer.lower():
-#             dispatcher.utter_message(text=pos_feedback)
-#         else:
-#             dispatcher.utter_message(text=neg_feedback)
-
-#         print('++++++++++++++++++++question_count-1: ', question_count-1, type(question_count-1),
-#               'dict_vars[sender_id]: ', dict_vars[sender_id], type(dict_vars[sender_id]))
-#         if dict_vars[sender_id] < question_count-1:
-#             print('++++++++++++++++++++It is WORKING')
-#             dispatcher.utter_message(text='It is WORKING')
-#             dict_vars[sender_id] += 1
-#             return {'question': None}
-
-#         # dict_vars['idx'] = 0  # reset value of idx for the next interaction
-#         dict_vars[sender_id] = 0
-
-#         return {'question': 'FILLED'}
-
-
-class ActionFollowQuestionsForm(Action):
-
-    def name(self) -> Text:
-        return "action_follow_questions_form"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        user_id = tracker.sender_id  # sender Id
-        subject = tracker.get_slot('subject')  # slot value of subject
-        topic = tracker.get_slot('topic')  # slot value of topic
-        intent_value = tracker.get_intent_of_latest_message()
-
-        if len(user_id) > Id.TELEGRAM_UUID_LENGTH.value or topic == "STOP":
-            return []
-
-        student_data = pd.read_excel(
-            'actions/student_db_new.xlsx')  # read data
-        student_data = student_data.loc[:, ~
-                                        student_data.columns.str.contains('^Unnamed')]  # removing "Unnamed" column
-        try:
-            for index, row in student_data.iterrows():  # iterating over rows
-                if str(row['User']) == str(user_id):
-                    # Increamenting number of times the user has chosen a subject
-                    student_data.loc[index, subject] += 1
-                    break  # out of loop once unique user is found
-
-            student_data.to_excel('actions/student_db_new.xlsx', index=False)
-        except:
-            pass
-
-        if len(tracker.sender_id) < Id.ANDROID_UUID_LENGTH.value:
-            return [FollowupAction(name="action_continue")]
-
-        return []
-
 
 class ActionGreet(Action):
 
@@ -330,9 +123,48 @@ class ActionIamaBot(Action):
 
         _, response_query = get_language_and_response(tracker)
 
-        message = response_query['action_i_am_a_bot']
+        respond_bot = response_query['action_i_am_a_bot']
 
-        dispatcher.utter_message(random.choice(message))
+        dispatcher.utter_message(random.choice(respond_bot))
+
+        message = response_query['action_show_features']
+        message_response = message["options"]
+
+        if len(tracker.sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
+            buttons = [
+                {'title': random.choice(
+                    message["activity"]), 'payload': '/ask_for_suggestion'},
+                {'title': random.choice(message["subject"]),
+                 'payload': '/find_subject'},
+                {'title': random.choice(message["question_types"]),
+                 'payload': '/ask_question_types'},
+                {'title': random.choice(message["improve"]),
+                 'payload': '/ask_improvement'}
+            ]
+
+        else:
+            buttons = [
+                {'title': random.choice(
+                    message["activity"]), 'payload': '/ask_for_suggestion'},
+                {'title': random.choice(message["subject"]),
+                 'payload': '/find_subject'},
+                {'title': random.choice(message["question_types"]),
+                 'payload': '/ask_question_types'},
+                {'title': random.choice(message["progress"]),
+                 'payload': '/ask_progress'},
+                {'title': random.choice(message["approach"]),
+                 'payload': '/ask_approach'},
+                {'title': random.choice(message["reminder"]),
+                 'payload': '/ask_remind_call{"time":"None"}'},
+                {'title': random.choice(message["cancel_reminder"]),
+                 'payload': '/ask_forget_reminders'},
+                {'title': random.choice(message["feedback"]),
+                 'payload': '/user_feedback'}
+            ]
+
+        dispatcher.utter_message(
+            text=random.choice(
+                message_response), buttons=buttons, button_type="vertical")
 
         return []
 
@@ -497,3 +329,47 @@ class ValidateQuestionsForm(FormValidationAction):
             return {'confirm_feedback': 'Yes'}
 
         return {'confirm_feedback': None}
+
+
+class ActionFollowQuestionsForm(Action):
+
+    def name(self) -> Text:
+        return "action_follow_questions_form"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_id = tracker.sender_id  # sender id
+        subject = tracker.get_slot('subject')  # slot value of subject
+        topic = tracker.get_slot('topic')  # slot value of topic
+
+        intent_value = tracker.get_intent_of_latest_message()
+
+        if len(user_id) > Id.TELEGRAM_UUID_LENGTH.value or topic == "STOP":
+            return []
+
+        # there are no activities available, so the user returns without completing any activity
+        if intent_value == "inform_new":
+            return [FollowupAction(name="action_continue")]
+
+        student_data = pd.read_excel(
+            'actions/student_db_new.xlsx')  # read data
+        student_data = student_data.loc[:, ~
+                                        student_data.columns.str.contains('^Unnamed')]  # removing "Unnamed" columns
+        try:
+            for index, row in student_data.iterrows():  # iterating over rows to find the user
+                if str(row['User']) == str(user_id):
+                    # Increamenting number of times the user has chosen a subject
+                    student_data.loc[index, subject] += 1
+                    break  # out of loop once unique user is found
+
+            student_data.to_excel('actions/student_db_new.xlsx', index=False)
+        except:
+            pass
+
+        # followup with whether the user wants to continue for the Telegram bot
+        if len(tracker.sender_id) < Id.ANDROID_UUID_LENGTH.value:
+            return [FollowupAction(name="action_continue")]
+
+        return []
