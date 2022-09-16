@@ -178,10 +178,10 @@
             },
             "validate_question": {
                 "sorry": [
-                    "Sorry, there are no activities available for this topic yet!"
+                    "Sorry, this topic has question types that are not supported in Telegram yet!"
                 ],
-                "add_soon": [
-                    "We will add new activities soon."
+                "link_below": [
+                    "To learn more question types, you can download the app from the link below"
                 ]
             },
             "action_set_reminder": {
@@ -716,11 +716,10 @@
             },
             "validate_question": {
                 "sorry": [
-                    "Leider sind für dieses Thema noch keine Aktivitäten verfügbar!",
-                    "leider nicht verfügbar"
+                    "Sorry, dieses Thema hat Fragetypen, die in Telegram noch nicht unterstützt werden!"
                 ],
-                "add_soon": [
-                    "Wir werden bald neue Aktivitäten hinzufügen."
+                "link_below": [
+                    "Um weitere Fragetypen kennenzulernen, können Sie die App über den folgenden Link herunterladen"
                 ]
             },
             "action_set_reminder": {
@@ -1261,10 +1260,10 @@
             },
             "validate_question": {
                 "sorry": [
-                    "Lo sentimos, aún no hay actividades disponibles para este tema."
+                    "Lo sentimos, este tema tiene tipos de preguntas que aún no son compatibles con Telegram."
                 ],
-                "add_soon": [
-                    "Pronto añadiremos nuevas actividades."
+                "link_below": [
+                    "Para conocer más tipos de preguntas, puede descargar la aplicación desde el siguiente enlace"
                 ]
             },
             "action_set_reminder": {
@@ -1803,10 +1802,10 @@
             },
             "validate_question": {
                 "sorry": [
-                    "Λυπάμαι, δεν υπάρχουν διαθέσιμες δραστηριότητες για αυτό το θέμα ακόμα!"
+                    "Συγγνώμη, αυτό το θέμα έχει τύπους ερωτήσεων που δεν υποστηρίζονται ακόμα στο Telegram!"
                 ],
-                "add_soon": [
-                    "Σύντομα θα προσθέσουμε νέες δραστηριότητες."
+                "link_below": [
+                    "Για να μάθετε περισσότερους τύπους ερωτήσεων, μπορείτε να κατεβάσετε την εφαρμογή από τον παρακάτω σύνδεσμο"
                 ]
             },
             "action_set_reminder": {
