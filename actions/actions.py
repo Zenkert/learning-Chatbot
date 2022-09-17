@@ -465,6 +465,11 @@ class ActionGiveImprovement(Action):
         user_language, response_query = get_language_and_response(tracker)
         sender_id = tracker.sender_id
 
+        # sender_id from Android app is in the format "{device_id}/{random_string}"
+        # only device_id is unique and needed. So it has to be split by "/"
+        splitted_sender_id = sender_id.split('/')
+        sender_id_unique = splitted_sender_id[0]
+
         message = response_query['action_give_improvement']
 
         with open('actions/improvements.json', 'r') as file:
@@ -475,17 +480,17 @@ class ActionGiveImprovement(Action):
                             'EL': data["low_scored_topics"]['greek'],
                             'ES': data["low_scored_topics"]['spanish']}
 
-        if topic_dictionary[user_language].get(sender_id, None) == None:
+        if topic_dictionary[user_language].get(sender_id_unique, None) == None:
             dispatcher.utter_message(text=random.choice(message["come_later"]))
             return []
 
-        if topic_dictionary[user_language].get(sender_id, None) != None:
-            if not topic_dictionary[user_language][sender_id]:
+        if topic_dictionary[user_language].get(sender_id_unique, None) != None:
+            if not topic_dictionary[user_language][sender_id_unique]:
                 dispatcher.utter_message(
                     text=random.choice(message["come_later"]))
                 return []
 
-        topics_to_improve = topic_dictionary[user_language][sender_id]
+        topics_to_improve = topic_dictionary[user_language][sender_id_unique]
 
         buttons = [{'title': topic,
                     'payload': '/inform_new_topic{"topic":"'+topic_id+'"}'} for topic, topic_id in topics_to_improve.items()]
@@ -726,6 +731,11 @@ class ActionContinue(Action):
         question = tracker.get_slot('question')
         sender_id = tracker.sender_id
 
+        # sender_id from Android app is in the format "{device_id}/{random_string}"
+        # only device_id is unique and needed. So it has to be split by "/"
+        splitted_sender_id = sender_id.split('/')
+        sender_id_unique = splitted_sender_id[0]
+
         try:
             if question == 'NOT AVAILABLE' or question.startswith('/inform_new'):
                 pass
@@ -763,15 +773,15 @@ class ActionContinue(Action):
                                 'EL': data["low_scored_topics"]['greek'],
                                 'ES': data["low_scored_topics"]['spanish']}
 
-            if topic_dictionary[user_language].get(sender_id, None) == None:
-                topic_dictionary[user_language][sender_id] = {}
+            if topic_dictionary[user_language].get(sender_id_unique, None) == None:
+                topic_dictionary[user_language][sender_id_unique] = {}
 
             if score_ratio <= Id.IMPROVEMENT_SUGGESTION_RATIO.value:
-                topic_dictionary[user_language][sender_id][topic_completed] = topic_id
+                topic_dictionary[user_language][sender_id_unique][topic_completed] = topic_id
 
             if score_ratio > Id.IMPROVEMENT_SUGGESTION_RATIO.value:
                 # remove topic from dictionary if user gets good score
-                _ = topic_dictionary[user_language][sender_id].pop(
+                _ = topic_dictionary[user_language][sender_id_unique].pop(
                     topic_completed, None)
 
             with open('actions/improvements.json', 'w') as file:
