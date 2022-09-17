@@ -3,7 +3,7 @@ from enum import Enum
 
 class Id(Enum):
     # To differentiate between Telegram and Android app
-    ANDROID_UUID_LENGTH = 30
+    ANDROID_UUID_LENGTH = 53
     TELEGRAM_UUID_LENGTH = 16
 
     # Number of subjects to display in plot
