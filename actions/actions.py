@@ -1037,7 +1037,7 @@ class ActionExplainQuestionTypes(Action):
 
         message = response_query['action_explain_question_types']
 
-        if len(tracker.sender_id) <= Id.ANDROID_UUID_LENGTH.value:
+        if len(tracker.sender_id) <= Id.TELEGRAM_UUID_LENGTH.value:
             buttons = [
                 {'title': random.choice(
                     message["1"]), 'payload': '/ask_types{"type":"MCQ"}'},
