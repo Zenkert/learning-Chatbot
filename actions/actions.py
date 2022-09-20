@@ -844,7 +844,7 @@ class ActionAskQuestion(Action):
                 text=random.choice(message["sorry"]))
             dispatcher.utter_message(text=random.choice(message["link_below"]))
             dispatcher.utter_message(
-                attachment='https://play.google.com/store/apps/details?id=com.moodle.moodlemobile')
+                attachment='https://play.google.com/store/apps/details?id=com.seeds.chat_bot')
 
             return [SlotSet('question', 'NOT AVAILABLE')]
 
