@@ -13,74 +13,53 @@ rules:
   - intent: user_language
   - action: action_set_language
 
-- rule: activate SUBJECT_WITH_TOPIC_FORM
-  steps:
-  - intent: ask_for_suggestion
-  - action: action_clean_entity
-  - action: subject_with_topic_form
-  - active_loop: subject_with_topic_form
-  - active_loop: null
-  - action: questions_form
-  - active_loop: questions_form
-  - active_loop: null
-  - action: action_follow_questions_form
-
-- rule: user completed activity
+- rule: USER COMPLETED ACTIVITY
   steps:
   - intent: activity_done
   - action: action_continue
 
-- rule: GET USER FEEDBACK RULE
-  steps:
-  - intent: user_feedback
-  - action: action_clean_feedbackform_slots
-  - action: feedback_form
-  - active_loop: feedback_form
-  - active_loop: null
-  - action: action_thanks_feedback
-
-- rule: save user data
+- rule: SAVE USER DATA
   steps:
   - intent: user_data
   - action: action_save_data
 
-- rule: out of scope
+- rule: OUT OF SCOPE
   steps:
   - intent: out_of_scope
   - action: action_default
 
-- rule: user bot challenge
+- rule: USER BOT CHALLENGE
   steps:
   - intent: bot_challenge
   - action: action_i_am_a_bot
 
-- rule: ask user to rephrase
+- rule: ASK USER TO REPHRASE
   steps:
   - intent: nlu_fallback
   - action: action_rephrase
 
-- rule: remind call
+- rule: REMIND CALL
   steps:
   - intent: ask_remind_call
   - action: action_set_reminder
   # - action: action_clean_time_slot
 
-- rule: forget reminder
+- rule: FORGET REMINDER
   steps:
   - intent: ask_forget_reminders
   - action: action_forget_reminders
 
-- rule: say goodbye to user
+- rule: SAY GOODBYE TO USER
   steps:
   - intent: user_goodbye
   - action: action_goodbye
 
-- rule: react to reminder
+- rule: REACT TO REMINDER
   steps:
   - intent: EXTERNAL_reminder
   - action: action_react_to_reminder
 
-- rule: say thanks to user
+- rule: SAY THANKS TO USER
   steps:
   - intent: user_thanks
   - action: action_welcome
@@ -122,12 +101,24 @@ rules:
   steps:
   - intent: inform_new_topic
   - action: action_good_time
-# misc
-# - rule: Respond to ask_what_can_do
-#   steps:
-#   - intent: ask_what_can_do
-#   - action: utter_abilities
-#   - intent: tell_me_more     # for this to work, set `restrict_rules: false` for the RulePolicy
-#   - action: utter_abilities
-#   - intent: tell_me_more
-#   - action: utter_abilities
+
+- rule: ACTIVATE SUBJECT_WITH_TOPIC_FORM
+  steps:
+  - intent: ask_for_suggestion
+  - action: action_clean_entity
+  - action: subject_with_topic_form
+  - active_loop: subject_with_topic_form
+  - active_loop: null
+  - action: questions_form
+  - active_loop: questions_form
+  - active_loop: null
+  - action: action_follow_questions_form
+
+- rule: GET USER FEEDBACK RULE
+  steps:
+  - intent: user_feedback
+  - action: action_clean_feedbackform_slots
+  - action: feedback_form
+  - active_loop: feedback_form
+  - active_loop: null
+  - action: action_thanks_feedback
