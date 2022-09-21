@@ -1,6 +1,6 @@
 .env
 main_legacy.py
 responses_old.json
-student_db_new.xlsx
+student_db.xlsx
 subject_template.json
 images
