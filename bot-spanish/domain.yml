@@ -5,8 +5,6 @@ session_config:
 config:
   store_entities_as_slots: true
 intents:
-- EXTERNAL_reminder
-- EXT_reminder
 - activity_done
 - ask_approach
 - ask_features
@@ -25,6 +23,8 @@ intents:
 - inform_new_topic
 - learn_subject
 - next_option
+- EXTERNAL_reminder
+- EXT_reminder
 - start
 - user_affirm
 - user_data
@@ -39,6 +39,7 @@ intents:
 - user_thanks
 - user_unhappy
 - user_stop
+- user_asks_topic_directly
 entities:
 - topic
 - subject
@@ -58,11 +59,8 @@ entities:
 - age
 - grade
 - private_key
-- free_1
-- free_2
-- free_3
-- free_4
-- free_5
+- direct_topic_name
+- direct_topic_value
 slots:
   subject_from_entity:
     type: text
@@ -177,36 +175,29 @@ slots:
     mappings:
     - type: from_entity
       entity: private_key
-  free_1:
+  direct_topics:
     type: text
     influence_conversation: false
     mappings:
-    - type: from_entity
-      entity: free_1
-  free_2:
+    - type: from_text
+      conditions:
+      - active_loop: direct_topics_form
+        requested_slot: direct_topics
+  direct_topic_name:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: direct_topics_form
+  direct_topic_value:
     type: text
     influence_conversation: false
     mappings:
-    - type: from_entity
-      entity: free_2
-  free_3:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: free_3
-  free_4:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: free_4
-  free_5:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: free_5
+    - type: from_text
+      conditions:
+      - active_loop: direct_topics_form
+
 forms:
   subject_with_topic_form:
     required_slots:
@@ -219,6 +210,9 @@ forms:
     required_slots:
     - feedback
     - confirm_feedback
+  direct_topics_form:
+    required_slots:
+    - direct_topics
 responses:
   utter_continue:
   - text: The activity is done. Do you want to do one more activity?
@@ -292,3 +286,7 @@ actions:
 - action_it_is_okay
 - action_happy
 - action_good_time
+- action_clean_direct_topic_slots
+- action_show_direct_topic_buttons
+- action_ask_direct_topics
+- validate_direct_topics_form
