@@ -37,6 +37,21 @@ def get_subjects() -> Tuple[List[Text], Tuple[Text, Text]]:
     return subject_list, subjects_chunk
 
 
+def get_all_topics() -> Tuple[Text, Text]:
+    '''
+    returns all the topics present in the database [('Cultural Layers', '_id'), ('Painting & Painters', '_id'), ...]
+    irrespective of the subject
+    '''
+
+    load_dotenv()
+    subject_response = requests.get(os.getenv('ALL_TOPICS')).json()
+
+    topic_list = [(subjects["topic"], subjects["_id"])
+                  for subjects in subject_response]
+
+    return topic_list
+
+
 def get_topics_android(subject, language, **other_filters) -> Tuple[List[Text], Tuple[Text, Text]]:
     '''
     returns list of topics associated with the subject ['Cultural Layers', 'Painting & Painters', ...]

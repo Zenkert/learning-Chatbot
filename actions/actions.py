@@ -95,10 +95,9 @@ class ActionTellSubjects(Action):
                 {"title": random.choice(message["back"]),
                  "payload": '/next_option{"subject":"BACK"}'})
 
-        if len(sender_id) < Id.TELEGRAM_UUID_LENGTH.value:
-            buttons.append(
-                {"title": 'STOP',
-                 "payload": '/user_stop{"subject":"STOP"}'})
+        buttons.append(
+            {"title": 'STOP',
+             "payload": '/user_stop{"subject":"STOP"}'})
 
         user_input = tracker.latest_message.get('text')
 
@@ -202,10 +201,9 @@ class ActionTellTopics(Action):
                 {"title": random.choice(message["next"]),
                  "payload": '/next_option{"topic":"None"}'})
 
-        if len(sender_id) < Id.TELEGRAM_UUID_LENGTH.value:
-            buttons.append(
-                {"title": 'STOP',
-                 "payload": '/user_stop{"subject":"topic"}'})
+        buttons.append(
+            {"title": 'STOP',
+             "payload": '/user_stop{"subject":"topic"}'})
 
         response = random.choice(message['topic'])
 
@@ -676,6 +674,8 @@ class ActionShowFeatures(Action):
             buttons = [
                 {'title': random.choice(
                     message["activity"]), 'payload': '/ask_for_suggestion'},
+                # {'title': "Ask Topic directly",
+                #     'payload': '/user_asks_topic_directly'},
                 {'title': random.choice(message["subject"]),
                  'payload': '/find_subject'},
                 {'title': random.choice(message["question_types"]),
@@ -690,6 +690,8 @@ class ActionShowFeatures(Action):
             buttons = [
                 {'title': random.choice(
                     message["activity"]), 'payload': '/ask_for_suggestion'},
+                {'title': "Ask Topic directly",
+                    'payload': '/user_asks_topic_directly'},
                 {'title': random.choice(message["subject"]),
                  'payload': '/find_subject'},
                 {'title': random.choice(message["question_types"]),
@@ -996,22 +998,34 @@ class ValidateQuestionsForm(FormValidationAction):
         question_count = unique_questions[sender_id]['question_count']
         questions_available = unique_questions[sender_id]['queried_data']
 
+        if question_count == 0:
+            dispatcher.utter_message(
+                text=random.choice(message["sorry"]))
+            dispatcher.utter_message(text=random.choice(message["link_below"]))
+            dispatcher.utter_message(
+                attachment='https://play.google.com/store/apps/details?id=com.seeds.chat_bot')
+
+            return [SlotSet('question', 'NOT AVAILABLE')]
+
         if slot_value.startswith('/inform_new'):
             return {'question': None}
 
-        right_answer = questions_available['right_answer'][
-            user_interaction[sender_id]].pop(0)
-        pos_feedback = questions_available['feedback'][
-            'pos_feedback'][user_interaction[sender_id]].pop(0)
-        neg_feedback = questions_available['feedback'][
-            'neg_feedback'][user_interaction[sender_id]].pop(0)
+        try:
+            right_answer = questions_available['right_answer'][
+                user_interaction[sender_id]].pop(0)
+            pos_feedback = questions_available['feedback'][
+                'pos_feedback'][user_interaction[sender_id]].pop(0)
+            neg_feedback = questions_available['feedback'][
+                'neg_feedback'][user_interaction[sender_id]].pop(0)
 
-        if slot_value.startswith('/inform_new'):
-            return {'question': None}
-        elif slot_value.lower() == right_answer.lower():
-            dispatcher.utter_message(text=pos_feedback)
-        else:
-            dispatcher.utter_message(text=neg_feedback)
+            if slot_value.startswith('/inform_new'):
+                return {'question': None}
+            elif slot_value.lower() == right_answer.lower():
+                dispatcher.utter_message(text=pos_feedback)
+            else:
+                dispatcher.utter_message(text=neg_feedback)
+        except IndexError:
+            pass
 
         if abs(user_interaction[sender_id]) < question_count:
             user_interaction[sender_id] -= 1
@@ -1088,5 +1102,104 @@ class ActionExplainQuestionTypesDefinition(Action):
         else:
             message = random.choice(message["error"])
         dispatcher.utter_message(text=message)
+
+        return []
+
+
+class ActionCleanDirectTopicSlots(Action):
+
+    def name(self) -> Text:
+        return "action_clean_direct_topic_slots"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        return [SlotSet("direct_topics", None),
+                SlotSet("direct_topic_name", None),
+                SlotSet("direct_topic_value", None)]
+
+
+class ActionGiveTopicDirectly(Action):
+
+    def name(self) -> Text:
+        return "action_ask_direct_topics"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # content
+
+        dispatcher.utter_message(
+            text='Please provide the exact name of the topic')
+
+        return []
+
+
+class ValidateDirectTopicsForm(FormValidationAction):
+
+    def name(self) -> Text:
+        return "validate_direct_topics_form"
+
+    def validate_direct_topics(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict
+    ) -> Dict[Text, Any]:
+
+        intent_value = tracker.get_intent_of_latest_message()
+
+        # exit form if user doesn't want to continue
+        if intent_value == "user_stop":
+            _, response_query = get_language_and_response(tracker)
+
+            message = response_query['action_done']
+
+            dispatcher.utter_message(
+                text=random.choice(message["done"]))
+
+            return {'direct_topics': 'STOP'}
+
+        topic_list = query_db.get_all_topics()
+
+        for val in topic_list:
+            if val[0].lower().replace(' ', '') == slot_value.lower().replace(' ', ''):
+                topic_name, topic_value = val[0], val[1]
+
+                return {
+                    "direct_topics": slot_value,
+                    "direct_topic_name": topic_name,
+                    "direct_topic_value": topic_value
+                }
+
+        dispatcher.utter_message(text="Sorry, I couldn't find anything!")
+        dispatcher.utter_message(text="Can you check the spelling again?")
+
+        return {"direct_topics": None}
+
+
+class ActionShowDirectTopicButtons(Action):
+
+    def name(self) -> Text:
+        return "action_show_direct_topic_buttons"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        topic_title = tracker.get_slot("direct_topic_name")
+        topic_payload = tracker.get_slot("direct_topic_value")
+
+        buttons = [
+            {'title': topic_title,
+                'payload': '/inform_new{"topic": "'+topic_payload+'"}'},
+            {'title': 'STOP', 'payload': '/user_stop'}
+        ]
+
+        dispatcher.utter_message(
+            text='Please select the topic to continue', buttons=buttons, button_type="vertical")
 
         return []
