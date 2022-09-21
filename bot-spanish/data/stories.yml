@@ -2,7 +2,7 @@ version: "3.1"
 
 stories: 
 
-- story: SUBJECT_WITH_TOPIC_FORM - Happy path 1
+- story: SUBJECT_WITH_TOPIC_FORM - HAPPY PATH 1
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
@@ -19,7 +19,7 @@ stories:
   - intent: activity_done
   - action: action_continue
 
-- story: SUBJECT_WITH_TOPIC_FORM - Happy path 2
+- story: SUBJECT_WITH_TOPIC_FORM - HAPPY PATH 2
   steps:
   - intent: ask_for_suggestion
   - action: action_clean_entity
@@ -40,37 +40,6 @@ stories:
   - active_loop: questions_form
   - active_loop: null
   - action: action_follow_questions_form
-
-# - story: User data at start of conversation - happy
-#   steps:
-#   - intent: learn_subject
-#   - action: action_clean_entity
-#   - action: action_ask_subj
-#   - intent: user_affirm
-#     entities:
-#     - subject: Biology
-#   - slot_was_set:
-#     - subject: Biology
-#   - action: subject_with_topic_form
-#   - active_loop: subject_with_topic_form
-#   - active_loop: null
-#   - action: utter_done
-
-# - story: User data at start of conversation - deny + happy
-#   steps:
-#   - intent: learn_subject
-#   - action: action_clean_entity
-#   - action: action_ask_subj
-#   - intent: user_deny
-#   - intent: inform_new
-#     entities:
-#     - subject: Biology
-#   - slot_was_set:
-#     - subject: Biology
-#   - action: subject_with_topic_form
-#   - active_loop: subject_with_topic_form
-#   - active_loop: null
-#   - action: utter_done
 
 - story: USER STRESS
   steps:
@@ -134,149 +103,58 @@ stories:
   - active_loop: null
   - action: action_thanks_feedback
 
+- story: USER ASKS TOPIC DIRECTLY AND CONTINUE
+  steps:
+  - intent: user_asks_topic_directly  
+  - action: action_clean_direct_topic_slots
+  - action: direct_topics_form
+  - active_loop: direct_topics_form
+  - active_loop: null
+  - action: action_show_direct_topic_buttons
+  - intent: inform_new
+  - action: questions_form
+  - active_loop: questions_form
+  - active_loop: null
+  - action: action_follow_questions_form
+
+- story: USER ASKS TOPIC DIRECTLY BUT STOPS
+  steps:
+  - intent: user_asks_topic_directly  
+  - action: action_clean_direct_topic_slots
+  - action: direct_topics_form
+  - active_loop: direct_topics_form
+  - active_loop: null
+  - action: action_show_direct_topic_buttons
+  - intent: user_stop
+  - action: action_continue
+
 # - story: User data at start of conversation - happy
 #   steps:
-#   - or:
-#     - intent: user_greet
-#     - intent: user_data
-#   - action: action_save_data  
-#   - intent: user_happy
-#   - action: utter_ask_subject
-#   - or:
-#     - intent: learn_subject
-#     - intent: inform
-#   - action: action_tell_subjects
+#   - intent: learn_subject
+#   - action: action_clean_entity
+#   - action: action_ask_subj
 #   - intent: user_affirm
-#   - action: action_tell_topics
-#   - intent: inform_new
-#   - action: utter_okay
+#     entities:
+#     - subj: Biology
+#   - slot_was_set:
+#     - subj: Biology
+#   - action: subject_with_topic_form
+#   - active_loop: subject_with_topic_form
+#   - active_loop: null
+#   - action: utter_done
 
-# - story: User data at start of conversation - unhappy
-#   steps:
-#   - or:
-#     - intent: user_greet
-#     - intent: user_data
-#   - action: action_save_data  
-#   - intent: user_happy
-#   - action: utter_ask_subject
-#   - or:
-#     - intent: learn_subject
-#     - intent: inform
-#   - action: action_tell_subjects
-#   - intent: user_deny
-#   - action: action_give_suggestion
-
-# - story: User asking for a subject
+# - story: User data at start of conversation - deny + happy
 #   steps:
 #   - intent: learn_subject
-#   - action: action_tell_subjects
-#   - intent: user_affirm
-#   - action: utter_okay
-
-# - story: User asking for a subject + extra
-#   steps:
-#   - intent: learn_subject
-#   - action: action_tell_subjects
+#   - action: action_clean_entity
+#   - action: action_ask_subj
 #   - intent: user_deny
-#   - action: action_give_suggestion
-
-# - story: Provide subject suggestions
-#   steps:
-#   - intent: ask_for_suggestion
-#   - action: action_give_suggestion
 #   - intent: inform_new
 #     entities:
-#     - subject: Biology
+#     - subj: Biology
 #   - slot_was_set:
-#     - subject: Biology
-#   - action: action_tell_topics
-#   - intent: inform_new
-#     entities:
-#     - topic: Neurology
-#   - slot_was_set:
-#     - topic: Neurology
-#   - action: utter_okay
-
-# - story: User unhappy
-#   steps:
-#   - or:
-#     - intent: user_greet
-#     - intent: user_data
-#   - action: action_save_data  
-#   - intent: user_unhappy
-#   - action: utter_rest
-#   - intent: user_affirm
-#   - action: utter_rest_is_okay
-
-# - story: User unhappy -> then happy + working
-#   steps:
-#   - or:
-#     - intent: user_greet
-#     - intent: user_data
-#   - action: action_save_data  
-#   - intent: user_unhappy
-#   - action: utter_rest
-#   - intent: user_deny
-#   - action: utter_ask_subject
-#   - or:
-#     - intent: learn_subject
-#     - intent: inform
-#   - action: action_tell_subjects
-#   - intent: user_affirm
-#   - action: utter_okay
-
-# - story: User unhappy -> then happy
-#   steps:
-#   - or:
-#     - intent: user_greet
-#     - intent: user_data
-#   - action: action_save_data  
-#   - intent: user_unhappy
-#   - action: utter_rest
-#   - intent: user_deny
-#   - action: utter_ask_subject
-#   - or:
-#     - intent: learn_subject
-#     - intent: inform
-#   - action: action_tell_subjects
-#   - intent: user_deny
-#   - action: action_give_suggestion
-
-# - story: interactive_story_1
-#   steps:
-#   - intent: user_data
-#   - action: action_save_data
-#   - slot_was_set:
-#     - name: sathish
-#   - slot_was_set:
-#     - id: '1234'
-#   - slot_was_set:
-#     - language: EN
-#   - intent: user_happy
-#   - action: utter_ask_subject
-#   - intent: learn_subject
-#     entities:
-#     - subject: maths
-#   - slot_was_set:
-#     - subject: maths
-#   - action: action_tell_subjects
-#   - intent: user_affirm
-#   - action: utter_okay
-
-# - story: interactive_story_2
-#   steps:
-#   - intent: ask_for_suggestion
-#   - action: action_give_suggestion
-#   - intent: inform_new
-#   - action: utter_okay_subj
-
-# - story: interactive_story_unhappy
-#   steps:
-#   - intent: user_greet
-#   - action: action_save_data
-#   - intent: user_unhappy
-#   - action: utter_rest
-#   - intent: user_affirm
-#   - action: utter_rest_is_okay
-
-
+#     - subj: Biology
+#   - action: subject_with_topic_form
+#   - active_loop: subject_with_topic_form
+#   - active_loop: null
+#   - action: utter_done
