@@ -53,6 +53,7 @@ nlu:
     - bitte geben Sie mir einige Vorschläge
     - mir etwas vorschlagen
     - lernen
+    - learn
 - intent: user_goodbye
   examples: |
     - auf Wiedersehen
@@ -245,7 +246,15 @@ nlu:
   examples: |
     - aufhören
     - Bitte aufhören
-    - Ich möchte aufhören.
+    - Ich möchte aufhören
     - Kannst du aufhören?
     - Hör auf!
     - Bitte aufhören
+    - stop
+    - cancel
+    - bitte stop
+    - stopp
+    - abbrechen
+    - bitte abbrechen
+    - kündigen
+    - stornieren

@@ -38,14 +38,14 @@ nlu:
     - i would like to learn about [Humanities](subject_from_entity)
     - i would like to learn about [Social Studies](subject_from_entity)
     - i want to learn about [Art and Design](subject_from_entity)
-    - i want to study [mathematics](subject_from_entity)
+    - i want to Choose a topic from a subject
+    - Choose a topic from a subject
     - i want to learn [maths](subject_from_entity)
     - i want to learn
     - i would like to learn
     - what are the subjects available
     - what can i learn
     - give me a subject
-    - give me a topic
     - give me a suggestion
     - i want to do an activity
     - i would to do an activity
@@ -266,6 +266,9 @@ nlu:
     - can you stop
     - stop it
     - pls stop
+    - i don't want to continue
+    - stopp
+    - can yyou please stopp
 - lookup: subject_from_entity
   examples: |
     - Math
