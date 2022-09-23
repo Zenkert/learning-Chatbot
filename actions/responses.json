@@ -79,6 +79,9 @@
                 ],
                 "back": [
                     "BACK"
+                ],
+                "cancel": [
+                    "CANCEL"
                 ]
             },
             "action_give_suggestion": [
@@ -102,6 +105,18 @@
                     "Here are some of the options I can provide you for topics",
                     "Here are some possibilities I've got for you, some nice topics",
                     "Choose one to begin the activity. It appears that teachers have added additional topics"
+                ],
+                "not_available": [
+                    "Sorry, no topics are available for this subject yet."
+                ],
+                "next": [
+                    "NEXT"
+                ],
+                "back": [
+                    "BACK"
+                ],
+                "cancel": [
+                    "CANCEL"
                 ],
                 "sub_choice": {
                     "Art and Design": [
@@ -157,16 +172,7 @@
                         "Technology is one of the fun subjects. You have so many things to learn.",
                         "In this decade Technology is growing rapidly. You'll have a good time learning it!"
                     ]
-                },
-                "not_available": [
-                    "Sorry, no topics are available for this subject yet."
-                ],
-                "next": [
-                    "NEXT"
-                ],
-                "back": [
-                    "BACK"
-                ]
+                }
             },
             "action_ask_question": {
                 "true": [
@@ -293,13 +299,14 @@
             ],
             "action_show_features": {
                 "options": [
-                    "Here are some of the options you can choose from: "
+                    "Here are some of the options you can choose from: ",
+                    "Please select an option: "
                 ],
                 "start": [
                     "Welcome. I am a bot and I'm here to assist you in your learning. You can choose an option from below to start!"
                 ],
                 "activity": [
-                    "Do an activity"
+                    "Choose a topic from a subject"
                 ],
                 "subject": [
                     "Ask for a subject"
@@ -327,6 +334,23 @@
                 ],
                 "bot": [
                     "Who are you?"
+                ],
+                "direct_topic": [
+                    "Select a topic by name"
+                ],
+                "more_option": [
+                    "MORE OPTIONS"
+                ],
+                "more_option_response": [
+                    "Here are more options for you: ",
+                    "You can choose from the options below: ",
+                    "I got you, here are some more options"
+                ],
+                "cancel": [
+                    "CANCEL"
+                ],
+                "back": [
+                    "BACK"
                 ]
             },
             "action_explain_question_types": {
@@ -518,6 +542,27 @@
             "action_happy": [
                 "Great, carry on!",
                 "Good, carry on!"
+            ],
+            "action_i_will_stop": [
+                "Okay, sure",
+                "I got you :)"
+            ],
+            "action_ask_direct_topics": [
+                "Please provide the exact name of the topic"
+            ],
+            "validate_direct_topics_form": {
+                "sorry": [
+                    "Sorry, I couldn't find anything! Can you check the spelling again?"
+                ],
+                "ask_stop": [
+                    "You can ask me to stop by saying \"stop\""
+                ],
+                "only_provide": [
+                    "Also, I can only provide topics for your current language: "
+                ]
+            },
+            "action_show_direct_topic_buttons": [
+                "Please select the topic to continue"
             ]
         },
         "DE": {
@@ -601,6 +646,9 @@
                 ],
                 "back": [
                     "ZURÜCK"
+                ],
+                "cancel": [
+                    "ABBRECHEN"
                 ]
             },
             "action_give_suggestion": [
@@ -649,6 +697,9 @@
                 ],
                 "back": [
                     "ZURÜCK"
+                ],
+                "cancel": [
+                    "ABBRECHEN"
                 ],
                 "sub_choice": {
                     "Art and Design": [
@@ -794,11 +845,7 @@
                     "Bitte machen Sie mehr Aufgaben, damit ich Ihnen Verbesserungsvorschläge machen kann"
                 ],
                 "do_later": [
-                    "Ich mache es später",
-                    "Ich kann es später machen",
-                    "Ich möchte es später tun",
-                    "Nicht jetzt",
-                    "Mach es später"
+                    "Nicht jetzt"
                 ]
             },
             "action_give_approach": [
@@ -843,7 +890,7 @@
                     "Willkommen! Ich bin ein Bot und ich bin hier, um dir bei deinem Studium zu helfen. Du kannst unten eine Option wählen, um zu beginnen!"
                 ],
                 "activity": [
-                    "Eine Aktivität durchführen"
+                    "Wählen Sie ein Thema aus einem Fach"
                 ],
                 "subject": [
                     "Fragen Sie nach einem Thema"
@@ -871,6 +918,23 @@
                 ],
                 "bot": [
                     "Wer sind Sie?"
+                ],
+                "direct_topic": [
+                    "Wählen Sie ein Thema nach Namen"
+                ],
+                "more_option": [
+                    "MEHR OPTIONEN"
+                ],
+                "more_option_response": [
+                    "Hier sind weitere Optionen für Sie: ",
+                    "Sie können aus den folgenden Optionen wählen: ",
+                    "Ich habe Sie verstanden, hier sind weitere Optionen"
+                ],
+                "cancel": [
+                    "ABBRECHEN"
+                ],
+                "back": [
+                    "ZURÜCK"
                 ]
             },
             "action_explain_question_types": {
@@ -1062,6 +1126,27 @@
             "action_happy": [
                 "Toll, mach weiter!",
                 "Gut, weiter so!"
+            ],
+            "action_i_will_stop": [
+                "Okay, sicher",
+                "Ich habe dich :)"
+            ],
+            "action_ask_direct_topics": [
+                "Bitte geben Sie den genauen Namen des Themas an"
+            ],
+            "validate_direct_topics_form": {
+                "sorry": [
+                    "Sorry, ich konnte nichts finden! Können Sie die Schreibweise noch einmal überprüfen?"
+                ],
+                "ask_stop": [
+                    "Sie können mich auffordern, aufzuhören, indem Sie \"stop\" sagen."
+                ],
+                "only_provide": [
+                    "Außerdem kann ich nur Themen für Ihre aktuelle Sprache anbieten: "
+                ]
+            },
+            "action_show_direct_topic_buttons": [
+                "Bitte wählen Sie das Thema aus, um fortzufahren"
             ]
         },
         "ES": {
@@ -1161,6 +1246,9 @@
                 ],
                 "back": [
                     "VOLVER"
+                ],
+                "cancel": [
+                    "CANCELAR"
                 ]
             },
             "action_give_suggestion": [
@@ -1193,6 +1281,9 @@
                 ],
                 "back": [
                     "VOLVER"
+                ],
+                "cancel": [
+                    "CANCELAR"
                 ],
                 "sub_choice": {
                     "Art and Design": [
@@ -1339,11 +1430,7 @@
                     "Por favor, haz más actividades, para que pueda sugerirte cualquier mejora"
                 ],
                 "do_later": [
-                    "Lo haré más tarde",
-                    "Puedo hacerlo más tarde",
-                    "Quiero hacerlo más tarde",
-                    "Ahora no",
-                    "Hazlo más tarde"
+                    "Ahora no"
                 ]
             },
             "action_give_approach": [
@@ -1388,7 +1475,7 @@
                     "Bienvenido. Soy un bot y estoy aquí para ayudarte en tus estudios. ¡Puedes elegir una opción de abajo para empezar!"
                 ],
                 "activity": [
-                    "Hacer una actividad"
+                    "Elija un tema de una asignatura"
                 ],
                 "subject": [
                     "Pedir un tema"
@@ -1416,6 +1503,23 @@
                 ],
                 "bot": [
                     "¿Quién es usted?"
+                ],
+                "direct_topic": [
+                    "Seleccione un tema por su nombre"
+                ],
+                "more_option": [
+                    "MÁS OPCIONES"
+                ],
+                "more_option_response": [
+                    "Aquí hay más opciones para ti: ",
+                    "Puedes elegir entre las opciones de abajo: ",
+                    "Te tengo, aquí hay más opciones"
+                ],
+                "cancel": [
+                    "CANCELAR"
+                ],
+                "back": [
+                    "VOLVER"
                 ]
             },
             "action_explain_question_types": {
@@ -1603,6 +1707,27 @@
             "action_happy": [
                 "¡Genial, sigue!",
                 "¡Bien, continúa!"
+            ],
+            "action_i_will_stop": [
+                "Vale, claro",
+                "Te tengo :)"
+            ],
+            "action_ask_direct_topics": [
+                "Por favor, proporciona el nombre exacto del tema"
+            ],
+            "validate_direct_topics_form": {
+                "sorry": [
+                    "¡Lo siento, no he podido encontrar nada! ¿Puedes comprobar la ortografía de nuevo?"
+                ],
+                "ask_stop": [
+                    "Puedes pedirme que me detenga diciendo \"stop\""
+                ],
+                "only_provide": [
+                    "Además, sólo puedo proporcionar temas para tu idioma actual: "
+                ]
+            },
+            "action_show_direct_topic_buttons": [
+                "Por favor, seleccione el tema para continuar"
             ]
         },
         "EL": {
@@ -1703,6 +1828,9 @@
                 ],
                 "back": [
                     "ΠΙΣΩ"
+                ],
+                "cancel": [
+                    "ΑΚΥΡΩΣΗ"
                 ]
             },
             "action_give_suggestion": [
@@ -1735,6 +1863,9 @@
                 ],
                 "back": [
                     "ΠΙΣΩ"
+                ],
+                "cancel": [
+                    "ΑΚΥΡΩΣΗ"
                 ],
                 "sub_choice": {
                     "Art and Design": [
@@ -1879,11 +2010,7 @@
                     "Παρακαλώ κάντε περισσότερες δραστηριότητες, ώστε να μπορέσω να σας προτείνω τυχόν βελτιώσεις"
                 ],
                 "do_later": [
-                    "Θα το κάνω αργότερα",
-                    "Μπορώ να το κάνω αργότερα",
-                    "Θέλω να το κάνω αργότερα",
-                    "Όχι τώρα",
-                    "Κάν' το αργότερα"
+                    "Όχι τώρα"
                 ]
             },
             "action_give_approach": [
@@ -1928,7 +2055,7 @@
                     "Καλώς ήρθατε. Είμαι ένα bot και είμαι εδώ για να σας βοηθήσω στις σπουδές σας. Μπορείτε να επιλέξετε μια επιλογή από τις παρακάτω για να ξεκινήσετε!"
                 ],
                 "activity": [
-                    "Κάντε μια δραστηριότητα"
+                    "Επιλέξτε ένα θέμα από ένα θέμα"
                 ],
                 "subject": [
                     "Ζητήστε ένα θέμα"
@@ -1956,6 +2083,23 @@
                 ],
                 "bot": [
                     "Ποιος είσαι εσύ;"
+                ],
+                "direct_topic": [
+                    "Επιλέξτε ένα θέμα με βάση το όνομα"
+                ],
+                "more_option": [
+                    "ΠΕΡΙΣΣΟΤΕΡΕΣ ΕΠΙΛΟΓΕΣ"
+                ],
+                "more_option_response": [
+                    "Ορίστε και άλλες επιλογές για εσάς: ",
+                    "Μπορείτε να επιλέξετε από τις παρακάτω επιλογές: ",
+                    "Σε έπιασα, εδώ είναι μερικές ακόμα επιλογές"
+                ],
+                "cancel": [
+                    "ΑΚΥΡΩΣΗ"
+                ],
+                "back": [
+                    "ΠΙΣΩ"
                 ]
             },
             "action_explain_question_types": {
@@ -2147,6 +2291,27 @@
             "action_happy": [
                 "Υπέροχα, συνεχίστε έτσι!",
                 "Ωραία, συνέχισε έτσι!"
+            ],
+            "action_i_will_stop": [
+                "Εντάξει, βέβαια",
+                "Σε ακούω :)"
+            ],
+            "action_ask_direct_topics": [
+                "Παρακαλώ δώστε το ακριβές όνομα του θέματος"
+            ],
+            "validate_direct_topics_form": {
+                "sorry": [
+                    "Συγγνώμη, δεν μπόρεσα να βρω τίποτα! Μπορείτε να ελέγξετε ξανά την ορθογραφία;"
+                ],
+                "ask_stop": [
+                    "Μπορείτε να μου ζητήσετε να σταματήσω λέγοντας \"stop\""
+                ],
+                "only_provide": [
+                    "Επίσης, μπορώ να παρέχω θέματα μόνο για την τρέχουσα γλώσσα σας: "
+                ]
+            },
+            "action_show_direct_topic_buttons": [
+                "Παρακαλώ επιλέξτε το θέμα για να συνεχίσετε"
             ]
         }
     }

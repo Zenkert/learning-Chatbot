@@ -130,37 +130,16 @@ class ActionIamaBot(Action):
         message = response_query['action_show_features']
         message_response = message["options"]
 
-        if len(tracker.sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
-            buttons = [
-                {'title': random.choice(
-                    message["activity"]), 'payload': '/ask_for_suggestion'},
-                {'title': random.choice(message["subject"]),
-                 'payload': '/find_subject'},
-                {'title': random.choice(message["question_types"]),
-                 'payload': '/ask_question_types'},
-                {'title': random.choice(message["improve"]),
-                 'payload': '/ask_improvement'}
-            ]
-
-        else:
-            buttons = [
-                {'title': random.choice(
-                    message["activity"]), 'payload': '/ask_for_suggestion'},
-                {'title': random.choice(message["subject"]),
-                 'payload': '/find_subject'},
-                {'title': random.choice(message["question_types"]),
-                 'payload': '/ask_question_types'},
-                {'title': random.choice(message["progress"]),
-                 'payload': '/ask_progress'},
-                {'title': random.choice(message["approach"]),
-                 'payload': '/ask_approach'},
-                {'title': random.choice(message["reminder"]),
-                 'payload': '/ask_remind_call{"time":"None"}'},
-                {'title': random.choice(message["cancel_reminder"]),
-                 'payload': '/ask_forget_reminders'},
-                {'title': random.choice(message["feedback"]),
-                 'payload': '/user_feedback'}
-            ]
+        buttons = [
+            {'title': random.choice(
+                message["activity"]), 'payload': '/ask_for_suggestion'},
+            {'title': random.choice(
+                message["direct_topic"]), 'payload': '/user_asks_topic_directly'},
+            {'title': random.choice(message["more_option"]),
+                'payload': '/more_options'},
+            {'title': random.choice(
+                message["cancel"]), 'payload': '/user_cancel'}
+        ]
 
         dispatcher.utter_message(
             text=random.choice(
@@ -235,6 +214,24 @@ class ActionGreat(Action):
         _, response_query = get_language_and_response(tracker)
 
         message = response_query['action_great']
+
+        dispatcher.utter_message(random.choice(message))
+
+        return []
+
+
+class ActionIWillStop(Action):
+
+    def name(self) -> Text:
+        return "action_i_will_stop"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        _, response_query = get_language_and_response(tracker)
+
+        message = response_query['action_i_will_stop']
 
         dispatcher.utter_message(random.choice(message))
 
@@ -371,5 +368,24 @@ class ActionFollowQuestionsForm(Action):
         # followup with whether the user wants to continue for the Telegram bot
         if len(tracker.sender_id) < Id.ANDROID_UUID_LENGTH.value:
             return [FollowupAction(name="action_continue")]
+
+        return []
+
+
+class ActionCancelOption(Action):
+
+    def name(self) -> Text:
+        return "action_cancel_option"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_language, response_query = get_language_and_response(tracker)
+
+        message = response_query['action_i_will_stop']
+
+        dispatcher.utter_message(
+            text=f'{random.choice(message)}')
 
         return []

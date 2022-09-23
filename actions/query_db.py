@@ -37,19 +37,79 @@ def get_subjects() -> Tuple[List[Text], Tuple[Text, Text]]:
     return subject_list, subjects_chunk
 
 
-def get_all_topics() -> Tuple[Text, Text]:
+def get_direct_topics_android(user_input_topic) -> Tuple[Text, Text]:
     '''
     returns all the topics present in the database [('Cultural Layers', '_id'), ('Painting & Painters', '_id'), ...]
     irrespective of the subject
     '''
 
     load_dotenv()
-    subject_response = requests.get(os.getenv('ALL_TOPICS')).json()
+    topic_response = requests.get(os.getenv('ALL_TOPICS')).json()
 
-    topic_list = [(subjects["topic"], subjects["_id"])
-                  for subjects in subject_response]
+    topic_name, topic_value = None, None
 
-    return topic_list
+    for topics in topic_response:
+
+        topic_lowered = topics["topic"].lower().replace(' ', '')
+        user_input_topic_lowered = user_input_topic.lower().replace(' ', '')
+
+        if topic_lowered == user_input_topic_lowered:
+            topic_name, topic_value = topics["topic"], topics["_id"]
+            break
+
+    return topic_name, topic_value
+
+    # try:
+    #     topic_response = requests.get(
+    #         os.getenv('GET_TOPIC_BY_NAME')+user_input_topic).json()
+    # except:
+    #     topic_response = {}
+
+    # if topic_response:
+    #     topic_name = topic_response["topic"]
+    #     topic_value = topic_response["_id"]
+
+    #     return topic_name, topic_value
+
+    # else:
+    #     topic_name, topic_value = None, None
+
+
+def get_direct_topics_telegram(user_input_topic, language) -> Tuple[Text, Text]:
+    '''
+    returns all the topics present in the database [('Cultural Layers', '_id'), ('Painting & Painters', '_id'), ...]
+    irrespective of the subject
+    '''
+
+    load_dotenv()
+    topic_response = requests.get(os.getenv('ALL_TOPICS')).json()
+
+    topic_name, topic_value = None, None
+
+    for topics in topic_response:
+
+        topic_lowered = topics["topic"].lower().replace(' ', '')
+        user_input_topic_lowered = user_input_topic.lower().replace(' ', '')
+
+        if topic_lowered == user_input_topic_lowered and topics["language"] == language and topics['access'] == False:
+            topic_name, topic_value = topics["topic"], topics["_id"]
+            break
+
+    return topic_name, topic_value
+
+    # try:
+    #     topic_response = requests.get(
+    #         os.getenv('GET_TOPIC_BY_NAME')+user_input_topic).json()
+    # except:
+    #     topic_response = {}
+
+    # topic_name, topic_value = None, None
+
+    # if topic_response and topic_response["language"] == language and topic_response['access'] == False:
+    #     topic_name = topic_response["topic"]
+    #     topic_value = topic_response["_id"]
+
+    # return topic_name, topic_value
 
 
 def get_topics_android(subject, language, **other_filters) -> Tuple[List[Text], Tuple[Text, Text]]:
@@ -137,7 +197,6 @@ def get_topics_telegram(subject, language) -> Tuple[List[Text], Tuple[Text, Text
     return topic_list, topics_chunk
 
 
-@lru_cache(maxsize=10)
 def get_questions(sender_id, topic_id) -> Dict[Text, Any]:
     '''
     returns unique_questions for the sender with unique session

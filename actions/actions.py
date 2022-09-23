@@ -2,8 +2,8 @@ import os
 import json
 import random
 import pandas as pd
-from dotenv import load_dotenv
 from fuzzywuzzy import process
+from dotenv import load_dotenv
 from datetime import datetime as dt
 from typing import Any, Text, Dict, List, Tuple
 
@@ -36,10 +36,20 @@ def get_language_and_response(tracker: Tracker) -> Tuple[Text, Dict[Text, Text]]
 
     user_language = tracker.get_slot('language')
 
+    response_per_language = {
+        'EN': 'responses_english',
+        'DE': 'responses_german',
+        'EL': 'responses_greek',
+        'ES': 'responses_spanish'
+    }
+
+    with open(f'actions/{response_per_language[user_language]}.json', 'r') as file:
+        response_data = json.load(file)
+
     # set a default language 'EN' if there is no user language present
     user_language = 'EN' if user_language is None else user_language
 
-    response_query = data['language'][user_language]
+    response_query = response_data['language'][user_language]
 
     return user_language, response_query
 
@@ -96,7 +106,7 @@ class ActionTellSubjects(Action):
                  "payload": '/next_option{"subject":"BACK"}'})
 
         buttons.append(
-            {"title": 'STOP',
+            {"title": random.choice(message["cancel"]),
              "payload": '/user_stop{"subject":"STOP"}'})
 
         user_input = tracker.latest_message.get('text')
@@ -202,7 +212,7 @@ class ActionTellTopics(Action):
                  "payload": '/next_option{"topic":"None"}'})
 
         buttons.append(
-            {"title": 'STOP',
+            {"title": random.choice(message["cancel"]),
              "payload": '/user_stop{"subject":"topic"}'})
 
         response = random.choice(message['topic'])
@@ -249,8 +259,12 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         if user_intent in functions_available:
             return functions_available[user_intent]()
 
-        # user_interaction[sender_id] needed only for respective session
-        user_interaction.pop(sender_id)
+        try:
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(sender_id)
+            user_interaction.pop('intro'+sender_id)
+        except KeyError:
+            pass
 
         return {'subject': slot_value}
 
@@ -285,8 +299,12 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
         if user_intent in functions_available:
             return functions_available[user_intent]()
 
-        # user_interaction[sender_id] needed only for respective session
-        user_interaction.pop(sender_id)
+        try:
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(sender_id)
+            user_interaction.pop('intro'+sender_id)
+        except KeyError:
+            pass
 
         if len(sender_id) < Id.ANDROID_UUID_LENGTH.value:
             return {'topic': slot_value, 'question': None}
@@ -304,6 +322,13 @@ class ActionCleanEntity(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         # clean subject and topic slot before activation of form
+
+        try:
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(tracker.sender_id)
+            user_interaction.pop('intro'+tracker.sender_id)
+        except KeyError:
+            pass
 
         return [SlotSet("subject", None), SlotSet("topic", None)]
 
@@ -347,6 +372,7 @@ class ActionSetReminder(Action):
 
         if reminder_time == 'None' or reminder_time == None:
             dispatcher.utter_message(text=random.choice(message["time"]))
+            dispatcher.utter_message(text=random.choice(message["example"]))
             return []
 
         time_object = dt.strptime(reminder_time, "%Y-%m-%dT%H:%M:%S.%f%z")
@@ -670,44 +696,84 @@ class ActionShowFeatures(Action):
         message_response = message["start"] if tracker.get_intent_of_latest_message(
         ) == "start" else message_response
 
+        try:
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(tracker.sender_id)
+            user_interaction.pop('intro'+tracker.sender_id)
+        except KeyError:
+            pass
+
+        buttons = [
+            {'title': random.choice(
+                message["activity"]), 'payload': '/ask_for_suggestion'},
+            {'title': random.choice(
+                message["direct_topic"]), 'payload': '/user_asks_topic_directly'},
+            {'title': random.choice(message["more_option"]),
+                'payload': '/more_options'},
+            {'title': random.choice(
+                message["cancel"]), 'payload': '/user_cancel'}
+        ]
+
+        dispatcher.utter_message(
+            text=random.choice(
+                message_response), buttons=buttons, button_type="vertical")
+
+        return []
+
+
+class ActionShowMoreOptions(Action):
+
+    def name(self) -> Text:
+        return "action_show_more_options"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        user_language, response_query = get_language_and_response(tracker)
+
+        message = response_query['action_show_features']
+
+        message_response = message["more_option_response"]
+
         if len(tracker.sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
             buttons = [
-                {'title': random.choice(
-                    message["activity"]), 'payload': '/ask_for_suggestion'},
-                # {'title': "Ask Topic directly",
-                #     'payload': '/user_asks_topic_directly'},
+                {'title': random.choice(message["improve"]),
+                 'payload': '/ask_improvement'},
                 {'title': random.choice(message["subject"]),
                  'payload': '/find_subject'},
                 {'title': random.choice(message["question_types"]),
                  'payload': '/ask_question_types'},
-                {'title': random.choice(message["improve"]),
-                 'payload': '/ask_improvement'},
                 {'title': random.choice(
-                    message["bot"]), 'payload': '/bot_challenge'}
+                    message["bot"]), 'payload': '/bot_challenge'},
+                {'title': random.choice(
+                    message["cancel"]), 'payload': '/user_cancel'},
+                {'title': random.choice(
+                    message["back"]), 'payload': '/ask_features'}
             ]
 
         else:
             buttons = [
-                {'title': random.choice(
-                    message["activity"]), 'payload': '/ask_for_suggestion'},
-                {'title': "Ask Topic directly",
-                    'payload': '/user_asks_topic_directly'},
-                {'title': random.choice(message["subject"]),
-                 'payload': '/find_subject'},
-                {'title': random.choice(message["question_types"]),
-                 'payload': '/ask_question_types'},
                 {'title': random.choice(message["progress"]),
                  'payload': '/ask_progress'},
-                {'title': random.choice(message["approach"]),
-                 'payload': '/ask_approach'},
                 {'title': random.choice(message["reminder"]),
                  'payload': '/ask_remind_call{"time":"None"}'},
                 {'title': random.choice(message["cancel_reminder"]),
                  'payload': '/ask_forget_reminders'},
-                {'title': random.choice(message["feedback"]),
-                 'payload': '/user_feedback'},
+                {'title': random.choice(message["question_types"]),
+                 'payload': '/ask_question_types'},
+                # {'title': random.choice(message["subject"]),
+                #  'payload': '/find_subject'},
+                {'title': random.choice(message["approach"]),
+                 'payload': '/ask_approach'},
+                # {'title': random.choice(message["feedback"]),
+                #  'payload': '/user_feedback'},
                 {'title': random.choice(
-                    message["bot"]), 'payload': '/bot_challenge'}
+                    message["bot"]), 'payload': '/bot_challenge'},
+                {'title': random.choice(
+                    message["cancel"]), 'payload': '/user_cancel'},
+                {'title': random.choice(
+                    message["back"]), 'payload': '/ask_features'}
             ]
 
         dispatcher.utter_message(
@@ -741,9 +807,13 @@ class ActionContinue(Action):
         try:
             if question == 'NOT AVAILABLE' or question.startswith('/inform_new'):
                 pass
-            else:
+            elif tracker.get_intent_of_latest_message() != "user_stop_topic":
                 dispatcher.utter_message(
                     text=random.choice(message["continue"]))
+
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(sender_id)
+            user_interaction.pop('intro'+sender_id)
         except:
             pass
 
@@ -1031,9 +1101,12 @@ class ValidateQuestionsForm(FormValidationAction):
             user_interaction[sender_id] -= 1
             return {'question': None}
 
-        # user_interaction[sender_id] needed only for respective session
-        user_interaction.pop(sender_id)
-        user_interaction.pop('intro'+sender_id)
+        try:
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(sender_id)
+            user_interaction.pop('intro'+sender_id)
+        except KeyError:
+            pass
 
         return {'question': 'FILLED'}
 
@@ -1115,6 +1188,15 @@ class ActionCleanDirectTopicSlots(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        # clean subject and topic slot before activation of form
+
+        try:
+            # user_interaction[sender_id] needed only for respective session
+            user_interaction.pop(tracker.sender_id)
+            user_interaction.pop('intro'+tracker.sender_id)
+        except KeyError:
+            pass
+
         return [SlotSet("direct_topics", None),
                 SlotSet("direct_topic_name", None),
                 SlotSet("direct_topic_value", None)]
@@ -1129,15 +1211,21 @@ class ActionGiveTopicDirectly(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        # content
+        user_language, response_query = get_language_and_response(tracker)
 
-        dispatcher.utter_message(
-            text='Please provide the exact name of the topic')
+        message = response_query['action_ask_direct_topics']
+
+        dispatcher.utter_message(text=random.choice(message))
 
         return []
 
 
 class ValidateDirectTopicsForm(FormValidationAction):
+    '''
+    Validates direct_topics_form.
+    Sets the slot direct_topic_name and direct_topic_value with topic and topic_id from database
+    if the user provides a genuine topic
+    '''
 
     def name(self) -> Text:
         return "validate_direct_topics_form"
@@ -1150,38 +1238,57 @@ class ValidateDirectTopicsForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
 
+        user_language, response_query = get_language_and_response(tracker)
+
+        message = response_query['validate_direct_topics_form']
+
         intent_value = tracker.get_intent_of_latest_message()
+        sender_id = tracker.sender_id
+
+        language_dict = {
+            'EN': 'English',
+            'DE': 'Deutsch',
+            'EL': 'Ελληνική',
+            'ES': 'Español'
+        }
+
+        if len(sender_id) > Id.TELEGRAM_UUID_LENGTH.value:
+            topic_name, topic_value = query_db.get_direct_topics_android(
+                slot_value)
+        else:
+            topic_name, topic_value = query_db.get_direct_topics_telegram(
+                slot_value, language_dict[user_language])
+
+        if topic_name and topic_value:
+            dispatcher.utter_message(text="I found this topic!")
+            return {
+                "direct_topics": slot_value,
+                "direct_topic_name": topic_name,
+                "direct_topic_value": topic_value
+            }
 
         # exit form if user doesn't want to continue
-        if intent_value == "user_stop":
-            _, response_query = get_language_and_response(tracker)
-
-            message = response_query['action_done']
-
-            dispatcher.utter_message(
-                text=random.choice(message["done"]))
-
+        if intent_value == "user_stop" and not topic_name and not topic_value:
             return {'direct_topics': 'STOP'}
 
-        topic_list = query_db.get_all_topics()
+        dispatcher.utter_message(
+            text=random.choice(message["sorry"]))
+        dispatcher.utter_message(
+            text=random.choice(message["ask_stop"]))
 
-        for val in topic_list:
-            if val[0].lower().replace(' ', '') == slot_value.lower().replace(' ', ''):
-                topic_name, topic_value = val[0], val[1]
-
-                return {
-                    "direct_topics": slot_value,
-                    "direct_topic_name": topic_name,
-                    "direct_topic_value": topic_value
-                }
-
-        dispatcher.utter_message(text="Sorry, I couldn't find anything!")
-        dispatcher.utter_message(text="Can you check the spelling again?")
+        # Let users know in Telegram that they can get topics only for their current language
+        if len(sender_id) < Id.ANDROID_UUID_LENGTH.value:
+            provide_current_lang = message["only_provide"]
+            dispatcher.utter_message(
+                text=f"{random.choice(provide_current_lang)}{language_dict[user_language]}")
 
         return {"direct_topics": None}
 
 
 class ActionShowDirectTopicButtons(Action):
+    '''
+    Provides button to select a topic directly and an additional button to cancel the current path
+    '''
 
     def name(self) -> Text:
         return "action_show_direct_topic_buttons"
@@ -1190,16 +1297,29 @@ class ActionShowDirectTopicButtons(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        user_language, response_query = get_language_and_response(tracker)
+
+        message = response_query['action_show_direct_topic_buttons']
+
+        # last user utterance text
+        user_text = tracker.latest_message["text"]
+        # last user utterance intent confidence
+        prediction_confidence = tracker.latest_message["intent"]["confidence"]
+
+        # user wants to stop asking for a topic
+        if "stop" in user_text.lower() or prediction_confidence > 0.9:
+            return [FollowupAction(name="action_i_will_stop")]
+
         topic_title = tracker.get_slot("direct_topic_name")
         topic_payload = tracker.get_slot("direct_topic_value")
 
         buttons = [
             {'title': topic_title,
-                'payload': '/inform_new{"topic": "'+topic_payload+'"}'},
-            {'title': 'STOP', 'payload': '/user_stop'}
+                'payload': '/inform_new_direct_topic{"topic": "'+topic_payload+'"}'},
+            {'title': 'STOP', 'payload': '/user_stop_topic'}
         ]
 
         dispatcher.utter_message(
-            text='Please select the topic to continue', buttons=buttons, button_type="vertical")
+            text=random.choice(message), buttons=buttons, button_type="vertical")
 
         return []
