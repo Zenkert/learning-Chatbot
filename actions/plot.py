@@ -31,9 +31,9 @@ def plot_graph(user_id, user_language, current_time) -> Text:
     }
     yaxis_response = {
         'EN': 'Activity completed related to Subject(no of times)',
-        'DE': 'Abgeschlossene Aktivität im Zusammenhang mit dem Subjekt (Anzahl der Male)',
-        'EL': 'Δραστηριότητα που ολοκληρώθηκε σε σχέση με το θέμα (αριθμός φορών)',
-        'ES': 'Actividad realizada relacionada con la asignatura (nº de veces)'
+        'DE': 'Abgeschlossene Aktivität im Zusammenhang mit dem Subjekt',
+        'EL': 'Δραστηριότητα που ολοκληρώθηκε σε σχέση με το θέμα',
+        'ES': 'Actividad realizada relacionada con la asignatura'
     }
 
     file_name = f'{current_time}_plot.png'
