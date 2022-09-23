@@ -102,6 +102,11 @@ rules:
   - intent: inform_new_topic
   - action: action_good_time
 
+- rule: USER WANTS TO STOP
+  steps:
+  - intent: user_stop
+  - action: action_i_will_stop
+
 - rule: ACTIVATE SUBJECT_WITH_TOPIC_FORM
   steps:
   - intent: ask_for_suggestion
@@ -122,3 +127,13 @@ rules:
   - active_loop: feedback_form
   - active_loop: null
   - action: action_thanks_feedback
+
+- rule: SHOW MORE OPTIONS
+  steps:
+  - intent: more_options
+  - action: action_show_more_options
+
+- rule: USER CANCELS THE OPTIONS
+  steps:
+  - intent: user_cancel
+  - action: action_cancel_option
