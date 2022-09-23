@@ -1,0 +1,576 @@
+{
+    "language": {
+        "ES": {
+            "action_ask_subject": {
+                "found": [
+                    "Lo he encontrado:",
+                    "Esto es lo que he encontrado: ",
+                    "Soy un poco inteligente :) He encontrado esto para ti: ",
+                    "Esto es lo que tengo en mi base de datos: ",
+                    "He encontrado esto en mi base de datos: ",
+                    "Podría ser más inteligente. He encontrado esto para ti: ",
+                    "Tengo esto para ti: ",
+                    "Aquí está el tema que encontré: ",
+                    "Veamos. Tengo esto para ti: ",
+                    "Oye, mira lo que he encontrado: ",
+                    "Oye, mira lo que he encontrado para ti: ",
+                    "Oye, mira lo que tengo aquí: ",
+                    "He encontrado esto para ti: "
+                ],
+                "mean": [
+                    "¿Se refiere a esto?",
+                    "¿Es esto lo que quieres decir?",
+                    "¿Creo que esto es lo que quieres decir?",
+                    "Estoy seguro de que esto es lo que quieres decir, ¿verdad?",
+                    "Creo que lo he entendido bien. ¿Qué dice usted?",
+                    "¿Qué dices? ¿He acertado?",
+                    "Estoy seguro de que tengo razón. ¿Sí o no?",
+                    "¿Qué dices? ¿He acertado?",
+                    "¿Debo pasar al siguiente paso seleccionando este tema?",
+                    "¿Te doy algunos temas para esta asignatura?",
+                    "Puedo dar algunos temas para esta asignatura. ¿Procedo?",
+                    "¿Procedo con este tema?",
+                    "Puedo dar temas para esta asignatura. ¿Lo hago?",
+                    "Tengo temas para esta asignatura en mi base de datos. Te los mostraré. ¿De acuerdo?"
+                ],
+                "query": [
+                    "Voy a consultar mi base de datos sobre"
+                ],
+                "available": [
+                    "Estos son algunos de los temas disponibles. Puede seleccionar uno: ",
+                    "Puedo proporcionarle diversos temas. Estos son algunos de ellos: ",
+                    "Tengo muchos temas interesantes. Por favor, elija uno: ",
+                    "Por favor, elija un tema de las opciones de abajo: ",
+                    "Aquí hay algunas opciones para que elijas: ",
+                    "Estos son los temas que tengo. Por favor, elija uno: ",
+                    "Puedes elegir un tema de las opciones de abajo: ",
+                    "Puedes encontrar estos temas interesantes: ",
+                    "Tengo muchos temas interesantes para ti. Por favor, seleccione uno: ",
+                    "Por favor, seleccione un tema y le proporcionaré temas para ese tema"
+                ],
+                "available_2": [
+                    "Estos son algunos de los otros temas disponibles. Puede seleccionar una: ",
+                    "Puedo proporcionarle más asignaturas. Puedes volver y seleccionar otras asignaturas también",
+                    "Tengo muchos más temas interesantes para ti. Por favor, elige uno: ",
+                    "Por favor, elija una asignatura de las opciones de abajo. Puedes volver a seleccionar otras asignaturas también",
+                    "Aquí tienes otras opciones para que elijas: ",
+                    "Estas son algunas de las otras asignaturas que tengo. Por favor, elija una: ",
+                    "Puedes elegir una asignatura de las opciones de abajo. Puedes volver a seleccionar otras asignaturas también",
+                    "Puedes encontrar estos otros temas interesantes: ",
+                    "Tengo muchos más temas interesantes para ti. Por favor, seleccione uno: ",
+                    "Por favor, seleccione un tema y le proporcionaré temas para ese tema"
+                ],
+                "choose": [
+                    "Genial. Aquí están las opciones para que elijas",
+                    "Me alegro de que quieras aprender más. Aquí tienes los temas que puedes elegir:",
+                    "Me alegro de que quieras aprender más. Por favor, elige un tema: ",
+                    "Genial, por favor, selecciona un tema: ",
+                    "Ahora puedes seleccionar un tema diferente y aprender cosas nuevas",
+                    "Puedes aprender un tema diferente. Estas son las opciones:",
+                    "Tal vez un tema diferente pueda interesarte. Por favor, selecciona una de las opciones de abajo:"
+                ],
+                "yes": [
+                    "Sí"
+                ],
+                "no": [
+                    "No"
+                ],
+                "next": [
+                    "SIGUIENTE"
+                ],
+                "back": [
+                    "VOLVER"
+                ],
+                "cancel": [
+                    "CANCELAR"
+                ]
+            },
+            "action_give_suggestion": [
+                "Estos son algunos de los temas que yo sugeriría:"
+            ],
+            "action_ask_topic": {
+                "topic": [
+                    "Seleccione un tema:",
+                    "Estos temas parecen interesantes. Por favor, selecciona uno para que pueda darte la actividad",
+                    "Aquí hay algunas opciones para ti. Por favor, selecciona una:",
+                    "Estos son algunos de los temas. Selecciona uno para empezar la actividad",
+                    "Hay muchos temas disponibles. Seleccione uno y le daré la actividad",
+                    "Puedo ofrecerte numerosos temas. Aquí tienes algunas opciones",
+                    "Tengo algunos buenos temas para ti. Aquí te muestro algunas opciones",
+                    "Los profesores han añadido muchos temas nuevos. Te mostraré las opciones",
+                    "Parece que los profesores han añadido nuevos temas. Selecciona uno para empezar la actividad",
+                    "Por favor, elige uno de estos temas para que pueda ofrecerte la actividad. Todos me parecen interesantes",
+                    "Te he pillado. Por favor, elige una de las siguientes opciones:",
+                    "Elija uno de estos para comenzar la actividad. Estos son algunos de los temas",
+                    "Escoge uno de los temas, y te daré la actividad",
+                    "Estas son algunas de las opciones que te puedo dar para los temas",
+                    "Estas son algunas de las posibilidades que tengo para ti, algunos buenos temas",
+                    "Elige uno para empezar la actividad. Parece que los profesores han añadido temas adicionales"
+                ],
+                "not_available": [
+                    "Lo sentimos, todavía no hay temas disponibles para este asunto."
+                ],
+                "next": [
+                    "SIGUIENTE"
+                ],
+                "back": [
+                    "VOLVER"
+                ],
+                "cancel": [
+                    "CANCELAR"
+                ],
+                "sub_choice": {
+                    "Art and Design": [
+                        "Arte y Diseño es una asignatura interesante. Te ayuda a desarrollar habilidades creativas",
+                        "A mí también me gusta el Arte y el Diseño :)",
+                        "¿Sabes que el Arte representa la imaginación y la creatividad mientras que el Diseño representa el desarrollo y la aplicación de ideas?"
+                    ],
+                    "Biology": [
+                        "La biología es el estudio de los seres vivos. Un biólogo es un científico que estudia la biología",
+                        "Un biólogo es un científico que estudia la biología. Los biólogos tratan de entender el mundo natural y las cosas que viven en él",
+                        "La biología es una rama de la ciencia que se ocupa del estudio de los organismos vivos como los seres humanos, las plantas y los animales"
+                    ],
+                    "Business": [
+                        "Negocios es un tema interesante para aprender",
+                        "A mí también me gusta aprender Negocios :)"
+                    ],
+                    "Chemistry": [
+                        "La química es una rama de la ciencia y está estrechamente relacionada con la física. A veces se llama a la química la \"ciencia central\"",
+                        "¿Sabes que los científicos especializados en química se llaman químicos?",
+                        "La química es una rama de la ciencia que estudia de qué está hecho todo y cómo funciona. Cocinar y hacer hielo también son química"
+                    ],
+                    "History": [
+                        "¿Sabes que la Historia es el estudio del pasado? El estudio de la historia ayuda a dar sentido a la humanidad",
+                        "La historia es la historia de la gente en nuestro planeta y la historia de todo lo que la gente ha hecho desde que los humanos reconocibles evolucionaron por primera vez",
+                        "La historia es una asignatura interesante. Se pueden aprender muchas cosas"
+                    ],
+                    "Humanities": [
+                        "Las humanidades ofrecen una visión de los aspectos de la vida. Se considera un elemento central de una educación completa desde la antigüedad",
+                        "Las humanidades son el estudio sobre la cultura humana, como la literatura, la filosofía y la historia",
+                        "Las humanidades incluyen el estudio de las lenguas antiguas y modernas, la literatura y la filosofía, entre otros"
+                    ],
+                    "Language": [
+                        "La lengua es una de las asignaturas más divertidas de aprender",
+                        "Hecho: los niños aprenden a hablar sin ningún entrenamiento especial. Pero la lectura y la escritura tienen que ser especialmente enseñadas"
+                    ],
+                    "Math": [
+                        "Las matemáticas son una asignatura muy interesante. También hay Matemáticas en mi desarrollo :)",
+                        "A mí también me gustan las Matemáticas :)",
+                        "Las matemáticas son realmente divertidas de aprender. Es muy interesante",
+                        "Las matemáticas son muy divertidas e interesantes de aprender"
+                    ],
+                    "Physics": [
+                        "La física es el estudio de la relación de los objetos, las fuerzas y la energía",
+                        "La física es una de las principales ramas de la ciencia. Las personas que trabajan en física se llaman físicos",
+                        "La física es un tema muy interesante"
+                    ],
+                    "Psychology": [
+                        "La psicología es el estudio científico de la forma en que las personas piensan, sienten y se comportan. Es una asignatura interesante",
+                        "La psicología es el estudio de la mente y el comportamiento. Los psicólogos estudian y comprenden los procesos mentales, las funciones cerebrales y el comportamiento."
+                    ],
+                    "Tecnology": [
+                        "La tecnología es un tema muy intrigante. Puedes aprender sobre muchos avances de esta asignatura",
+                        "La tecnología es una de las asignaturas más divertidas. Tienes muchas cosas que aprender",
+                        "En esta década la Tecnología está creciendo rápidamente. Te lo pasarás bien aprendiéndola"
+                    ]
+                }
+            },
+            "action_ask_question": {
+                "true": [
+                    "Verdadero"
+                ],
+                "false": [
+                    "Falso"
+                ]
+            },
+            "validate_question": {
+                "sorry": [
+                    "Lo sentimos, este tema tiene tipos de preguntas que aún no son compatibles con Telegram."
+                ],
+                "link_below": [
+                    "Para conocer más tipos de preguntas, puede descargar la aplicación desde el siguiente enlace"
+                ]
+            },
+            "action_set_reminder": {
+                "time": [
+                    "Por favor, indique la hora.",
+                    "¡Por favor, facilítame una hora para recordártelo!",
+                    "¿Puede proporcionarme una hora?",
+                    "Necesito una hora para recordártelo",
+                    "¿Puede decirme cuándo es?",
+                    "¿Cuándo debo recordárselo?"
+                ],
+                "example": [
+                    "Por ejemplo puedes decir: \"en 5 minutos",
+                    "Por ejemplo puedes decir: \"en 2 horas\"",
+                    "Por ejemplo puedes decir: \"mañana a las 16:00\"",
+                    "Por ejemplo puedes decir: \"a las 7 de la mañana\""
+                ],
+                "remind": [
+                    "Vale, te lo recordaré en",
+                    "De acuerdo, te lo recordaré en",
+                    "Claro, te lo recordaré a las",
+                    "Claro, te lo puedo recordar a las",
+                    "Claro, me acordaré de recordártelo a las",
+                    "Te lo recordaré a las",
+                    "Me acordaré de recordárselo a",
+                    "Lo tienes. Te lo recordaré a las",
+                    "Lo tienes. Me acordaré de recordártelo en"
+                ]
+            },
+            "action_react_to_reminder": [
+                "Hey, aquí está su recordatorio",
+                "Te estoy recordando tu recordatorio",
+                "Aquí está tu recordatorio. No me he olvidado :)",
+                "Aquí tienes tu recordatorio. Tal vez puedas pedirme que dé un tema por ti :)",
+                "No he olvidado tu recordatorio. Aquí tienes",
+                "Este es tu recordatorio. Puedes pedirme que dé un tema si te interesa ahora!"
+            ],
+            "action_forget_reminders": [
+                "De acuerdo, cancelaré tu recordatorio",
+                "Claro, cancelaré sus recordatorios",
+                "Entendido, cancelaré tus recordatorios",
+                "De acuerdo, cancelaré los recordatorios"
+            ],
+            "action_give_progress": {
+                "message1": [
+                    "Por favor, espere un momento",
+                    "Un momento...",
+                    "Estoy trabajando en ello...",
+                    "Podría tomar un momento ...",
+                    "Estoy construyendo su progreso ...",
+                    "Esto puede tomar un momento ..."
+                ],
+                "message2": [
+                    "Oye, aquí está tu progreso",
+                    "Este es tu progreso",
+                    "Este es tu progreso. Continúa con el buen trabajo",
+                    "Aquí tienes, este es tu progreso",
+                    "Este es tu progreso de siempre. Continúa el buen trabajo",
+                    "Yo te proporcioné tu progreso",
+                    "Yo te proporcioné tu progreso de todos los tiempos"
+                ]
+            },
+            "action_give_improvement": {
+                "improve": [
+                    "Creo que estos son los temas que debes mejorar:",
+                    "Creo que estos son los temas que debes mejorar: ",
+                    "Estos son algunos de los temas que creo que puedes mejorar: ",
+                    "Estos son algunos de los temas que puedes mejorar: ",
+                    "He encontrado estos temas para que los mejores: ",
+                    "Estos son algunos de los temas que puedes volver a intentar: ",
+                    "He encontrado estos temas para que los vuelvas a intentar: "
+                ],
+                "come_later": [
+                    "Por favor, complete algunas actividades más y vuelva más tarde",
+                    "Lo siento, no tengo nada para ti ahora",
+                    "Parece que no tengo nada para usted ahora",
+                    "Actualmente, no tengo ninguna sugerencia para usted",
+                    "Por favor, vuelva más tarde después de resolver algunas actividades más",
+                    "Por favor, haz más actividades, para que pueda sugerirte cualquier mejora"
+                ],
+                "do_later": [
+                    "Ahora no"
+                ]
+            },
+            "action_give_approach": [
+                "Por favor, vea el vídeo para comprender mejor :)",
+                "Aquí tienes un vídeo para que lo veas y lo entiendas mejor :)",
+                "Aquí tienes un vídeo para que lo veas y lo entiendas mejor :)",
+                "Aquí tienes un vídeo para que lo entiendas mejor :)",
+                "Puedes ver el vídeo para comprender mejor",
+                "Le proporcionaré un vídeo para que lo entienda mejor",
+                "Podrás entenderlo mejor viendo este vídeo"
+            ],
+            "action_get_feedback": [
+                "Gracias por su aportación."
+            ],
+            "action_ask_feedback": {
+                "choice1": [
+                    "Me gustaría escucharlo. Por favor, ¡ponga su opinión en un mensaje completo!"
+                ],
+                "choice2": [
+                    "Oh, ¡por favor, proporcione su información en un mensaje completo!"
+                ]
+            },
+            "action_ask_confirm_feedback": {
+                "yes": [
+                    "Sí, ¡procede! 👍"
+                ],
+                "no": [
+                    "No, quiero hacer cambios👎"
+                ],
+                "confirm": [
+                    "¿Seguro que quieres presentarte?"
+                ]
+            },
+            "validate_feedback": [
+                "Su aportación es:"
+            ],
+            "action_show_features": {
+                "options": [
+                    "Estas son algunas de las opciones que puede elegir:"
+                ],
+                "start": [
+                    "Bienvenido. Soy un bot y estoy aquí para ayudarte en tus estudios. ¡Puedes elegir una opción de abajo para empezar!"
+                ],
+                "activity": [
+                    "Elija un tema de una asignatura"
+                ],
+                "subject": [
+                    "¿Cómo pido una asignatura?"
+                ],
+                "question_types": [
+                    "¿Qué tipos de preguntas están disponibles?"
+                ],
+                "progress": [
+                    "¿Cuál es mi progreso?"
+                ],
+                "improve": [
+                    "¿Qué debo mejorar?"
+                ],
+                "approach": [
+                    "¿Cómo resolver las actividades?"
+                ],
+                "reminder": [
+                    "Crear un recordatorio"
+                ],
+                "cancel_reminder": [
+                    "Cancelar mis recordatorios"
+                ],
+                "feedback": [
+                    "Quiero dar mi opinión"
+                ],
+                "bot": [
+                    "¿Quién es usted?"
+                ],
+                "direct_topic": [
+                    "Seleccione un tema por su nombre"
+                ],
+                "more_option": [
+                    "MÁS OPCIONES"
+                ],
+                "more_option_response": [
+                    "Aquí hay más opciones para ti: ",
+                    "Puedes elegir entre las opciones de abajo: ",
+                    "Te tengo, aquí hay más opciones"
+                ],
+                "cancel": [
+                    "CANCELAR"
+                ],
+                "back": [
+                    "VOLVER"
+                ]
+            },
+            "action_explain_question_types": {
+                "question": [
+                    "Estos son los tipos de preguntas disponibles. Seleccione una opción para obtener más información."
+                ],
+                "1": [
+                    "MCQ"
+                ],
+                "2": [
+                    "Verdadero/Falso"
+                ],
+                "3": [
+                    "Parejas que coinciden"
+                ],
+                "4": [
+                    "Abierto"
+                ]
+            },
+            "action_explain_question_types_definition": {
+                "error": [
+                    "¡Lo siento, tengo un problema ahora mismo!"
+                ],
+                "MCQ": [
+                    "Una pregunta de opción múltiple (MCQ) se compone de dos partes: un tallo que identifica la pregunta o el problema, y un conjunto de alternativas o posibles respuestas que contienen una clave que es la mejor respuesta a la pregunta, y una serie de distractores que son respuestas plausibles pero incorrectas a la pregunta."
+                ],
+                "True_False": [
+                    "Verdadero/falso determina si una afirmación es correcta. Tienes un 50-50 de posibilidades de adivinar la respuesta correcta"
+                ],
+                "Matching_Pairs": [
+                    "Los pares de correspondencia consisten en dos listas de elementos. Para cada elemento de la lista A, hay un elemento de la lista B que está relacionado. Encuentre los pares relacionados"
+                ],
+                "Open_ended": [
+                    "Una pregunta abierta es una pregunta que no puede responderse con un 'sí' o un 'no', o con una respuesta estática. Las preguntas abiertas se formulan como una afirmación que requiere una respuesta más larga."
+                ]
+            },
+            "action_continue": {
+                "continue": [
+                    "Bien hecho, has completado la actividad.",
+                    "Enhorabuena. Has terminado la actividad.",
+                    "Salud, has completado con éxito la actividad."
+                ],
+                "one_more": [
+                    "¿Quieres hacer una actividad más?",
+                    "¿Quieres continuar con una actividad más?",
+                    "Aprender siempre es divertido. ¿Puedo darte otra actividad?",
+                    "Hacer actividades es una forma productiva de pasar el tiempo. Me gustaría darte una actividad más. ¿Qué te parece?",
+                    "Tengo más actividades divertidas para ti. Creo que disfrutarás haciéndolas. ¿Te interesa?"
+                ],
+                "yes": [
+                    "Sí"
+                ],
+                "no": [
+                    "No"
+                ],
+                "1": [
+                    "Muy bien, lo has hecho excepcionalmente bien y has acertado en todo👏",
+                    "Buen trabajo, hiciste un gran trabajo y lo hiciste todo correctamente👏"
+                ],
+                "<1": [
+                    "Bien, casi has acertado en todo👏",
+                    "Bien hecho, casi lo tienes todo bien👍"
+                ],
+                "<=0.7": [
+                    "Lo has hecho bien resolviendo las actividades. Todavía se pueden hacer algunas mejoras aprendiendo más 👍",
+                    "Lo has hecho bien en las actividades. Creo que, aprendiendo más, se pueden hacer algunos avances👍"
+                ],
+                "<=0.4": [
+                    "Has puntuado menos en esta actividad. Creo que puedes mejorar aprendiendo más 👍",
+                    "Has recibido una puntuación baja en esta actividad. Creo que puedes mejorar si aprendes más👍"
+                ]
+            },
+            "good_time": [
+                "Diviértete resolviendo las actividades :)",
+                "Diviértete resolviendo las actividades :)",
+                "Te deseo mucha suerte resolviendo las actividades :)",
+                "Creo que disfrutarás haciendo esta actividad. Vamos!",
+                "Has seleccionado un tema interesante. Vamos a resolver la actividad",
+                "Es un tema interesante. Te deseo que te lo pases bien resolviendo las actividades :)",
+                "Te doy un consejo: Lee atentamente la pregunta para responderla correctamente",
+                "Tengo un consejo para ti: Para completar con éxito una actividad, primero debes entender bien la pregunta"
+            ],
+            "action_greet": {
+                "greeting": [
+                    "Hola, bienvenido",
+                    "Saludos",
+                    "Bienvenido",
+                    "Hola"
+                ],
+                "welcome": [
+                    "¿Qué te gustaría hacer hoy?",
+                    "¿Qué te gustaría hacer?",
+                    "¿Qué quieres hacer ahora?",
+                    "Me alegro de que estés aquí. ¿Qué quieres hacer?",
+                    "¿En qué puedo ayudarle?",
+                    "¿Qué ayuda puedo prestar?"
+                ]
+            },
+            "action_goodbye": [
+                "Adiós, espero verte pronto :)",
+                "Adiós :)",
+                "Adiós, nos vemos pronto :)",
+                "Adiós a ti también :)"
+            ],
+            "action_done": {
+                "done": [
+                    "¡Bien, ya está, hecho!",
+                    "Bien, eso es todo, ¡hecho!",
+                    "Eso es todo por ahora",
+                    "Ya está hecho por ahora",
+                    "Ya está hecho por ahora",
+                    "Entonces está hecho por ahora"
+                ],
+                "availability": [
+                    "Puedes volver y empezar a aprender cuando quieras. Yo siempre estoy aquí",
+                    "Puedes seguir aprendiendo cuando quieras",
+                    "¡Estoy aquí para ayudarte siempre!",
+                    "Estoy aquí y siempre puedo proporcionar asistencia",
+                    "Estoy disponible las 24 horas del día, para que siempre puedas aprender",
+                    "Estoy disponible todo el tiempo, para que puedas aprender cuando quieras"
+                ]
+            },
+            "action_rephrase": [
+                "Lo siento, no pude entenderlo. Todavía tengo mucho que aprender, como tú :)",
+                "¿Puedes reformular tu texto para que pueda intentar entenderlo?",
+                "Lo siento, no pude entender",
+                "Parece que no puedo entenderlo. Todavía tengo que aprender como tú :)",
+                "No pude entenderlo. Siento las molestias"
+            ],
+            "action_default": [
+                "¡Oh, no soy capaz de hacer eso!",
+                "¡Me temo que eso está más allá de mis capacidades!",
+                "Tengo miedo, no soy capaz de hacer eso",
+                "Tengo miedo, todavía tengo que aprender más",
+                "Lo siento, no soy capaz de hacer eso",
+                "Lo siento, todavía no he aprendido a hacer eso",
+                "Disculpe. Todavía no tengo la capacidad de hacer eso",
+                "Disculpe. No soy capaz de hacer eso todavía"
+            ],
+            "action_i_am_a_bot": [
+                "¡Soy un bot y estoy aquí para asistirte!",
+                "¡Soy un bot y mi propósito es asistirte!",
+                "Soy un asistente y te ayudaré con gusto :)",
+                "Soy un bot y fui construido con el propósito de asistirte",
+                "Soy un bot y mi propósito es ayudarte a aprender",
+                "Soy un asistente que puede ayudarte a aprender",
+                "Soy un asistente de IA y siempre estoy aquí para asistirte",
+                "Soy un bot y puedo asistirte en el aprendizaje"
+            ],
+            "action_welcome": [
+                "¡De nada!",
+                "De nada :)",
+                "Me alegro de haberte ayudado",
+                "Me alegro de haber podido ayudar :)",
+                "Me alegro de haber podido ayudar",
+                "De nada. Siempre estoy aquí para ayudarte",
+                "De nada. Siempre estoy aquí para ayudarte"
+            ],
+            "action_thanks_feedback": [
+                "Gracias por su valiosa aportación",
+                "Gracias por la aportación"
+            ],
+            "action_find_subject": [
+                "¡Por favor, pregunte 'Quiero aprender <nombre de la asignatura>' o 'Quiero estudiar <nombre de la asignatura>', para encontrar una asignatura directamente!",
+                "Por favor, pregunte 'Me gustaría aprender <nombre de la asignatura>' o 'Quiero estudiar <nombre de la asignatura>', para encontrar una asignatura directamente!",
+                "Por favor, pregunte 'Quiero aprender sobre <nombre del tema>' o 'Quiero estudiar <nombre del tema>', para encontrar un tema directamente!",
+                "Por favor, pregunte 'Quiero aprender sobre <nombre del tema>' o 'Me gustaría aprender <nombre del tema>', para encontrar un tema directamente!",
+                "Por favor, pregunte 'Quiero aprender <nombre del tema>' o 'Me gustaría aprender <nombre del tema>', ¡para encontrar un tema directamente!",
+                "Por favor, pregunte 'quiero estudiar <nombre de la asignatura>' o 'me gustaría aprender <nombre de la asignatura>', ¡para encontrar una asignatura directamente!",
+                "¡Por favor, pregunte 'aprender <nombre de la asignatura>' o 'quiero aprender <nombre de la asignatura>', para encontrar una asignatura directamente!"
+            ],
+            "action_great": [
+                "Eso es bueno",
+                "¡Me alegro de oírlo!",
+                "Me alegro :)"
+            ],
+            "action_it_is_okay": [
+                "Puedo entenderlo. Puedes volver más tarde",
+                "Lo entiendo. Puedes volver cuando quieras",
+                "Creo que puedo entender. Siempre puedes volver para aprender",
+                "Puedo entender. Vuelve más tarde y podré ayudarte a aprender",
+                "Siempre estoy aquí para ti. Puedes aprender cuando te apetezca",
+                "Siempre estoy aquí para ayudarte. Puedes volver más tarde y seguir aprendiendo"
+            ],
+            "action_happy": [
+                "¡Genial, sigue!",
+                "¡Bien, continúa!"
+            ],
+            "action_i_will_stop": [
+                "Vale, claro",
+                "Te tengo :)",
+                "Claro, te tengo :)",
+                "De acuerdo, lo haré"
+            ],
+            "action_ask_direct_topics": [
+                "Por favor, proporciona el nombre exacto del tema"
+            ],
+            "validate_direct_topics_form": {
+                "sorry": [
+                    "¡Lo siento, no he podido encontrar nada! ¿Puedes comprobar la ortografía de nuevo?"
+                ],
+                "ask_stop": [
+                    "Puedes pedirme que me detenga diciendo \"stop\""
+                ],
+                "only_provide": [
+                    "Además, sólo puedo proporcionar temas para tu idioma actual: "
+                ]
+            },
+            "action_show_direct_topic_buttons": [
+                "Por favor, seleccione el tema para continuar"
+            ]
+        }
+    }
+}
