@@ -40,6 +40,10 @@ intents:
 - user_unhappy
 - user_stop
 - user_asks_topic_directly
+- more_options
+- user_cancel
+- user_stop_topic
+- inform_new_direct_topic
 entities:
 - topic
 - subject
@@ -286,7 +290,10 @@ actions:
 - action_it_is_okay
 - action_happy
 - action_good_time
+- action_i_will_stop
 - action_clean_direct_topic_slots
 - action_show_direct_topic_buttons
 - action_ask_direct_topics
 - validate_direct_topics_form
+- action_show_more_options
+- action_cancel_option
