@@ -111,7 +111,7 @@ stories:
   - active_loop: direct_topics_form
   - active_loop: null
   - action: action_show_direct_topic_buttons
-  - intent: inform_new
+  - intent: inform_new_direct_topic
   - action: questions_form
   - active_loop: questions_form
   - active_loop: null
@@ -125,7 +125,7 @@ stories:
   - active_loop: direct_topics_form
   - active_loop: null
   - action: action_show_direct_topic_buttons
-  - intent: user_stop
+  - intent: user_stop_topic
   - action: action_continue
 
 # - story: User data at start of conversation - happy
