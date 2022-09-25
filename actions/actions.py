@@ -1,9 +1,10 @@
 import os
 import json
 import random
+import logging
 import pandas as pd
-from fuzzywuzzy import process
 from dotenv import load_dotenv
+from fuzzywuzzy import process
 from datetime import datetime as dt
 from typing import Any, Text, Dict, List, Tuple
 
@@ -14,16 +15,12 @@ from actions.enum_uniques import Id
 from rasa_sdk import Action, Tracker
 from rasa_sdk.types import DomainDict
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet, FollowupAction
 from rasa_sdk import Tracker, FormValidationAction, Action
-from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
 from rasa_sdk.events import ReminderScheduled, ReminderCancelled, ActionReverted
 
-
-with open('actions/responses.json', 'r') as file:
-    data = json.load(file)
-
-with open('actions/subjects.json', 'r') as file:
-    subjects = json.load(file)
+logging.basicConfig(filename="exceptions.log", level=logging.ERROR,
+                    format="%(asctime)s - %(filename)s : %(message)s", datefmt="%d-%b-%y %H:%M:%S")
 
 # to keep track of unique sender_id for the session {'sender_id': interaction_count}
 user_interaction = dict()
@@ -43,7 +40,7 @@ def get_language_and_response(tracker: Tracker) -> Tuple[Text, Dict[Text, Text]]
         'ES': 'responses_spanish'
     }
 
-    with open(f'actions/{response_per_language[user_language]}.json', 'r') as file:
+    with open(f'actions/responses/{response_per_language[user_language]}.json', 'r') as file:
         response_data = json.load(file)
 
     # set a default language 'EN' if there is no user language present
@@ -91,6 +88,9 @@ class ActionTellSubjects(Action):
 
         fixed_subjects = subject_dict[user_interaction[sender_id]]
 
+        with open('actions/subjects.json', 'r') as file:
+            subjects = json.load(file)
+
         # subject[0]:str is the name of the subject
         # subjects["choices"][user_language][subject[0]]:str is the translated name of the respective subject[0]
         buttons = [{'title': subjects["choices"][user_language][subject[0]],
@@ -117,8 +117,8 @@ class ActionTellSubjects(Action):
             subject_list = subjects["choices"][user_language]["subject_list"]
             subject_found, common_value = process.extractOne(
                 user_input, subject_list)
-        except:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         if subject_found is not None and not user_input.startswith('/'):
 
@@ -127,8 +127,10 @@ class ActionTellSubjects(Action):
                 dispatcher.utter_message(
                     f'{random.choice(message["found"])} {subject_found!r}')
 
+                # add subject as entity
                 buttons = [{'title': random.choice(message["yes"]),
-                            'payload': '/inform_new{"subject":"'+list(my_dict.keys())[list(my_dict.values()).index(subject_found)]+'"}'},  # add subject as entity
+                            'payload': '/inform_new{"subject":"'
+                            + list(my_dict.keys())[list(my_dict.values()).index(subject_found)]+'"}'},
                            {'title': random.choice(message["no"]),
                            'payload': '/user_deny{"subject":"None"}'}]
 
@@ -145,8 +147,8 @@ class ActionTellSubjects(Action):
             num_times = next(tracker.get_latest_entity_values('num_times'))
             if int(num_times) == 1:
                 response = random.choice(message["choose"])
-        except:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         dispatcher.utter_message(
             text=response, buttons=buttons, button_type="vertical")
@@ -263,8 +265,8 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(sender_id)
             user_interaction.pop('intro'+sender_id)
-        except KeyError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         return {'subject': slot_value}
 
@@ -303,8 +305,8 @@ class ValidateSubmitWithTopicForm(FormValidationAction):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(sender_id)
             user_interaction.pop('intro'+sender_id)
-        except KeyError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         if len(sender_id) < Id.ANDROID_UUID_LENGTH.value:
             return {'topic': slot_value, 'question': None}
@@ -327,8 +329,8 @@ class ActionCleanEntity(Action):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(tracker.sender_id)
             user_interaction.pop('intro'+tracker.sender_id)
-        except KeyError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         return [SlotSet("subject", None), SlotSet("topic", None)]
 
@@ -367,8 +369,8 @@ class ActionSetReminder(Action):
 
         try:
             reminder_time = next(tracker.get_latest_entity_values('time'))
-        except:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         if reminder_time == 'None' or reminder_time == None:
             dispatcher.utter_message(text=random.choice(message["time"]))
@@ -517,7 +519,8 @@ class ActionGiveImprovement(Action):
         topics_to_improve = topic_dictionary[user_language][sender_id_unique]
 
         buttons = [{'title': topic,
-                    'payload': '/inform_new_topic{"topic":"'+topic_id+'"}'} for topic, topic_id in topics_to_improve.items()]
+                    'payload': '/inform_new_topic{"topic":"'+topic_id+'"}'}
+                   for topic, topic_id in topics_to_improve.items()]
 
         limit = 5
         if len(buttons) >= limit:
@@ -672,8 +675,9 @@ class ActionShowFeatures(Action):
         user_id = str(tracker.sender_id)
 
         student_data = pd.read_excel('actions/student_db_new.xlsx')
+        # removing "Unnamed" column
         student_data = student_data.loc[:, ~
-                                        student_data.columns.str.contains('^Unnamed')]  # removing "Unnamed" column
+                                        student_data.columns.str.contains('^Unnamed')]
         student_data_list = student_data.values.tolist()
         user_exist = False
         for data in student_data_list:
@@ -700,8 +704,8 @@ class ActionShowFeatures(Action):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(tracker.sender_id)
             user_interaction.pop('intro'+tracker.sender_id)
-        except KeyError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         buttons = [
             {'title': random.choice(
@@ -814,8 +818,8 @@ class ActionContinue(Action):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(sender_id)
             user_interaction.pop('intro'+sender_id)
-        except:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         try:
             score_1 = next(tracker.get_latest_entity_values('score1'))
@@ -956,27 +960,30 @@ class ActionAskQuestion(Action):
                 break
 
         if abs(user_interaction['intro'+sender_id]) <= intro_count:
-            introduction = question_intro['introduction'][
-                user_interaction['intro'+sender_id]].pop(0)
-            introduction_file = question_intro['file'][
-                user_interaction['intro'+sender_id]].pop(0)
-            introduction_link = question_intro['link'][
-                user_interaction['intro'+sender_id]].pop(0)
+            try:
+                introduction = question_intro['introduction'][
+                    user_interaction['intro'+sender_id]].pop(0)
+                introduction_file = question_intro['file'][
+                    user_interaction['intro'+sender_id]].pop(0)
+                introduction_link = question_intro['link'][
+                    user_interaction['intro'+sender_id]].pop(0)
 
-            if sequence_intro < sequence_types:
-                user_interaction['intro'+sender_id] -= 1
-                dispatcher.utter_message(text=introduction)
+                if sequence_intro < sequence_types:
+                    user_interaction['intro'+sender_id] -= 1
+                    dispatcher.utter_message(text=introduction)
 
-                if introduction_link != None and introduction_link != '':
-                    dispatcher.utter_message(text=introduction_link)
+                    if introduction_link != None and introduction_link != '':
+                        dispatcher.utter_message(text=introduction_link)
 
-                if introduction_file != None and introduction_file != '':
-                    dispatcher.utter_message(
-                        text=f'introduction_file is {introduction_file}')
-                    file_split = introduction_file.split('5000')
-                    link_secure = os.getenv('SECURE_HTTPS')
-                    url_secure = link_secure+file_split[1]
-                    dispatcher.utter_message(image=url_secure)
+                    if introduction_file != None and introduction_file != '':
+                        dispatcher.utter_message(
+                            text=f'introduction_file is {introduction_file}')
+                        file_split = introduction_file.split('5000')
+                        link_secure = os.getenv('SECURE_HTTPS')
+                        url_secure = link_secure+file_split[1]
+                        dispatcher.utter_message(image=url_secure)
+            except Exception as e:
+                logging.exception(str(e))
 
         def split_file_and_secure() -> Text:
             '''
@@ -1094,8 +1101,8 @@ class ValidateQuestionsForm(FormValidationAction):
                 dispatcher.utter_message(text=pos_feedback)
             else:
                 dispatcher.utter_message(text=neg_feedback)
-        except IndexError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         if abs(user_interaction[sender_id]) < question_count:
             user_interaction[sender_id] -= 1
@@ -1105,8 +1112,8 @@ class ValidateQuestionsForm(FormValidationAction):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(sender_id)
             user_interaction.pop('intro'+sender_id)
-        except KeyError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         return {'question': 'FILLED'}
 
@@ -1194,8 +1201,8 @@ class ActionCleanDirectTopicSlots(Action):
             # user_interaction[sender_id] needed only for respective session
             user_interaction.pop(tracker.sender_id)
             user_interaction.pop('intro'+tracker.sender_id)
-        except KeyError:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         return [SlotSet("direct_topics", None),
                 SlotSet("direct_topic_name", None),

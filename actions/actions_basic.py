@@ -1,5 +1,6 @@
 import json
 import random
+import logging
 import pandas as pd
 from typing import Any, Text, Dict, List
 
@@ -14,8 +15,8 @@ from rasa_sdk.events import SlotSet, EventType, AllSlotsReset, FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
 
 
-with open('actions/responses.json', 'r') as file:
-    data = json.load(file)
+logging.basicConfig(filename="exceptions.log", level=logging.DEBUG,
+                    format="%(asctime)s - %(message)s", datefmt="%d-%b-%y %H:%M:%S")
 
 
 class ActionGreet(Action):
@@ -362,8 +363,8 @@ class ActionFollowQuestionsForm(Action):
                     break  # out of loop once unique user is found
 
             student_data.to_excel('actions/student_db_new.xlsx', index=False)
-        except:
-            pass
+        except Exception as e:
+            logging.info(e)
 
         # followup with whether the user wants to continue for the Telegram bot
         if len(tracker.sender_id) < Id.ANDROID_UUID_LENGTH.value:
