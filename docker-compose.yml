@@ -1,0 +1,86 @@
+version: '3.0'
+services:
+  rasa_english:
+    container_name: "rasa_server_english"
+    build:
+      context: ./bot-english
+    volumes:
+      - "./bot-english:/app/bot-english"
+      - "./bot-english/models:/app/bot-english/models"
+    ports:
+      - "5005:5005"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
+    restart: always
+
+  rasa_german:
+    container_name: "rasa_server_german"
+    build:
+      context: ./bot-german
+    volumes:
+      - "./bot-german:/app/bot-german"
+      - "./bot-german/models:/app/bot-german/models"
+    ports:
+      - "5006:5006"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
+
+  rasa_greek:
+    container_name: "rasa_server_greek"
+    build:
+      context: ./bot-greek
+    volumes:
+      - "./bot-greek:/app/bot-greek"
+      - "./bot-greek/models:/app/bot-greek/models"
+    ports:
+      - "5007:5007"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
+    restart: always
+
+  rasa_spanish:
+    container_name: "rasa_server_spanish"
+    build:
+      context: ./bot-spanish
+    volumes:
+      - "./bot-spanish:/app/bot-spanish"
+      - "./bot-spanish/models:/app/bot-spanish/models"
+    ports:
+      - "5008:5008"
+    env_file:
+      - ./actions/.env
+    depends_on:
+      - action_server
+    restart: always
+
+  action_server:
+    container_name: "action_server"
+    build:
+      context: actions
+    volumes:
+      - ./actions:/app/actions
+      - ./data:/app/data
+    ports:
+      - "5055:5055"
+    restart: always
+
+  duckling_server:
+    container_name: "duckling_server"
+    image: rasa/duckling:latest
+    ports:
+      - "8000:8000"
+    restart: always
+  # nginx:
+  #   image: nginx:latest
+  #   volumes:
+  #     - ./conf.d:/etc/nginx/conf.d
+  #   depends_on:
+  #     - action_server
+  #   ports:
+  #     - "5055:5055"

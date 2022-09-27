@@ -1,0 +1,577 @@
+{
+    "language": {
+        "EN": {
+            "action_ask_subject": {
+                "found": [
+                    "I found: ",
+                    "Here's what I found: ",
+                    "I'm a bit smart :) I found this for you: ",
+                    "This is what I have in my database: ",
+                    "I found this in my database: ",
+                    "I might be getting smarter. I found this for you: ",
+                    "I got this for you: ",
+                    "Here is the subject I found: ",
+                    "Let's see. I have this for you: ",
+                    "Hey look what I found: ",
+                    "Hey look what I found for you: ",
+                    "Hey look what I got here: ",
+                    "I found this for you: "
+                ],
+                "mean": [
+                    "Is this what you mean?",
+                    "I believe this is what you mean?",
+                    "I am sure this is what you mean, right?",
+                    "I guess, I got it right. What do you say?",
+                    "What do you say? Did I get it right?",
+                    "I am confident that I am right. Yes or No?",
+                    "Hey, what do you say? Did I get it right",
+                    "Should I go to the next step selecting this subject?",
+                    "Shall I give you some topics for this subject?",
+                    "I can give some topics for this subject. Shall I proceed?",
+                    "Shall I proceed with this subject?",
+                    "I can provide topics for this subject. Shall I do it?",
+                    "I have topics for this subject in my database. I'll show them to you. Okay?"
+                ],
+                "query": [
+                    "I will query my database about"
+                ],
+                "available": [
+                    "These are some of the subjects available. You can select one: ",
+                    "I can provide you with diverse subjects. Here are some of them: ",
+                    "I have so many interesting subjects. Please choose one: ",
+                    "Please choose a subject from the options below: ",
+                    "Here are some options for you to choose: ",
+                    "These are the subjects I have. Please choose one: ",
+                    "You can choose a subject from the options below: ",
+                    "You might find these subjects interesting: ",
+                    "I have many interesting subjects for you. Please select one: ",
+                    "Please select a subject and I will provide you topics for that subject"
+                ],
+                "available_2": [
+                    "These are some of the other subjects available. You can select one: ",
+                    "I can provide you with more subjects. You can go back and select other subjects as well",
+                    "I have so many more interesting subjects for you. Please choose one: ",
+                    "Please choose a subject from the options below. You can go back to select other subjects as well",
+                    "Here are some other options for you to choose: ",
+                    "These are some of the other subjects I have. Please choose one: ",
+                    "You can choose a subject from the options below. You can go back to select other subjects as well",
+                    "You might find these other subjects interesting: ",
+                    "I have many more interesting subjects for you. Please select one: ",
+                    "Please select a subject and I will provide you topics for that subject"
+                ],
+                "choose": [
+                    "Great. Here are the options for you to choose",
+                    "I'm glad you want to learn more. Here are the subjects you can choose:",
+                    "Good you are learning more. Please select a subject: ",
+                    "Great, Please select a subject: ",
+                    "You can now select a different subject and learn new things",
+                    "You can learn a different subject. Here are the options:",
+                    "Maybe a different subject might interest you. Please select one from options below:"
+                ],
+                "yes": [
+                    "Yes"
+                ],
+                "no": [
+                    "No"
+                ],
+                "next": [
+                    "NEXT"
+                ],
+                "back": [
+                    "BACK"
+                ],
+                "cancel": [
+                    "CANCEL"
+                ]
+            },
+            "action_give_suggestion": [
+                "These are some of the subjects I'd suggest: "
+            ],
+            "action_ask_topic": {
+                "topic": [
+                    "Please select a topic: ",
+                    "These topics look interesting. Please select one so I can give you the activity",
+                    "Here are some options for you. Please select one:",
+                    "These are some of the topics. Select one to start the activity",
+                    "There are many topics available. Select one and I will give you the activity",
+                    "I can provide you numerous topics. Here are some of the options",
+                    "I have some good topics for you. Here I am showing you a few options",
+                    "Many new topics have been added by the teachers. I will show you the options",
+                    "It seems teachers have added new topics. Select one to start the activity",
+                    "Please choose one of these topics so I can offer you the activity. They all appear intriguing to me",
+                    "I got you. Please choose one of the following options:",
+                    "Choose one of these to begin the activity. These are some of the topics",
+                    "Choose one of the various topics, and I'll give you the activity",
+                    "Here are some of the options I can provide you for topics",
+                    "Here are some possibilities I've got for you, some nice topics",
+                    "Choose one to begin the activity. It appears that teachers have added additional topics"
+                ],
+                "not_available": [
+                    "Sorry, no topics are available for this subject yet."
+                ],
+                "next": [
+                    "NEXT"
+                ],
+                "back": [
+                    "BACK"
+                ],
+                "cancel": [
+                    "CANCEL"
+                ],
+                "sub_choice": {
+                    "Art and Design": [
+                        "Art and Design is an interesting subject. It helps you develop creative skills.",
+                        "I like Art and Design too :)",
+                        "Do you know that Art represents imagination and creativity while Design represents developing and applying ideas?"
+                    ],
+                    "Biology": [
+                        "Biology is the study of living things. A biologist is a scientist who studies biology.",
+                        "A biologist is a scientist who studies biology. Biologists try to understand the natural world and the things that live in it.",
+                        "Biology is a branch of science that deals with the study of living organisms like human beings, plants, and animals."
+                    ],
+                    "Business": [
+                        "Business is an interesting subject to learn.",
+                        "I like learning Business too :)"
+                    ],
+                    "Chemistry": [
+                        "Chemistry is a branch of science and is closely related to physics. Sometimes chemistry is called the \"central science\"",
+                        "Do you know that scientists who specialize in chemistry are called chemists?",
+                        "Chemistry is a branch of science that studies what everything is made of and how it works. Cooking and making ice are chemistry as well"
+                    ],
+                    "History": [
+                        "Do you know that History is the study of the past? The study of history helps make sense of humankind.",
+                        "History is the story of people on our planet and story of everything that people have ever done since recognizable humans first evolved.",
+                        "History is an interesting subject. You can learn so many things."
+                    ],
+                    "Humanities": [
+                        "Humanities offer insight into aspect of life. It is considered as a core element of a well-rounded education since ancient times.",
+                        "Humanities is the study about human culture, such as literature, philosophy, and history.",
+                        "Humanities include the study of ancient and modern languages, literature, philosophy, and others."
+                    ],
+                    "Language": [
+                        "Language is one of the fun subjects to learn.",
+                        "Fact: Children learn to speak without any special training. But reading and writing has to be specially taught."
+                    ],
+                    "Math": [
+                        "Math is a really interesting subject. There is also Math involved in developing me :)",
+                        "I like Math too :)",
+                        "Math is really fun to learn. It is very interesting",
+                        "Math is really fun and interesting to learn"
+                    ],
+                    "Physics": [
+                        "Physics is the study of the relationship of objects, forces, and energy.",
+                        "Physics is one of the major branches of science. People who work in physics are called physicists.",
+                        "Physics is a very interesting subject"
+                    ],
+                    "Psychology": [
+                        "Psychology is the scientific study of the ways that people think, feel, and behave. It is an interesting subject",
+                        "Psychology is the study of the mind and behavior. Psychologists study and understand mental processes, brain functions, and behavior."
+                    ],
+                    "Technology": [
+                        "Technology is a very intriguing subject. You can learn about many advancements from this subject",
+                        "Technology is one of the fun subjects. You have so many things to learn.",
+                        "In this decade Technology is growing rapidly. You'll have a good time learning it!"
+                    ]
+                }
+            },
+            "action_ask_question": {
+                "true": [
+                    "True"
+                ],
+                "false": [
+                    "False"
+                ]
+            },
+            "validate_question": {
+                "sorry": [
+                    "Sorry, this topic has question types that are not supported in Telegram yet!"
+                ],
+                "link_below": [
+                    "To learn more question types, you can download the app from the link below"
+                ]
+            },
+            "action_set_reminder": {
+                "time": [
+                    "Please provide a time!",
+                    "Please provide me a time to remind you!",
+                    "Can you provide me with a time?",
+                    "I need a time to remind you",
+                    "Can you tell me when it is?",
+                    "When should I remind you?"
+                ],
+                "example": [
+                    "For example you can say: \"in 5 minutes\"",
+                    "For example you can say: \"in 2 hours\"",
+                    "For example you can say: \"tomorrow 4pm\"",
+                    "For example you can say: \"at 7am\""
+                ],
+                "remind": [
+                    "Okay, I will remind you at",
+                    "Sure, I will remind you at",
+                    "Sure, I can remind you at",
+                    "Sure, I will remember to remind you at",
+                    "I will remind you at",
+                    "I will remember to remind you at",
+                    "You got it. I will remind you at",
+                    "You got it. I will remember to remind you at"
+                ]
+            },
+            "action_react_to_reminder": [
+                "Hey, here is your reminder",
+                "I am reminding you of your reminder",
+                "Here is your reminder. I didn't forget :)",
+                "Here is your reminder. Maybe you can ask me to give a subject for you :)",
+                "I didn't forget your reminder. Here you go!",
+                "This is your reminder. You can ask me to give a subject if you're interested now!"
+            ],
+            "action_forget_reminders": [
+                "Okay, I'll cancel your reminder",
+                "Sure, I'll cancel your reminders",
+                "Understood, I'll cancel your reminders",
+                "Okay, I'll cancel the reminders"
+            ],
+            "action_give_progress": {
+                "message1": [
+                    "Please wait a moment ...",
+                    "Just a moment ...",
+                    "I'm working on it ...",
+                    "It might take a moment ...",
+                    "I'm building your progress ...",
+                    "This may take a moment ..."
+                ],
+                "message2": [
+                    "Hey, here is your progress",
+                    "This is your progress",
+                    "This is your progress. Continue the good work",
+                    "Here you go, this is your progress",
+                    "This is your all-time progress. Continue the good work",
+                    "I provided you with your progress",
+                    "I provided you with your all-time progress"
+                ]
+            },
+            "action_give_improvement": {
+                "improve": [
+                    "I think these are the topics you should improve: ",
+                    "Here are some of the topics I think you can improve: ",
+                    "These are some of the topics you can improve: ",
+                    "I found these topics for you to improve: ",
+                    "Here are some of the topics you can try again: ",
+                    "I found these topics for you to try again: "
+                ],
+                "come_later": [
+                    "Please complete some more activities and come back later",
+                    "Sorry, I don't have anything for you now",
+                    "It seems I don't have anything for you now",
+                    "Currently, I don't have any suggestions for you",
+                    "Please come back later after solving some more activities",
+                    "Please do more activities, so that I can suggest any improvements"
+                ],
+                "do_later": [
+                    "Not now"
+                ]
+            },
+            "action_give_approach": [
+                "Please watch the video to get a better understanding :)",
+                "Here is a video for you to watch to get a better understanding :)",
+                "Here is a video for you to get a better understanding :)",
+                "You can watch the video to get a better understanding",
+                "I'll provide a video for you to get a better understanding",
+                "You'll get a better understanding by watching this video"
+            ],
+            "action_get_feedback": [
+                "Thank you for your input!"
+            ],
+            "action_ask_feedback": {
+                "choice1": [
+                    "I would like to hear it. Please provide your input in one complete message!"
+                ],
+                "choice2": [
+                    "Oh, please provide your input in one complete message!"
+                ]
+            },
+            "action_ask_confirm_feedback": {
+                "yes": [
+                    "Yes, proceed!👍"
+                ],
+                "no": [
+                    "No, I want to make changes👎"
+                ],
+                "confirm": [
+                    "Are you sure you want to submit?"
+                ]
+            },
+            "validate_feedback": [
+                "Your input is: "
+            ],
+            "action_show_features": {
+                "options": [
+                    "Here are some of the options you can choose from: ",
+                    "Please select an option: "
+                ],
+                "start": [
+                    "Welcome. I am a bot and I'm here to assist you in your learning. You can choose an option from below to start!"
+                ],
+                "activity": [
+                    "Choose a topic from a subject"
+                ],
+                "subject": [
+                    "How do I ask for a subject?"
+                ],
+                "question_types": [
+                    "What question types are available?"
+                ],
+                "progress": [
+                    "What is my progress?"
+                ],
+                "improve": [
+                    "What should I improve?"
+                ],
+                "approach": [
+                    "How to solve activities?"
+                ],
+                "reminder": [
+                    "Create a reminder"
+                ],
+                "cancel_reminder": [
+                    "Cancel my reminders"
+                ],
+                "feedback": [
+                    "I want to give feedback"
+                ],
+                "bot": [
+                    "Who are you?"
+                ],
+                "direct_topic": [
+                    "Select a topic by name"
+                ],
+                "more_option": [
+                    "MORE OPTIONS"
+                ],
+                "more_option_response": [
+                    "Here are more options for you: ",
+                    "You can choose from the options below: ",
+                    "I got you, here are some more options"
+                ],
+                "cancel": [
+                    "CANCEL"
+                ],
+                "back": [
+                    "BACK"
+                ]
+            },
+            "action_explain_question_types": {
+                "question": [
+                    "These are the question types available. Please select an option to learn more about them!"
+                ],
+                "1": [
+                    "MCQ"
+                ],
+                "2": [
+                    "True/False"
+                ],
+                "3": [
+                    "Matching Pairs"
+                ],
+                "4": [
+                    "Open ended"
+                ]
+            },
+            "action_explain_question_types_definition": {
+                "error": [
+                    "Sorry, I'm facing a problem right now!"
+                ],
+                "MCQ": [
+                    "A multiple-choice question(MCQ) is composed of two parts: a stem that identifies the question or problem, and a set of alternatives or possible answers that contain a key that is the best answer to the question, and a number of distractors that are plausible but incorrect answers to the question."
+                ],
+                "True_False": [
+                    "True/false determines whether a statement is correct. You have a 50-50 chance of guessing the correct answer"
+                ],
+                "Matching_Pairs": [
+                    "Matching pairs consist of two lists of items. For each item in List A, there is an item in List B that's related. Find the related pairs"
+                ],
+                "Open_ended": [
+                    "An open-ended question is a question that cannot be answered with a 'yes' or 'no' response, or with a static response. Open-ended questions are phrased as a statement which requires a longer response."
+                ]
+            },
+            "action_continue": {
+                "continue": [
+                    "Well done, you completed the activity.",
+                    "Congratulations! You finished the activity.",
+                    "Cheers, you have successfully completed the activity."
+                ],
+                "one_more": [
+                    "Do you want to do one more activity?",
+                    "Would you like to continue with one more activity?",
+                    "Learning is always fun. Shall I give you one more activity?",
+                    "Doing activities is a productive way to spend time. I would like to give you one more activity. What do you say?",
+                    "I have some more fun activities for you. I think you will enjoy doing them. Are you interested?"
+                ],
+                "yes": [
+                    "Yes"
+                ],
+                "no": [
+                    "No"
+                ],
+                "1": [
+                    "Very good, you have done exceptionally well and got everything right👏",
+                    "Good job, you did a great job and did everything correctly👏"
+                ],
+                "<1": [
+                    "Good, you almost got everything right👏",
+                    "Well done, you almost got it all right👏"
+                ],
+                "<=0.7": [
+                    "You did good solving the activities. Still some improvements can be made by learning more👍",
+                    "You did well on the activities. I think, by learning more, some advancements can be made👍"
+                ],
+                "<=0.4": [
+                    "You scored less in this activity. I believe you can improve by learning more 👍",
+                    "You received a lower score for this activity. I think you can get better if you learn more👍"
+                ]
+            },
+            "good_time": [
+                "Have a good time solving the activities :)",
+                "Have fun solving the activities :)",
+                "I wish you best of luck solving the activities :)",
+                "I believe you'll enjoy doing this activity. Let's go!",
+                "You have selected an interesting topic. Let's go solve the activity",
+                "That is an interesting topic. I wish you have a good time solving the activities :)",
+                "Here's a tip for you: Read the question carefully to answer it properly",
+                "I have a tip for you: To successfully complete an activity, you must fully understand the question first"
+            ],
+            "action_greet": {
+                "greeting": [
+                    "Hey, welcome",
+                    "Greetings",
+                    "Welcome",
+                    "Hello there",
+                    "Hi",
+                    "Hey"
+                ],
+                "welcome": [
+                    "What would you like to do today?",
+                    "What would you like to do?",
+                    "What do you want to do now?",
+                    "I'm glad you're here. What do you want to do?",
+                    "What can I assist you with?",
+                    "What assistance can I provide?"
+                ]
+            },
+            "action_goodbye": [
+                "Bye Bye",
+                "Goodbye, hope to see you soon :)",
+                "Bye Bye :)",
+                "Goodbye :)",
+                "Bye. See you soon :)",
+                "Bye to you too :)"
+            ],
+            "action_done": {
+                "done": [
+                    "Okay, that's it, done!",
+                    "Well, that's it, done!",
+                    "That's it for now",
+                    "That's done for now",
+                    "It's done for now",
+                    "Then it's done for now"
+                ],
+                "availability": [
+                    "You can come back and start learning whenever you want. I'm always here",
+                    "You can continue learning whenever you want",
+                    "I'm here to assist you always!",
+                    "I'm here and I can always provide assistance",
+                    "I'm available 24/7, so that you can always learn",
+                    "I'm available all the time, so that you can learn whenever you want"
+                ]
+            },
+            "action_rephrase": [
+                "Sorry, I couldn't understand that. I still have so much to learn just like you :)",
+                "Can you please rephrase your text so that I can try to understand it?",
+                "I'm sorry, I couldn't understand",
+                "It seems I can't understand it. I still have to learn just like you :)",
+                "I couldn't understand it. Sorry for the inconvenience!"
+            ],
+            "action_default": [
+                "Oh, I am not capable of doing that!",
+                "I am afraid that's beyond my capabilities!",
+                "I'm afraid, I'm not capable of doing that",
+                "I'm afraid, I still have to learn more",
+                "Sorry, I'm not capable of doing that",
+                "Sorry I haven't learned to do that yet",
+                "Excuse me. I don't have the capability to do that yet",
+                "Excuse me. I am unable to do that yet"
+            ],
+            "action_i_am_a_bot": [
+                "I am a bot and I'm here to assist you!",
+                "I am a bot and my purpose is to assist you!",
+                "I am an assistant and I'll happily help you :)",
+                "I am a bot and I was built with the purpose of assisting you",
+                "I am a bot and my purpose is to assist you in learning",
+                "I am an assistant who can assist you in learning",
+                "I am an AI assistant and I'm always here to assist you",
+                "I am a bot and I can assist you in learning"
+            ],
+            "action_welcome": [
+                "You are welcome!",
+                "You're welcome :)",
+                "Glad I could help you",
+                "Glad I could help :)",
+                "I'm glad that I could help",
+                "You're welcome. I'm always here to help you",
+                "You're welcome. I'm always here to assist you"
+            ],
+            "action_thanks_feedback": [
+                "Thanks for your input",
+                "Thank you for the input"
+            ],
+            "action_find_subject": [
+                "Please ask 'I want to learn <subject name>' or 'I want to study <subject name>', to find a subject directly!",
+                "Please ask 'I would like to learn <subject name>' or 'I want to study <subject name>', to find a subject directly!",
+                "Please ask 'I want to learn about <subject name>' or 'I want to study <subject name>', to find a subject directly!",
+                "Please ask 'I want to learn about <subject name>' or 'I would like to learn <subject name>', to find a subject directly!",
+                "Please ask 'I want to learn <subject name>' or 'I would like to learn <subject name>', to find a subject directly!",
+                "Please ask 'I want to study <subject name>' or 'I would like to learn <subject name>', to find a subject directly!",
+                "Please ask 'learn <subject name>' or 'I want to learn <subject name>', to find a subject directly!"
+            ],
+            "action_great": [
+                "That's good",
+                "Good to hear that!",
+                "I am glad :)"
+            ],
+            "action_it_is_okay": [
+                "I can understand. You can comeback later.",
+                "I understand. You can comeback anytime you want.",
+                "I think I can understand. You can always come back to learn",
+                "I can understand. Come back later and I can assist you in learning",
+                "I am always here for you. You can learn when you feel like it",
+                "I am always here to assist you. You can come back later and continue learning"
+            ],
+            "action_happy": [
+                "Great, carry on!",
+                "Good, carry on!"
+            ],
+            "action_i_will_stop": [
+                "Okay, sure",
+                "I got you :)",
+                "Sure, I got you :)",
+                "Okay, I'll do it"
+            ],
+            "action_ask_direct_topics": [
+                "Please provide the exact name of the topic"
+            ],
+            "validate_direct_topics_form": {
+                "sorry": [
+                    "Sorry, I couldn't find anything! Can you check the spelling again?"
+                ],
+                "ask_stop": [
+                    "You can ask me to stop by saying \"stop\""
+                ],
+                "only_provide": [
+                    "Also, I can only provide topics for your current language: "
+                ]
+            },
+            "action_show_direct_topic_buttons": [
+                "Please select the topic to continue"
+            ]
+        }
+    }
+}

@@ -1,0 +1,108 @@
+{
+    "choices": {
+        "EN": {
+            "subject_list": [
+                "Art and Design",
+                "Biology",
+                "Business",
+                "Chemistry",
+                "History",
+                "Humanities",
+                "Language",
+                "Math",
+                "Physics",
+                "Psychology",
+                "Technology"
+            ],
+            "Art and Design": "Art and Design",
+            "Biology": "Biology",
+            "Business": "Business",
+            "Chemistry": "Chemistry",
+            "History": "History",
+            "Humanities": "Humanities",
+            "Language": "Language",
+            "Math": "Math",
+            "Physics": "Physics",
+            "Psychology": "Psychology",
+            "Technology": "Technology"
+        },
+        "DE": {
+            "subject_list": [
+                "Wirtschaft",
+                "Chemie",
+                "Psychologie",
+                "Technik",
+                "Sprache",
+                "Mathematik",
+                "Geschichte",
+                "Biologie",
+                "Physik",
+                "Geisteswissenschaften",
+                "Kunst und Design"
+            ],
+            "Art and Design": "Kunst und Design",
+            "Biology": "Biologie",
+            "Business": "Wirtschaft",
+            "Chemistry": "Chemie",
+            "History": "Geschichte",
+            "Humanities": "Geisteswissenschaften",
+            "Language": "Sprache",
+            "Math": "Mathematik",
+            "Physics": "Physik",
+            "Psychology": "Psychologie",
+            "Technology": "Technik"
+        },
+        "EL": {
+            "subject_list": [
+                "Επιχειρήσεις",
+                "Χημεία",
+                "Ψυχολογία",
+                "Τεχνολογία",
+                "Γλώσσα",
+                "Μαθηματικά",
+                "Ιστορία",
+                "Βιολογία",
+                "Φυσική",
+                "Ανθρωπιστικές σπουδές",
+                "Τέχνη και σχεδιασμός"
+            ],
+            "Art and Design": "Τέχνη και σχεδιασμός",
+            "Biology": "Βιολογία",
+            "Business": "Επιχειρήσεις",
+            "Chemistry": "Χημεία",
+            "History": "Ιστορία",
+            "Humanities": "Ανθρωπιστικές σπουδές",
+            "Language": "Γλώσσα",
+            "Math": "Μαθηματικά",
+            "Physics": "Φυσική",
+            "Psychology": "Ψυχολογία",
+            "Technology": "Τεχνολογία"
+        },
+        "ES": {
+            "subject_list": [
+                "Negocios",
+                "Química",
+                "Psicología",
+                "Tecnología",
+                "Lengua",
+                "Matemáticas",
+                "Historia",
+                "Biología",
+                "Física",
+                "Humanidades",
+                "Arte y Diseño"
+            ],
+            "Art and Design": "Arte y Diseño",
+            "Biology": "Biología",
+            "Business": "Negocios",
+            "Chemistry": "Química",
+            "History": "Historia",
+            "Humanities": "Humanidades",
+            "Language": "Lengua",
+            "Math": "Matemáticas",
+            "Physics": "Física",
+            "Psychology": "Psicología",
+            "Technology": "Tecnología"
+        }
+    }
+}

@@ -1,0 +1,269 @@
+versión: "3.1"
+nlu:
+- intent: user_greet
+  examples: |
+    - hola
+    - hola
+    - hiii
+    - hola
+    - hii
+    - hola, buenos días
+    - buenos días
+    - buenos días
+    - buenas tardes
+- intent: user_thanks
+  examples: |
+    - gracias
+    - gracias
+    - muchas gracias
+    - gracias por la ayuda
+    - gracias por la ayuda
+    - gracias por la ayuda
+    - agradezco la ayuda
+    - gracias
+- intent: ask_for_suggestion
+  examples: |
+    - quiero aprender [Matemáticas](subject_from_entity)
+    - quiero aprender [Física](subject_from_entity)
+    - quiero aprender [Informática](subject_from_entity)
+    - quiero aprender sobre [Aprendizaje automático](subject_from_entity)
+    - quiero aprender sobre [Negocios](subject_from_entity)
+    - quiero aprender [Química](subject_from_entity)
+    - quiero aprender [Matemáticas](subject_from_entity)
+    - me gustaría aprender [Física](subject_from_entity)
+    - me gustaría aprender [Psicología](subject_from_entity)
+    - me gustaría aprender [Historia](subject_from_entity)
+    - me gustaría aprender sobre [Humanidades](subject_from_entity)
+    - me gustaría aprender sobre [Estudios Sociales](subject_from_entity)
+    - quiero aprender sobre [Arte y Diseño](subject_from_entity)
+    - quiero estudiar [matemáticas](subject_from_entity)
+    - quiero aprender [matemáticas](subject_from_entity)
+    - quiero aprender sobre [astronomía](subject_from_entity)
+    - quiero aprender sobre [astronomía](subject_from_entity)
+    - quiero aprender
+    - me gustaría aprender
+    - cuáles son las asignaturas disponibles
+    - qué puedo aprender
+    - dame un tema
+    - dame una sugerencia
+    - quiero hacer una actividad
+    - quiero hacer una actividad
+    - sugiéreme un tema
+    - sugiéreme algo para aprender
+    - dame algo para aprender
+    - sugiéreme algo
+    - sugerirme algo
+- intent: user_goodbye
+  examples: |
+    - hasta luego
+    - adiós
+    - adiós
+    - adiós
+    - adiós
+    - ciao
+    - hasta la vista
+    - nos vemos
+- intent: user_stress
+  examples: |
+    - no tengo ganas de hacer nada
+    - no quiero hacer nada
+    - no es el momento adecuado
+    - no quiero hacer 
+    - no estoy de humor
+    - no tengo ganas
+    - lo haré más tarde
+    - lo haré más tarde
+    - no me interesa ahora
+    - no me interesa hacerlo ahora
+    - no me interesa hacerlo ahora
+    - no puedo concentrarme ahora
+    - no puedo hacerlo ahora
+    - necesito tiempo libre
+- intent: user_happy
+  examples: |
+    - bien
+    - me va bien
+    - estoy bien
+    - soy feliz
+    - okay
+    - ok
+    - me va bien
+    - va muy bien
+    - es un buen día
+- intent: user_unhappy
+  examples: |
+    - malo
+    - no es bueno
+    - no es un buen día
+    - es malo
+- intent: user_affirm
+  examples: |
+    - sí
+    - sí
+    - sí
+    - claro
+    - por supuesto
+    - por supuesto
+    - Sí
+- intent: user_deny
+  examples: |
+    - no
+    - no
+    - no quiero
+    - no
+    - no estoy de humor
+    - no me apetece
+    - No
+- intent: user_data
+  examples: |
+    - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
+    - {'name': 'kumar', 'id': '9865', 'lang': 'DE'}
+    - {'name': 'john', 'id': '7822', 'lang': 'ES'}
+    - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
+- intent: out_of_scope
+  examples: |
+    - quiero contactar con mi profesor
+    - quiero enviar un mensaje a mi amigo
+    - quiero enviar un mensaje a mi supervisor
+    - quiero jugar ahora
+    - quiero aprender a volar a marte
+    - quiero aprender más sobre el mundo
+    - quiero aprender a montar a caballo
+    - me gustaría saber más sobre ti
+    - quiero saber cómo aprender a conducir
+- intent: bot_challenge
+  examples: |
+    - ¿quién eres?
+    - ¿eres un bot?
+    - ¿eres un humano?
+    - ¿eres mi profesor?
+    - ¿eres real?
+    - ¿quién te construyó?
+    - ¿quién te ha desarrollado?
+- intent: next_option
+  examples: |
+    - siguiente
+    - siguiente opción
+- intent: ask_remind_call
+  examples: |
+    - recuérdame que haga las clases en 5 minutos
+    - recuérdame que haga las clases en 1 hora
+    - Recuérdame que haga las actividades en 5 segundos
+    - Recuérdame hacer las clases en 2 horas
+    - Recuérdame hacer actividades en 120 minutos
+    - recordarme que tengo que aprender
+    - Recuérdame que aprenda más tarde
+    - más tarde tengo que tomar clases
+    - más tarde tengo que hacer clases
+    - más tarde tengo que hacer actividades
+    - Por favor, recuérdame hacer actividades
+    - por favor, recuérdame hacer lecciones más tarde
+    - No debo olvidarme de hacer actividades
+    - No debo olvidarme de hacer las clases más tarde
+    - recuérdame que tengo que aprender en 1 hora
+- intent: ask_id
+  examples: |
+    - ¿cuál es el id de la conversación?
+    - id
+    - ¿Cuál es el ID de esta conversación?
+    - ¿Cómo puedo enviar una solicitud POST a esta conversación?
+- intent: ask_forget_reminders
+  examples: |
+    - olvídalo
+    - no me lo recuerdes
+    - Olvidar el recordatorio
+    - cancelar el recordatorio
+    - cancela todos los recordatorios por favor
+    - Olvídate de recordármelo
+    - Olvídate de recordármelo
+- intent: ask_progress
+  examples: |
+    - cuál es mi progreso
+    - cuál es mi progreso en el aprendizaje
+    - cómo es mi progreso
+    - cómo es mi progreso
+    - cómo es mi progreso en el aprendizaje
+    - ¿lo estoy haciendo bien?
+    - cuál es mi último progreso
+    - cuál es mi progreso reciente
+- intent: ask_improvement
+  examples: |
+    - qué debería mejorar
+    - cómo puedo mejorar
+    - en qué debo centrarme
+    - en qué tema debo centrarme
+    - en qué tema debo centrarme
+    - ¿necesito mejorar algo?
+    - ¿necesito mejorar algo?
+    - ¿necesito centrarme en algún tema?
+    - ¿necesito mejorar en alguna asignatura?
+    - ¿necesito centrarme en algún tema?
+    - ¿necesito mejorar en algún tema?
+- intent: ask_approach
+  examples: |
+    - no sé cómo hacer esta tarea
+    - cómo puedo resolver esta tarea
+    - ayúdame a resolver esta tarea
+    - cómo utilizo esta aplicación
+    - ¿Cómo puedo utilizar esta aplicación?
+    - no sé qué hacer
+    - no sé cómo hacer
+    - cómo puedo enfocar esto
+    - no sé cómo hacer mcqs
+    - no sé cómo hacer verdadero o falso
+    - no sé cómo hacer preguntas de concordancia
+    - no sé cómo hacer actividades
+- intent: user_feedback
+  examples: |
+    - hay un problema con una actividad
+    - hay un problema con un tema
+    - hay un problema con un tema
+    - hay un problema con la aplicación
+    - hay un problema con una actividad
+    - he encontrado un problema con una actividad
+    - he encontrado un problema con la aplicación
+    - hay un problema con una tarea
+    - me gustaría dar mi opinión
+    - quiero dar una opinión
+- intent: ask_features
+  examples: |
+    - ¿cuáles son sus características?
+    - ¿cuáles son las cosas que puede hacer?
+    - ¿qué puedes hacer?
+    - Léame las cosas que puede hacer
+    - Léame sus características
+    - Líbrame de todas tus funciones
+    - muéstrame todas las cosas que puedes hacer
+    - muéstrame todas tus características
+- intent: ask_question_types
+  examples: |
+    - ¿cuáles son los tipos de preguntas disponibles?
+    - ¿cuáles son los tipos de preguntas disponibles?
+    - ¿cuáles son los tipos de preguntas disponibles?
+    - ¿qué tipo de preguntas están disponibles?
+    - ¿qué preguntas tiene una actividad?
+    - ¿cuántos tipos de preguntas hay disponibles?
+- intent: find_subject
+  examples: |
+    - nombre del sujeto
+    - nombre del sujeto
+    - dar el nombre del sujeto
+- intent: start
+  examples: |
+    - inicio
+    - empezar 
+    - quiero empezar
+- intent: user_stop
+  examples: |
+    - parar
+    - por favor, detente
+    - quiero parar
+    - puedes parar
+    - parar
+    - stop
+    - stopp
+    - Detener
+    - cancel
+    - cancelar
+    - anular
+    - por favor, deténgase

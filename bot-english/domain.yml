@@ -1,0 +1,299 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+config:
+  store_entities_as_slots: true
+intents:
+- activity_done
+- ask_approach
+- ask_features
+- ask_for_suggestion
+- ask_forget_reminders
+- ask_id
+- ask_improvement
+- ask_progress
+- ask_question_types
+- ask_remind_call
+- ask_types
+- bot_challenge
+- find_subject
+- inform
+- inform_new
+- inform_new_topic
+- learn_subject
+- next_option
+- EXTERNAL_reminder
+- EXT_reminder
+- start
+- user_affirm
+- user_data
+- user_deny
+- user_done
+- user_feedback
+- user_goodbye
+- user_greet
+- user_happy
+- user_language
+- user_stress
+- user_thanks
+- user_unhappy
+- user_stop
+- user_asks_topic_directly
+- more_options
+- user_cancel
+- user_stop_topic
+- inform_new_direct_topic
+entities:
+- topic
+- subject
+- subject_from_entity
+- name
+- id
+- language
+- time
+- type
+- num_times
+- question
+- score1
+- score2
+- topic_id
+- topic_completed
+- material_language
+- age
+- grade
+- private_key
+- direct_topic_name
+- direct_topic_value
+slots:
+  subject_from_entity:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: subject_from_entity
+  subject:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: subject
+  topic:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: topic
+  score1:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: score1
+  score2:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: score2
+  topic_id:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: topic_id
+  topic_completed:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: topic_completed
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: name
+  id:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: id
+  language:
+    type: text
+    influence_conversation: false
+    initial_value: EN
+    mappings:
+    - type: from_entity
+      entity: language
+  type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: type
+  question:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      action: action_ask_question
+  feedback:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: feedback_form
+        requested_slot: feedback
+  confirm_feedback:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: feedback_form
+        requested_slot: confirm_feedback
+  material_language:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: material_language
+  age:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: age
+  grade:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: grade
+  private_key:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: private_key
+  direct_topics:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: direct_topics_form
+        requested_slot: direct_topics
+  direct_topic_name:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: direct_topics_form
+  direct_topic_value:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: direct_topics_form
+
+forms:
+  subject_with_topic_form:
+    required_slots:
+    - subject
+    - topic
+  questions_form:
+    required_slots:
+    - question
+  feedback_form:
+    required_slots:
+    - feedback
+    - confirm_feedback
+  direct_topics_form:
+    required_slots:
+    - direct_topics
+responses:
+  utter_continue:
+  - text: The activity is done. Do you want to do one more activity?
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_good_time:
+  - text: Have a good time solving the activities :)
+  utter_happy:
+  - text: Great, carry on!
+  utter_joke:
+  - text: Do you like to hear a joke?
+  utter_sorry:
+  - text: That's okay, it will get better :)
+  - text: I am sorry to hear that, I hope you'll be fine :)
+  utter_available_subjects:
+  - text: The entity/slot is {subject}
+  utter_name:
+  - text: Hey {name}, how are you doing?
+  utter_sub:
+  - text: This is your selection - {subject_from_entity}
+  utter_ask_subject:
+  - text: That's great. What would you like to learn today?
+  utter_okay:
+  - text: Okay, I'll do it!
+  utter_okay_subj:
+  - text: I'll provide you activites for {topic}
+  utter_rest:
+  - text: I'm sorry to hear that. Would you like to take rest?
+  utter_rest_is_okay:
+  - text: Sometimes it's okay take rest. I'll see you later re-energized :)
+actions:
+- action_ask_confirm_feedback
+- action_ask_feedback
+- action_ask_question
+- action_ask_subject
+- action_ask_topic
+- action_clean_entity
+- action_clean_feedbackform_slots
+- action_clean_time_slot
+- action_continue
+- action_explain_question_types
+- action_explain_question_types_definition
+- action_follow_questions_form
+- action_forget_reminders
+- action_get_feedback
+- action_give_approach
+- action_give_improvement
+- action_give_progress
+- action_give_suggestion
+- action_react_to_reminder
+- action_save_data
+- action_set_language
+- action_set_reminder
+- action_show_features
+- action_show_questions
+- action_submit
+- action_tell_id
+- validate_feedback_form
+- validate_questions_form
+- validate_subject_with_topic_form
+- action_greet
+- action_goodbye
+- action_done
+- action_rephrase
+- action_default
+- action_i_am_a_bot
+- action_welcome
+- action_thanks_feedback
+- action_find_subject
+- action_great
+- action_it_is_okay
+- action_happy
+- action_good_time
+- action_i_will_stop
+- action_clean_direct_topic_slots
+- action_show_direct_topic_buttons
+- action_ask_direct_topics
+- validate_direct_topics_form
+- action_show_more_options
+- action_cancel_option

@@ -1,0 +1,284 @@
+version: "3.1"
+nlu:
+- intent: user_greet
+  examples: |
+    - hey
+    - hi
+    - hii
+    - hiya
+    - howdy
+    - hallo
+    - hello
+    - hiii
+    - heyy
+    - hey, good morning
+    - good evening
+    - gud morning
+    - gud evening
+- intent: user_thanks
+  examples: |
+    - thanks
+    - thank you
+    - thank you so much
+    - thanks for the help
+    - thanks for your help
+    - thank you for the help
+    - i appreciate the help
+    - thankss
+- intent: ask_for_suggestion
+  examples: |
+    - i want to learn [Maths](subject_from_entity)
+    - i want to learn [Physics](subject_from_entity)
+    - i want to learn about [Business](subject_from_entity)
+    - i want to learn [Chemistry](subject_from_entity)
+    - i would like to learn [Maths](subject_from_entity)
+    - i would like to learn [Physics](subject_from_entity)
+    - i would like to learn [Pyschology](subject_from_entity)
+    - i would like to learn [History](subject_from_entity)
+    - i would like to learn about [Humanities](subject_from_entity)
+    - i would like to learn about [Social Studies](subject_from_entity)
+    - i want to learn about [Art and Design](subject_from_entity)
+    - i want to Choose a topic from a subject
+    - Choose a topic from a subject
+    - i want to learn [maths](subject_from_entity)
+    - i want to learn
+    - i would like to learn
+    - what are the subjects available
+    - what can i learn
+    - give me a subject
+    - give me a suggestion
+    - i want to do an activity
+    - i would to do an activity
+    - suggest me a subject
+    - suggest me something to learn
+    - give me something to learn
+    - please provide me some suggestions
+    - suggest me something
+    - learn
+- intent: user_goodbye
+  examples: |
+    - see you later
+    - goodbye
+    - byebye
+    - bye
+    - good bye
+    - ciao
+    - see you
+    - see ya
+- intent: user_stress
+  examples: |
+    - i don't feel like doing anything
+    - i don't want to do anything
+    - its not the right time
+    - i don't want to do 
+    - i am not in mood
+    - i dont feel like it
+    - i will do it later
+    - i'll do it later
+    - not interested now
+    - not interested to do now
+    - i'm not interested in doing it now
+    - i can't focus now
+    - i can't do now
+    - i need some free time
+- intent: user_happy
+  examples: |
+    - good
+    - i am doing good
+    - i am great
+    - i am happy
+    - doing fine
+    - okay
+    - it is going great
+    - it is a fine day
+- intent: user_unhappy
+  examples: |
+    - bad
+    - not good
+    - not a good day
+    - it is bad
+    - could have been better
+    - not okay
+    - it is very worst
+- intent: user_affirm
+  examples: |
+    - yes
+    - yeah
+    - yup
+    - sure
+    - ofcourse
+    - of course
+    - Yes
+- intent: user_deny
+  examples: |
+    - no
+    - nope
+    - nah
+    - No
+- intent: user_data
+  examples: |
+    - {'name': 'sathish', 'id': '1234', 'lang': 'EN'}
+    - {'name': 'kumar', 'id': '9865', 'lang': 'DE'}
+    - {'name': 'john', 'id': '7822', 'lang': 'ES'}
+    - {'name': 'milton', 'id': '4593', 'lang': 'GRK'}
+- intent: out_of_scope
+  examples: |
+    - i want to contact my teacher
+    - i want to send a message to my friend
+    - i would like to message my supervisor
+    - i would like to play now
+    - i want to learn about flying to mars
+    - i want to learn more about the world
+    - i would like to learn how to ride a horse
+    - i would like to learn more about you
+    - i want to know how to learn to drive
+- intent: bot_challenge
+  examples: |
+    - who are you?
+    - are you a bot?
+    - are you a human?
+    - are you my teacher?
+    - are you real?
+    - who build you?
+    - who developed you?
+- intent: next_option
+  examples: |
+    - next
+    - next option
+    - option2
+- intent: ask_remind_call
+  examples: |
+    - remind me to take lessons in 5 minutes
+    - remind me to do lessons in 1 hour
+    - remind me to do activities in 5 seconds
+    - remind me to do lessons in 2 hours
+    - remind me to do activities in 120 minutes
+    - remind me to learn
+    - remind me to learn later
+    - later I have to take lessons
+    - later I have to do lessons
+    - later I have to do activities
+    - Please, remind me to do activities
+    - please remind me to do lessons later
+    - I must not forget to do activities
+    - I must not forget to do lessons later
+    - remind me to learn in 1 hour
+- intent: ask_id
+  examples: |
+    - what's the conversation id?
+    - id
+    - What is the ID of this conversation?
+    - How do I send a POST request to this conversation?
+- intent: ask_forget_reminders
+  examples: |
+    - forget about it
+    - don't remind me!
+    - Forget about the reminder
+    - cancel the reminder
+    - cancel all reminders please
+    - Forget reminding me
+    - Forget reminding me!
+- intent: ask_progress
+  examples: |
+    - what is my progress
+    - what is my progress in learning
+    - how is my progress
+    - how well is my progress
+    - how is my progress in learning
+    - am I doing well?
+    - what is my last progress
+    - what is my recent progress
+- intent: ask_improvement
+  examples: |
+    - what should i improve
+    - how can i improve
+    - what should i focus on
+    - what topic should i focus on
+    - what subject should i focus on
+    - do i need to improve anything
+    - do i need improvement
+    - do i need to focus on any subject
+    - do i need to improve on any subject
+    - do i need to focus on any topic
+    - do i need to improve on any topic
+- intent: ask_approach
+  examples: |
+    - i don't know how to do this task
+    - how do i solve this task
+    - help me to solve this task
+    - how do i use this app
+    - how do i use this application
+    - i dont know what to do
+    - i dont know how to do
+    - how do i approach this
+    - i don't know how to do mcqs
+    - i don't know how to do true or false
+    - i don't know how to do matching questions
+    - i don't know how to do activities
+- intent: user_feedback
+  examples: |
+    - there is a problem with an activity
+    - there is a problem with a subject
+    - there is a problem with an topic
+    - there is an issue with the app
+    - there is an issue with an activity
+    - i found an issue with an activity
+    - i found an issue with the app
+    - there is an issue with a task
+    - i would like to provide feedback
+    - i want to give some feedback
+- intent: ask_features
+  examples: |
+    - what are all your features?
+    - what are the things you can do?
+    - what can you do?
+    - list me the things you can do
+    - list me your features
+    - list me all your features
+    - show me what you can do
+    - show me all the things you can do
+    - show me all of your features
+- intent: ask_question_types
+  examples: |
+    - what are the question types available?
+    - what are the tyypes of questions available?
+    - what are the kinds of questions available?
+    - what kind of questions are available?
+    - what questions does an activity have?
+    - how many question types are available?
+- intent: find_subject
+  examples: |
+    - subject name
+    - give subject name
+- intent: start
+  examples: |
+    - start
+    - i want to start
+- intent: user_done
+  examples: |
+    - That's enough
+    - that's done
+- intent: user_stop
+  examples: |
+    - stop
+    - please stop
+    - i want to stop
+    - can you stop
+    - stop it
+    - pls stop
+    - i don't want to continue
+    - stopp
+    - can yyou please stopp
+- lookup: subject_from_entity
+  examples: |
+    - Math
+    - Business
+    - Art and Design
+    - Humanities
+    - Physics
+    - Biology
+    - History
+    - Chemistry
+    - Pyschology
+    - Technology
+    - Language

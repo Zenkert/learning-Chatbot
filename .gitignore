@@ -1,0 +1,11 @@
+bot-telegram
+tests/
+results/
+misc/
+.vscode/
+events.db
+events.db-shm
+events.db-wal
+rasa.db
+story_graph.dot
+.rasa/

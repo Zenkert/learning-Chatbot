@@ -1,0 +1,31 @@
+recipe: default.v1
+
+language: es
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 2
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 160
+    constrain_similarities: true
+  - name: DucklingEntityExtractor
+    url: http://duckling_server:8000
+    dimensions: ["time"]
+    locale: "es_ES"
+    timezone: "Europe/Berlin"
+  - name: FallbackClassifier
+    threshold: 0.4
+
+policies:
+  - name: MemoizationPolicy
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+  - name: RulePolicy
+    # restrict_rules: false
