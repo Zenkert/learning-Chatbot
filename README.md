@@ -35,7 +35,7 @@ To achieve this, the SEEDS project takes a step-by-step approach, and: 1) identi
 ## Application screenshots
 
 #### Interface language
-<img src="https://user-images.githubusercontent.com/60668130/193759967-7d719760-e4e4-424d-81e7-52e4e9b32257.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193759967-7d719760-e4e4-424d-81e7-52e4e9b32257.jpg"  width=40% height=40%>
 
 #### Material language
 <img src="https://user-images.githubusercontent.com/60668130/193755291-cce16a1e-f6b3-41f3-9072-2c2a4e0da589.jpg"  width=25% height=25%>
