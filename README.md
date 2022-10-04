@@ -35,41 +35,41 @@ To achieve this, the SEEDS project takes a step-by-step approach, and: 1) identi
 ## Application screenshots
 
 #### Interface language
-<img src="https://user-images.githubusercontent.com/60668130/193759967-7d719760-e4e4-424d-81e7-52e4e9b32257.jpg"  width=40% height=40%>
+<img src="https://user-images.githubusercontent.com/60668130/193759967-7d719760-e4e4-424d-81e7-52e4e9b32257.jpg"  width=35% height=35%>
 
 #### Material language
-<img src="https://user-images.githubusercontent.com/60668130/193755291-cce16a1e-f6b3-41f3-9072-2c2a4e0da589.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193755291-cce16a1e-f6b3-41f3-9072-2c2a4e0da589.jpg"  width=35% height=35%>
 
 #### Subject selection
-<img src="https://user-images.githubusercontent.com/60668130/193751124-aef76d71-e9e0-42e7-b90d-27430fc1502a.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751124-aef76d71-e9e0-42e7-b90d-27430fc1502a.jpg"  width=35% height=35%>
 
 #### Selecting a subject by name
-<img src="https://user-images.githubusercontent.com/60668130/193751258-1cf56ede-9688-49c5-b164-1272259db9ec.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751258-1cf56ede-9688-49c5-b164-1272259db9ec.jpg"  width=35% height=35%>
 
 #### Topic selection
-<img src="https://user-images.githubusercontent.com/60668130/193751347-9584c471-9447-4129-ac2a-1928a4cea51a.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751347-9584c471-9447-4129-ac2a-1928a4cea51a.jpg"  width=35% height=35%>
 
 #### Selecting a topic by name
-<img src="https://user-images.githubusercontent.com/60668130/193751379-b9916fc5-7daa-4d70-89b2-052717d8bfdc.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751379-b9916fc5-7daa-4d70-89b2-052717d8bfdc.jpg"  width=35% height=35%>
 
 #### Doing the activity
-<img src="https://user-images.githubusercontent.com/60668130/193751570-deb78f40-9ce4-4de6-83e3-b11f75a795fb.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751570-deb78f40-9ce4-4de6-83e3-b11f75a795fb.jpg"  width=35% height=35%>
 </br>
-<img src="https://user-images.githubusercontent.com/60668130/193753717-9e6b3b36-0fc3-49be-93ca-d90370cdcfd2.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193753717-9e6b3b36-0fc3-49be-93ca-d90370cdcfd2.jpg"  width=35% height=35%>
 </br>
-<img src="https://user-images.githubusercontent.com/60668130/193753735-c9d30036-a988-4360-a684-d6405d36b99e.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193753735-c9d30036-a988-4360-a684-d6405d36b99e.jpg"  width=35% height=35%>
 
 #### Providing feedback for the activity
-<img src="https://user-images.githubusercontent.com/60668130/193753749-03443f58-e956-4ace-b15d-514c0bb033aa.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193753749-03443f58-e956-4ace-b15d-514c0bb033aa.jpg"  width=35% height=35%>
 
 #### Completion of the activity
-<img src="https://user-images.githubusercontent.com/60668130/193751580-466e5b01-bb5e-4860-9979-7eedd77e18a4.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751580-466e5b01-bb5e-4860-9979-7eedd77e18a4.jpg"  width=35% height=35%>
 
 #### Suggesting improvements
-<img src="https://user-images.githubusercontent.com/60668130/193751704-fbe46403-e60a-4931-b0a3-9a26e0250df7.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751704-fbe46403-e60a-4931-b0a3-9a26e0250df7.jpg"  width=35% height=35%>
 
 #### Question types available
-<img src="https://user-images.githubusercontent.com/60668130/193751962-6637743d-a28f-4a46-9b60-d90e5085bb16.jpg"  width=25% height=25%>
+<img src="https://user-images.githubusercontent.com/60668130/193751962-6637743d-a28f-4a46-9b60-d90e5085bb16.jpg"  width=35% height=35%>
 
 
 
